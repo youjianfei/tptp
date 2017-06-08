@@ -19,12 +19,10 @@ import cn.kymart.tptp.Adapter.Adapter_Grid_main_recommend;
 import cn.kymart.tptp.Adapter.FragmentAdapterSecond;
 import cn.kymart.tptp.Bean.MainBean;
 import cn.kymart.tptp.CustomView.MyGridView;
-import cn.kymart.tptp.GlideImageLoader;
+import cn.kymart.tptp.class_.GlideImageLoader;
 import cn.kymart.tptp.Interface.Interface_volley_respose;
-import cn.kymart.tptp.MainActivity;
 import cn.kymart.tptp.R;
 import cn.kymart.tptp.Utils.LogUtils;
-import cn.kymart.tptp.Utils.ToastUtils;
 import cn.kymart.tptp.Utils.Volley_Utils;
 
 import static cn.kymart.tptp.Http.BaseUrl.BaseURL;
@@ -38,9 +36,8 @@ public class Fragment_main extends Fragment {
     View rootview;
     List<String> mImagesURL;//顶部轮播图图片下载地址数据
 
-    List<String> mData_viewpager;//first viewpager 单独一个viewpager总数据
-    List<String> mData_child;//一页viewpager中Fragment中的数据；
-    List<List<String>> mData_Group;//单独一个viewpager总数据分为若干页的数据集合，传入到Fragment；
+    List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_promotion;//first viewpager 单独一个viewpager总数据
+    List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_promotion;//单独一个viewpager总数据分为若干页的数据集合，传入到Fragment；
 
 
     List<String> mList_recommend;
@@ -68,8 +65,11 @@ public class Fragment_main extends Fragment {
 
         myGridView = (MyGridView) rootview.findViewById(R.id.gradview_Recommend);
 
-        initData();
-        setData();
+        adBean = new ArrayList<>();//轮播广告bean
+        mData_viewpager_promotion = new ArrayList<>();//促销商品 viewpager 总数据
+
+
+        requestData();
 
         return rootview;
     }
@@ -100,17 +100,21 @@ public class Fragment_main extends Fragment {
     private MainBean bean;//请求下来的全部数据
     private List<MainBean.ResultBean.AdBean> adBean;//首页轮播广告信息
 
-    public void requestData(int cid, int count, final int page) {//主页数据网络请求  &cid=2&page=1&count=20
+    public void requestData() {//主页数据网络请求  &cid=2&page=1&count=20
 
         LogUtils.LOG("ceshi", "请求了");
         String URL = BaseURL + mainURL;
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+
+                LogUtils.LOG("ceshi","网络请求成功");
                 bean = new Gson().fromJson(respose, MainBean.class);//请求下来的全部数据，在这里进行数据分配
-                adBean = bean.getResult().getAd();
+                adBean = bean.getResult().getAd();//添加广告轮播视图
+                mData_viewpager_promotion=bean.getResult().getPromotion_goods();
 
-
+                initData();
+                setData();
             }
 
             @Override
@@ -122,43 +126,45 @@ public class Fragment_main extends Fragment {
     }
 
     private void initData() {
-        adBean = new ArrayList<>();//轮播广告bean
-        mImagesURL = new ArrayList<>();
-        mImagesURL.add("http://img2.imgtn.bdimg.com/it/u=502348296,3633422462&fm=26&gp=0.jpg");
-        mImagesURL.add("http://img2.imgtn.bdimg.com/it/u=502348296,3633422462&fm=26&gp=0.jpg");
-        mImagesURL.add("http://wallpapers1.hellowallpaper.com/art_black-wallpaper--01_04-1280x960.jpg");
 
-        mData_viewpager = new ArrayList<>();//first viewpager 总数据
-        mData_viewpager.add("sdfsadf");
-        mData_viewpager.add("sdfsadf");
-        mData_viewpager.add("sdfsadf");
-        mData_viewpager.add("sdfsadf");
-        mData_viewpager.add("sdfsadf");
-        mData_viewpager.add("sdfsadf");
-        mData_viewpager.add("sdfsadf");
-        mData_Group = new ArrayList<>();
-        mData_child = new ArrayList<>();
+        mImagesURL = new ArrayList<>();
+        LogUtils.LOG("ceshi","图片数量"+adBean.size());
+        for(int i=0;i<adBean.size();i++){
+            LogUtils.LOG("ceshi","图片网址"+adBean.get(i).getAd_code());
+            mImagesURL.add(adBean.get(i).getAd_code());
+
+        }
+
+
+//        mData_viewpager_promotion.add("sdfsadf");
+//        mData_viewpager_promotion.add("sdfsadf");
+//        mData_viewpager_promotion.add("sdfsadf");
+//        mData_viewpager_promotion.add("sdfsadf");
+//        mData_viewpager_promotion.add("sdfsadf");
+//        mData_viewpager_promotion.add("sdfsadf");
+//        mData_viewpager_promotion.add("sdfsadf");
+        mData_Group_promotion = new ArrayList<>();
         fragments_first = new ArrayList<>();
         /**
          * 算出viewpager的页数;
          */
-        int page = mData_viewpager.size() / 3;//页数，余数为0的时候
+        int page = mData_viewpager_promotion.size() / 3;//页数，余数为0的时候
         for (int i = 1; i < page + 1; i++) {
-            List<String> child = new ArrayList<>();
+            List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
             for (int j = 1; j < 4; j++) {
-                child.add(mData_viewpager.get(j * i - 1));
+                child.add(mData_viewpager_promotion.get(j * i - 1));
             }
-            mData_Group.add(child);
-            fragments_first.add(new Fragment_main_viewpager_item(mData_Group.get(i - 1)));
+            mData_Group_promotion.add(child);
+            fragments_first.add(new Fragment_main_viewpager_item(mData_Group_promotion.get(i - 1)));
         }
-        int yushu = mData_viewpager.size() % 3;
+        int yushu = mData_viewpager_promotion.size() % 3;
         if (yushu != 0) {
-            List<String> child = new ArrayList<>();
-            for (int i = 3 * page; i < mData_viewpager.size(); i++) {
-                child.add(mData_viewpager.get(i));
+            List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
+            for (int i = 3 * page; i < mData_viewpager_promotion.size(); i++) {
+                child.add(mData_viewpager_promotion.get(i));
             }
-            mData_Group.add(child);
-            fragments_first.add(new Fragment_main_viewpager_item(mData_Group.get( page)));
+            mData_Group_promotion.add(child);
+            fragments_first.add(new Fragment_main_viewpager_item(mData_Group_promotion.get( page)));
         }
 
 

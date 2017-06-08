@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.kymart.tptp.Adapter.Adapter_Grid_main_viewpager;
+import cn.kymart.tptp.Bean.MainBean;
 import cn.kymart.tptp.R;
 
 /**
@@ -22,9 +22,9 @@ public class Fragment_main_viewpager_item extends Fragment{
     private GridView  mGridviewPager;
     private Adapter_Grid_main_viewpager mAdapter_grid;
 
-    private List<String>data;
+    private List<MainBean.ResultBean.PromotionGoodsBean>data;
 
-    public Fragment_main_viewpager_item(List<String> data) {
+    public Fragment_main_viewpager_item(List<MainBean.ResultBean.PromotionGoodsBean> data) {
         this.data = data;
     }
 
@@ -35,6 +35,7 @@ public class Fragment_main_viewpager_item extends Fragment{
         initdata();
         mAdapter_grid=new Adapter_Grid_main_viewpager(data,getActivity());
         mGridviewPager.setAdapter(mAdapter_grid);
+
 
 
         return rootView;

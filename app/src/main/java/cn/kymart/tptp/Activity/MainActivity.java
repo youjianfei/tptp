@@ -1,4 +1,4 @@
-package cn.kymart.tptp;
+package cn.kymart.tptp.Activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import cn.kymart.tptp.Fragment.Fragment_classification;
 import cn.kymart.tptp.Fragment.Fragment_main;
+import cn.kymart.tptp.R;
 import cn.kymart.tptp.Utils.LogUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {

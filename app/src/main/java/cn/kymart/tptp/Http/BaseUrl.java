@@ -7,5 +7,6 @@ package cn.kymart.tptp.Http;
 public class BaseUrl {
     public  static String BaseURL="http://test.kymart.cn/index.php?";
     public  static String mainURL="m=api&c=Index&a=homePage";
+    public static String  main_imgURL="m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";
 
 }
