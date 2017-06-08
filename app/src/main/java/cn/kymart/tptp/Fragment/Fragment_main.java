@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.kymart.tptp.Adapter.Adapter_Grid_main_like;
-import cn.kymart.tptp.Adapter.FragmentAdapterSecond;
 import cn.kymart.tptp.Bean.MainBean;
 import cn.kymart.tptp.Bean.mainLike;
 import cn.kymart.tptp.CustomView.MyGridView;
@@ -43,8 +42,8 @@ public class Fragment_main extends Fragment {
     List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_promotion;// viewpager 精品推荐viewpager总数据
     List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_promotion;//单独一个viewpager精品推荐总数据分为若干页的数据集合，传入到Fragment；
     //2
-    List<MainBean.ResultBean.HighQualityGoodsBean> mData_viewpager_highQuality;// viewpager 精品推荐viewpager总数据
-    List<List<MainBean.ResultBean.HighQualityGoodsBean>> mData_Group_highQuality;//单独一个viewpager精品推荐总数据分为若干页的数据集合，传入到Fragment；
+    List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_highQuality;// viewpager 精品推荐viewpager总数据
+    List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_highQuality;//单独一个viewpager精品推荐总数据分为若干页的数据集合，传入到Fragment；
 
 
 
@@ -60,10 +59,13 @@ public class Fragment_main extends Fragment {
     private MyGridView myGridView;
 
 
-    private List<Fragment> fragments_first = new ArrayList<Fragment>();
-    private List<Fragment> fragments_second = new ArrayList<Fragment>();
-    private FragmentAdapter mFragmentAdapter;
-    private FragmentAdapterSecond mFragmentAdapter2;
+
+//
+//    private List<Fragment> fragments_first = new ArrayList<Fragment>();
+//    private List<Fragment> fragments_second = new ArrayList<Fragment>();
+
+//    private FragmentAdapter mFragmentAdapter2;
+    List< List<Fragment>> fragments=new ArrayList<>();
 
 
 
@@ -118,9 +120,14 @@ public class Fragment_main extends Fragment {
          * 初始化Adapter
          */
         mFragmentAdapter = new FragmentAdapter(getFragmentManager(), fragments_first);
-        mFragmentAdapter2 = new FragmentAdapterSecond(getFragmentManager(), fragments_second);
+//        mFragmentAdapter2 = new FragmentAdapter(getFragmentManager(), fragments_second);
         mViewPager_item_first.setAdapter(mFragmentAdapter);
         mViewPager_item_second.setAdapter(mFragmentAdapter2);
+
+        for(int  i=0;i<fragments.size();i++){
+            FragmentAdapter mFragmentAdapter = new FragmentAdapter(getFragmentManager(), fragments.get(i));
+
+        }
 
 
     }
@@ -180,59 +187,63 @@ public class Fragment_main extends Fragment {
     /**
      * 促销商品viewpager数据初始化
      */
-    private void initDataPromotion(){
+    private void initDataPromotion(List<MainBean.ResultBean.PromotionGoodsBean> mlist){
+
+         List<Fragment> fragments_first = new ArrayList<Fragment>();
+
         mData_Group_promotion = new ArrayList<>();
         fragments_first = new ArrayList<>();
         //算出viewpager的页数
-        int page = mData_viewpager_promotion.size() / 3;//页数，余数为0的时候
+        int page = mlist.size() / 3;//页数，余数为0的时候
         //将数据分发到每一页的fragment
         for (int i = 1; i < page + 1; i++) {
             List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
             for (int j = 1; j < 4; j++) {
-                child.add(mData_viewpager_promotion.get(j * i - 1));
+                child.add(mlist.get(j * i - 1));
             }
             mData_Group_promotion.add(child);
             fragments_first.add(new Fragment_main_viewpager_Promotion(mData_Group_promotion.get(i - 1)));
         }
         // 数据总和不是3的倍数需要另外处理
-        int yushu_promotion = mData_viewpager_promotion.size() % 3;
+        int yushu_promotion = mlist.size() % 3;
         if (yushu_promotion != 0) {
             List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
-            for (int i = 3 * page; i < mData_viewpager_promotion.size(); i++) {
-                child.add(mData_viewpager_promotion.get(i));
+            for (int i = 3 * page; i < mlist.size(); i++) {
+                child.add(mlist.get(i));
             }
             mData_Group_promotion.add(child);
-            fragments_first.add(new Fragment_main_viewpager_Promotion(mData_Group_promotion.get( page)));
+            fragments_first.add(new Fragment_main_viewpager_Promotion(mData_Group_promotion.get(page)));
         }
+        fragments.add(fragments_first);
     }
-    /**
-     * 精品推荐viewpager数据初始化
-     */
-    private void initDataHighQuality(){
-        mData_Group_highQuality = new ArrayList<>();
-        fragments_second = new ArrayList<>();
-        //算出viewpager的页数
-        int page = mData_viewpager_highQuality.size() / 3;//页数，余数为0的时候
-        //将数据分发到每一页的fragment
-        for (int i = 1; i < page + 1; i++) {
-            List<MainBean.ResultBean.HighQualityGoodsBean> child = new ArrayList<>();
-            for (int j = 1; j < 4; j++) {
-                child.add(mData_viewpager_highQuality.get(j * i - 1));
-            }
-            mData_Group_highQuality.add(child);
-            fragments_second.add(new Fragment_main_viewpager_HighQuallity(mData_Group_highQuality.get(i - 1)));
-        }
-        // 数据总和不是3的倍数需要另外处理
-        int yushu = mData_viewpager_highQuality.size() % 3;
-        if (yushu != 0) {
-            List<MainBean.ResultBean.HighQualityGoodsBean> child = new ArrayList<>();
-            for (int i = 3 * page; i < mData_viewpager_highQuality.size(); i++) {
-                child.add(mData_viewpager_highQuality.get(i));
-            }
-            mData_Group_highQuality.add(child);
-            fragments_second.add(new Fragment_main_viewpager_HighQuallity(mData_Group_highQuality.get( page)));
-        }
-    }
+//    /**
+//     * 精品推荐viewpager数据初始化
+//     */
+//    private void initDataHighQuality(){
+//        mData_Group_highQuality = new ArrayList<>();
+//        fragments_second = new ArrayList<>();
+//        //算出viewpager的页数
+//        int page = mData_viewpager_highQuality.size() / 3;//页数，余数为0的时候
+//        //将数据分发到每一页的fragment
+//        for (int i = 1; i < page + 1; i++) {
+//            List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
+//            for (int j = 1; j < 4; j++) {
+//                child.add(mData_viewpager_highQuality.get(j * i - 1));
+//            }
+//            mData_Group_highQuality.add(child);
+//            fragments_second.add(new Fragment_main_viewpager_Promotion(mData_Group_highQuality.get(i - 1)));
+//        }
+//        // 数据总和不是3的倍数需要另外处理
+//        int yushu = mData_viewpager_highQuality.size() % 3;
+//        if (yushu != 0) {
+//            List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
+//            for (int i = 3 * page; i < mData_viewpager_highQuality.size(); i++) {
+//                child.add(mData_viewpager_highQuality.get(i));
+//            }
+//            mData_Group_highQuality.add(child);
+//            fragments_second.add(new Fragment_main_viewpager_Promotion(mData_Group_highQuality.get( page)));
+//        }
+//    }
 
     private void initData() {
         /**
@@ -245,8 +256,9 @@ public class Fragment_main extends Fragment {
             mImagesURL.add(adBean.get(i).getAd_code());
 
         }
-        initDataPromotion();
-        initDataHighQuality();
+        initDataPromotion(mData_viewpager_promotion);
+        initDataPromotion(mData_viewpager_highQuality);
+//        initDataHighQuality();
 
 
 

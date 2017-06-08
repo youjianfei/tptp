@@ -20,7 +20,7 @@ import cn.kymart.tptp.R;
  */
 
 public class Adapter_Grid_main_viewpager_HighQuallity extends BaseAdapter {
-    private List<MainBean.ResultBean.HighQualityGoodsBean> mData;
+    private List<MainBean.ResultBean.PromotionGoodsBean> mData;
     private Context mContext;
     private LayoutInflater mInflater;
 
@@ -34,7 +34,7 @@ public class Adapter_Grid_main_viewpager_HighQuallity extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
-        MainBean.ResultBean.HighQualityGoodsBean bean=mData.get(position);
+        MainBean.ResultBean.PromotionGoodsBean bean=mData.get(position);
         if(convertView==null){
             holder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.item_gridview_main_viewpager,null,false);

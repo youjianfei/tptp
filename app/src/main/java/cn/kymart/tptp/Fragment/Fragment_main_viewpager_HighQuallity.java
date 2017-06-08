@@ -23,9 +23,9 @@ public class Fragment_main_viewpager_HighQuallity extends Fragment{
     private GridView  mGridviewPager;
     private Adapter_Grid_main_viewpager_HighQuallity mAdapter_grid;
 
-    private List<MainBean.ResultBean.HighQualityGoodsBean>data;
+    private List<MainBean.ResultBean.PromotionGoodsBean>data;
 
-    public Fragment_main_viewpager_HighQuallity(List<MainBean.ResultBean.HighQualityGoodsBean> data) {
+    public Fragment_main_viewpager_HighQuallity(List<MainBean.ResultBean.PromotionGoodsBean> data) {
         this.data = data;
     }
 

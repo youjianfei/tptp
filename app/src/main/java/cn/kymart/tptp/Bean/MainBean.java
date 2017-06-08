@@ -44,10 +44,10 @@ public class MainBean {
 
     public static class ResultBean {
         private List<PromotionGoodsBean> promotion_goods;
-        private List<HighQualityGoodsBean> high_quality_goods;
+        private List<PromotionGoodsBean> high_quality_goods;
         private List<?> flash_sale_goods;
-        private List<NewGoodsBean> new_goods;
-        private List<HotGoodsBean> hot_goods;
+        private List<PromotionGoodsBean> new_goods;
+        private List<PromotionGoodsBean> hot_goods;
         private List<AdBean> ad;
 
         public List<PromotionGoodsBean> getPromotion_goods() {
@@ -58,11 +58,11 @@ public class MainBean {
             this.promotion_goods = promotion_goods;
         }
 
-        public List<HighQualityGoodsBean> getHigh_quality_goods() {
+        public List<PromotionGoodsBean> getHigh_quality_goods() {
             return high_quality_goods;
         }
 
-        public void setHigh_quality_goods(List<HighQualityGoodsBean> high_quality_goods) {
+        public void setHigh_quality_goods(List<PromotionGoodsBean> high_quality_goods) {
             this.high_quality_goods = high_quality_goods;
         }
 
@@ -74,19 +74,19 @@ public class MainBean {
             this.flash_sale_goods = flash_sale_goods;
         }
 
-        public List<NewGoodsBean> getNew_goods() {
+        public List<PromotionGoodsBean> getNew_goods() {
             return new_goods;
         }
 
-        public void setNew_goods(List<NewGoodsBean> new_goods) {
+        public void setNew_goods(List<PromotionGoodsBean> new_goods) {
             this.new_goods = new_goods;
         }
 
-        public List<HotGoodsBean> getHot_goods() {
+        public List<PromotionGoodsBean> getHot_goods() {
             return hot_goods;
         }
 
-        public void setHot_goods(List<HotGoodsBean> hot_goods) {
+        public void setHot_goods(List<PromotionGoodsBean> hot_goods) {
             this.hot_goods = hot_goods;
         }
 
@@ -144,113 +144,113 @@ public class MainBean {
             }
         }
 
-        public static class HighQualityGoodsBean {
-            /**
-             * goods_id : 143
-             * goods_name : haier海尔 BC-93TMPF 93升单门冰箱
-             * shop_price : 699.00
-             */
-
-            private int goods_id;
-            private String goods_name;
-            private String shop_price;
-
-            public int getGoods_id() {
-                return goods_id;
-            }
-
-            public void setGoods_id(int goods_id) {
-                this.goods_id = goods_id;
-            }
-
-            public String getGoods_name() {
-                return goods_name;
-            }
-
-            public void setGoods_name(String goods_name) {
-                this.goods_name = goods_name;
-            }
-
-            public String getShop_price() {
-                return shop_price;
-            }
-
-            public void setShop_price(String shop_price) {
-                this.shop_price = shop_price;
-            }
-        }
-
-        public static class NewGoodsBean {
-            /**
-             * goods_id : 103
-             * goods_name : 珂兰钻石 18K金90分效果群镶钻石戒指 倾城 需定制
-             * shop_price : 1999.00
-             */
-
-            private int goods_id;
-            private String goods_name;
-            private String shop_price;
-
-            public int getGoods_id() {
-                return goods_id;
-            }
-
-            public void setGoods_id(int goods_id) {
-                this.goods_id = goods_id;
-            }
-
-            public String getGoods_name() {
-                return goods_name;
-            }
-
-            public void setGoods_name(String goods_name) {
-                this.goods_name = goods_name;
-            }
-
-            public String getShop_price() {
-                return shop_price;
-            }
-
-            public void setShop_price(String shop_price) {
-                this.shop_price = shop_price;
-            }
-        }
-
-        public static class HotGoodsBean {
-            /**
-             * goods_id : 1
-             * goods_name : Apple iPhone 6s Plus 16G 玫瑰金 移动联通电信4G手机
-             * shop_price : 200.00
-             */
-
-            private int goods_id;
-            private String goods_name;
-            private String shop_price;
-
-            public int getGoods_id() {
-                return goods_id;
-            }
-
-            public void setGoods_id(int goods_id) {
-                this.goods_id = goods_id;
-            }
-
-            public String getGoods_name() {
-                return goods_name;
-            }
-
-            public void setGoods_name(String goods_name) {
-                this.goods_name = goods_name;
-            }
-
-            public String getShop_price() {
-                return shop_price;
-            }
-
-            public void setShop_price(String shop_price) {
-                this.shop_price = shop_price;
-            }
-        }
+//        public static class HighQualityGoodsBean {
+//            /**
+//             * goods_id : 143
+//             * goods_name : haier海尔 BC-93TMPF 93升单门冰箱
+//             * shop_price : 699.00
+//             */
+//
+//            private int goods_id;
+//            private String goods_name;
+//            private String shop_price;
+//
+//            public int getGoods_id() {
+//                return goods_id;
+//            }
+//
+//            public void setGoods_id(int goods_id) {
+//                this.goods_id = goods_id;
+//            }
+//
+//            public String getGoods_name() {
+//                return goods_name;
+//            }
+//
+//            public void setGoods_name(String goods_name) {
+//                this.goods_name = goods_name;
+//            }
+//
+//            public String getShop_price() {
+//                return shop_price;
+//            }
+//
+//            public void setShop_price(String shop_price) {
+//                this.shop_price = shop_price;
+//            }
+//        }
+//
+//        public static class NewGoodsBean {
+//            /**
+//             * goods_id : 103
+//             * goods_name : 珂兰钻石 18K金90分效果群镶钻石戒指 倾城 需定制
+//             * shop_price : 1999.00
+//             */
+//
+//            private int goods_id;
+//            private String goods_name;
+//            private String shop_price;
+//
+//            public int getGoods_id() {
+//                return goods_id;
+//            }
+//
+//            public void setGoods_id(int goods_id) {
+//                this.goods_id = goods_id;
+//            }
+//
+//            public String getGoods_name() {
+//                return goods_name;
+//            }
+//
+//            public void setGoods_name(String goods_name) {
+//                this.goods_name = goods_name;
+//            }
+//
+//            public String getShop_price() {
+//                return shop_price;
+//            }
+//
+//            public void setShop_price(String shop_price) {
+//                this.shop_price = shop_price;
+//            }
+//        }
+//
+//        public static class HotGoodsBean {
+//            /**
+//             * goods_id : 1
+//             * goods_name : Apple iPhone 6s Plus 16G 玫瑰金 移动联通电信4G手机
+//             * shop_price : 200.00
+//             */
+//
+//            private int goods_id;
+//            private String goods_name;
+//            private String shop_price;
+//
+//            public int getGoods_id() {
+//                return goods_id;
+//            }
+//
+//            public void setGoods_id(int goods_id) {
+//                this.goods_id = goods_id;
+//            }
+//
+//            public String getGoods_name() {
+//                return goods_name;
+//            }
+//
+//            public void setGoods_name(String goods_name) {
+//                this.goods_name = goods_name;
+//            }
+//
+//            public String getShop_price() {
+//                return shop_price;
+//            }
+//
+//            public void setShop_price(String shop_price) {
+//                this.shop_price = shop_price;
+//            }
+//        }
 
         public static class AdBean {
             /**
