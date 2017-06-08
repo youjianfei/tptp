@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.youth.banner.Banner;
@@ -15,9 +16,10 @@ import com.youth.banner.Banner;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.kymart.tptp.Adapter.Adapter_Grid_main_recommend;
+import cn.kymart.tptp.Adapter.Adapter_Grid_main_like;
 import cn.kymart.tptp.Adapter.FragmentAdapterSecond;
 import cn.kymart.tptp.Bean.MainBean;
+import cn.kymart.tptp.Bean.mainLike;
 import cn.kymart.tptp.CustomView.MyGridView;
 import cn.kymart.tptp.class_.GlideImageLoader;
 import cn.kymart.tptp.Interface.Interface_volley_respose;
@@ -27,6 +29,7 @@ import cn.kymart.tptp.Utils.Volley_Utils;
 
 import static cn.kymart.tptp.Http.BaseUrl.BaseURL;
 import static cn.kymart.tptp.Http.BaseUrl.mainURL;
+import static cn.kymart.tptp.Http.BaseUrl.main_like;
 
 /**
  * Created by PC on 2017/6/6.
@@ -40,8 +43,8 @@ public class Fragment_main extends Fragment {
     List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_promotion;//单独一个viewpager总数据分为若干页的数据集合，传入到Fragment；
 
 
-    List<String> mList_recommend;
-    Adapter_Grid_main_recommend mAdapter_recommend;
+    List<mainLike.ResultBean.FavouriteGoodsBean> mList_like;//猜你喜欢 数据
+    Adapter_Grid_main_like mAdapter_main_like;
 
 
     private Banner mViewpager;//顶部轮播图
@@ -56,6 +59,10 @@ public class Fragment_main extends Fragment {
     private FragmentAdapterSecond mFragmentAdapter2;
 
 
+
+    private TextView mTextviewLoadmore;//底部加载更多
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_main, container, false);
@@ -65,13 +72,26 @@ public class Fragment_main extends Fragment {
 
         myGridView = (MyGridView) rootview.findViewById(R.id.gradview_Recommend);
 
+        mTextviewLoadmore= (TextView) rootview.findViewById(R.id.textview_loadmore);
+
         adBean = new ArrayList<>();//轮播广告bean
         mData_viewpager_promotion = new ArrayList<>();//促销商品 viewpager 总数据
-
+        mList_like = new ArrayList<>();//猜你喜欢数据
 
         requestData();
+        initListenner();
 
         return rootview;
+    }
+        int  main_like_page=1;
+    private void initListenner() {
+        mTextviewLoadmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {//  猜你喜欢  点击加载更多监听
+                main_like_page++;
+                requestLikeData(main_like_page);
+            }
+        });
     }
 
     private void setData() {
@@ -97,24 +117,24 @@ public class Fragment_main extends Fragment {
 
     }
 
-    private MainBean bean;//请求下来的全部数据
+    private MainBean mainbean;//请求下来的全部数据
     private List<MainBean.ResultBean.AdBean> adBean;//首页轮播广告信息
 
     public void requestData() {//主页数据网络请求  &cid=2&page=1&count=20
 
-        LogUtils.LOG("ceshi", "请求了");
         String URL = BaseURL + mainURL;
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
 
-                LogUtils.LOG("ceshi","网络请求成功");
-                bean = new Gson().fromJson(respose, MainBean.class);//请求下来的全部数据，在这里进行数据分配
-                adBean = bean.getResult().getAd();//添加广告轮播视图
-                mData_viewpager_promotion=bean.getResult().getPromotion_goods();
-
+                LogUtils.LOG("ceshi","main网络请求成功");
+                mainbean = new Gson().fromJson(respose, MainBean.class);//请求下来的全部数据，在这里进行数据分配
+                adBean = mainbean.getResult().getAd();//添加广告轮播视图
+                mData_viewpager_promotion=mainbean.getResult().getPromotion_goods();
                 initData();
                 setData();
+                requestLikeData(1);//请求  猜你喜欢   数据
+
             }
 
             @Override
@@ -124,9 +144,36 @@ public class Fragment_main extends Fragment {
         }).Http(URL, getActivity(), 0);
 
     }
+    private mainLike mainLikeBean;
+    public void requestLikeData(int  page){//请求猜你喜欢数据
+
+        String URL = BaseURL + main_like+page;
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","mainLike网络请求成功");
+                mainLikeBean=new  Gson().fromJson(respose,mainLike.class);
+                mList_like.addAll(mainLikeBean.getResult().getFavourite_goods());
+                mAdapter_main_like.notifyDataSetChanged();
+
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(URL,getActivity(),0);
+
+
+    }
+
+
 
     private void initData() {
-
+        /**
+         * 轮播图数据初始化
+         */
         mImagesURL = new ArrayList<>();
         LogUtils.LOG("ceshi","图片数量"+adBean.size());
         for(int i=0;i<adBean.size();i++){
@@ -136,19 +183,14 @@ public class Fragment_main extends Fragment {
         }
 
 
-//        mData_viewpager_promotion.add("sdfsadf");
-//        mData_viewpager_promotion.add("sdfsadf");
-//        mData_viewpager_promotion.add("sdfsadf");
-//        mData_viewpager_promotion.add("sdfsadf");
-//        mData_viewpager_promotion.add("sdfsadf");
-//        mData_viewpager_promotion.add("sdfsadf");
-//        mData_viewpager_promotion.add("sdfsadf");
+        /**
+         * 促销商品viewpager数据初始化
+         */
         mData_Group_promotion = new ArrayList<>();
         fragments_first = new ArrayList<>();
-        /**
-         * 算出viewpager的页数;
-         */
+        //算出viewpager的页数
         int page = mData_viewpager_promotion.size() / 3;//页数，余数为0的时候
+        //将数据分发到每一页的fragment
         for (int i = 1; i < page + 1; i++) {
             List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
             for (int j = 1; j < 4; j++) {
@@ -157,6 +199,7 @@ public class Fragment_main extends Fragment {
             mData_Group_promotion.add(child);
             fragments_first.add(new Fragment_main_viewpager_item(mData_Group_promotion.get(i - 1)));
         }
+        // 数据总和不是3的倍数需要另外处理
         int yushu = mData_viewpager_promotion.size() % 3;
         if (yushu != 0) {
             List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
@@ -168,24 +211,12 @@ public class Fragment_main extends Fragment {
         }
 
 
-//        fragments_second=new ArrayList<>();
-//        Fragment_main_viewpager_item fragment_item4=new Fragment_main_viewpager_item(mData_viewpager);
-//        Fragment_main_viewpager_item fragment_item5=new Fragment_main_viewpager_item(mData_viewpager);
-//        Fragment_main_viewpager_item fragment_item6=new Fragment_main_viewpager_item(mData_viewpager);
-//        fragments_second.add(fragment_item4);
-//        fragments_second.add(fragment_item5);
-//        fragments_second.add(fragment_item6);
 
 
-        mList_recommend = new ArrayList<>();
-        mList_recommend.add("sdfasdf");
-        mList_recommend.add("sdfasdf");
-        mList_recommend.add("sdfasdf");
-        mList_recommend.add("sdfasdf");
-        mList_recommend.add("sdfasdf");
-        mList_recommend.add("sdfasdf");
-        mAdapter_recommend = new Adapter_Grid_main_recommend(mList_recommend, getActivity());
-        myGridView.setAdapter(mAdapter_recommend);
+
+        mAdapter_main_like = new Adapter_Grid_main_like(mList_like, getActivity());
+        myGridView.setAdapter(mAdapter_main_like);
+
 
     }
 
