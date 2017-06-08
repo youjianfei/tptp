@@ -27,11 +27,10 @@
                 android:layout_height="150dp"
                 android:background="@color/white"
                 />
-
-
             <include layout="@layout/viewpager_item_first" />
             <include layout="@layout/viewpager_item_second" />
             <include layout="@layout/viewpager_item_third" />
+            <include layout="@layout/viewpager_item_fouth" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

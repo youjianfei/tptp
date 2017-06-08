@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TPTP.iml" filepath="$PROJECT_DIR$/TPTP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TPTPTEXT.iml" filepath="$PROJECT_DIR$/TPTPTEXT.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

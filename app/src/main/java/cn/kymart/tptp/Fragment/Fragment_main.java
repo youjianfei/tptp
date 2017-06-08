@@ -38,14 +38,11 @@ public class Fragment_main extends Fragment {
     View rootview;
     List<String> mImagesURL;//顶部轮播图图片下载地址数据
 
-    //1
+
     List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_promotion;// viewpager 精品推荐viewpager总数据
-    List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_promotion;//单独一个viewpager精品推荐总数据分为若干页的数据集合，传入到Fragment；
-    //2
     List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_highQuality;// viewpager 精品推荐viewpager总数据
-    List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_highQuality;//单独一个viewpager精品推荐总数据分为若干页的数据集合，传入到Fragment；
-
-
+    List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_flashSale;// viewpager 新品上市viewpager总数据
+    List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_hot;// viewpager 热销商品viewpager总数据
 
 
 
@@ -56,16 +53,13 @@ public class Fragment_main extends Fragment {
     private Banner mViewpager;//顶部轮播图
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
+    private ViewPager mViewPager_item_thred;
+    private ViewPager mViewPager_item_fouth;
     private MyGridView myGridView;
 
 
 
-//
-//    private List<Fragment> fragments_first = new ArrayList<Fragment>();
-//    private List<Fragment> fragments_second = new ArrayList<Fragment>();
-
-//    private FragmentAdapter mFragmentAdapter2;
-    List< List<Fragment>> fragments=new ArrayList<>();
+    List< List<Fragment>> fragments=new ArrayList<>();//用来
 
 
 
@@ -78,6 +72,8 @@ public class Fragment_main extends Fragment {
         mViewpager = (Banner) rootview.findViewById(R.id.banner);//顶部轮播图
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
         mViewPager_item_second = (ViewPager) rootview.findViewById(R.id.viewpager_second);
+        mViewPager_item_thred = (ViewPager) rootview.findViewById(R.id.viewpager_thred);
+        mViewPager_item_fouth = (ViewPager) rootview.findViewById(R.id.viewpager_fouth);
 
         myGridView = (MyGridView) rootview.findViewById(R.id.gradview_Recommend);
 
@@ -85,7 +81,10 @@ public class Fragment_main extends Fragment {
 
         adBean = new ArrayList<>();//轮播广告bean
         mData_viewpager_promotion = new ArrayList<>();//促销商品 viewpager 总数据
-        mData_viewpager_highQuality = new ArrayList<>();//促销商品 viewpager 总数据
+        mData_viewpager_highQuality = new ArrayList<>();//精品推荐 viewpager 总数据
+        mData_viewpager_flashSale=new ArrayList<>();//新品上市 viewpager 总数据
+        mData_viewpager_hot=new ArrayList<>();//热销商品  viewpager总数据
+
         mList_like = new ArrayList<>();//猜你喜欢数据
 
         requestData();
@@ -119,16 +118,14 @@ public class Fragment_main extends Fragment {
         /**
          * 初始化Adapter
          */
-        mFragmentAdapter = new FragmentAdapter(getFragmentManager(), fragments_first);
-//        mFragmentAdapter2 = new FragmentAdapter(getFragmentManager(), fragments_second);
-        mViewPager_item_first.setAdapter(mFragmentAdapter);
+        FragmentAdapter mFragmentAdapter1 = new FragmentAdapter(getFragmentManager(), fragments.get(0));
+        FragmentAdapter mFragmentAdapter2 = new FragmentAdapter(getFragmentManager(), fragments.get(1));
+        FragmentAdapter mFragmentAdapter3 = new FragmentAdapter(getFragmentManager(), fragments.get(2));
+        FragmentAdapter mFragmentAdapter4 = new FragmentAdapter(getFragmentManager(), fragments.get(3));
+        mViewPager_item_first.setAdapter(mFragmentAdapter1);
         mViewPager_item_second.setAdapter(mFragmentAdapter2);
-
-        for(int  i=0;i<fragments.size();i++){
-            FragmentAdapter mFragmentAdapter = new FragmentAdapter(getFragmentManager(), fragments.get(i));
-
-        }
-
+        mViewPager_item_thred.setAdapter(mFragmentAdapter3);
+        mViewPager_item_fouth.setAdapter(mFragmentAdapter4);
 
     }
 
@@ -146,8 +143,9 @@ public class Fragment_main extends Fragment {
                 mainbean = new Gson().fromJson(respose, MainBean.class);//请求下来的全部数据，在这里进行数据分配
                 adBean = mainbean.getResult().getAd();//添加广告轮播视图
                 mData_viewpager_promotion=mainbean.getResult().getPromotion_goods();//促销产品数据添加
-                mData_viewpager_highQuality=mainbean.getResult().getHigh_quality_goods();
-
+                mData_viewpager_highQuality=mainbean.getResult().getHigh_quality_goods();//精品推荐 数据添加
+                mData_viewpager_flashSale=mainbean.getResult().getNew_goods();//新品上市数据添加
+                mData_viewpager_hot=mainbean.getResult().getHot_goods();//热销产品数据添加
                 initData();
                 setData();
                 requestLikeData(1);//请求  猜你喜欢   数据
@@ -189,19 +187,20 @@ public class Fragment_main extends Fragment {
      */
     private void initDataPromotion(List<MainBean.ResultBean.PromotionGoodsBean> mlist){
 
-         List<Fragment> fragments_first = new ArrayList<Fragment>();
+         List<Fragment> fragments_first = new ArrayList<Fragment>();//存放fragment  viewpager需要适配使用
+        List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_promotion;//单独一个viewpager总数据分为若干页的数据集合，传入到Fragment；
 
         mData_Group_promotion = new ArrayList<>();
-        fragments_first = new ArrayList<>();
         //算出viewpager的页数
         int page = mlist.size() / 3;//页数，余数为0的时候
         //将数据分发到每一页的fragment
         for (int i = 1; i < page + 1; i++) {
             List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
             for (int j = 1; j < 4; j++) {
-                child.add(mlist.get(j * i - 1));
+                child.add(mlist.get(j * i - 1));//每一组添加3个数据
             }
-            mData_Group_promotion.add(child);
+            mData_Group_promotion.add(child);//将数据添加到group中
+            //将group中的list数据通过构造方法传入fragment
             fragments_first.add(new Fragment_main_viewpager_Promotion(mData_Group_promotion.get(i - 1)));
         }
         // 数据总和不是3的倍数需要另外处理
@@ -216,34 +215,7 @@ public class Fragment_main extends Fragment {
         }
         fragments.add(fragments_first);
     }
-//    /**
-//     * 精品推荐viewpager数据初始化
-//     */
-//    private void initDataHighQuality(){
-//        mData_Group_highQuality = new ArrayList<>();
-//        fragments_second = new ArrayList<>();
-//        //算出viewpager的页数
-//        int page = mData_viewpager_highQuality.size() / 3;//页数，余数为0的时候
-//        //将数据分发到每一页的fragment
-//        for (int i = 1; i < page + 1; i++) {
-//            List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
-//            for (int j = 1; j < 4; j++) {
-//                child.add(mData_viewpager_highQuality.get(j * i - 1));
-//            }
-//            mData_Group_highQuality.add(child);
-//            fragments_second.add(new Fragment_main_viewpager_Promotion(mData_Group_highQuality.get(i - 1)));
-//        }
-//        // 数据总和不是3的倍数需要另外处理
-//        int yushu = mData_viewpager_highQuality.size() % 3;
-//        if (yushu != 0) {
-//            List<MainBean.ResultBean.PromotionGoodsBean> child = new ArrayList<>();
-//            for (int i = 3 * page; i < mData_viewpager_highQuality.size(); i++) {
-//                child.add(mData_viewpager_highQuality.get(i));
-//            }
-//            mData_Group_highQuality.add(child);
-//            fragments_second.add(new Fragment_main_viewpager_Promotion(mData_Group_highQuality.get( page)));
-//        }
-//    }
+//
 
     private void initData() {
         /**
@@ -256,19 +228,21 @@ public class Fragment_main extends Fragment {
             mImagesURL.add(adBean.get(i).getAd_code());
 
         }
+        //初始化数据   四种类型  初始化四次
         initDataPromotion(mData_viewpager_promotion);
         initDataPromotion(mData_viewpager_highQuality);
-//        initDataHighQuality();
+        initDataPromotion(mData_viewpager_flashSale);
+        initDataPromotion(mData_viewpager_hot);
 
 
 
-        mAdapter_main_like = new Adapter_Grid_main_like(mList_like, getActivity());
-        myGridView.setAdapter(mAdapter_main_like);
+        mAdapter_main_like = new Adapter_Grid_main_like(mList_like, getActivity());//猜你喜欢 网格列表 适配器
+        myGridView.setAdapter(mAdapter_main_like);///绑定适配器
 
 
     }
 
-    class FragmentAdapter extends FragmentPagerAdapter {
+    class FragmentAdapter extends FragmentPagerAdapter {//viewpager fangmentAdapter
         private List<Fragment> fragments;
 
         public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {

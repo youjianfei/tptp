@@ -9,7 +9,7 @@
         android:id="@+id/textview_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="新品上市"
+        android:text="热销商品"
         android:textColor="@color/red"
         android:textSize="15dp"
         android:layout_margin="8dp"
@@ -23,7 +23,7 @@
         android:layout_below="@+id/textview_item_title"
         />
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_thred"
+        android:id="@+id/viewpager_fouth"
         android:layout_below="@+id/image_item_line"
         android:layout_width="match_parent"
         android:layout_height="200dp"
