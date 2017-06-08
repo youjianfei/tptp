@@ -45,7 +45,6 @@ public class Fragment_main extends Fragment {
     List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_hot;// viewpager 热销商品viewpager总数据
 
 
-
     List<mainLike.ResultBean.FavouriteGoodsBean> mList_like;//猜你喜欢 数据
     Adapter_Grid_main_like mAdapter_main_like;//猜你喜欢数据网格列表
 
@@ -59,7 +58,7 @@ public class Fragment_main extends Fragment {
 
 
 
-    List< List<Fragment>> fragments=new ArrayList<>();//用来
+    List< List<Fragment>> fragments=new ArrayList<>();//用来存放4个 fragment集合 的集合
 
 
 
