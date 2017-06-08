@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    >
+    <cn.kymart.tptp.CustomView.CustomerScrollView
+        android:id="@+id/bsv_news_detail_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/REL_title"
+        android:background="#ffffff"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/white"
+                />
+
+
+            <include layout="@layout/viewpager_item_first" />
+            <include layout="@layout/viewpager_item_second" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="————猜你喜欢————"
+                android:layout_margin="10dp"
+                />
+            <cn.kymart.tptp.CustomView.MyGridView
+                android:id="@+id/gradview_Recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="2"
+                >
+
+            </cn.kymart.tptp.CustomView.MyGridView>
+
+
+
+
+        </LinearLayout>
+        </cn.kymart.tptp.CustomView.CustomerScrollView>
+
+
+
+
+</LinearLayout>
