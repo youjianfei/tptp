@@ -9,7 +9,8 @@ import android.widget.GridView;
 
 import java.util.List;
 
-import cn.kymart.tptp.Adapter.Adapter_Grid_main_viewpager;
+import cn.kymart.tptp.Adapter.Adapter_Grid_main_viewpager_HighQuallity;
+import cn.kymart.tptp.Adapter.Adapter_Grid_main_viewpager_Promotion;
 import cn.kymart.tptp.Bean.MainBean;
 import cn.kymart.tptp.R;
 
@@ -17,14 +18,14 @@ import cn.kymart.tptp.R;
  * Created by PC on 2017/6/6.
  */
 
-public class Fragment_main_viewpager_item extends Fragment{
+public class Fragment_main_viewpager_HighQuallity extends Fragment{
     View rootView;
     private GridView  mGridviewPager;
-    private Adapter_Grid_main_viewpager mAdapter_grid;
+    private Adapter_Grid_main_viewpager_HighQuallity mAdapter_grid;
 
-    private List<MainBean.ResultBean.PromotionGoodsBean>data;
+    private List<MainBean.ResultBean.HighQualityGoodsBean>data;
 
-    public Fragment_main_viewpager_item(List<MainBean.ResultBean.PromotionGoodsBean> data) {
+    public Fragment_main_viewpager_HighQuallity(List<MainBean.ResultBean.HighQualityGoodsBean> data) {
         this.data = data;
     }
 
@@ -33,7 +34,7 @@ public class Fragment_main_viewpager_item extends Fragment{
         rootView=inflater.inflate(R.layout.item_fragment_viewpager,container,false);
         mGridviewPager= (GridView) rootView.findViewById(R.id.Gridview_viewpager);
         initdata();
-        mAdapter_grid=new Adapter_Grid_main_viewpager(data,getActivity());
+        mAdapter_grid=new Adapter_Grid_main_viewpager_HighQuallity(data,getActivity());
         mGridviewPager.setAdapter(mAdapter_grid);
 
 

@@ -20,12 +20,12 @@ import cn.kymart.tptp.R;
  * Created by PC on 2017/6/7.
  */
 
-public class Adapter_Grid_main_viewpager extends BaseAdapter {
+public class Adapter_Grid_main_viewpager_Promotion extends BaseAdapter {
     private List<MainBean.ResultBean.PromotionGoodsBean> mData;
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public Adapter_Grid_main_viewpager(List mDatas, Context mContext) {
+    public Adapter_Grid_main_viewpager_Promotion(List mDatas, Context mContext) {
         super(mDatas, mContext);
         this.mData=mDatas;
         this.mContext=mContext;
