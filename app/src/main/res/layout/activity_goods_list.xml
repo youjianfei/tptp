@@ -6,21 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="cn.kymart.tptp.Activity.GoodsListActivity">
+
     <RelativeLayout
         android:id="@+id/REL_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/red"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/red">
+
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/back"
-            />
+            android:src="@mipmap/back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,103 +33,107 @@
             android:textSize="18dp" />
 
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
+
         <RelativeLayout
             android:id="@+id/RelativeLayout_Latest"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="最新"
-                android:textSize="15dp"
-                />
+                android:textSize="15dp" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/select_goods_list"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="@drawable/select_goods_list" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/RelativeLayout_Sales"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="销量"
-                android:textSize="15dp"
-                />
+                android:textSize="15dp" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/select_goods_list"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="@drawable/select_goods_list" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/RelativeLayout_Comments"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="评论"
-                android:textSize="15dp"
-                />
+                android:textSize="15dp" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/select_goods_list"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="@drawable/select_goods_list" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/RelativeLayout_Price"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <TextView
                 android:id="@+id/textview_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="价格"
-                android:textSize="15dp"
-                />
+                android:textSize="15dp" />
+
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@mipmap/sort"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/textview_price"
-                />
+                android:src="@mipmap/sort" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/select_goods_list"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="@drawable/select_goods_list" />
         </RelativeLayout>
-
-
-
     </LinearLayout>
 
-
+    <GridView
+        android:id="@+id/GridView_goodslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="2dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp"></GridView>
 
 
 </LinearLayout>

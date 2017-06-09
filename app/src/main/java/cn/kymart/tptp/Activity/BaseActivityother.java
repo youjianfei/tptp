@@ -31,9 +31,9 @@ public abstract class BaseActivityother extends Activity implements OnClickListe
      */
     private void dealCommon() {
 
-//        View back = findViewById(R.id.iv_back);
-//        if (back != null)
-//            back.setOnClickListener(this);
+        View back = findViewById(R.id.iv_back);
+        if (back != null)
+            back.setOnClickListener(this);
     }
 
     /**
@@ -64,9 +64,9 @@ public abstract class BaseActivityother extends Activity implements OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-//            case R.id.iv_back:
-//                finish();
-//                break;
+            case R.id.iv_back:
+                finish();
+                break;
 
         }
     }
