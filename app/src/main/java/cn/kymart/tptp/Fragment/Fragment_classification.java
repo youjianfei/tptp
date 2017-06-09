@@ -64,6 +64,8 @@ public class Fragment_classification extends Fragment {
 
                 requestDataRight(mData_left.get(0).getId());//默认请求第一个二级菜单
 
+                
+
             }
 
             @Override
