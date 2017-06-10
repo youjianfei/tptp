@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:youth="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <com.youth.banner.Banner
+        android:id="@+id/Banner_goodImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/white"
+        youth:indicator_drawable_selected="@drawable/dop_select"
+        youth:indicator_drawable_unselected="@drawable/dop_unselect"
+        youth:indicator_height="8dp"
+        youth:indicator_margin="5dp"
+        youth:indicator_width="8dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/LightGrey"
+        >
+        <TextView
+            android:id="@+id/textview_goodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:textColor="@color/blank"
+            android:lines="2"
+            android:textSize="15dp"
+            android:layout_margin="15dp"
+            android:text="长虹（CHANGHONG)49A1U 49英寸双 64位4超清智能网络LED液晶电视" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textview_goodPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$2799.00y元"
+        android:textColor="@color/red"
+        android:textSize="20dp"
+        android:layout_margin="15dp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/DarkGray"
+            android:text="折扣：9.7折"
+            android:textSize="14dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/DarkGray"
+            android:layout_alignParentRight="true"
+            android:text="0人已付款"
+            android:textSize="14dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/LightGrey"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+
+
+
+</LinearLayout>

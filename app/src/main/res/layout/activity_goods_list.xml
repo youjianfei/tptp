@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.kymart.tptp.com.kymart.tptp.Activity.GoodsListActivity">
+    tools:context="com.kymart.shop.Activity.GoodsListActivity">
 
     <RelativeLayout
         android:id="@+id/REL_title"

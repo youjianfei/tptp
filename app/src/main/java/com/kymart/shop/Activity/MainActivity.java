@@ -26,6 +26,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      */
     Fragment_main mFragment_main;
     Fragment_classification mFragment_classification;
+
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
 
