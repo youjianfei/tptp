@@ -1,6 +1,7 @@
 package cn.kymart.tptp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kymart.tptp.Activity.GoodsListActivity;
 import cn.kymart.tptp.Bean.Classification_rightBean;
 import cn.kymart.tptp.CustomView.MyGridView;
 import cn.kymart.tptp.R;
@@ -58,8 +60,12 @@ public class Adapter_classification_right_list extends BaseAdapter {
         holder.myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//二级菜单分类点击
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.LOG("ceshi", mDatata.get(position).getMobile_name());
 
+                LogUtils.LOG("ceshi", mDatata.get(position).getMobile_name());
+                Intent intent=new Intent(mContext, GoodsListActivity.class);
+                intent.putExtra("id",mDatata.get(position).getId());
+                LogUtils.LOG("ceshi",mDatata.get(position).getId()+"");
+                mContext.startActivity(intent);
             }
         });
 

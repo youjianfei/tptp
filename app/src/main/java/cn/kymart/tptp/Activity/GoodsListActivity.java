@@ -1,5 +1,6 @@
 package cn.kymart.tptp.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,15 +19,16 @@ import cn.kymart.tptp.CustomView.MyGridView;
 import cn.kymart.tptp.Http.BaseUrl;
 import cn.kymart.tptp.Interface.Interface_volley_respose;
 import cn.kymart.tptp.R;
+import cn.kymart.tptp.Utils.LogUtils;
 import cn.kymart.tptp.Utils.Volley_Utils;
 
 public class GoodsListActivity extends BaseActivityother {
-    private RelativeLayout mRelativeLayout_Latest, mRelativeLayout_Sales, mRelativeLayout_Price, mRelativeLayout_Comments;
+    private RelativeLayout mRelativeLayout_Latest, mRelativeLayout_Sales, mRelativeLayout_Price, mRelativeLayout_Comments;//顶部四个按钮控件
     private MyGridView mGridview;
-    private TextView mTextVIew_loadMore;
+    private TextView mTextVIew_loadMore;//加载更多控件
 
 
-    private List<Goods_ListBean.ResultBean.GoodsListBean> mDate;
+    private List<Goods_ListBean.ResultBean.GoodsListBean> mDate;//grid数据集合
     private Goods_ListBean.ResultBean  resultBean;
     private Adapter_Grid_goodsList mAdapter;
 
@@ -43,20 +45,23 @@ public class GoodsListActivity extends BaseActivityother {
     }
 
 
-    String url="/index.php/api/Goods/goodsList/id/1/sort/is_new/sort_asc/desc/p/";
+    String url="";//后面拼接网址，四个按钮有四个
+    int ID=0;
     int page=1;
     void requestData(final int page ){
         String URL=BaseUrl.BasegoodlistURL+url+page;
+        LogUtils.LOG("ceshi","商品列表网址"+URL);
 
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
                 resultBean=new Gson().fromJson(respose,Goods_ListBean.class).getResult();
-                if(page==1){
+                if(page==1&&resultBean.getGoods_list()!=null){
                     mDate.clear();
+
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
-                }else{
+                }else if(page!=1&&resultBean.getGoods_list()!=null){
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
                 }
@@ -74,6 +79,9 @@ public class GoodsListActivity extends BaseActivityother {
     @Override
     protected void initData() {
 
+        Intent intent=getIntent();
+        ID=intent.getIntExtra("id",1);
+        url="/index.php/api/Goods/goodsList/id/"+ID+"/sort/is_new/sort_asc/desc/p/";
         mDate=new ArrayList<>();
         mAdapter=new Adapter_Grid_goodsList(mDate,this);
         mGridview.setAdapter(mAdapter);

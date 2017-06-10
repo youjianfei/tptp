@@ -100,7 +100,7 @@ public class Fragment_classification extends Fragment {
     private void initListenner() {
         mListview_left.setOnItemClickListener(new AdapterView.OnItemClickListener() {//监听左边列表的点击  颜色变化
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {//监听左边列表点击
                 Adapter_left.setSelectedPosition(position);//传入点击的条目位置
                 Adapter_left.notifyDataSetInvalidated();//重新加载到listview
 
