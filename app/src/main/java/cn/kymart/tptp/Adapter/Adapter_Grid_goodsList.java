@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import cn.kymart.tptp.Bean.Goods_ListBean;
+import cn.kymart.tptp.Http.BaseUrl;
 import cn.kymart.tptp.R;
 
 /**
@@ -16,7 +20,7 @@ import cn.kymart.tptp.R;
  */
 
 public class Adapter_Grid_goodsList extends BaseAdapter{
-    List<String>mData;
+    List<Goods_ListBean.ResultBean.GoodsListBean>mData;
     Context mContext;
     LayoutInflater mInflater;
 
@@ -30,6 +34,7 @@ public class Adapter_Grid_goodsList extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
+        Goods_ListBean.ResultBean.GoodsListBean bean =mData.get(position);
         if(convertView==null){
             holder=new  ViewHolder();
             convertView=mInflater.inflate(R.layout.item_gridview_goodslist,null,false);
@@ -40,6 +45,9 @@ public class Adapter_Grid_goodsList extends BaseAdapter{
         }else {
             holder= (ViewHolder) convertView.getTag();
         }
+        holder.mTextview_name.setText(bean.getGoods_name());
+        holder.mTextview_price.setText(bean.getShop_price()+"元");
+        Glide.with(mContext).load(BaseUrl.BaseURL+BaseUrl.main_imgURL+bean.getGoods_id()).into(holder.mImageView);
 
 
         return convertView;
