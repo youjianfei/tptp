@@ -5,7 +5,25 @@
     xmlns:youth="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorAccent"
     android:orientation="vertical">
-    <cn.kymart.tptp.CustomView.CustomerScrollView
+    <RelativeLayout
+        android:id="@+id/REL_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="首页"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+    <com.kymart.shop.CustomView.CustomerScrollView
         android:id="@+id/bsv_news_detail_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -151,7 +169,7 @@
                 android:text="————猜你喜欢————"
                 android:layout_margin="10dp"
                 />
-            <cn.kymart.tptp.CustomView.MyGridView
+            <com.kymart.shop.CustomView.MyGridView
                 android:id="@+id/gradview_Recommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -161,7 +179,7 @@
                 android:verticalSpacing="5dp"
                 android:horizontalSpacing="5dp"
                 >
-            </cn.kymart.tptp.CustomView.MyGridView>
+            </com.kymart.shop.CustomView.MyGridView>
 
             <TextView
                 android:id="@+id/textview_loadmore"
@@ -178,7 +196,7 @@
 
 
         </LinearLayout>
-        </cn.kymart.tptp.CustomView.CustomerScrollView>
+        </com.kymart.shop.CustomView.CustomerScrollView>
 
 
 

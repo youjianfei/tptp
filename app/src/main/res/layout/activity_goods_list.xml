@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.kymart.tptp.Activity.GoodsListActivity">
+    tools:context="cn.kymart.tptp.com.kymart.tptp.Activity.GoodsListActivity">
 
     <RelativeLayout
         android:id="@+id/REL_title"
@@ -131,7 +131,7 @@
         android:layout_height="0.5dp"
         android:background="@color/LightGrey"
         />
-    <cn.kymart.tptp.CustomView.CustomerScrollView
+    <com.kymart.shop.CustomView.CustomerScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-            <cn.kymart.tptp.CustomView.MyGridView
+            <com.kymart.shop.CustomView.MyGridView
                 android:id="@+id/GridView_goodslist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 />
         </LinearLayout>
 
-    </cn.kymart.tptp.CustomView.CustomerScrollView>
+    </com.kymart.shop.CustomView.CustomerScrollView>
 
 
 

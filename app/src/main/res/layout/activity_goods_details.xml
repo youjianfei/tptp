@@ -4,7 +4,7 @@
     android:id="@+id/activity_goods_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.kymart.tptp.Activity.goodsDetailsActivity">
+    tools:context="cn.kymart.tptp.com.kymart.tptp.Activity.goodsDetailsActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
