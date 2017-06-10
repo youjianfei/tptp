@@ -28,7 +28,14 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         />
-
+    <LinearLayout
+        android:id="@+id/dot_group_fouth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        />
 
 
 </LinearLayout>

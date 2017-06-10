@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -54,6 +56,13 @@ public class Fragment_main extends Fragment {
     private ViewPager mViewPager_item_second;
     private ViewPager mViewPager_item_thred;
     private ViewPager mViewPager_item_fouth;
+    private LinearLayout viewpager_dot_first;
+    private LinearLayout viewpager_dot_second;
+    private LinearLayout viewpager_dot_third;
+    private LinearLayout viewpager_dot_fouth;
+
+
+
     private MyGridView myGridView;
 
 
@@ -74,6 +83,12 @@ public class Fragment_main extends Fragment {
         mViewPager_item_thred = (ViewPager) rootview.findViewById(R.id.viewpager_thred);
         mViewPager_item_fouth = (ViewPager) rootview.findViewById(R.id.viewpager_fouth);
 
+        viewpager_dot_first= (LinearLayout) rootview.findViewById(R.id.dot_group_first);
+        viewpager_dot_second= (LinearLayout) rootview.findViewById(R.id.dot_group_second);
+        viewpager_dot_third= (LinearLayout) rootview.findViewById(R.id.dot_group_third);
+        viewpager_dot_fouth= (LinearLayout) rootview.findViewById(R.id.dot_group_fouth);
+
+
         myGridView = (MyGridView) rootview.findViewById(R.id.gradview_Recommend);
 
         mTextviewLoadmore= (TextView) rootview.findViewById(R.id.textview_loadmore);
@@ -91,8 +106,11 @@ public class Fragment_main extends Fragment {
 
         return rootview;
     }
-        int  main_like_page=1;
+        int  main_like_page=1;//猜你喜欢接口的  页数  默认第一页
     private void initListenner() {
+        /**
+         * Grid猜你喜欢  点击 加载更多的监听
+         */
         mTextviewLoadmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {//  猜你喜欢  点击加载更多监听
@@ -100,6 +118,90 @@ public class Fragment_main extends Fragment {
                 requestLikeData(main_like_page);
             }
         });
+
+        mViewPager_item_first.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i=0;i<fragments.get(0).size();i++){
+                    viewpager_dot_first.getChildAt(i).setEnabled(false);//把上一个小圆点设为false
+                }
+                viewpager_dot_first.getChildAt(position).setEnabled(true);//设置小点为白色
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mViewPager_item_second.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i=0;i<fragments.get(1).size();i++){
+                    viewpager_dot_second.getChildAt(i).setEnabled(false);//把上一个小圆点设为false
+                }
+                viewpager_dot_second.getChildAt(position).setEnabled(true);//设置小点为白色
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mViewPager_item_thred.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i=0;i<fragments.get(2).size();i++){
+                    viewpager_dot_third.getChildAt(i).setEnabled(false);//把上一个小圆点设为false
+                }
+                viewpager_dot_third.getChildAt(position).setEnabled(true);//设置小点为白色
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mViewPager_item_fouth.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i=0;i<fragments.get(3).size();i++){
+                    viewpager_dot_fouth.getChildAt(i).setEnabled(false);//把上一个小圆点设为false
+                }
+                viewpager_dot_fouth.getChildAt(position).setEnabled(true);//设置小点为白色
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
+
     }
 
     private void setData() {
@@ -147,7 +249,7 @@ public class Fragment_main extends Fragment {
                 mData_viewpager_hot=mainbean.getResult().getHot_goods();//热销产品数据添加
                 initData();
                 setData();
-                requestLikeData(1);//请求  猜你喜欢   数据
+                requestLikeData(1);//请求  猜你喜欢 数据
 
             }
 
@@ -169,8 +271,6 @@ public class Fragment_main extends Fragment {
                 mainLikeBean=new  Gson().fromJson(respose,mainLike.class);
                 mList_like.addAll(mainLikeBean.getResult().getFavourite_goods());
                 mAdapter_main_like.notifyDataSetChanged();
-
-
             }
 
             @Override
@@ -181,10 +281,14 @@ public class Fragment_main extends Fragment {
 
 
     }
+
     /**
-     * 促销商品viewpager数据初始化
+     *促销商品viewpager数据初始化
+     * @param mlist  每个viewpager的总数居
+     * @param viewpager_dots 放小白点的linearlayout
+     * @param count viewpager里的fragment数量
      */
-    private void initDataPromotion(List<MainBean.ResultBean.PromotionGoodsBean> mlist){
+    private void initDataPromotion(List<MainBean.ResultBean.PromotionGoodsBean> mlist,LinearLayout viewpager_dots,int count){
 
          List<Fragment> fragments_first = new ArrayList<Fragment>();//存放fragment  viewpager需要适配使用
         List<List<MainBean.ResultBean.PromotionGoodsBean>> mData_Group_promotion;//单独一个viewpager总数据分为若干页的数据集合，传入到Fragment；
@@ -213,8 +317,38 @@ public class Fragment_main extends Fragment {
             fragments_first.add(new Fragment_main_viewpager_Promotion(mData_Group_promotion.get(page)));
         }
         fragments.add(fragments_first);
+       addDot(viewpager_dots ,count);
     }
-//
+
+    /**
+     * 添加小白点到viewpager
+     * @param viewpager_dot 放小白点的linearlayout
+     * @param count  viewpager里的fragment数量
+     */
+    void addDot( LinearLayout viewpager_dot,int count){
+        View dotview;
+        for(int i=0;i<fragments.get(count).size();i++){
+            //准备小圆点的数据
+            dotview=new View(getContext());
+            dotview.setBackgroundResource(R.drawable.dot_selector);
+            //设置小圆点的宽和高
+            LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(15,15);
+            if(i!=0){
+                params.leftMargin=10;//设置小白点间距
+            }
+            dotview.setLayoutParams(params);
+            //设置小圆点的状态
+            if(i==0){
+                dotview.setEnabled(true);//第一个小白点初始化
+            }else{
+                dotview.setEnabled(false);
+            }
+            //把小圆点添加到线性布局中
+            viewpager_dot.addView(dotview);
+
+        }
+    }
+
 
     private void initData() {
         /**
@@ -228,12 +362,11 @@ public class Fragment_main extends Fragment {
 
         }
         //初始化数据   四种类型  初始化四次
-        initDataPromotion(mData_viewpager_promotion);
-        initDataPromotion(mData_viewpager_highQuality);
-        initDataPromotion(mData_viewpager_flashSale);
-        initDataPromotion(mData_viewpager_hot);
 
-
+        initDataPromotion(mData_viewpager_promotion,viewpager_dot_first,0);
+        initDataPromotion(mData_viewpager_highQuality,viewpager_dot_second,1);
+        initDataPromotion(mData_viewpager_flashSale,viewpager_dot_third,2);
+        initDataPromotion(mData_viewpager_hot,viewpager_dot_fouth,3);
 
         mAdapter_main_like = new Adapter_Grid_main_like(mList_like, getActivity());//猜你喜欢 网格列表 适配器
         myGridView.setAdapter(mAdapter_main_like);///绑定适配器

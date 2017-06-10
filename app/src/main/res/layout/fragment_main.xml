@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:youth="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorAccent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <cn.kymart.tptp.CustomView.CustomerScrollView
         android:id="@+id/bsv_news_detail_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/REL_title"
-        android:background="@color/LightGrey"
+        android:background="@color/white"
         android:overScrollMode="never"
         android:scrollbars="vertical"
         android:visibility="visible">
@@ -26,6 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@color/white"
+                youth:indicator_width="8dp"
+                youth:indicator_height="8dp"
+                youth:indicator_drawable_selected="@drawable/dop_select"
+                youth:indicator_drawable_unselected="@drawable/dop_unselect"
+                youth:indicator_margin="5dp"
+
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,10 +121,29 @@
                 </LinearLayout>
 
             </LinearLayout>
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@color/LightGrey"
+                />
             <include layout="@layout/viewpager_item_first" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@color/LightGrey"
+                />
             <include layout="@layout/viewpager_item_second" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@color/LightGrey"
+                />
             <include layout="@layout/viewpager_item_third" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@color/LightGrey"
+                />
             <include layout="@layout/viewpager_item_fouth" />
             <TextView
                 android:layout_width="wrap_content"
