@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kymart.shop.Activity.LoginActivity">
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red"
+        >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会员登录"
+            android:textSize="@dimen/top_title"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="用户名："
+            android:textSize="16dp"
+            />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:background="@drawable/loginactivity_edit"
+            android:hint="请输入邮箱/手机号"
+            android:textSize="16dp"
+            android:textColor="@color/blank"
+            android:padding="5dp"
+            android:id="@+id/editText_account"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="密码："
+            android:textSize="16dp"
+            />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:background="@drawable/loginactivity_edit"
+            android:hint="密码"
+            android:textSize="16dp"
+            android:textColor="@color/blank"
+            android:padding="5dp"
+            android:id="@+id/editText_pas"
+            android:inputType="textPassword"
+            />
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="登 录"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_login"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:id="@+id/text_Registered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="免费注册"
+            android:textSize="13dp"
+            android:textColor="@color/DarkBlue"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/shuxian"
+            android:layout_marginRight="10dp"
+            />
+        <ImageView
+            android:id="@+id/shuxian"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:src="@color/Gray"
+            android:layout_toLeftOf="@+id/text_findpas"
+            android:layout_marginRight="10dp"
+
+            />
+        <TextView
+            android:id="@+id/text_findpas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="找回密码"
+            android:textSize="13dp"
+            android:textColor="@color/DarkBlue"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+
+</LinearLayout>

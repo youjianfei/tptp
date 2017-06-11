@@ -18,7 +18,7 @@
             android:layout_height="30dp"
             android:src="@mipmap/back"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             />
         <LinearLayout
             android:layout_width="wrap_content"
