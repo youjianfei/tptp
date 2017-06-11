@@ -10,6 +10,9 @@ import android.widget.RelativeLayout;
 import com.kymart.shop.Fragment.Fragment_classification;
 import com.kymart.shop.Fragment.Fragment_main;
 import cn.kymart.tptp.R;
+
+import com.kymart.shop.Fragment.Fragment_personalCenter;
+import com.kymart.shop.Fragment.Fragment_shopCar;
 import com.kymart.shop.Utils.LogUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
@@ -26,6 +29,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      */
     Fragment_main mFragment_main;
     Fragment_classification mFragment_classification;
+    Fragment_shopCar mFragment_shopCar;
+    Fragment_personalCenter mFragment_personalCenter;
 
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
@@ -99,10 +104,23 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.rl_3:
                 ChangeBottomButton(mRelativeLayout_ShoppingCar);
+                if(mFragment_shopCar==null){
+                    mFragment_shopCar=new Fragment_shopCar();
+                    transaction.add(R.id.fl_main,mFragment_shopCar).commit();
+                }else{
+                    transaction.show(mFragment_shopCar).commit();
+                }
 
                 break;
             case R.id.rl_4:
                 ChangeBottomButton(mRelativeLayout_mine);
+                if(mFragment_personalCenter==null){
+                    mFragment_personalCenter=new Fragment_personalCenter();
+                    transaction.add(R.id.fl_main,mFragment_personalCenter).commit();
+                }else{
+                    transaction.show(mFragment_personalCenter).commit();
+                }
+
 
                 break;
 
@@ -116,6 +134,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
         if (mFragment_classification != null) {
             transaction.hide(mFragment_classification);
+        }
+        if (mFragment_shopCar != null) {
+            transaction.hide(mFragment_shopCar);
+        }
+        if (mFragment_personalCenter != null) {
+            transaction.hide(mFragment_personalCenter);
         }
     }
 
