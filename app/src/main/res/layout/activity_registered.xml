@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
+    android:id="@+id/activity_registered"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/LightGrey"
     android:orientation="vertical"
-    tools:context="com.kymart.shop.Activity.LoginActivity">
-
+    android:background="@color/LightGrey"
+    tools:context="com.kymart.shop.Activity.RegisteredActivity">
     <RelativeLayout
         android:id="@+id/REL_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/red">
 
@@ -28,11 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="登 录"
+            android:text="注册"
             android:textColor="@color/white"
             android:textSize="16dp" />
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,10 +45,10 @@
 
             />
         <EditText
-            android:id="@+id/edit_account"
+            android:id="@+id/edittext_phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入手机号"
+            android:hint="手机号"
             android:textColorHint="@color/LightGrey"
             android:layout_toRightOf="@+id/image_phone"
             android:textSize="15dp"
@@ -59,14 +56,57 @@
             android:inputType="number"
             android:background="@null"
             />
+        <TextView
+            android:id="@+id/textview_yanzhengma"
+            android:layout_width="70dp"
+            android:layout_height="18dp"
+            android:text="获取验证码"
+            android:textColor="@color/red"
+            android:textSize="12dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignBaseline="@+id/edittext_phonenumber"
+            android:layout_alignParentRight="true"
+
+            />
         <ImageView
-            android:id="@+id/image_line"
+            android:id="@+id/image_line1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:src="@color/LightGrey"
             android:layout_below="@+id/image_phone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            />
+        <ImageView
+            android:id="@+id/image_yanzhengma"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/yanzhengma"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/image_line1"
+
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入验证码"
+            android:textColorHint="@color/LightGrey"
+            android:layout_toRightOf="@+id/image_phone"
+            android:textSize="15dp"
+            android:layout_marginTop="13dp"
+            android:inputType="number"
+            android:background="@null"
+            android:layout_below="@+id/image_line1"
+            />
+        <ImageView
+            android:id="@+id/image_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/LightGrey"
+            android:layout_below="@+id/image_yanzhengma"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
             />
 
         <ImageView
@@ -75,17 +115,48 @@
             android:layout_height="25dp"
             android:layout_margin="10dp"
             android:src="@mipmap/password"
-            android:layout_below="@+id/image_line"
+            android:layout_below="@+id/image_line2"
 
             />
         <EditText
-            android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入密码"
+            android:hint="登录密码"
             android:textColorHint="@color/LightGrey"
             android:layout_toRightOf="@+id/image_password"
-            android:layout_below="@+id/image_line"
+            android:layout_below="@+id/image_line2"
+            android:textSize="15dp"
+            android:layout_marginTop="13dp"
+            android:background="@null"
+            android:inputType="textPassword"
+            />
+        <ImageView
+            android:id="@+id/image_line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/LightGrey"
+            android:layout_below="@+id/image_password"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/image_passwordagain"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/password"
+            android:layout_below="@+id/image_line3"
+
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="确认密码"
+            android:textColorHint="@color/LightGrey"
+            android:layout_toRightOf="@+id/image_password"
+            android:layout_below="@+id/image_line3"
             android:textSize="15dp"
             android:layout_marginTop="13dp"
             android:background="@null"
@@ -93,10 +164,9 @@
             />
     </RelativeLayout>
     <Button
-        android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="登  录"
+        android:text="注  册"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:layout_marginRight="20dp"
@@ -104,63 +174,6 @@
         android:background="@drawable/button_conner_5"
         />
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background"
-        android:layout_margin="20dp"
-        >
-
-        <TextView
-            android:id="@+id/text_Registered"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="还没有账号？"
-            android:textColor="@color/LightGrey"
-            android:textColorHint="@color/LightGrey"
-            android:textSize="15dp"
-            android:layout_margin="10dp"
-            android:layout_marginTop="13dp"
-            />
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/more"
-            android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
-            />
-        <ImageView
-            android:id="@+id/image_line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:src="@color/LightGrey"
-            android:layout_below="@+id/text_Registered"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            />
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/more"
-            android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
-            android:layout_below="@+id/image_line1"
-            />
-        <TextView
-            android:id="@+id/text_Forgetpassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="忘记密码？"
-            android:textColorHint="@color/LightGrey"
-            android:layout_below="@+id/image_line1"
-            android:textSize="15dp"
-            android:layout_margin="10dp"
-            android:layout_marginTop="13dp"
-            android:background="@null"
-            />
-    </RelativeLayout>
 
 
 
