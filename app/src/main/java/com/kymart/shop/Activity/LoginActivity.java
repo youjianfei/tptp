@@ -1,5 +1,6 @@
 package com.kymart.shop.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,8 @@ public class LoginActivity extends BaseActivityother {
 
     UserBean userbean;
 
+    ProgressDialog pd;
+
 
     @Override
     public int setLayoutResID() {
@@ -49,7 +52,9 @@ public class LoginActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        pd = new ProgressDialog(LoginActivity.this);
+        pd.setMessage("正在登录");
+        pd.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -78,6 +83,7 @@ public class LoginActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()){
             case R.id.button_login:
+                pd.show();
                 mob = mEdit_account.getText() + "";
                 password = mEdit_password.getText() + "";
                  map = new HashMap<String, String>();
@@ -123,7 +129,9 @@ public class LoginActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
             }
         }).Http(BaseUrl.BaseURL+BaseUrl.image_code+uuid,this,0);
     }
@@ -143,12 +151,22 @@ public class LoginActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
 
             }
         }).postHttp(BaseUrl.BaseURL+BaseUrl.login,this,1,map);
 
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (pd.isShowing()) {
+            pd.dismiss();
+        }
     }
 }

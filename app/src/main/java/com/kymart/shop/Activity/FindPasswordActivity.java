@@ -168,7 +168,7 @@ public class FindPasswordActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).postHttp(BaseUrl.BaseURL+BaseUrl.register,this,1,map);
+        }).postHttp(BaseUrl.BaseURL+BaseUrl.findPassword,this,1,map);
 
     }
 
