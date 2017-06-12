@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.kymart.shop.Activity.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             </activity>
         <activity android:name="com.kymart.shop.Activity.GoodsListActivity" />
         <activity android:name="com.kymart.shop.Activity.GoodDetailsActivity">
@@ -25,13 +29,11 @@
 
         </activity>
         <activity android:name="com.kymart.shop.Activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             </activity>
-        <activity android:name="com.kymart.shop.Activity.RegisteredActivity"/>
+        <activity android:name="com.kymart.shop.Activity.RegisteredActivity">
+
+            </activity>
     </application>
 
 </manifest>

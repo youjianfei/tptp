@@ -14,5 +14,7 @@ public class BaseUrl {
     public static String  classificationright="m=api&c=goods&a=goodsSecAndThirdCategoryList&parent_id=";//分类右边列表
     public static String  image_code="m=api&c=User&a=verify&unique_id=";//图形验证码
     public static String  login="m=Api&c=User&a=login";//图形验证码
+    public static String  messageCode="m=Home&c=Api&a=send_validate_code&scene=1&type=mobile";//短信验证码
+    public static String  register="m=Api&c=User&a=reg";//短信验证码
 
 }

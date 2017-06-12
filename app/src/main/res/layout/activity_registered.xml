@@ -26,9 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="注册"
+            android:text="注  册"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="@dimen/top_title"
+        />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -87,6 +88,7 @@
 
             />
         <EditText
+            android:id="@+id/edit_yanzhengma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入验证码"
@@ -119,6 +121,7 @@
 
             />
         <EditText
+            android:id="@+id/edit_pas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="登录密码"
@@ -151,6 +154,7 @@
 
             />
         <EditText
+            android:id="@+id/pas_again"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="确认密码"
@@ -164,6 +168,7 @@
             />
     </RelativeLayout>
     <Button
+        android:id="@+id/button_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="注  册"

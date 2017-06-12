@@ -1,8 +1,10 @@
 package com.kymart.shop.Activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.kymart.shop.AppStaticData.Staticdata;
@@ -26,6 +28,7 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 public class LoginActivity extends BaseActivityother {
     private EditText mEdit_account,mEdit_password;
     private Button mButton_login;
+    private TextView mTextview_Registered;
 
     String mob;
     String password;
@@ -52,6 +55,7 @@ public class LoginActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         mButton_login.setOnClickListener(this);
+        mTextview_Registered.setOnClickListener(this);
 
     }
 
@@ -60,6 +64,7 @@ public class LoginActivity extends BaseActivityother {
         mEdit_account= (EditText) findViewById(R.id.edit_account);
         mEdit_password= (EditText) findViewById(R.id.edit_password);
         mButton_login= (Button) findViewById(R.id.button_login);
+        mTextview_Registered= (TextView) findViewById(R.id.text_Registered);
 
     }
 
@@ -78,13 +83,16 @@ public class LoginActivity extends BaseActivityother {
                 map.put("password", password);
                 LogUtils.LOG("ceshi",mob+"..."+password);
                 UUID = InstalltionId.id(LoginActivity.this);
-                request_image(UUID);
-
+                request_imageCode(UUID);
+                break;
+            case R.id.text_Registered:
+                Intent intent=new Intent(this,RegisteredActivity.class);
+                startActivity(intent);
 
                 break;
         }
     }
-    void request_image(String uuid){
+    void request_imageCode(String uuid){
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -121,8 +129,8 @@ public class LoginActivity extends BaseActivityother {
                 userbean= new  Gson().fromJson(respose,UserBean.class);
                 userBean_static=userbean;//将用户信息写入全局变量
                 Staticdata.isLogin=1;
-
-
+                setResult(RESULT_OK);
+                finish();
             }
 
             @Override

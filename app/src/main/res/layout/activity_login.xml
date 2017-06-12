@@ -30,7 +30,7 @@
             android:layout_centerInParent="true"
             android:text="登 录"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="@dimen/top_title" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -51,12 +51,11 @@
             android:id="@+id/edit_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入手机号"
+            android:hint="请输入手机号/邮箱"
             android:textColorHint="@color/LightGrey"
             android:layout_toRightOf="@+id/image_phone"
             android:textSize="15dp"
             android:layout_marginTop="13dp"
-            android:inputType="number"
             android:background="@null"
             />
         <ImageView

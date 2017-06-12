@@ -1,5 +1,6 @@
 package com.kymart.shop.Activity;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,8 @@ import cn.kymart.tptp.R;
 import com.kymart.shop.Fragment.Fragment_personalCenter;
 import com.kymart.shop.Fragment.Fragment_shopCar;
 import com.kymart.shop.Utils.LogUtils;
+
+import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     /**
@@ -60,6 +63,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void setView() {
+        ChangeBottomButton(mRelativeLayout_main);
         fragmetnmanager = getSupportFragmentManager();
         transaction = fragmetnmanager.beginTransaction();
         transaction.add(R.id.fl_main, mFragment_main).commit();
@@ -113,19 +117,43 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.rl_4:
+                if(isLogin==1){//登录状态
+                    ChangeBottomButton(mRelativeLayout_mine);
+                    if(mFragment_personalCenter==null){
+                        mFragment_personalCenter=new Fragment_personalCenter();
+                        transaction.add(R.id.fl_main,mFragment_personalCenter).commit();
+                    }else{
+                        transaction.show(mFragment_personalCenter).commit();
+                    }
+                }else{//未登录状态
+                    Intent intent=new Intent(this,LoginActivity.class);
+                    startActivityForResult(intent,0);
+                }
+
+                break;
+
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RESULT_OK://登录成功打开我的界面的 Fragment
                 ChangeBottomButton(mRelativeLayout_mine);
+                transaction = fragmetnmanager.beginTransaction();
+                hideFragments(transaction);
                 if(mFragment_personalCenter==null){
                     mFragment_personalCenter=new Fragment_personalCenter();
                     transaction.add(R.id.fl_main,mFragment_personalCenter).commit();
                 }else{
                     transaction.show(mFragment_personalCenter).commit();
                 }
-
-
                 break;
-
+            default:
+                break;
         }
-
     }
 
     private void hideFragments(FragmentTransaction transaction) {//隐藏Fragment,以便点击时展映相应的Fragment
