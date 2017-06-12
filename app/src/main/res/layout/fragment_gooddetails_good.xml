@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/LinearLayout_bottom"
     android:background="@color/white">
 
     <com.youth.banner.Banner
@@ -73,6 +74,41 @@
         android:background="@color/LightGrey"
         android:layout_marginTop="10dp"
         />
+    <LinearLayout
+        android:id="@+id/LinearLayout_result"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="已选:"
+            android:layout_marginLeft="15dp"
+
+            />
+        <TextView
+            android:id="@+id/text_result"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:text="这里是选择完毕的信息"
+            android:lines="1"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/three_dop"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+
+
 
 
 
