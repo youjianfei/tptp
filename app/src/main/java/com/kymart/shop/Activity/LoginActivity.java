@@ -28,7 +28,7 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 public class LoginActivity extends BaseActivityother {
     private EditText mEdit_account,mEdit_password;
     private Button mButton_login;
-    private TextView mTextview_Registered;
+    private TextView mTextview_Registered,mTextview_findpassword;
 
     String mob;
     String password;
@@ -56,6 +56,7 @@ public class LoginActivity extends BaseActivityother {
     protected void initListener() {
         mButton_login.setOnClickListener(this);
         mTextview_Registered.setOnClickListener(this);
+        mTextview_findpassword.setOnClickListener(this);
 
     }
 
@@ -65,6 +66,7 @@ public class LoginActivity extends BaseActivityother {
         mEdit_password= (EditText) findViewById(R.id.edit_password);
         mButton_login= (Button) findViewById(R.id.button_login);
         mTextview_Registered= (TextView) findViewById(R.id.text_Registered);
+        mTextview_findpassword= (TextView) findViewById(R.id.text_Forgetpassword);
 
     }
 
@@ -88,6 +90,11 @@ public class LoginActivity extends BaseActivityother {
             case R.id.text_Registered:
                 Intent intent=new Intent(this,RegisteredActivity.class);
                 startActivity(intent);
+
+                break;
+            case R.id.text_Forgetpassword:
+                Intent intent2=new Intent(this,FindPasswordActivity.class);
+                startActivity(intent2);
 
                 break;
         }
@@ -127,6 +134,7 @@ public class LoginActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 userbean= new  Gson().fromJson(respose,UserBean.class);
+                LogUtils.LOG("ceshi","登录成功");
                 userBean_static=userbean;//将用户信息写入全局变量
                 Staticdata.isLogin=1;
                 setResult(RESULT_OK);
@@ -135,6 +143,7 @@ public class LoginActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
+
 
             }
         }).postHttp(BaseUrl.BaseURL+BaseUrl.login,this,1,map);

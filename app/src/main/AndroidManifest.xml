@@ -16,37 +16,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kymart.shop.Activity.MainActivity" >
+        <activity android:name="com.kymart.shop.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
-        <activity android:name="com.kymart.shop.Activity.GoodsListActivity" />
-        <activity android:name="com.kymart.shop.Activity.GoodDetailsActivity">
-
-
         </activity>
-        <activity android:name="com.kymart.shop.Activity.LoginActivity">
-
-            </activity>
-        <activity android:name="com.kymart.shop.Activity.RegisteredActivity">
-
-            </activity>
-
-
+        <activity android:name="com.kymart.shop.Activity.GoodsListActivity" />
+        <activity android:name="com.kymart.shop.Activity.GoodDetailsActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.LoginActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.RegisteredActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.kymart.shop.fileprovider"
-            android:grantUriPermissions="true"
             android:exported="false"
-            >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name="com.kymart.shop.Activity.FindPasswordActivity"></activity>
     </application>
 
 </manifest>
