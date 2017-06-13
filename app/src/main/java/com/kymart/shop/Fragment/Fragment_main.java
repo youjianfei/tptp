@@ -1,5 +1,6 @@
 package com.kymart.shop.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,10 +9,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.kymart.shop.Activity.GoodDetailsActivity;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -198,7 +201,15 @@ public class Fragment_main extends Fragment {
             }
         });
 
-
+        myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//坚挺猜你喜欢点击事件
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(getActivity(), GoodDetailsActivity.class);
+                intent.putExtra("ID",mList_like.get(i).getGoods_id());
+                LogUtils.LOG("ceshi",mList_like.get(i).getGoods_id()+"IIIIDDDDD");
+                getActivity().startActivity(intent);
+            }
+        });
 
 
     }

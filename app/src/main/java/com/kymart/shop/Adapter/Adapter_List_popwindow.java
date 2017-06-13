@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kymart.shop.Activity.GoodDetailsActivity;
+import com.kymart.shop.AppStaticData.Staticdata;
+import com.kymart.shop.Bean.BuyGoodBean;
 import com.kymart.shop.Bean.GoodDetailsBean;
 import com.kymart.shop.Utils.LogUtils;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -14,6 +17,7 @@ import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -52,7 +56,8 @@ public class Adapter_List_popwindow extends BaseAdapter {
         holder.mTextview.setText(bean.getSpec_name());
         mData_spec=new ArrayList<>();
         mData_spec.addAll(bean.getSpec_list());
-
+        holder.mTagFlow.setTag(position);
+        // TODO: 2017/6/13
         final ViewHolder finalHolder = holder;
         TagAdapter tagAdapter=new TagAdapter(mData_spec) {
             @Override
@@ -65,23 +70,35 @@ public class Adapter_List_popwindow extends BaseAdapter {
         };
         holder.mTagFlow.setAdapter(tagAdapter);
         tagAdapter.setSelectedList(0);
-        holder.mTagFlow.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()//点击标签的监听
-        {
-            @Override
-            public boolean onTagClick(View view, int position, FlowLayout parent)
-            {
-
-
-                return true;
-            }
-        });
+//        holder.mTagFlow.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()//点击标签的监听
+//        {
+//            @Override
+//            public boolean onTagClick(View view, int position, FlowLayout parent)
+//            {
+//
+//
+//                return true;
+//            }
+//        });
 
         holder.mTagFlow.setOnSelectListener(new TagFlowLayout.OnSelectListener()
         {
             @Override
             public void onSelected(Set<Integer> selectPosSet)
             {//选择标签的监听
-                LogUtils.LOG("ceshi","choose:" + selectPosSet.toString());
+//                LogUtils.LOG("ceshi","choose:" + selectPosSet.toString());
+                Iterator it = selectPosSet.iterator();
+                while(it.hasNext()){
+                    int i= (int) it.next();
+                    LogUtils.LOG("ceshi","choose:" + mData_spec.get(i).getItem());
+                    Staticdata.bean.getGood_buy_propertys().get(0).setSpec_list(mData_spec.get(i));
+                    Staticdata.bean.reload();
+                    GoodDetailsActivity.goodDetailsActivity.fragment_goodDatails_good.afterShowpopwinsow();
+                }
+
+
+
+
 
             }
         });

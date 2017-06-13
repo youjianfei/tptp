@@ -2,6 +2,7 @@ package com.kymart.shop.Activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -91,6 +92,15 @@ public class GoodsListActivity extends BaseActivityother {
         mRelativeLayout_Price.setOnClickListener(this);
         mRelativeLayout_Comments.setOnClickListener(this);
         mTextVIew_loadMore.setOnClickListener(this);
+
+        mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(GoodsListActivity.this,GoodDetailsActivity.class);
+                intent.putExtra("ID",mDate.get(i).getGoods_id());
+                GoodsListActivity.this.startActivity(intent);
+            }
+        });
     }
 
     @Override

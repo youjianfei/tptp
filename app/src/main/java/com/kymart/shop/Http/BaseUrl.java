@@ -19,5 +19,6 @@ public class BaseUrl {
     public static String  messageCode_find="m=Home&c=Api&a=send_validate_code&scene=2&type=mobile";//找回密码使用的短信验证码
     public static String  findPassword="m=api&c=user&a=forgetPassword";//找回密码使用的短信验证码
     public static String  goodDetails="m=Api&c=Goods&a=goodsInfo";//商品详情
+    public static String  goodDetails_web="m=api&c=goods&a=goodsContent&id=";//商品详情
 
 }

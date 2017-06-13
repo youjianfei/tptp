@@ -13,8 +13,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Adapter.Adapter_List_popwindow;
+import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.BuyGoodBean;
 import com.kymart.shop.Bean.GoodDetailsBean;
 import com.kymart.shop.Http.BaseUrl;
@@ -35,6 +37,7 @@ import cn.kymart.tptp.R;
 
 public class Fragment_GoodDatails_good extends Fragment {
     View rootview;
+    private int Id;
     private LinearLayout mLinear_bottom;
     private Banner mBanner;
     private TextView mTextview_GoodName;
@@ -49,15 +52,20 @@ public class Fragment_GoodDatails_good extends Fragment {
     private List<GoodDetailsBean.Result.Gallery> galleryBean;//存放图片地址的对象
     private List<String> mImagesURL;//图片网址集合
 
-    private BuyGoodBean bugBean;
+    BuyGoodBean bugBean;
 
     private Adapter_List_popwindow mAdapter_pop;
 
     PopupWindow mPopupWindow;
 
+    public Fragment_GoodDatails_good(int id) {
+       this. Id = id;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,  Bundle savedInstanceState) {
         rootview=inflater.inflate(R.layout.fragment_gooddetails_good,container,false);
+        bugBean=Staticdata.bean;
         initview();
         setData();
         initListenner();
@@ -79,7 +87,6 @@ public class Fragment_GoodDatails_good extends Fragment {
         galleryBean=new ArrayList<>();
         mData_Spec=new ArrayList<>();//商品属性
 
-        bugBean=new BuyGoodBean();
         request();
 
 
@@ -105,8 +112,17 @@ public class Fragment_GoodDatails_good extends Fragment {
             @Override
             public void onSuccesses(String respose) {
                 resultBean=new Gson().fromJson(respose,GoodDetailsBean.class).getResult();
+                if(resultBean==null){
+                    return;
+                }
                 goodBean=resultBean.getGoods();
+                if(goodBean==null){
+                    return;
+                }
                 galleryBean=resultBean.getGallery();
+                if(galleryBean==null){
+                    return;
+                }
                 lunBoTU();//顶部轮播图方法执行
                 mTextview_GoodName.setText(goodBean.getGoods_name());
 
@@ -144,12 +160,13 @@ public class Fragment_GoodDatails_good extends Fragment {
             public void onError(int error) {
 
             }
-        }).Http(BaseUrl.BaseURL+BaseUrl.goodDetails+"&id=105",getActivity(),0);
+        }).Http(BaseUrl.BaseURL+BaseUrl.goodDetails+"&id="+Id,getActivity(),0);
     }
 
-     void afterQequest(){
-         mTextview_price.setText(bugBean.getGood_buy_price());
+    public  void afterQequest(){
+         mTextview_price.setText("￥"+bugBean.getGood_buy_price());
          mTextview_result.setText(bugBean.getGood_select_info());
+
 
 
      }
@@ -174,6 +191,7 @@ public class Fragment_GoodDatails_good extends Fragment {
 
 
 
+    private TextView mTextview_price_pop,mTextview_goodNumber;
     private ListView mListview_pop;
     private ImageView mImage_PIC,mImage_close;
     private List<GoodDetailsBean.Result.Goods.GoodsSpecList>mData_Spec;
@@ -186,14 +204,24 @@ public class Fragment_GoodDatails_good extends Fragment {
         mPopupWindow.showAtLocation(mLinear_bottom, Gravity.BOTTOM, 0, 0);
         mListview_pop= (ListView) conView.findViewById(R.id.Listview_popwindow);
         mImage_close= (ImageView) conView.findViewById(R.id.ImageView_close);
+        mImage_PIC= (ImageView) conView.findViewById(R.id.image_goodIPC);
+        mTextview_price_pop= (TextView) conView.findViewById(R.id.text_price_pop);
+        mTextview_goodNumber= (TextView) conView.findViewById(R.id.textview_goodsNumber);
 
 
         mAdapter_pop=new Adapter_List_popwindow(mData_Spec,getActivity());
         mListview_pop.setAdapter(mAdapter_pop);
 
         setAlpha((float) 0.3);
-
+        afterShowpopwinsow();
         initListenner_POP();
+    }
+    public   void afterShowpopwinsow(){
+        Glide.with(getActivity()).load(BaseUrl.BaseURL+BaseUrl.main_imgURL+105).into(mImage_PIC);//设置pop 商品图片
+        mTextview_price_pop.setText("￥"+bugBean.getGood_buy_price());
+        mTextview_goodNumber.setText("商品编号 "+goodBean.getGoods_sn());
+
+
     }
 
     private void initListenner_POP() {
@@ -201,6 +229,12 @@ public class Fragment_GoodDatails_good extends Fragment {
             @Override
             public void onClick(View v) {
                 mPopupWindow.dismiss();
+                setAlpha((float) 1.0);
+            }
+        });
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
                 setAlpha((float) 1.0);
             }
         });

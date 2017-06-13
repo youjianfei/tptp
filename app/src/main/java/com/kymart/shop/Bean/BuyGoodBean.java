@@ -160,6 +160,9 @@ public class BuyGoodBean {
         if(!string.equals("")){
             string=string.substring(1);
         }
+        if(spec_goods_prices==null){
+            return;
+        }
         for(int i=0;i<spec_goods_prices.size();i++){
             String mes=spec_goods_prices.get(i).getKey();
             if(string.equals(mes)){
@@ -181,6 +184,9 @@ public class BuyGoodBean {
     }
     public void reload(){
         List<GoodsSpecList>propertys=sort();
+        if(propertys==null){
+            return;
+        }
         PinJieString (propertys);
         yiXuan();
 

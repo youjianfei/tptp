@@ -12,14 +12,17 @@
         android:background="@color/white"
         >
         <TextView
+            android:id="@+id/text_price_pop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$12.90"
+            android:text="￥12.90元"
             android:layout_marginLeft="105dp"
             android:layout_marginTop="10dp"
+            android:textSize="18dp"
             android:textColor="@color/red"
             />
         <TextView
+            android:id="@+id/textview_goodsNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="商品编号"
@@ -68,7 +71,7 @@
         android:id="@+id/image_goodIPC"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@color/blank"
+        android:src="@color/LightGrey"
         android:layout_margin="15dp"
         />
     <ImageView

@@ -1,5 +1,6 @@
 package com.kymart.shop.AppStaticData;
 
+import com.kymart.shop.Bean.BuyGoodBean;
 import com.kymart.shop.Bean.UserBean;
 
 /**
@@ -13,6 +14,8 @@ public class Staticdata {
      * 判断帐号是否登录
      */
     public static int isLogin=0;//0  否  1  是
+
+    public static BuyGoodBean bean= new BuyGoodBean();
 
 
 
