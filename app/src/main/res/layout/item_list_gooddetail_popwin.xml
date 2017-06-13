@@ -9,16 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="颜色"
-        android:textSize="14dp"
+        android:textSize="16dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         />
     <com.zhy.view.flowlayout.TagFlowLayout
         android:id="@+id/id_flowlayout"
-        zhy:max_select="-1"
+        zhy:max_select="1"
+        zhy:auto_select_effect="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
-    </com.zhy.view.flowlayout.TagFlowLayout>
-
-
+        />
 
 </LinearLayout>

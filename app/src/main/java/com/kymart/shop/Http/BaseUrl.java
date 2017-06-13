@@ -18,5 +18,6 @@ public class BaseUrl {
     public static String  register="m=Api&c=User&a=reg";//注册帐号
     public static String  messageCode_find="m=Home&c=Api&a=send_validate_code&scene=2&type=mobile";//找回密码使用的短信验证码
     public static String  findPassword="m=api&c=user&a=forgetPassword";//找回密码使用的短信验证码
+    public static String  goodDetails="m=Api&c=Goods&a=goodsInfo";//商品详情
 
 }
