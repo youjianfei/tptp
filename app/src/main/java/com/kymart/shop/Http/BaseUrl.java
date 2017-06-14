@@ -20,5 +20,8 @@ public class BaseUrl {
     public static String  findPassword="m=api&c=user&a=forgetPassword";//找回密码使用的短信验证码
     public static String  goodDetails="m=Api&c=Goods&a=goodsInfo";//商品详情
     public static String  goodDetails_web="m=api&c=goods&a=goodsContent&id=";//商品详情
+    public static String  addShopCar="m=Api&c=Cart&a=addCart&unique_id=";//商品详情
+    public static String  shopCarList="m=Api&c=Cart&a=cartList";//商品详情
+
 
 }

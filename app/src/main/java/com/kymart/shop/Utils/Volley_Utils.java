@@ -36,6 +36,7 @@ public class Volley_Utils {
     RequestQueue mQueue;
     StringRequest mStringRequest;
 
+
     public Volley_Utils(Interface_volley_respose mInterface) {
         this.mInterface = mInterface;
     }
@@ -82,6 +83,7 @@ public class Volley_Utils {
     }
 
     public void postHttp(String URL, Context mContext, int Method, final Map<String, String> map) {
+        LogUtils.LOG("ceshi","post请求触发");
         mQueue = Volley.newRequestQueue(mContext);
         mStringRequest = new StringRequest(Method, URL, new Response.Listener<String>() {
             @Override
@@ -97,7 +99,7 @@ public class Volley_Utils {
                 if (error.networkResponse != null) {
                     int code = error.networkResponse.statusCode;
                     mInterface.onError(code);
-
+                    LogUtils.LOG("ceshi","post请求");
                 }
 
             }
@@ -112,6 +114,7 @@ public class Volley_Utils {
         mQueue.add(mStringRequest);
 
     }
+
 
     public void volleyCancle() {
         mStringRequest.cancel();

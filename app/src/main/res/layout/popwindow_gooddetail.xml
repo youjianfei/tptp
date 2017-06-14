@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    xmlns:qinc="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,13 +48,17 @@
                 android:textSize="16dp"
                 />
             <ren.qinc.numberbutton.NumberButton
+                android:id="@+id/numberButton"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
+                qinc:editable="false"
+
                 />
 
         </RelativeLayout>
         <TextView
+            android:id="@+id/textview_addShopcar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/red"

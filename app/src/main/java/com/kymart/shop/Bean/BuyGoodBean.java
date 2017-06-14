@@ -117,6 +117,14 @@ public class BuyGoodBean {
         public void setSpec_list(GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList spec_list) {
             this.spec_list = spec_list;
         }
+
+        @Override
+        public String toString() {
+            return "GoodsSpecList{" +
+                    "spec_name='" + spec_name + '\'' +
+                    ", spec_list=" + spec_list +
+                    '}';
+        }
     }
 
     public   List<GoodsSpecList> sort(){
@@ -153,16 +161,23 @@ public class BuyGoodBean {
         LogUtils.LOG("ceshi",propertys.toString());
         String string ="";
 
-        for(GoodsSpecList  bean:propertys){
-            int id= bean.getSpec_list().getItem_id();
-            string="_"+id;
+//        for(GoodsSpecList  bean:propertys){
+//            int id= bean.getSpec_list().getItem_id();
+//            string="_"+id;
+//        }
+        for(int  i=0;i<propertys.size();i++){
+            int id= propertys.get(i).getSpec_list().getItem_id();
+
+            string+="_"+id;
         }
+
         if(!string.equals("")){
             string=string.substring(1);
         }
         if(spec_goods_prices==null){
             return;
         }
+        LogUtils.LOG("ceshi",string+"拼接后的价格 KEY");
         for(int i=0;i<spec_goods_prices.size();i++){
             String mes=spec_goods_prices.get(i).getKey();
             if(string.equals(mes)){

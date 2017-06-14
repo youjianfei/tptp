@@ -9,6 +9,10 @@ import com.kymart.shop.Bean.UserBean;
 
 public class Staticdata {
     public static UserBean userBean_static=new UserBean();//登录用户静态对象
+    /**
+     * UUID
+     */
+    public static String UUID_static="";//在登陆时候  设置
 
     /**
      * 判断帐号是否登录

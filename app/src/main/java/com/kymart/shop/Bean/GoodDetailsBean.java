@@ -45,7 +45,7 @@ public class GoodDetailsBean {
         private List<SpecGoodsPrice> spec_goods_price;
         private List<Gallery> gallery;
         private List<Comment> comment;
-        private List<RecommendGoods> recommendGoods;
+        private List<RecommendGoods> recommend_goods;
         private Statistics statistics;
         public void setActivity(List<String> activity) {
             this.activity = activity;
@@ -92,11 +92,12 @@ public class GoodDetailsBean {
             return comment;
         }
 
-        public void setRecommendGoods(List<RecommendGoods> recommendGoods) {
-            this.recommendGoods = recommendGoods;
+        public List<RecommendGoods> getRecommend_goods() {
+            return recommend_goods;
         }
-        public List<RecommendGoods> getRecommendGoods() {
-            return recommendGoods;
+
+        public void setRecommend_goods(List<RecommendGoods> recommend_goods) {
+            this.recommend_goods = recommend_goods;
         }
 
         public void setStatistics(Statistics statistics) {
@@ -1205,6 +1206,14 @@ public class GoodDetailsBean {
                     this.spec_list = spec_list;
                 }
 
+                @Override
+                public String toString() {
+                    return "GoodsSpecList{" +
+                            "spec_name='" + spec_name + '\'' +
+                            ", spec_list=" + spec_list +
+                            '}';
+                }
+
                 public  static class SpecList {
 
                     private int item_id;
@@ -1233,6 +1242,14 @@ public class GoodDetailsBean {
                         return src;
                     }
 
+                    @Override
+                    public String toString() {
+                        return "SpecList{" +
+                                "item_id=" + item_id +
+                                ", item='" + item + '\'' +
+                                ", src='" + src + '\'' +
+                                '}';
+                    }
                 }
             }
         }
@@ -1448,30 +1465,33 @@ public class GoodDetailsBean {
         }
         public static class RecommendGoods {
 
-            private int goodsId;
-            private String goodsName;
-            private String shopPrice;
-            public void setGoodsId(int goodsId) {
-                this.goodsId = goodsId;
-            }
-            public int getGoodsId() {
-                return goodsId;
+            private int goods_id;
+            private String goods_name;
+            private String shop_price;
+
+            public int getGoods_id() {
+                return goods_id;
             }
 
-            public void setGoodsName(String goodsName) {
-                this.goodsName = goodsName;
-            }
-            public String getGoodsName() {
-                return goodsName;
+            public void setGoods_id(int goods_id) {
+                this.goods_id = goods_id;
             }
 
-            public void setShopPrice(String shopPrice) {
-                this.shopPrice = shopPrice;
-            }
-            public String getShopPrice() {
-                return shopPrice;
+            public String getGoods_name() {
+                return goods_name;
             }
 
+            public void setGoods_name(String goods_name) {
+                this.goods_name = goods_name;
+            }
+
+            public String getShop_price() {
+                return shop_price;
+            }
+
+            public void setShop_price(String shop_price) {
+                this.shop_price = shop_price;
+            }
         }
         public static class Statistics {
 

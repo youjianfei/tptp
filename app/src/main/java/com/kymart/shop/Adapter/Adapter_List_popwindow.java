@@ -56,8 +56,8 @@ public class Adapter_List_popwindow extends BaseAdapter {
         holder.mTextview.setText(bean.getSpec_name());
         mData_spec=new ArrayList<>();
         mData_spec.addAll(bean.getSpec_list());
-        holder.mTagFlow.setTag(position);
-        // TODO: 2017/6/13
+        holder.mTagFlow.setTag(position);//添加标记，可以知道选择的是哪一行的属性值改变
+
         final ViewHolder finalHolder = holder;
         TagAdapter tagAdapter=new TagAdapter(mData_spec) {
             @Override
@@ -65,40 +65,35 @@ public class Adapter_List_popwindow extends BaseAdapter {
                 TextView tv = (TextView) mInflater.inflate(R.layout.item_tag,
                         finalHolder.mTagFlow, false);
                 tv.setText(mData_spec.get(position).getItem());
+
                 return tv;
             }
         };
         holder.mTagFlow.setAdapter(tagAdapter);
         tagAdapter.setSelectedList(0);
-//        holder.mTagFlow.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()//点击标签的监听
-//        {
-//            @Override
-//            public boolean onTagClick(View view, int position, FlowLayout parent)
-//            {
-//
-//
-//                return true;
-//            }
-//        });
 
+        final ViewHolder finalHolder1 = holder;
         holder.mTagFlow.setOnSelectListener(new TagFlowLayout.OnSelectListener()
         {
             @Override
             public void onSelected(Set<Integer> selectPosSet)
             {//选择标签的监听
 //                LogUtils.LOG("ceshi","choose:" + selectPosSet.toString());
+
+              LogUtils.LOG("ceshi",finalHolder1.mTagFlow.getTag()+"点击的");
+                int i= (int) finalHolder1.mTagFlow.getTag();
+                int q = 0;
                 Iterator it = selectPosSet.iterator();
                 while(it.hasNext()){
-                    int i= (int) it.next();
-                    LogUtils.LOG("ceshi","choose:" + mData_spec.get(i).getItem());
-                    Staticdata.bean.getGood_buy_propertys().get(0).setSpec_list(mData_spec.get(i));
-                    Staticdata.bean.reload();
-                    GoodDetailsActivity.goodDetailsActivity.fragment_goodDatails_good.afterShowpopwinsow();
+                    q= (int) it.next();
+                    LogUtils.LOG("ceshi",q+"选择的位置");
                 }
+                Staticdata.bean.getGood_buy_propertys().get(i).setSpec_list(mData.get(i).getSpec_list().get(q));
+                Staticdata.bean.reload();
+                LogUtils.LOG("ceshi",Staticdata.bean.getGood_buy_propertys().get(i).getSpec_list().getItem()+"选择的属性");
 
-
-
-
+                GoodDetailsActivity.goodDetailsActivity.fragment_goodDatails_good.afterShowpopwinsow();
+                GoodDetailsActivity.goodDetailsActivity.fragment_goodDatails_good.afterQequest();
 
             }
         });

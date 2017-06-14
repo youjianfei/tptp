@@ -24,6 +24,7 @@ import java.util.Map;
 
 import cn.kymart.tptp.R;
 
+import static com.kymart.shop.AppStaticData.Staticdata.UUID_static;
 import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 
 public class LoginActivity extends BaseActivityother {
@@ -91,6 +92,7 @@ public class LoginActivity extends BaseActivityother {
                 map.put("password", password);
                 LogUtils.LOG("ceshi",mob+"..."+password);
                 UUID = InstalltionId.id(LoginActivity.this);
+                UUID_static=UUID;//将UUID添加全局变量
                 request_imageCode(UUID);
                 break;
             case R.id.text_Registered:
