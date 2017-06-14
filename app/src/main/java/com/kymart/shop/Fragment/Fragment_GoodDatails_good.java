@@ -68,9 +68,9 @@ public class Fragment_GoodDatails_good extends Fragment {
 
 
     private LinearLayout mLinearout_result;
-    private GoodDetailsBean.Result resultBean;//请求下来的全部对象
-    private GoodDetailsBean.Result.Goods  goodBean;//存放商品的对象
-    private List<GoodDetailsBean.Result.Gallery> galleryBean;//存放图片地址的对象
+    private GoodDetailsBean.ResultBean resultBean;//请求下来的全部对象
+    private GoodDetailsBean.ResultBean.GoodsBean  goodBean;//存放商品的对象
+    private List<GoodDetailsBean.ResultBean.GalleryBean> galleryBean;//存放图片地址的对象
     private List<String> mImagesURL;//图片网址集合
 
 
@@ -101,8 +101,8 @@ public class Fragment_GoodDatails_good extends Fragment {
     }
 
     private void setData() {
-        resultBean=new  GoodDetailsBean.Result();
-        goodBean=new GoodDetailsBean.Result.Goods();
+        resultBean=new  GoodDetailsBean.ResultBean();
+        goodBean=new GoodDetailsBean.ResultBean.GoodsBean();
         galleryBean=new ArrayList<>();
         mData_Spec=new ArrayList<>();//商品属性
 
@@ -147,7 +147,7 @@ public class Fragment_GoodDatails_good extends Fragment {
                 lunBoTU();//顶部轮播图方法执行
                 mTextview_GoodName.setText(goodBean.getGoods_name());
 
-                mData_Spec=goodBean.getGoods_spec_list();
+                mData_Spec=resultBean.getGoods_spec_list();
 
                 Initialization();//初始化选中数据
 
@@ -168,21 +168,21 @@ public class Fragment_GoodDatails_good extends Fragment {
         Staticdata.bean.setGood_buy_store_count(goodBean.getStore_count());
         Staticdata.bean.setGood_buy_price(goodBean.getShop_price());
         List<BuyGoodBean.GoodsSpecList>good_buy_propertys=new ArrayList<>();
-        if(goodBean.getGoods_spec_list()==null){
+        if(resultBean.getGoods_spec_list()==null){
             return;
         }
-        for(int i=0;i<goodBean.getGoods_spec_list().size();i++){
+        for(int i=0;i<resultBean.getGoods_spec_list().size();i++){
             BuyGoodBean.GoodsSpecList buy_propertys=new BuyGoodBean.GoodsSpecList();
-            buy_propertys.setSpec_name(goodBean.getGoods_spec_list().get(i).getSpec_name());
-            GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList  specList= new  GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList();
-            specList=goodBean.getGoods_spec_list().get(i).getSpec_list().get(0);
+            buy_propertys.setSpec_name(resultBean.getGoods_spec_list().get(i).getSpec_name());
+            GoodDetailsBean.ResultBean.GoodsSpecListBean.SpecListBean  specList= new  GoodDetailsBean.ResultBean.GoodsSpecListBean.SpecListBean();
+            specList=resultBean.getGoods_spec_list().get(i).getSpec_list().get(0);
             buy_propertys.setSpec_list(specList);
             good_buy_propertys.add(buy_propertys);
 
         }
 
         Staticdata.bean.setGood_buy_propertys(good_buy_propertys);
-        List<GoodDetailsBean.Result.SpecGoodsPrice>spec_goods_prices =new ArrayList<>();
+        List<GoodDetailsBean.ResultBean.SpecGoodsPriceBean>spec_goods_prices =new ArrayList<>();
         spec_goods_prices=resultBean.getSpec_goods_price();
         Staticdata.bean.setSpec_goods_prices(spec_goods_prices);
         Staticdata.bean.reload();
@@ -223,7 +223,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private TextView mTextview_price_pop,mTextview_goodNumber,mTextview_addShopCar;
     private ListView mListview_pop;
     private ImageView mImage_PIC,mImage_close;
-    private List<GoodDetailsBean.Result.Goods.GoodsSpecList>mData_Spec;
+    private List<GoodDetailsBean.ResultBean.GoodsSpecListBean>mData_Spec;
     private NumberButton mNumberButton;
     private void showPopwindow() {
 

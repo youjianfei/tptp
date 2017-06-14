@@ -7,7 +7,7 @@ package com.kymart.shop.Http;
 public class BaseUrl {
     //https://www.kymart.cn/  正式接口
 
-
+//
 //    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
 //    public  static String BaseURL="http://test.kymart.cn/index.php?";// 主接口——测试接口
 //    public  static String BasegoodlistURL="http://test.kymart.cn";//商品列表主接口——测试接口

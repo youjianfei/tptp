@@ -21,7 +21,7 @@ public class BuyGoodBean {
 
     private List<GoodsSpecList>good_buy_propertys;//属性数组
     private List<GoodsSpecList>good_buy_propertys_copy;//属性数组
-    private List<GoodDetailsBean.Result.SpecGoodsPrice>spec_goods_prices;//价格数组
+    private List<GoodDetailsBean.ResultBean.SpecGoodsPriceBean>spec_goods_prices;//价格数组
 
 
 
@@ -68,7 +68,7 @@ public class BuyGoodBean {
         this.good_buy_propertys = good_buy_propertys;
     }
 
-    public List<GoodDetailsBean.Result.SpecGoodsPrice> getSpec_goods_prices() {
+    public List<GoodDetailsBean.ResultBean.SpecGoodsPriceBean> getSpec_goods_prices() {
         return spec_goods_prices;
     }
     public List<GoodsSpecList> getGood_buy_propertys_copy() {
@@ -78,7 +78,7 @@ public class BuyGoodBean {
     public void setGood_buy_propertys_copy(List<GoodsSpecList> good_buy_propertys_copy) {
         this.good_buy_propertys_copy = good_buy_propertys_copy;
     }
-    public void setSpec_goods_prices(List<GoodDetailsBean.Result.SpecGoodsPrice> spec_goods_prices) {
+    public void setSpec_goods_prices(List<GoodDetailsBean.ResultBean.SpecGoodsPriceBean> spec_goods_prices) {
         this.spec_goods_prices = spec_goods_prices;
     }
 
@@ -100,7 +100,7 @@ public class BuyGoodBean {
     public static class GoodsSpecList {
 
         private String spec_name;
-        private GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList spec_list;
+        private GoodDetailsBean.ResultBean.GoodsSpecListBean.SpecListBean spec_list;
 
         public String getSpec_name() {
             return spec_name;
@@ -110,11 +110,11 @@ public class BuyGoodBean {
             this.spec_name = spec_name;
         }
 
-        public GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList getSpec_list() {
+        public GoodDetailsBean.ResultBean.GoodsSpecListBean.SpecListBean getSpec_list() {
             return spec_list;
         }
 
-        public void setSpec_list(GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList spec_list) {
+        public void setSpec_list(GoodDetailsBean.ResultBean.GoodsSpecListBean.SpecListBean spec_list) {
             this.spec_list = spec_list;
         }
 

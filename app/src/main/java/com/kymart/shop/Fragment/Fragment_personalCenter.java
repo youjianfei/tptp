@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kymart.shop.Http.BaseUrl;
@@ -23,6 +24,7 @@ public class Fragment_personalCenter extends Fragment {
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_tuiPerson;
+    RelativeLayout mRE_yue,mRE_jiangjin,mRE_dingdan;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {

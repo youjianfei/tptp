@@ -73,6 +73,7 @@
             />
     </LinearLayout>
     <RelativeLayout
+        android:id="@+id/re_yue"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >
@@ -102,6 +103,8 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/re_jiangjin"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >
@@ -131,7 +134,9 @@
 
     </RelativeLayout>
     <RelativeLayout
-    android:layout_width="match_parent"
+        android:id="@+id/re_dingdan"
+
+        android:layout_width="match_parent"
     android:layout_height="50dp"
     >
     <ImageView
@@ -160,6 +165,8 @@
 
 </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/re_zhanghumingxi"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >
@@ -189,6 +196,8 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/re_jiangjinmingxi"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >
@@ -218,6 +227,8 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/re_dizhi"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >
@@ -247,6 +258,8 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/re_shehzi"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >

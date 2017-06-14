@@ -12,10 +12,10 @@ import java.util.List;
  */
 
 public class sortGoodDetails {
-    public static List<GoodDetailsBean.Result.Goods.GoodsSpecList> sort(List<GoodDetailsBean.Result.Goods.GoodsSpecList> mList){
-        Collections.sort(mList, new Comparator<GoodDetailsBean.Result.Goods.GoodsSpecList>() {
+    public static List<GoodDetailsBean.ResultBean.GoodsSpecListBean> sort(List<GoodDetailsBean.ResultBean.GoodsSpecListBean> mList){
+        Collections.sort(mList, new Comparator<GoodDetailsBean.ResultBean.GoodsSpecListBean>() {
             @Override
-            public int compare(GoodDetailsBean.Result.Goods.GoodsSpecList o1, GoodDetailsBean.Result.Goods.GoodsSpecList o2) {
+            public int compare(GoodDetailsBean.ResultBean.GoodsSpecListBean o1, GoodDetailsBean.ResultBean.GoodsSpecListBean o2) {
                 //按照学生的年龄进行升序排列
                 if(o1.getSpec_list().get(0).getItem_id() > o2.getSpec_list().get(0).getItem_id()){
                     return 1;

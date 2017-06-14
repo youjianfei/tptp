@@ -28,8 +28,8 @@ import cn.kymart.tptp.R;
  */
 
 public class Adapter_List_popwindow extends BaseAdapter {
-    List<GoodDetailsBean.Result.Goods.GoodsSpecList> mData;
-    List<GoodDetailsBean.Result.Goods.GoodsSpecList.SpecList> mData_spec;
+    List<GoodDetailsBean.ResultBean.GoodsSpecListBean> mData;
+    List<GoodDetailsBean.ResultBean.GoodsSpecListBean.SpecListBean> mData_spec;
     Context mContext;
     LayoutInflater mInflater;
 
@@ -43,7 +43,7 @@ public class Adapter_List_popwindow extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
-        GoodDetailsBean.Result.Goods.GoodsSpecList bean=mData.get(position);
+        GoodDetailsBean.ResultBean.GoodsSpecListBean bean=mData.get(position);
         if(convertView==null){
             holder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.item_list_gooddetail_popwin,null,false);
