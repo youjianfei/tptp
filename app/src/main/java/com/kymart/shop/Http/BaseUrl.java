@@ -5,6 +5,8 @@ package com.kymart.shop.Http;
  */
 
 public class BaseUrl {
+    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新
+
     public  static String BaseURL="http://test.kymart.cn/index.php?";
     public  static String BasegoodlistURL="http://test.kymart.cn";
     public  static String mainURL="m=api&c=Index&a=homePage";
@@ -22,6 +24,9 @@ public class BaseUrl {
     public static String  goodDetails_web="m=api&c=goods&a=goodsContent&id=";//商品详情
     public static String  addShopCar="m=Api&c=Cart&a=addCart&unique_id=";//商品详情
     public static String  shopCarList="m=Api&c=Cart&a=cartList";//购物车列表
+
+
+
 
 
 }

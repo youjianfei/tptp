@@ -1,5 +1,6 @@
 package com.kymart.shop.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import cn.kymart.tptp.R;
 /**
  * Created by Administrator on 2017/6/13.
  */
-
+@SuppressLint("ValidFragment")
 public class Fragment_GoodDetails_web  extends Fragment{
     int ID=0;
 

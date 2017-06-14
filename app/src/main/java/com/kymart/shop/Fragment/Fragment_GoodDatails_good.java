@@ -1,5 +1,6 @@
 package com.kymart.shop.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 /**
  * Created by Administrator on 2017/6/10.
  */
-
+@SuppressLint("ValidFragment")
 public class Fragment_GoodDatails_good extends Fragment {
     View rootview;
     private int Id;

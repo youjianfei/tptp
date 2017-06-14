@@ -1,5 +1,6 @@
 package com.kymart.shop.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,7 @@ import cn.kymart.tptp.R;
 /**
  * Created by PC on 2017/6/6.
  */
-
+@SuppressLint("ValidFragment")
 public class Fragment_main_viewpager_Promotion extends Fragment{
     View rootView;
     private GridView  mGridviewPager;

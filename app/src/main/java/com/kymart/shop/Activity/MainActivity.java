@@ -24,6 +24,7 @@ import cn.kymart.tptp.R;
 
 import com.kymart.shop.Fragment.Fragment_personalCenter;
 import com.kymart.shop.Fragment.Fragment_shopCar;
+import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.Volley_Utils;
@@ -83,6 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void setData() {
+        requestVersionData();//查询是否更新
     }
 
     private void setView() {
@@ -260,7 +262,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void onError(int error) {
 
             }
-        }).Http("新版本号的网址", this, 1);
+        }).Http(BaseUrl.checkUpdate, this, 0);
 
 
     }
