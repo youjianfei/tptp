@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:textColor="@color/red"
-            android:text="$300.25元"
+            android:text="￥300.25"
             android:lines="1"
             />
         <ImageView

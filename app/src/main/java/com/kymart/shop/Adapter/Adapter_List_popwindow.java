@@ -55,7 +55,9 @@ public class Adapter_List_popwindow extends BaseAdapter {
         }
         holder.mTextview.setText(bean.getSpec_name());
         mData_spec=new ArrayList<>();
+
         mData_spec.addAll(bean.getSpec_list());
+
         holder.mTagFlow.setTag(position);//添加标记，可以知道选择的是哪一行的属性值改变
 
         final ViewHolder finalHolder = holder;

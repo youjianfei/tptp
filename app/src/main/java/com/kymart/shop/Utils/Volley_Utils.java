@@ -90,6 +90,7 @@ public class Volley_Utils {
             public void onResponse(String response) {
                 if (response != null || response.length() != 0) {
                     mInterface.onSuccesses(response);
+                    LogUtils.LOG("ceshi","post成功");
                 }
 
             }
@@ -99,7 +100,7 @@ public class Volley_Utils {
                 if (error.networkResponse != null) {
                     int code = error.networkResponse.statusCode;
                     mInterface.onError(code);
-                    LogUtils.LOG("ceshi","post请求");
+                    LogUtils.LOG("ceshi","post请求失败");
                 }
 
             }

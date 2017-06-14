@@ -311,8 +311,11 @@ public class Fragment_GoodDatails_good extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isLogin==1) {//登录状态,添加到购物车
-                    LogUtils.LOG("ceshi","添加购物车数组"+count().toString());
-                    request_addShopCar(count());
+                    Map map=new HashMap();
+                    map=count();
+                    if(map!=null){
+                        request_addShopCar(map);
+                    }
 
                 }else{
                     Intent intent=new Intent(getActivity(),LoginActivity.class);

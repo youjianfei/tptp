@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.kymart.shop.Bean.ShopCarBean;
 import com.kymart.shop.Utils.LogUtils;
 
 import java.util.List;
@@ -19,7 +21,7 @@ import ren.qinc.numberbutton.NumberButton;
  */
 
 public class Adapter_shopCarList extends BaseAdapter {
-    List<String> mData;
+    List<ShopCarBean.ResultEntity.StoreListEntity.CartListEntity> mData;
     private Context mContext;
     private LayoutInflater mInflater;
 
@@ -33,6 +35,7 @@ public class Adapter_shopCarList extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
+        ShopCarBean.ResultEntity.StoreListEntity.CartListEntity bean = mData.get(position);
         if(convertView==null){
             holder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.item_listview_shopcar,null,false);
@@ -48,20 +51,11 @@ public class Adapter_shopCarList extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
         holder.mImage_check.setSelected(true);
-        holder.mNumberButton.getChildCount();
-        LogUtils.LOG("ceshi", holder.mNumberButton.getChildCount()+"个子控件");
-        holder.mNumberButton.setInventory(10).setOnWarnListener(new NumberButton.OnWarnListener() {
-            @Override
-            public void onWarningForInventory(int inventory) {
-                LogUtils.LOG("ceshi","变化");
-            }
-
-            @Override
-            public void onWarningForBuyMax(int max) {
-                LogUtils.LOG("ceshi","变化");
-
-            }
-        });
+        holder.mNumberButton.setCurrentNumber(bean.getGoods_num());
+        holder.mText_goodName.setText(bean.getGoods_name());
+        holder.mTextview_goodPrice.setText("￥"+bean.getGoods_price());
+        holder.mTextview_goodProperty.setText(bean.getSpec_key());
+        Glide.with(mContext).load("http://test.kymart.cn/index.php?"+"m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id="+bean.getGoods_id()).into( holder.mImage_goodPIC);
 
 
         return convertView;
