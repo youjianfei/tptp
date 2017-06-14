@@ -84,8 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void setData() {
-        // TODO: 2017/6/14
-//        requestVersionData();//查询是否更新
+        requestVersionData();//查询是否更新
     }
 
     private void setView() {

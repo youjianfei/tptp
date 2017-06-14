@@ -35,7 +35,7 @@ public class BaseUrl {
     public static String  shopCarList="m=Api&c=Cart&a=cartList";//购物车列表
 
 
-    public static String  userInfo="m=Api&c=Cart&a=cartList";//我的界面
+    public static String  userInfo="m=api&c=user&a=userInfo";//我的界面
 
 
 

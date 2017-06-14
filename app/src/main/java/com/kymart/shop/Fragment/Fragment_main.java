@@ -218,12 +218,19 @@ public class Fragment_main extends Fragment {
         /**
          * 顶部轮播图
          */
-        //设置图片加载器
-        mViewpager.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        mViewpager.setImages(mImagesURL);
-        //banner设置方法全部调用完毕时最后调用
-        mViewpager.start();
+        if(mImagesURL.size()==0){
+            mViewpager.setVisibility(View.GONE);
+        }else{
+
+            //设置图片加载器
+            mViewpager.setImageLoader(new GlideImageLoader());
+            //设置图片集合
+            mViewpager.setImages(mImagesURL);
+            //banner设置方法全部调用完毕时最后调用
+            mViewpager.start();
+        }
+
+
 
 
         /**
@@ -372,7 +379,18 @@ public class Fragment_main extends Fragment {
 
         }
         //初始化数据   四种类型  初始化四次
-
+        if(mData_viewpager_promotion.size()==0){
+            mViewPager_item_first.setVisibility(View.GONE);
+        }
+        if(mData_viewpager_highQuality.size()==0){
+            mViewPager_item_second.setVisibility(View.GONE);
+        }
+        if(mData_viewpager_flashSale.size()==0){
+            mViewPager_item_thred.setVisibility(View.GONE);
+        }
+        if(mData_viewpager_hot.size()==0){
+            mViewPager_item_fouth.setVisibility(View.GONE);
+        }
         initDataPromotion(mData_viewpager_promotion,viewpager_dot_first,0);
         initDataPromotion(mData_viewpager_highQuality,viewpager_dot_second,1);
         initDataPromotion(mData_viewpager_flashSale,viewpager_dot_third,2);
