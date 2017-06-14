@@ -168,6 +168,9 @@ public class Fragment_GoodDatails_good extends Fragment {
         Staticdata.bean.setGood_buy_store_count(goodBean.getStore_count());
         Staticdata.bean.setGood_buy_price(goodBean.getShop_price());
         List<BuyGoodBean.GoodsSpecList>good_buy_propertys=new ArrayList<>();
+        if(goodBean.getGoods_spec_list()==null){
+            return;
+        }
         for(int i=0;i<goodBean.getGoods_spec_list().size();i++){
             BuyGoodBean.GoodsSpecList buy_propertys=new BuyGoodBean.GoodsSpecList();
             buy_propertys.setSpec_name(goodBean.getGoods_spec_list().get(i).getSpec_name());

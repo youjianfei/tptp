@@ -1563,4 +1563,9 @@ public class GoodDetailsBean {
     }
 
 
+
+
+
+
+
 }

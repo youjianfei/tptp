@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/LightGrey"
     >
     <RelativeLayout
         android:id="@+id/RelativeLayout_title"
@@ -19,42 +21,260 @@
             android:layout_centerInParent="true"
             />
     </RelativeLayout>
-    <RelativeLayout
+    <com.kymart.shop.CustomView.CustomerScrollView
+        android:id="@+id/bsv_news_detail_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/REL_title"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout
         android:layout_below="@+id/RelativeLayout_title"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/LightGrey"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/DarkBlue"
         >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@color/blank"
+            />
         <TextView
+            android:id="@+id/textview_accountname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="16dp"
             android:text="18737105569"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:id="@+id/textview_tuiPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="推荐人：张飞"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/yue"
+            android:layout_centerVertical="true"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
-            android:textColor="@color/white"
-            android:text="注册会员"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"
+            android:text="余额"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
             />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/more"
+            android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
     </RelativeLayout>
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_head"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@color/blank"
-        android:layout_marginTop="220dp"
-        android:layout_marginLeft="20dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/jiangjin"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="分享奖金"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    >
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/dingdan"
+        android:layout_centerVertical="true"
         />
-    
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="全部订单"
+        android:layout_marginLeft="55dp"
+        android:layout_centerVertical="true"
+        />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/more"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        />
 
 </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/zhanghumingxi"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="账户明细"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/jiangjinmingxi"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="奖金明细"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/dizhi"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="收货地址"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/shezhi"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="设置"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    </LinearLayout>
+   </com.kymart.shop.CustomView.CustomerScrollView>
+</LinearLayout>
