@@ -33,6 +33,7 @@ public class BaseUrl {
     public static String  goodDetails_web="m=api&c=goods&a=goodsContent&id=";//商品详情
     public static String  addShopCar="m=Api&c=Cart&a=addCart&unique_id=";//
     public static String  shopCarList="m=Api&c=Cart&a=cartList";//购物车列表
+    public static String  delGood="m=Api&c=Cart&a=delCart";//删除购物车中的某个商品
 
 
     public static String  userInfo="m=api&c=user&a=userInfo";//我的界面

@@ -24,7 +24,7 @@
 
     </RelativeLayout>
     <com.kymart.shop.CustomView.CustomerScrollView
-        android:id="@+id/bsv_news_detail_scrollview"
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/REL_title"
@@ -51,118 +51,143 @@
                 youth:indicator_margin="5dp"
 
                 />
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="115dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:background="@color/white"-->
-                <!--&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:gravity="center"-->
-                    <!--&gt;-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:src="@drawable/black_background"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="店铺街"-->
-                        <!--android:textSize="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--/>-->
-                <!--</LinearLayout>-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:gravity="center"-->
-                    <!--&gt;-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:src="@drawable/black_background"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="品牌街"-->
-                        <!--android:textSize="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--/>-->
-                <!--</LinearLayout>-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:gravity="center"-->
-                    <!--&gt;-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:src="@drawable/black_background"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="我的订单"-->
-                        <!--android:textSize="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--/>-->
-                <!--</LinearLayout>-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:gravity="center"-->
-                    <!--&gt;-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:src="@drawable/black_background"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="个人中心"-->
-                        <!--android:textSize="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--/>-->
-                <!--</LinearLayout>-->
+            <LinearLayout
+                android:id="@+id/linearlayout_search"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="20dp"
+                android:background="@drawable/main_serchbackgroud"
+                android:gravity="center_vertical">
 
-            <!--</LinearLayout>-->
-            <ImageView
+                <ImageView
+                    android:id="@+id/image_seach"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@mipmap/serch" />
+
+                <TextView
+                    android:id="@+id/edit_phonenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/image_seach"
+                    android:background="@null"
+                    android:hint="请输入你所搜索的商品"
+                    android:textColor="@color/blank"
+                    android:textColorHint="@color/DarkGray"
+                    android:textCursorDrawable="@null"
+                    android:textSize="16dp" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:src="@color/LightGrey"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:src="@mipmap/dianpujie"
+                        android:id="@+id/imageView2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="店铺街"
+                        android:textSize="15dp"
+                        android:layout_marginTop="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:src="@mipmap/pinpaijie"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="品牌街"
+                        android:textSize="15dp"
+                        android:layout_marginTop="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:src="@mipmap/main_dingdan"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的订单"
+                        android:textSize="15dp"
+                        android:layout_marginTop="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearlayout_main_personcenter"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:src="@mipmap/personcenter"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="个人中心"
+                        android:textSize="15dp"
+                        android:layout_marginTop="10dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <include
+                android:id="@+id/include_first"
+                layout="@layout/viewpager_item_first"
                 />
-            <include layout="@layout/viewpager_item_first" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:src="@color/LightGrey"
-                />
-            <include layout="@layout/viewpager_item_second" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:src="@color/LightGrey"
-                />
-            <include layout="@layout/viewpager_item_third" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:src="@color/LightGrey"
-                />
-            <include layout="@layout/viewpager_item_fouth" />
+
+            <include
+                android:id="@+id/include_second"
+                layout="@layout/viewpager_item_second" />
+
+            <include
+                android:id="@+id/include_third"
+                layout="@layout/viewpager_item_third" />
+
+            <include
+                android:id="@+id/include_fouth"
+                layout="@layout/viewpager_item_fouth" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -80,7 +80,7 @@
         <ImageView
             android:id="@+id/image_delate"
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="29dp"
             android:src="@mipmap/delet"
             android:layout_marginTop="10dp"
             />

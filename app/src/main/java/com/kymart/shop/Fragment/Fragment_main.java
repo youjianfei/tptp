@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.GoodDetailsActivity;
+import com.kymart.shop.Activity.MainActivity;
+import com.kymart.shop.CustomView.CustomerScrollView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ import cn.kymart.tptp.R;
 import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
+import static com.kymart.shop.Activity.MainActivity.mMainactivity;
 import static com.kymart.shop.Http.BaseUrl.BaseURL;
 import static com.kymart.shop.Http.BaseUrl.mainURL;
 import static com.kymart.shop.Http.BaseUrl.main_like;
@@ -53,7 +56,10 @@ public class Fragment_main extends Fragment {
     Adapter_Grid_main_like mAdapter_main_like;//猜你喜欢数据网格列表
 
 
+    private CustomerScrollView customerScrollView;
     private Banner mViewpager;//顶部轮播图
+    private LinearLayout mLearlayout_personcenter;
+
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
     private ViewPager mViewPager_item_thred;
@@ -62,6 +68,7 @@ public class Fragment_main extends Fragment {
     private LinearLayout viewpager_dot_second;
     private LinearLayout viewpager_dot_third;
     private LinearLayout viewpager_dot_fouth;
+
 
 
 
@@ -79,7 +86,10 @@ public class Fragment_main extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_main, container, false);
+        customerScrollView= (CustomerScrollView) rootview.findViewById(R.id.scrollview);
         mViewpager = (Banner) rootview.findViewById(R.id.banner);//顶部轮播图
+        mLearlayout_personcenter= (LinearLayout) rootview.findViewById(R.id.linearlayout_main_personcenter);
+
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
         mViewPager_item_second = (ViewPager) rootview.findViewById(R.id.viewpager_second);
         mViewPager_item_thred = (ViewPager) rootview.findViewById(R.id.viewpager_thred);
@@ -94,15 +104,6 @@ public class Fragment_main extends Fragment {
         myGridView = (MyGridView) rootview.findViewById(R.id.gradview_Recommend);
 
         mTextviewLoadmore= (TextView) rootview.findViewById(R.id.textview_loadmore);
-
-/**
- * ScrollView默认位置不是最顶部解决方案
- * 最开始的时候让最上面其中一个控件获得焦点，滚动条自然就到顶部去了，如下：
- * 选择使viewpager获得焦点
- */
-        mViewpager.setFocusable(true);
-        mViewpager.setFocusableInTouchMode(true);
-        mViewpager.requestFocus();
 
 
         adBean = new ArrayList<>();//轮播广告bean
@@ -120,6 +121,13 @@ public class Fragment_main extends Fragment {
     }
         int  main_like_page=1;//猜你喜欢接口的  页数  默认第一页
     private void initListenner() {
+        mLearlayout_personcenter.setOnClickListener(new View.OnClickListener() {//个人中心点击事件
+            @Override
+            public void onClick(View v) {
+                mMainactivity.onClick(getActivity().findViewById(R.id.rl_4));
+            }
+        });
+
         /**
          * Grid猜你喜欢  点击 加载更多的监听
          */
@@ -288,6 +296,7 @@ public class Fragment_main extends Fragment {
 
     }
     private mainLike mainLikeBean;
+    boolean scroollew=true;
     public void requestLikeData(int  page){//请求猜你喜欢数据
 
         String URL = BaseURL + main_like+page;
@@ -298,6 +307,17 @@ public class Fragment_main extends Fragment {
                 mainLikeBean=new  Gson().fromJson(respose,mainLike.class);
                 mList_like.addAll(mainLikeBean.getResult().getFavourite_goods());
                 mAdapter_main_like.notifyDataSetChanged();
+
+                /**
+                 * ScrollView默认位置不是最顶部解决方案
+                 * 最开始的时候让最上面其中一个控件获得焦点，滚动条自然就到顶部去了，如下：
+                 * 选择使viewpager获得焦点
+                 */
+                if(scroollew){//第一次
+                    customerScrollView.smoothScrollTo(0,0);
+                    scroollew=false;
+                }
+
             }
 
             @Override
@@ -390,16 +410,16 @@ public class Fragment_main extends Fragment {
         }
         //初始化数据   四种类型  初始化四次
         if(mData_viewpager_promotion.size()==0){
-            mViewPager_item_first.setVisibility(View.GONE);
+            rootview.findViewById(R.id.include_first).setVisibility(View.GONE);
         }
         if(mData_viewpager_highQuality.size()==0){
-            mViewPager_item_second.setVisibility(View.GONE);
+            rootview.findViewById(R.id.include_second).setVisibility(View.GONE);
         }
         if(mData_viewpager_flashSale.size()==0){
-            mViewPager_item_thred.setVisibility(View.GONE);
+            rootview.findViewById(R.id.include_third).setVisibility(View.GONE);
         }
         if(mData_viewpager_hot.size()==0){
-            mViewPager_item_fouth.setVisibility(View.GONE);
+            rootview.findViewById(R.id.include_fouth).setVisibility(View.GONE);
         }
         initDataPromotion(mData_viewpager_promotion,viewpager_dot_first,0);
         initDataPromotion(mData_viewpager_highQuality,viewpager_dot_second,1);

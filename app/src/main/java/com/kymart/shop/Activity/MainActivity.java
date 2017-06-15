@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kymart.shop.AppStaticData.Staticdata;
@@ -53,7 +54,7 @@ import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
-
+  public static  MainActivity mMainactivity;
     /**
      * 记录的帐号密码
      */
@@ -112,6 +113,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void initData() {
+        mMainactivity=this;
         mFragment_main = new Fragment_main();
         /**
          * 自动登录网络请求
@@ -516,7 +518,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
 
-
+    /**
+     * 再点一次退出
+     */
+    private long mLastTime = 0;
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - mLastTime > 2000) {
+            // 两次返回时间超出两秒
+            Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
+            mLastTime = System.currentTimeMillis();
+        } else {
+            // 两次返回时间小于两秒，可以退出
+            finish();
+        }
+    }
 
 
 

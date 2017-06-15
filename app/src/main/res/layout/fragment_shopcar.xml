@@ -25,7 +25,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/button_conner_5"
-        android:text="购物车还是空的"
+        android:text="赶紧去逛逛吧"
         android:textColor="@color/white"
         android:textSize="14dp"
         android:layout_centerInParent="true"

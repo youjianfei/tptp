@@ -122,7 +122,6 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 userBean_static=null;
                 Intent intent=new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivity(intent);
-
             }
 
             @Override

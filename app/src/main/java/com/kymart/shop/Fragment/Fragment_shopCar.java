@@ -1,5 +1,6 @@
 package com.kymart.shop.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,14 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.LoginActivity;
-import com.kymart.shop.Adapter.Adapter_shopCarList;
+import com.kymart.shop.Adapter.BaseAdapter;
+import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.ShopCarBean;
-import com.kymart.shop.Bean.UserBean;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
@@ -26,7 +29,9 @@ import java.util.List;
 import java.util.Map;
 
 import cn.kymart.tptp.R;
+import ren.qinc.numberbutton.NumberButton;
 
+import static com.kymart.shop.Activity.MainActivity.mMainactivity;
 import static com.kymart.shop.AppStaticData.Staticdata.UUID_static;
 import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
@@ -67,16 +72,7 @@ public class Fragment_shopCar  extends Fragment{
             @Override
             public void onClick(View v) {
                 if(isLogin==1){
-                     map=new HashMap();
-                    map.put("unique_id",UUID_static);
-                    map.put("user_id",userBean_static.getResult().getUser_id()+"" );
-                    map.put("token",userBean_static.getResult().getToken() );
-
-
-                    LogUtils.LOG("ceshi","unique_id"+UUID_static+"user_id"+userBean_static.getResult().getUser_id() +"token"+userBean_static.getResult().getToken() );
-
-                    request(map);
-
+                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
                 }else{
                     Intent intend=new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(intend);
@@ -108,16 +104,15 @@ public class Fragment_shopCar  extends Fragment{
                             mData.add(mListAllStore.get(i).getCartList().get(j));
                         }
                     }
-                    if(mData.size()!=0){
-                        mButton_add.setVisibility(View.INVISIBLE);
-                        mListview_shopcar.setVisibility(View.VISIBLE);
-
-                    }
-
-                    mAdapter.notifyDataSetChanged();
                 }
-
-
+                if(mData.size()!=0){
+                    mButton_add.setVisibility(View.INVISIBLE);
+                    mListview_shopcar.setVisibility(View.VISIBLE);
+                }else{
+                    mButton_add.setVisibility(View.VISIBLE);
+                    mListview_shopcar.setVisibility(View.INVISIBLE);
+                }
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -129,6 +124,7 @@ public class Fragment_shopCar  extends Fragment{
     }
 
     private void initData() {
+        map=new HashMap();
         mListAllStore=new ArrayList<>();
         mData=new ArrayList<>();
 
@@ -149,6 +145,95 @@ public class Fragment_shopCar  extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        request(map);
+
+        if(isLogin==1){
+
+            map.put("unique_id",UUID_static);
+            map.put("user_id",userBean_static.getResult().getUser_id()+"" );
+            map.put("token",userBean_static.getResult().getToken() );
+
+
+            LogUtils.LOG("ceshi","unique_id"+UUID_static+"user_id"+userBean_static.getResult().getUser_id() +"token"+userBean_static.getResult().getToken() );
+
+            request(map);
+        }
+    }
+
+
+
+
+    class Adapter_shopCarList extends BaseAdapter {
+        List<ShopCarBean.ResultEntity.StoreListEntity.CartListEntity> mData;
+        private Context mContext;
+        private LayoutInflater mInflater;
+
+        public Adapter_shopCarList(List mDatas, Context mContext) {
+            super(mDatas, mContext);
+            this.mData=mDatas;
+            this.mContext=mContext;
+            mInflater=LayoutInflater.from(mContext);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder=null;
+            final ShopCarBean.ResultEntity.StoreListEntity.CartListEntity bean = mData.get(position);
+            if(convertView==null){
+                holder=new ViewHolder();
+                convertView=mInflater.inflate(R.layout.item_listview_shopcar,null,false);
+                holder.mImage_check= (ImageView) convertView.findViewById(R.id.image_check);
+                holder.mImage_goodPIC= (ImageView) convertView.findViewById(R.id.imageView);
+                holder.mImage_delet= (ImageView) convertView.findViewById(R.id.image_delate);
+                holder.mText_goodName= (TextView) convertView.findViewById(R.id.text_goodname);
+                holder.mTextview_goodProperty= (TextView) convertView.findViewById(R.id.text_goodProperty);
+                holder.mTextview_goodPrice= (TextView) convertView.findViewById(R.id.text_price);
+                holder.mNumberButton= (NumberButton) convertView.findViewById(R.id.numberButton_count);
+                convertView.setTag(holder);
+            }else{
+                holder= (ViewHolder) convertView.getTag();
+            }
+            holder.mImage_check.setSelected(true);
+            holder.mNumberButton.setCurrentNumber(bean.getGoods_num());
+            holder.mText_goodName.setText(bean.getGoods_name());
+            holder.mTextview_goodPrice.setText("￥"+bean.getGoods_price());
+            holder.mTextview_goodProperty.setText(bean.getSpec_key());
+            Glide.with(mContext).load("http://test.kymart.cn/index.php?"+"m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id="+bean.getGoods_id()).into( holder.mImage_goodPIC);
+            LogUtils.LOG("ceshi",bean.getGoods_id()+"");
+            holder.mImage_delet.setOnClickListener(new View.OnClickListener() {//点击删除
+                @Override
+                public void onClick(View v) {
+                    Map map=new HashMap();
+                    map.put("ids",bean.getGoods_id());
+                    map.put("token",""+ Staticdata.userBean_static.getResult().getToken());
+                    map.put("unique_id",""+ Staticdata.UUID_static);
+
+                    LogUtils.LOG("ceshi","删除商品信息ids...."+bean.getGoods_id()+"token..."+Staticdata.userBean_static.getResult().getToken()+"unique_id..."+Staticdata.UUID_static);
+
+                    new  Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi","删除商品成功"+respose);
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).postHttp(BaseUrl.BaseURL+BaseUrl.delGood,getActivity(),1,map);
+                }
+            });
+
+
+            return convertView;
+        }
+        class ViewHolder {
+            ImageView mImage_check;
+            ImageView mImage_goodPIC;
+            TextView  mText_goodName;
+            TextView  mTextview_goodProperty;
+            NumberButton mNumberButton;
+            TextView mTextview_goodPrice;
+            ImageView mImage_delet;
+        }
     }
 }

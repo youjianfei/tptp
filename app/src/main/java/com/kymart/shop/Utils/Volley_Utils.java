@@ -121,5 +121,4 @@ public class Volley_Utils {
         mStringRequest.cancel();
     }
 
-
 }
