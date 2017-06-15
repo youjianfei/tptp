@@ -14,6 +14,7 @@ import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.InstalltionId;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.SharedPreferencesUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
@@ -57,6 +58,12 @@ public class LoginActivity extends BaseActivityother {
         pd = new ProgressDialog(LoginActivity.this);
         pd.setMessage("正在登录");
         pd.setCanceledOnTouchOutside(false);
+
+        mob=SharedPreferencesUtils.getString(this,"kymt","account");
+        password=SharedPreferencesUtils.getString(this,"kymt","password");
+        mEdit_account.setText(mob);
+        mEdit_password.setText(password);
+
     }
 
     @Override
@@ -157,6 +164,9 @@ public class LoginActivity extends BaseActivityother {
                     userbean= new  Gson().fromJson(respose,UserBean.class);
                     LogUtils.LOG("ceshi","登录成功"+respose);
                     userBean_static=userbean;//将用户信息写入全局变量
+                    //记住帐号密码,下次自动登录
+                    SharedPreferencesUtils.putString(LoginActivity.this,"kymt","account", mEdit_account.getText() + "");
+                    SharedPreferencesUtils.putString(LoginActivity.this,"kymt","password", mEdit_password.getText() + "");
                     Staticdata.isLogin=1;
                     setResult(RESULT_OK);
                     finish();

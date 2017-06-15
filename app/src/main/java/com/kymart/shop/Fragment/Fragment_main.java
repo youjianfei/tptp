@@ -95,6 +95,16 @@ public class Fragment_main extends Fragment {
 
         mTextviewLoadmore= (TextView) rootview.findViewById(R.id.textview_loadmore);
 
+/**
+ * ScrollView默认位置不是最顶部解决方案
+ * 最开始的时候让最上面其中一个控件获得焦点，滚动条自然就到顶部去了，如下：
+ * 选择使viewpager获得焦点
+ */
+        mViewpager.setFocusable(true);
+        mViewpager.setFocusableInTouchMode(true);
+        mViewpager.requestFocus();
+
+
         adBean = new ArrayList<>();//轮播广告bean
         mData_viewpager_promotion = new ArrayList<>();//促销商品 viewpager 总数据
         mData_viewpager_highQuality = new ArrayList<>();//精品推荐 viewpager 总数据

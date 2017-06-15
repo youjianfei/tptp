@@ -48,7 +48,6 @@ import java.util.Map;
 import cn.kymart.tptp.R;
 import ren.qinc.numberbutton.NumberButton;
 
-import static com.kymart.shop.AppStaticData.Staticdata.bean;
 import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 

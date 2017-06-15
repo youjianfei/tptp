@@ -18,6 +18,9 @@ import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
+import com.kymart.shop.AppStaticData.Staticdata;
+import com.kymart.shop.Bean.UserBean;
 import com.kymart.shop.Fragment.Fragment_classification;
 import com.kymart.shop.Fragment.Fragment_main;
 import cn.kymart.tptp.R;
@@ -26,7 +29,10 @@ import com.kymart.shop.Fragment.Fragment_personalCenter;
 import com.kymart.shop.Fragment.Fragment_shopCar;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
+import com.kymart.shop.Utils.InstalltionId;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.SharedPreferencesUtils;
+import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
 import org.json.JSONException;
@@ -39,10 +45,20 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
+import static com.kymart.shop.AppStaticData.Staticdata.UUID_static;
 import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
+import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
+
+    /**
+     * 记录的帐号密码
+     */
+    private String account ="";
+    private String  password="";
     /**
      * 下面按钮
      */
@@ -97,6 +113,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void initData() {
         mFragment_main = new Fragment_main();
+        /**
+         * 自动登录网络请求
+         */
+        autoLogin();
     }
 
     private void initView() {
@@ -211,8 +231,79 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
 
+    Map<String, String> map;
+    String UUID="";
+   void  autoLogin(){//自动登录网络请求
+       account= SharedPreferencesUtils.getString(this,"kymt","account");
+       password =SharedPreferencesUtils.getString(this,"kymt","password");
+       if(!password.equals("")){
+           map = new HashMap<String, String>();
+           map.put("username", account);
+           map.put("password", password);
+           UUID = InstalltionId.id(this);
+           UUID_static=UUID;//将UUID添加全局变量
+           request_imageCode(UUID);
+       }else{
+           return;
+       }
+   }
 
+    void request_imageCode(String uuid){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi1","图形验证码"+respose);
+                try {
 
+                    JSONObject jsonObject = new JSONObject(respose);
+                    String result=  jsonObject.getString("result");
+                    map.put("unique_id", UUID);
+                    map.put("capache", result);
+                    map.put("capapush_id", "");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                requestlogin(map);
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(BaseUrl.BaseURL+BaseUrl.image_code+uuid,this,0);
+    }
+    void requestlogin(Map map) {//登录请求\
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("status");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    LogUtils.LOG("ceshi", "登录成功" + respose);
+                    userBean_static = new Gson().fromJson(respose, UserBean.class);//将用户信息写入全局变量
+                    Staticdata.isLogin = 1;
+                    setResult(RESULT_OK);
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(BaseUrl.BaseURL + BaseUrl.login, this, 1, map);
+    }
 
     String newdownurl = "";//下载apk网址
 

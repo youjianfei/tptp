@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/LightGrey"
+    android:background="@color/white"
     >
     <RelativeLayout
         android:id="@+id/RelativeLayout_title"
@@ -71,6 +71,15 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             />
+        <TextView
+            android:id="@+id/text_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注销登录"
+            android:textSize="12dp"
+            android:padding="5dp"
+            android:textColor="@color/LightGrey"
+            />
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/re_yue"
@@ -92,6 +101,17 @@
             android:layout_marginLeft="55dp"
             android:layout_centerVertical="true"
             />
+        <TextView
+            android:id="@+id/text_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥0.00"
+            android:textSize="16dp"
+            android:textColor="@color/red"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -99,6 +119,13 @@
             android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/LightGrey"
+            android:layout_alignParentBottom="true"
             />
 
     </RelativeLayout>
@@ -123,6 +150,17 @@
             android:layout_marginLeft="55dp"
             android:layout_centerVertical="true"
             />
+        <TextView
+            android:id="@+id/text_sharePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥0.00"
+            android:textSize="16dp"
+            android:textColor="@color/red"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -130,8 +168,14 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
             />
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/LightGrey"
+            android:layout_alignParentBottom="true"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_dingdan"
@@ -162,7 +206,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         />
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/LightGrey"
+            android:layout_alignParentBottom="true"
+            />
 </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_zhanghumingxi"
@@ -193,7 +242,12 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             />
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/LightGrey"
+            android:layout_alignParentBottom="true"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_jiangjinmingxi"
@@ -224,7 +278,12 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             />
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/LightGrey"
+            android:layout_alignParentBottom="true"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_dizhi"
@@ -255,7 +314,12 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             />
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/LightGrey"
+            android:layout_alignParentBottom="true"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_shehzi"
