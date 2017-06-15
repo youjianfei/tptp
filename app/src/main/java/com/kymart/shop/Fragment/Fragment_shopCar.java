@@ -202,24 +202,25 @@ public class Fragment_shopCar  extends Fragment{
             holder.mImage_delet.setOnClickListener(new View.OnClickListener() {//点击删除
                 @Override
                 public void onClick(View v) {
-                    Map map=new HashMap();
-                    map.put("ids",bean.getGoods_id());
-                    map.put("token",""+ Staticdata.userBean_static.getResult().getToken());
-                    map.put("unique_id",""+ Staticdata.UUID_static);
+                    Map delmap=new HashMap();
+                    delmap.put("ids",""+bean.getId());
+                    delmap.put("token",""+ Staticdata.userBean_static.getResult().getToken());
+                    delmap.put("unique_id",""+ Staticdata.UUID_static);
 
-                    LogUtils.LOG("ceshi","删除商品信息ids...."+bean.getGoods_id()+"token..."+Staticdata.userBean_static.getResult().getToken()+"unique_id..."+Staticdata.UUID_static);
+                    LogUtils.LOG("ceshi","删除商品信息ids...."+bean.getId()+"token..."+Staticdata.userBean_static.getResult().getToken()+"unique_id..."+Staticdata.UUID_static);
 
                     new  Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
                             LogUtils.LOG("ceshi","删除商品成功"+respose);
+                            request(map);
                         }
 
                         @Override
                         public void onError(int error) {
 
                         }
-                    }).postHttp(BaseUrl.BaseURL+BaseUrl.delGood,getActivity(),1,map);
+                    }).postHttp(BaseUrl.BaseURL+BaseUrl.delGood,getActivity(),1,delmap);
                 }
             });
 

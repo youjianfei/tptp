@@ -13,7 +13,7 @@ public class SharedPreferencesUtils {
 
     public static String getString(Context context, String xmlName, String key) {
         sharedPreferences = context.getSharedPreferences(xmlName, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(key, "defValue");
+        return sharedPreferences.getString(key, "");
     }
 
     public static void putInt(Context context, String xmlName, String key, int value) {

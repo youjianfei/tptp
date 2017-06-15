@@ -164,6 +164,7 @@ public class LoginActivity extends BaseActivityother {
                     userbean= new  Gson().fromJson(respose,UserBean.class);
                     LogUtils.LOG("ceshi","登录成功"+respose);
                     userBean_static=userbean;//将用户信息写入全局变量
+                    LogUtils.LOG("ceshi","登录获得的token"+userbean.getResult().getToken());
                     //记住帐号密码,下次自动登录
                     SharedPreferencesUtils.putString(LoginActivity.this,"kymt","account", mEdit_account.getText() + "");
                     SharedPreferencesUtils.putString(LoginActivity.this,"kymt","password", mEdit_password.getText() + "");
