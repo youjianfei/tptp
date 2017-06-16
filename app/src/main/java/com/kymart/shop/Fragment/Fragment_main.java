@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.GoodDetailsActivity;
+import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.MainActivity;
 import com.kymart.shop.CustomView.CustomerScrollView;
 import com.youth.banner.Banner;
@@ -41,7 +42,7 @@ import static com.kymart.shop.Http.BaseUrl.main_like;
  * Created by PC on 2017/6/6.
  */
 
-public class Fragment_main extends Fragment {
+public class Fragment_main extends Fragment implements View.OnClickListener{
     View rootview;
     List<String> mImagesURL;//顶部轮播图图片下载地址数据
 
@@ -58,7 +59,7 @@ public class Fragment_main extends Fragment {
 
     private CustomerScrollView customerScrollView;
     private Banner mViewpager;//顶部轮播图
-    private LinearLayout mLearlayout_personcenter;
+    private LinearLayout mLearlayout_personcenter,mLinearlayout_search;
 
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
@@ -88,6 +89,7 @@ public class Fragment_main extends Fragment {
         rootview = inflater.inflate(R.layout.fragment_main, container, false);
         customerScrollView= (CustomerScrollView) rootview.findViewById(R.id.scrollview);
         mViewpager = (Banner) rootview.findViewById(R.id.banner);//顶部轮播图
+        mLinearlayout_search= (LinearLayout) rootview.findViewById(R.id.linearlayout_search);
         mLearlayout_personcenter= (LinearLayout) rootview.findViewById(R.id.linearlayout_main_personcenter);
 
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
@@ -121,23 +123,10 @@ public class Fragment_main extends Fragment {
     }
         int  main_like_page=1;//猜你喜欢接口的  页数  默认第一页
     private void initListenner() {
-        mLearlayout_personcenter.setOnClickListener(new View.OnClickListener() {//个人中心点击事件
-            @Override
-            public void onClick(View v) {
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_4));
-            }
-        });
+        mTextviewLoadmore.setOnClickListener(this);
+        mLearlayout_personcenter.setOnClickListener(this);
+        mLinearlayout_search.setOnClickListener(this);
 
-        /**
-         * Grid猜你喜欢  点击 加载更多的监听
-         */
-        mTextviewLoadmore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {//  猜你喜欢  点击加载更多监听
-                main_like_page++;
-                requestLikeData(main_like_page);
-            }
-        });
 
         mViewPager_item_first.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -430,6 +419,25 @@ public class Fragment_main extends Fragment {
         myGridView.setAdapter(mAdapter_main_like);///绑定适配器
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.textview_loadmore://点击底部加载更多
+                main_like_page++;
+                requestLikeData(main_like_page);
+                break;
+            case R.id.linearlayout_main_personcenter://点击个人中心
+                mMainactivity.onClick(getActivity().findViewById(R.id.rl_4));
+                break;
+            case R.id.linearlayout_search:
+                Intent intent=new Intent(getActivity(), GoodsListActivity.class);
+                intent.putExtra("id",100);
+                getActivity().startActivity(intent);
+                break;
+
+        }
     }
 
     class FragmentAdapter extends FragmentPagerAdapter {//viewpager fangmentAdapter
