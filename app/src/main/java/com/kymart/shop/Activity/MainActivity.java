@@ -371,7 +371,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("升级提示");
                 builder.setMessage("有新版本，请更新!");
-                builder.setCancelable(false);
+                builder.setCancelable(true);
 
                 builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
 
@@ -383,10 +383,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                         mProgress.setMessage("正在下载...");
                         // 对话框显示出来
-                        mProgress.setCancelable(false);
+                        mProgress.setCancelable(true);
                         mProgress.show();
                         // 直接下载
-                        new downloadApkThread().start();
+                     new downloadApkThread().start();
+                      new   downloadApkThread().start();
 
                     }
 
@@ -482,6 +483,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         if (numread <= 0) {
                             downHandler.sendEmptyMessage(DOWNLOAD_FINISH);
                             cancelUpdate = true;
+                            mProgress.dismiss();
                             break;
                         }
                         fos.write(buf, 0, numread);
@@ -515,8 +517,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             return Integer.MAX_VALUE;
         }
     }
-
-
 
     /**
      * 再点一次退出
