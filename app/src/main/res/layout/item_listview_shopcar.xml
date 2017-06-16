@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:qinc="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="horizontal"
     android:gravity="center_vertical"
@@ -53,14 +53,19 @@
             android:layout_marginTop="8dp"
             android:lines="1"
             />
-
-        <ren.qinc.numberbutton.NumberButton
-        android:id="@+id/numberButton_count"
-            android:layout_width="match_parent"
+        <com.mcxtzhang.lib.AnimShopButton
+            android:id="@+id/numberButton_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:addEnableBgColor="@color/red"
+            app:addEnableFgColor="#ffffff"
             android:layout_marginTop="8dp"
-            android:layout_height="30dp"
-            qinc:editable="false"/>
-
+            app:gapBetweenCircle="50dp"
+            app:hintBgColor="@color/red"
+            app:hintBgRoundValue="5dp"
+            app:hintFgColor="#ffffff"
+            app:maxCount="99"
+            />
 
     </LinearLayout>
     <LinearLayout

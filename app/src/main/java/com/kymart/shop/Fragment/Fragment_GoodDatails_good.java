@@ -342,19 +342,6 @@ public class Fragment_GoodDatails_good extends Fragment {
 
     void request_addShopCar(Map<String ,Object> map){
         LogUtils.LOG("ceshi","postMap"+map.toString());
-//        LogUtils.LOG("ceshi","加入购物车网址接口"+BaseUrl.BaseURL+BaseUrl.addShopCar+Staticdata.UUID_static+"&token="+userBean_static.getResult().getToken());
-//
-//        new  Volley_Utils(new Interface_volley_respose() {
-//            @Override
-//            public void onSuccesses(String respose) {
-//                mPopupWindow.dismiss();
-//                ToastUtils.showToast(getActivity(),"添加购物车成功");
-//            }
-//
-//            @Override
-//            public void onError(int error) {
-//            }
-//        }).postHttp(BaseUrl.BaseURL+BaseUrl.addShopCar+Staticdata.UUID_static+"&token="+userBean_static.getResult().getToken(),getActivity(),1,map);
         requestQueue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject(map);

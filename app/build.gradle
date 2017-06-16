@@ -37,5 +37,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'ren.qinc.numberbutton:numberbutton:0.0.1'
     compile 'com.zhy:flowlayout-lib:1.0.3'
+    compile 'com.github.mcxtzhang:AnimShopButton:V1.2.0'
 
 }

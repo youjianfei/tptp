@@ -21,7 +21,10 @@ import com.kymart.shop.Bean.ShopCarBean;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
+import com.mcxtzhang.lib.AnimShopButton;
+import com.mcxtzhang.lib.IOnAddDelListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,6 +96,7 @@ public class Fragment_shopCar  extends Fragment{
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi",respose);
+                shopCarChange=false;
                 ShopCarBean.ResultEntity resuleBEan=new Gson().fromJson(respose,ShopCarBean.class).getResult();
                 mTextview_allPrice.setText("￥"+resuleBEan.getTotal_price().getTotal_fee()+"元");
                 mListAllStore.clear();
@@ -151,8 +155,9 @@ public class Fragment_shopCar  extends Fragment{
             map.put("unique_id",UUID_static);
             map.put("user_id",userBean_static.getResult().getUser_id()+"" );
             map.put("token",userBean_static.getResult().getToken() );
-
-
+            if(!shopCarChange){//判断是否是点击 加减 产生的请求，如果false，  cart_form_data字段为空
+                map.put("cart_form_data","");
+            }
             LogUtils.LOG("ceshi","unique_id"+UUID_static+"user_id"+userBean_static.getResult().getUser_id() +"token"+userBean_static.getResult().getToken() );
 
             request(map);
@@ -161,7 +166,7 @@ public class Fragment_shopCar  extends Fragment{
 
 
 
-
+    boolean shopCarChange=false;
     class Adapter_shopCarList extends BaseAdapter {
         List<ShopCarBean.ResultEntity.StoreListEntity.CartListEntity> mData;
         private Context mContext;
@@ -187,16 +192,65 @@ public class Fragment_shopCar  extends Fragment{
                 holder.mText_goodName= (TextView) convertView.findViewById(R.id.text_goodname);
                 holder.mTextview_goodProperty= (TextView) convertView.findViewById(R.id.text_goodProperty);
                 holder.mTextview_goodPrice= (TextView) convertView.findViewById(R.id.text_price);
-                holder.mNumberButton= (NumberButton) convertView.findViewById(R.id.numberButton_count);
+                holder.mNumberButton= (AnimShopButton) convertView.findViewById(R.id.numberButton_count);
                 convertView.setTag(holder);
             }else{
                 holder= (ViewHolder) convertView.getTag();
             }
             holder.mImage_check.setSelected(true);
-            holder.mNumberButton.setCurrentNumber(bean.getGoods_num());
+//            holder.mNumberButton.setCurrentNumber(bean.getGoods_num());
+            holder.mNumberButton.setCount(bean.getGoods_num());
+            holder.mNumberButton.setOnAddDelListener(new IOnAddDelListener() {
+                @Override
+                public void onAddSuccess(int i) {
+
+                    //自定义json
+                    LogUtils.LOG("ceshi","点击add"+i);
+                    int goods_num=bean.getGoods_num()+1;
+                    String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
+                            bean.getStore_count()+"\",\"selected\":\"1\"}]";
+
+                    LogUtils.LOG("ceshi","json"+Json);
+
+                    map.put("cart_form_data",Json);
+                    shopCarChange=true;
+
+                    request(map);
+                }
+
+                @Override
+                public void onAddFailed(int i, FailType failType) {
+
+                }
+
+                @Override
+                public void onDelSuccess(int i) {
+                    LogUtils.LOG("ceshi","点击del"+i);
+                    //自定义json
+                    LogUtils.LOG("ceshi","点击add"+i);
+                    int goods_num=bean.getGoods_num()-1;
+                    String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
+                            bean.getStore_count()+"\",\"selected\":\"1\"}]";
+
+                    LogUtils.LOG("ceshi","json"+Json);
+
+                    map.put("cart_form_data",Json);
+                    shopCarChange=true;
+                    request(map);
+                }
+
+                @Override
+                public void onDelFaild(int i, FailType failType) {
+
+                }
+            });
+
+
+
+
             holder.mText_goodName.setText(bean.getGoods_name());
             holder.mTextview_goodPrice.setText("￥"+bean.getGoods_price());
-            holder.mTextview_goodProperty.setText(bean.getSpec_key());
+            holder.mTextview_goodProperty.setText(bean.getSpec_key_name());
             Glide.with(mContext).load("http://test.kymart.cn/index.php?"+"m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id="+bean.getGoods_id()).into( holder.mImage_goodPIC);
             LogUtils.LOG("ceshi",bean.getGoods_id()+"");
             holder.mImage_delet.setOnClickListener(new View.OnClickListener() {//点击删除
@@ -213,6 +267,7 @@ public class Fragment_shopCar  extends Fragment{
                         @Override
                         public void onSuccesses(String respose) {
                             LogUtils.LOG("ceshi","删除商品成功"+respose);
+                            ToastUtils.showToast(getActivity(),"删除成功");
                             request(map);
                         }
 
@@ -227,12 +282,27 @@ public class Fragment_shopCar  extends Fragment{
 
             return convertView;
         }
+
+//        public void shopcarChange( Map map_change){//编辑商品数量
+//            new Volley_Utils(new Interface_volley_respose() {
+//                @Override
+//                public void onSuccesses(String respose) {
+//
+//                }
+//
+//                @Override
+//                public void onError(int error) {
+//
+//                }
+//            }).postHttp(BaseUrl.BaseURL+BaseUrl.shopCarList,mContext,1,map_change);
+//
+//        }
         class ViewHolder {
             ImageView mImage_check;
             ImageView mImage_goodPIC;
             TextView  mText_goodName;
             TextView  mTextview_goodProperty;
-            NumberButton mNumberButton;
+            AnimShopButton mNumberButton;
             TextView mTextview_goodPrice;
             ImageView mImage_delet;
         }
