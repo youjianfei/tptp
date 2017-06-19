@@ -37,7 +37,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_tuiPerson,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_yue,mRE_jiangjin,mRE_dingdan;
+    RelativeLayout mRE_yue,mRE_jiangjin,mRE_shezhi,mRE_fenxiangjiangjin,mRE_quanbudingdan;
 
     personCenterBean person;
 
@@ -60,6 +60,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
 
     private void initListener() {
         mTextview_Exit.setOnClickListener(this);
+        mRE_shezhi.setOnClickListener(this);
     }
 
     String name="";
@@ -98,6 +99,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_blance= (TextView) rootView.findViewById(R.id.text_balance);
         mTextview_sharePrice= (TextView) rootView.findViewById(R.id.text_sharePrice);
         mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
+        mRE_shezhi= (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
     }
 
     @Override
@@ -107,6 +109,9 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 Map map=new HashMap();
                 map.put("token",Staticdata.userBean_static.getResult().getToken());
                 loginOut(map);
+                break;
+            case R.id.re_shezhi:
+
                 break;
         }
     }

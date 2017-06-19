@@ -179,9 +179,8 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_dingdan"
-
         android:layout_width="match_parent"
-    android:layout_height="50dp"
+        android:layout_height="50dp"
     >
     <ImageView
         android:layout_width="30dp"
@@ -208,13 +207,48 @@
         />
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="10dp"
             android:background="@color/LightGrey"
             android:layout_alignParentBottom="true"
             />
 </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_xiaofeijilu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/zhanghumingxi"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="消费记录"
+                android:layout_marginLeft="55dp"
+                android:layout_centerVertical="true"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/re_zhanghumingxi"
+        android:id="@+id/re_chongzhimingxi"
 
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -230,7 +264,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
-            android:text="账户明细"
+            android:text="充值明细"
             android:layout_marginLeft="55dp"
             android:layout_centerVertical="true"
             />
@@ -250,7 +284,7 @@
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/re_jiangjinmingxi"
+        android:id="@+id/re_jiangjinjilu"
 
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -266,7 +300,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
-            android:text="奖金明细"
+            android:text="奖金记录"
             android:layout_marginLeft="55dp"
             android:layout_centerVertical="true"
             />
@@ -285,6 +319,44 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_tixianjilu"
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/jiangjinmingxi"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="提现记录"
+                android:layout_marginLeft="55dp"
+                android:layout_centerVertical="true"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/LightGrey"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+
+
     <RelativeLayout
         android:id="@+id/re_dizhi"
 
@@ -321,8 +393,75 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_fenxianghaoyou"
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/dizhi"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="分享好友"
+                android:layout_marginLeft="55dp"
+                android:layout_centerVertical="true"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_erweima"
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/shezhi"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="二维码"
+                android:layout_marginLeft="55dp"
+                android:layout_centerVertical="true"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+
+        </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/re_shehzi"
+        android:id="@+id/re_shezhi"
 
         android:layout_width="match_parent"
         android:layout_height="50dp"

@@ -8,14 +8,14 @@ public class BaseUrl {
     //https://www.kymart.cn/  正式接口
 
 
-//    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
-//    public  static String BaseURL="http://test.kymart.cn/index.php?";// 主接口——测试接口
-//    public  static String BasegoodlistURL="http://test.kymart.cn";//商品列表主接口——测试接口
+    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
+    public  static String BaseURL="http://test.kymart.cn/index.php?";// 主接口——测试接口
+    public  static String BasegoodlistURL="http://test.kymart.cn";//商品列表主接口——测试接口
 
 //
-    public  static String checkUpdate="https://www.kymart.cn/api/index/checkupdate";//强制更新——正式接口
-    public  static String BaseURL="https://www.kymart.cn/index.php?";//主接口——测试接口正式接口
-    public  static String BasegoodlistURL="https://www.kymart.cn";//商品列表主接口——测试接口
+//    public  static String checkUpdate="https://www.kymart.cn/api/index/checkupdate";//强制更新——正式接口
+//    public  static String BaseURL="https://www.kymart.cn/index.php?";//主接口——测试接口正式接口
+//    public  static String BasegoodlistURL="https://www.kymart.cn";//商品列表主接口——测试接口
 
 
     public  static String mainURL="m=api&c=Index&a=homePage";
@@ -38,6 +38,8 @@ public class BaseUrl {
 
     public static String  userInfo="m=api&c=user&a=userInfo";//我的界面
     public static String  loginout="m=api&c=user&a=userInfo";//登出
+//    public static String  allOrder="m=Api&c=User&a=getOrderList";//我的订单 get
+
 
 
 
