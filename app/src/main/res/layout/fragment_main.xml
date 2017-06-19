@@ -42,7 +42,7 @@
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:background="@color/white"
                 youth:indicator_width="8dp"
                 youth:indicator_height="8dp"

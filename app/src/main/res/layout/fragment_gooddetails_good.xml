@@ -10,7 +10,7 @@
     <com.youth.banner.Banner
         android:id="@+id/Banner_goodImage"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="300dp"
         android:background="@color/white"
         youth:is_auto_play="false"
         youth:indicator_drawable_selected="@drawable/dop_select"

@@ -26,9 +26,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kymart.shop.Activity.MainActivity">
-
-        </activity>
+        <activity android:name="com.kymart.shop.Activity.MainActivity"></activity>
         <activity android:name="com.kymart.shop.Activity.GoodsListActivity" />
         <activity android:name="com.kymart.shop.Activity.GoodDetailsActivity" />
         <activity android:name="com.kymart.shop.Activity.LoginActivity" />
@@ -47,12 +45,15 @@
         <activity android:name="com.kymart.shop.Activity.FindPasswordActivity" />
         <activity android:name="com.kymart.shop.Activity.AllOrderActivity" />
         <activity android:name="com.kymart.shop.Activity.SettingActivity">
+
+        </activity>
+        <activity android:name="com.kymart.shop.Activity.AddressActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.kymart.shop.Utils.ToastUtils;
+
 import cn.kymart.tptp.R;
 
 public class SettingActivity extends BaseActivityother {
@@ -14,6 +16,9 @@ public class SettingActivity extends BaseActivityother {
     private Button mButton_confirm_info,mButton_password;
 
     LinearLayout mLinearlayout_secret,mLinearlayout_man,mLinearlayout_women;
+
+    String name="",oldpassword="",newpassword="";
+    int sex=0;
 
     @Override
     public int setLayoutResID() {
@@ -57,24 +62,35 @@ public class SettingActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()){
             case R.id.button_confirm_info:
+                name=mEdit_nicheng.getText()+"";
+
 
                 break;
             case R.id.button_confirm_password:
+                oldpassword=mEdit_oldpassword.getText()+"";
+                newpassword=mEdit_newpassword.getText()+"";
+                if(!oldpassword.equals("")&&!newpassword.equals("")&&!oldpassword.equals(newpassword)){
+
+                }else{
+                    ToastUtils.showToast(this,"请填写完整或者两次密码相同");
+                }
 
                 break;
             case R.id.linearlayout_secret:
                 setNoselect();
                 mLinearlayout_secret.setSelected(true);
+                sex=1;//保密
 
                 break;
             case R.id.linearlayout_man:
                 setNoselect();
                 mLinearlayout_man.setSelected(true);
-
+                sex=2;//男
                 break;
             case R.id.linearlayout_women:
                 setNoselect();
                 mLinearlayout_women.setSelected(true);
+                sex=3;//女
                 break;
         }
     }

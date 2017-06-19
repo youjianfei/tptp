@@ -160,6 +160,7 @@
         android:textColor="@color/white"
         android:background="@drawable/button_conner_5"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -181,12 +182,14 @@
             android:padding="5dp"
             android:textSize="15dp"
             android:hint="请输入原始密码"
+            android:inputType="text"
             android:textColorHint="@color/DarkGray"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/main_serchbackgroud"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
