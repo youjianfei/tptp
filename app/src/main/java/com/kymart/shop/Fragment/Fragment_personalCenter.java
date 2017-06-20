@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.personCenterBean;
 import com.kymart.shop.Http.BaseUrl;
@@ -56,6 +57,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         LogUtils.LOG("ceshi","onResume");
+        request();
     }
 
     private void initListener() {
@@ -73,7 +75,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_name.setText(person.getResult().getNickname());
         mTextview_tuiPerson.setVisibility(View.GONE);
         mTextview_blance.setText("￥"+person.getResult().getUser_money()+"");
-        mTextview_sharePrice.setText("￥"+person.getResult().getDistribut_money());
+        mTextview_sharePrice.setText("￥"+person.getResult().getBonus());
     }
    void  request(){
        new Volley_Utils(new Interface_volley_respose() {
@@ -111,6 +113,8 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 loginOut(map);
                 break;
             case R.id.re_shezhi:
+                Intent intent=new Intent(getActivity(), SettingActivity.class);
+                getActivity().startActivity(intent);
 
                 break;
         }

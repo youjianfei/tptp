@@ -39,6 +39,8 @@ public class BaseUrl {
     public static String  userInfo="m=api&c=user&a=userInfo";//我的界面
     public static String  loginout="m=api&c=user&a=userInfo";//登出
 //    public static String  allOrder="m=Api&c=User&a=getOrderList";//我的订单 get
+    public static String  changeUserInfo="m=api&c=User&a=updateUserInfo&unique_id=";
+    public static String  changeUserPassword="m=api&c=User&a=password&unique_id=";
 
 
 
