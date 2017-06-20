@@ -61,7 +61,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private LinearLayout mLinear_bottom;
     private Banner mBanner;
     private TextView mTextview_GoodName;
-    private  TextView mTextview_price,mTextview_result;
+    private TextView mTextview_price,mTextview_result;
 
 
 

@@ -135,7 +135,6 @@ public class SettingActivity extends BaseActivityother {
             }
         }).postHttp(Url,this,1,nMap);
 
-
     }
     void request_changePassword(Map pMap){
         String URL=BaseUrl.BaseURL+BaseUrl.changeUserPassword+ Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
