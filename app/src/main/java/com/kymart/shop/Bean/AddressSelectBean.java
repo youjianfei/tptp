@@ -28,6 +28,7 @@ public class AddressSelectBean {
          * name : 北京市
          * id : 1
          */
+
         private int level;
         private int parent_id;
         private String name;
@@ -74,6 +75,7 @@ public class AddressSelectBean {
                     ", id=" + id +
                     '}';
         }
+
     }
 }
 

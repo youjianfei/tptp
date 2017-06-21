@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.AddAddressActivity;
+import com.kymart.shop.Activity.AddressActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
@@ -120,7 +121,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 getActivity().startActivity(intent);
                 break;
             case R.id.re_dizhi:
-                Intent intent_addAddress=new Intent(getActivity(), AddAddressActivity.class);
+                Intent intent_addAddress=new Intent(getActivity(), AddressActivity.class);
                 getActivity().startActivity(intent_addAddress);
                 break;
         }
