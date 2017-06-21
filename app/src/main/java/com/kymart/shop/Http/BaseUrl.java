@@ -42,7 +42,10 @@ public class BaseUrl {
     public static String  changeUserInfo="m=api&c=User&a=updateUserInfo&unique_id=";//设置 修改昵称
     public static String  changeUserPassword="m=api&c=User&a=password&unique_id=";//设置 修改密码
 
-    public static String  addressList="";
+    public static String  addressList="";//地址列表
+    public static String  Address="m=api&c=other&a=region&level=";//选择地址————popwindow
+    public static String  addAddress="m=api&c=user&a=addAddress&unique_id=";//选择地址————popwindow
+
 
 
 

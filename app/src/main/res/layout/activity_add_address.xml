@@ -44,13 +44,17 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:text="收货人姓名："
+            android:textColor="@color/blank"
             android:layout_marginLeft="10dp"
             />
-        <TextView
+        <EditText
+            android:id="@+id/edit_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="张三"
+            android:hint="请输入姓名"
+            android:background="@null"
+            android:textColorHint="@color/DarkGray"
             android:layout_marginLeft="10dp"
             />
     </LinearLayout>
@@ -61,7 +65,7 @@
         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         >
@@ -70,14 +74,17 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:text="所 在 地  区："
+            android:textColor="@color/blank"
+
             android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/text_area"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="张三"
+            android:text="省  县  镇"
+            android:textColor="@color/DarkGray"
             android:layout_marginLeft="10dp"
             />
     </LinearLayout>
@@ -88,7 +95,7 @@
         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         >
@@ -97,13 +104,18 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:text="详  细 地 址："
+            android:textColor="@color/blank"
+
             android:layout_marginLeft="10dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edit_address"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="小桥"
+            android:hint="请输入详细地址"
+            android:background="@null"
+            android:textColorHint="@color/DarkGray"
             android:layout_marginLeft="10dp"
             />
     </LinearLayout>
@@ -123,13 +135,56 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:text="手           机："
+            android:textColor="@color/blank"
+
             android:layout_marginLeft="10dp"
             />
+        <EditText
+            android:id="@+id/edit_phonenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="请输入手机号码"
+            android:textColorHint="@color/DarkGray"
+            android:background="@null"
+            android:inputType="number"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/LightGrey"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/LightGrey"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text=" 1383838888"
+            android:text="邮 政 编 码："
+            android:textColor="@color/blank"
+
+            android:layout_marginLeft="10dp"
+            />
+        <EditText
+            android:id="@+id/edit_zipcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="请输入邮政编码"
+            android:textColorHint="@color/DarkGray"
+            android:inputType="number"
+            android:background="@null"
             android:layout_marginLeft="10dp"
             />
     </LinearLayout>
@@ -145,6 +200,7 @@
         android:gravity="center_vertical"
         >
         <ImageView
+            android:id="@+id/image_isdefault"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"
@@ -171,6 +227,7 @@
             android:background="@mipmap/delet"
             />
         <Button
+            android:id="@+id/button_addAddress"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:text="添加"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.kymart.shop.Activity.AddAddressActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
@@ -38,7 +39,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_tuiPerson,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_yue,mRE_jiangjin,mRE_shezhi,mRE_fenxiangjiangjin,mRE_quanbudingdan;
+    RelativeLayout mRE_yue,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_quanbudingdan;
 
     personCenterBean person;
 
@@ -63,6 +64,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     private void initListener() {
         mTextview_Exit.setOnClickListener(this);
         mRE_shezhi.setOnClickListener(this);
+        mRE_shouhudizhi.setOnClickListener(this);
     }
 
     String name="";
@@ -102,6 +104,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_sharePrice= (TextView) rootView.findViewById(R.id.text_sharePrice);
         mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
         mRE_shezhi= (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
+        mRE_shouhudizhi= (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
     }
 
     @Override
@@ -115,7 +118,10 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
             case R.id.re_shezhi:
                 Intent intent=new Intent(getActivity(), SettingActivity.class);
                 getActivity().startActivity(intent);
-
+                break;
+            case R.id.re_dizhi:
+                Intent intent_addAddress=new Intent(getActivity(), AddAddressActivity.class);
+                getActivity().startActivity(intent_addAddress);
                 break;
         }
     }

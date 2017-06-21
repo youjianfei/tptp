@@ -8,7 +8,9 @@
         android:layout_height="30dp"
         android:text="请选择"
         android:textSize="14dp"
+        android:textColor="@color/blank"
         android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
         />
 
 </LinearLayout>
