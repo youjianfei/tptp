@@ -2,10 +2,6 @@ package com.kymart.shop.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,25 +123,26 @@ public class AddressActivity extends BaseActivityother {
             holder.mTextview_name.setText(bean.getConsignee());
             holder.mTextview_phonenumber.setText(bean.getMobile());
             holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getCountry()+"  "+bean.getTwon()+" "+bean.getAddress());
-           if(bean.getCity()!=0){
-               final viewHolder finalHolder = holder;
-               new  Volley_Utils(new Interface_volley_respose() {
-                   @Override
-                   public void onSuccesses(String respose) {
-                       CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
-                       LogUtils.LOG("ceshi",cityIDBean.getName());
-                       mList_address.get(position).getCityid().add(cityIDBean);
-                       finalHolder.mTextview_address.setText(cityIDBean.getName());
-                   }
+            if (bean.getProvince()!=0){
+                final viewHolder finalHolder1 = holder;
+                new  Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        LogUtils.LOG("ceshi",respose);
+                        CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                        LogUtils.LOG("ceshi",cityIDBean.getName());
+                        LogUtils.LOG("ceshi", mList_address.get(position).getCityid()+"");
+//                       mList_address.get(position).getCityid().add(););
+                        finalHolder1.mTextview_address.setText(cityIDBean.getName());
+                    }
 
-                   @Override
-                   public void onError(int error) {
+                    @Override
+                    public void onError(int error) {
 
-                   }
-               }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getCity(),mContext,0);
-           }
+                    }
+                }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getCity(),mContext,0);
 
-
+            }
 
             return convertView;
         }
