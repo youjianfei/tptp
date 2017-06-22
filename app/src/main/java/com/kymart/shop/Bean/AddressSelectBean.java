@@ -21,7 +21,7 @@ public class AddressSelectBean {
         return address_select;
     }
 
-    public class Address_selectEntity {
+    public static  class Address_selectEntity {
         /**
          * level : 1
          * parent_id : 0

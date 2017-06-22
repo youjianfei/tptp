@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/text_addAddress"
+        android:layout_below="@+id/REL_title"
         />
 
 </RelativeLayout>

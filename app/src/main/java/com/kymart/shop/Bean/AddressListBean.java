@@ -72,6 +72,15 @@ public class AddressListBean {
         private String zipcode;
         private String mobile;
         private int is_default;
+        private List<CityIDBean> cityid;
+
+        public List<CityIDBean> getCityid() {
+            return cityid;
+        }
+
+        public void setCityid(List<CityIDBean> cityid) {
+            this.cityid = cityid;
+        }
 
         public int getAddress_id() {
             return address_id;
@@ -176,5 +185,7 @@ public class AddressListBean {
         public void setIs_default(int is_default) {
             this.is_default = is_default;
         }
+
+
     }
 }
