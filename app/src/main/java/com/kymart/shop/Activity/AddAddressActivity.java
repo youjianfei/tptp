@@ -1,6 +1,7 @@
 package com.kymart.shop.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +40,14 @@ import java.util.Map;
 import cn.kymart.tptp.R;
 
 public class AddAddressActivity extends BaseActivityother {
-    TextView mTextview_area;
+    int ID=0;//地址id
+
+
+    TextView mTextview_title,mTextview_area;
     EditText mEdit_name,mEdit_phonenumber,mEdit_address,mEdit_zipcode;
 
     String name="",phonenumber="",address="",zipcode="";
-    ImageView mImage_select;
+    ImageView mImage_select,mImage_delete;
 
 
     PopupWindow mPopupWindow;
@@ -65,13 +69,40 @@ public class AddAddressActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        mImage_select.setSelected(true);
 
     }
     String one,two,three,four;
     @Override
     protected void initData() {
         map_addAddress=new HashMap();
+        if(ID!=0){
+           int i= Staticdata.mList_address.getIs_default();
+            if(i==1){
+                mImage_select.setSelected(true);
+            }else{
+                mImage_select.setSelected(false);
+            }
+            mEdit_name.setText(Staticdata.mList_address.getConsignee());
+            map_addAddress.put("consignee",Staticdata.mList_address.getConsignee());
+            mEdit_phonenumber.setText(Staticdata.mList_address.getMobile());
+            map_addAddress.put("mobile",Staticdata.mList_address.getMobile());
+            mEdit_address.setText(Staticdata.mList_address.getAddress());
+            map_addAddress.put("address",Staticdata.mList_address.getAddress());
+            mEdit_zipcode.setText(Staticdata.mList_address.getZipcode());
+            map_addAddress.put("zipcode",Staticdata.mList_address.getZipcode());
+            map_addAddress.put("user_id",Staticdata.userBean_static.getResult().getUser_id()+"");
+            map_addAddress.put("is_default",Staticdata.mList_address.getIs_default()+"");
+            String y=Staticdata.mList_address.getCityid().get(0).getName();
+            String e=Staticdata.mList_address.getCityid().get(1).getName();
+            String sa=Staticdata.mList_address.getCityid().get(2).getName();
+            String si=Staticdata.mList_address.getCityid().get(3).getName();
+            mTextview_area.setText(y+" "+e+" "+sa+" "+si);
+            map_addAddress.put("province",Staticdata.mList_address.getCityid().get(0).getId()+"");
+            map_addAddress.put("city",Staticdata.mList_address.getCityid().get(1).getId()+"");
+            map_addAddress.put("district",Staticdata.mList_address.getCityid().get(2).getId()+"");
+            map_addAddress.put("twon",Staticdata.mList_address.getCityid().get(3).getId()+"");
+            map_addAddress.put("address_id",Staticdata.mList_address.getAddress_id()+"");
+        }
         volley_utils=new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -125,10 +156,15 @@ public class AddAddressActivity extends BaseActivityother {
         mTextview_area.setOnClickListener(this);
         mButton_addAddress.setOnClickListener(this);
         mImage_select.setOnClickListener(this);
+        mImage_delete.setOnClickListener(this);
     }
 
     @Override
     protected void initView() {
+        Intent intent=getIntent();
+        ID=intent.getIntExtra("id",0);
+
+        mTextview_title= (TextView) findViewById(R.id.text_title);
         mLinearLayout_bottom= (LinearLayout) findViewById(R.id.activity_add_address);
         mTextview_area= (TextView) findViewById(R.id.text_area);
         mButton_addAddress= (Button) findViewById(R.id.button_addAddress);
@@ -137,6 +173,15 @@ public class AddAddressActivity extends BaseActivityother {
         mEdit_address= (EditText) findViewById(R.id.edit_address);
         mEdit_zipcode= (EditText) findViewById(R.id.edit_zipcode);
         mImage_select= (ImageView) findViewById(R.id.image_isdefault);
+        mImage_delete= (ImageView) findViewById(R.id.image_delate);
+        if(ID==0){
+            mTextview_title.setText("新增地址");
+            mImage_delete.setVisibility(View.INVISIBLE);
+        }else{
+            mTextview_title.setText("编辑地址");
+            mButton_addAddress.setText("完成");
+        }
+
     }
 
     @Override
@@ -190,6 +235,23 @@ public class AddAddressActivity extends BaseActivityother {
                 }
 
                 request_addAddress(map_addAddress);
+
+                break;
+            case R.id.image_delate:
+                Map map_del=new HashMap();
+                map_del.put("id",Staticdata.mList_address.getAddress_id()+"");
+                new Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        LogUtils.LOG("ceshi","删除成功");
+
+                    }
+
+                    @Override
+                    public void onError(int error) {
+
+                    }
+                }).postHttp(BaseUrl.BaseURL+BaseUrl.delAddress+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken(),AddAddressActivity.this,1,map_del);
 
                 break;
         }

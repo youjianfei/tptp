@@ -38,14 +38,14 @@ public class BaseUrl {
 
     public static String  userInfo="m=api&c=user&a=userInfo";//我的界面
     public static String  loginout="m=api&c=user&a=userInfo";//登出
-//    public static String  allOrder="m=Api&c=User&a=getOrderList";//我的订单 get
+//  public static String  allOrder="m=Api&c=User&a=getOrderList";//我的订单 get
     public static String  changeUserInfo="m=api&c=User&a=updateUserInfo&unique_id=";//设置 修改昵称
     public static String  changeUserPassword="m=api&c=User&a=password&unique_id=";//设置 修改密码
 
     public static String  addressList="m=api&c=user&a=getAddressList&unique_id=";//地址列表   +"&token="
     public static String  Address="m=api&c=other&a=region&level=";//选择地址————popwindow
     public static String  addAddress="m=api&c=user&a=addAddress&unique_id=";//添加地址    +"&token="
-    public static String  delAddress="m=api&c=user&a=del_address&unique_id=";//编辑地址  post   参数"id"  +"&token="
+    public static String  delAddress="m=api&c=user&a=del_address&unique_id=";//删除地址  post   参数"id"  +"&token="
     public static String  cityId="m=Api&c=other&a=getregion&id=";//根据城市id获得城市地址等信息
 
 }

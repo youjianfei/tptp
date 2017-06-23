@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,6 +53,15 @@ public class AddressActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         mTextview_addAddress.setOnClickListener(this);
+       mListview_address.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              Staticdata.mList_address =mList_address.get(position);
+               Intent  intent =new Intent(AddressActivity.this,AddAddressActivity.class);
+               intent .putExtra("id", Staticdata.mList_address.getAddress_id());
+               AddressActivity.this.startActivity(intent);
+           }
+       });
 
     }
 
@@ -122,9 +132,9 @@ public class AddressActivity extends BaseActivityother {
             }
             holder.mTextview_name.setText(bean.getConsignee());
             holder.mTextview_phonenumber.setText(bean.getMobile());
-            holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getDistrict()+"  "+bean.getTwon()+" "+bean.getAddress());
+//            holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getDistrict()+"  "+bean.getTwon()+" "+bean.getAddress());
 
-            if (bean.getProvince()!=0){
+            if (bean.getProvince()!=0){//请求网络 根据ID获得市县信息
                 final viewHolder finalHolder = holder;
                 final String[] address = {"","","",""};
                 new  Volley_Utils(new Interface_volley_respose() {
@@ -200,6 +210,8 @@ public class AddressActivity extends BaseActivityother {
                     }
                 }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getProvince(),mContext,0);
             }
+
+
 
             return convertView;
         }
