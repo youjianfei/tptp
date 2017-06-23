@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.kymart.shop.Adapter.BaseAdapter;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.AddressListBean;
@@ -18,10 +19,13 @@ import com.kymart.shop.Bean.CityIDBean;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.kymart.tptp.R;
 
@@ -30,7 +34,7 @@ public class AddressActivity extends BaseActivityother {
     ListView mListview_address;
     List<AddressListBean.ResultBean>mList_address;
     AddressAdapter mAdapter;
-
+    KProgressHUD mKProgressHUD;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_address;
@@ -38,6 +42,7 @@ public class AddressActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        mKProgressHUD = new KProgressHUD(this);
 
     }
 
@@ -82,6 +87,13 @@ public class AddressActivity extends BaseActivityother {
                 break;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestAddressList();
+    }
+
     private void requestAddressList() {
         String URL_addressList= BaseUrl.BaseURL+BaseUrl.addressList+ Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
         LogUtils.LOG("ceshi","addressList"+URL_addressList);
@@ -132,11 +144,22 @@ public class AddressActivity extends BaseActivityother {
             }
             holder.mTextview_name.setText(bean.getConsignee());
             holder.mTextview_phonenumber.setText(bean.getMobile());
+            if(bean.getIs_default()==1){
+                holder.mImageView_select.setSelected(true);
+            }else{
+
+                holder.mImageView_select.setSelected(false);
+            }
 //            holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getDistrict()+"  "+bean.getTwon()+" "+bean.getAddress());
 
             if (bean.getProvince()!=0){//请求网络 根据ID获得市县信息
                 final viewHolder finalHolder = holder;
                 final String[] address = {"","","",""};
+                mKProgressHUD.setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                        .setCancellable(true)
+                        .setAnimationSpeed(2)
+                        .setDimAmount(0.5f)
+                        .show();
                 new  Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
@@ -177,6 +200,7 @@ public class AddressActivity extends BaseActivityother {
                                                           mList_address.get(position).getCityid().add(cityIDBean);
                                                           address[3] =cityIDBean.getName();
                                                           finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+" "+address[2]+" "+address[3]);
+                                                          mKProgressHUD.dismiss();
                                                       }
 
                                                       @Override
@@ -184,6 +208,8 @@ public class AddressActivity extends BaseActivityother {
 
                                                       }
                                                   }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getTwon(),mContext,0);
+                                                }else {
+                                                    mKProgressHUD.dismiss();
                                                 }
 
                                             }
@@ -193,6 +219,8 @@ public class AddressActivity extends BaseActivityother {
 
                                             }
                                         }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getDistrict(),mContext,0);
+                                    }else {
+                                        mKProgressHUD.dismiss();
                                     }
                                 }
 
@@ -201,6 +229,8 @@ public class AddressActivity extends BaseActivityother {
 
                                 }
                             }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getCity(),mContext,0);
+                        }else {
+                            mKProgressHUD.dismiss();
                         }
                     }
 
@@ -210,6 +240,27 @@ public class AddressActivity extends BaseActivityother {
                     }
                 }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getProvince(),mContext,0);
             }
+            holder.mImageView_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LogUtils.LOG("ceshi","删除被点击了");
+                    Map mapdel=new HashMap();
+                    mapdel.put("id",bean.getAddress_id()+"");
+                    new  Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi","删除被点击了1"+respose);
+                            ToastUtils.showToast(mContext,"删除成功");
+                            requestAddressList();
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).postHttp(BaseUrl.BaseURL+BaseUrl.delAddress+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken(),mContext,1,mapdel);
+                }
+            });
 
 
 
