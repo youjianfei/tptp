@@ -48,7 +48,7 @@
             android:id="@+id/image_head"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@color/blank"
+            android:src="@color/white"
             />
         <TextView
             android:id="@+id/textview_accountname"
@@ -90,7 +90,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/yue"
+            android:src="@mipmap/mine_2"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -139,7 +139,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/jiangjin"
+            android:src="@mipmap/mine_4"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -186,7 +186,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
-        android:src="@mipmap/dingdan"
+        android:src="@mipmap/mine_3"
         android:layout_centerVertical="true"
         />
     <TextView
@@ -221,7 +221,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/zhanghumingxi"
+                android:src="@mipmap/mine_1"
                 android:layout_centerVertical="true"
                 />
             <TextView
@@ -257,7 +257,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/zhanghumingxi"
+            android:src="@mipmap/mine_2"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -293,7 +293,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/jiangjinmingxi"
+            android:src="@mipmap/mine_4"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -329,7 +329,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/jiangjinmingxi"
+                android:src="@mipmap/mine_5"
                 android:layout_centerVertical="true"
                 />
             <TextView
@@ -367,7 +367,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/dizhi"
+            android:src="@mipmap/mine_6"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -403,7 +403,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/dizhi"
+                android:src="@mipmap/mine_9"
                 android:layout_centerVertical="true"
                 />
             <TextView
@@ -439,7 +439,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/shezhi"
+                android:src="@mipmap/mine_10"
                 android:layout_centerVertical="true"
                 />
             <TextView
@@ -470,7 +470,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/shezhi"
+            android:src="@mipmap/mine_7"
             android:layout_centerVertical="true"
             />
         <TextView
