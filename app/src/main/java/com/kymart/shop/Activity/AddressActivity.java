@@ -106,8 +106,8 @@ public class AddressActivity extends BaseActivityother {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            viewHolder holder=null;
-            AddressListBean.ResultBean bean=mData.get(position);
+          viewHolder holder=null;
+            final AddressListBean.ResultBean bean=mData.get(position);
             if(convertView==null){
                 holder=new viewHolder();
                 convertView=mLayoutInflater.inflate(R.layout.item_list_address,null,false);
@@ -122,26 +122,83 @@ public class AddressActivity extends BaseActivityother {
             }
             holder.mTextview_name.setText(bean.getConsignee());
             holder.mTextview_phonenumber.setText(bean.getMobile());
-            holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getCountry()+"  "+bean.getTwon()+" "+bean.getAddress());
+            holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getDistrict()+"  "+bean.getTwon()+" "+bean.getAddress());
+
             if (bean.getProvince()!=0){
-                final viewHolder finalHolder1 = holder;
+                final viewHolder finalHolder = holder;
+                final String[] address = {"","","",""};
                 new  Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
+                        final List<CityIDBean> cityList=new ArrayList<>();
+                        mList_address.get(position).setCityid(cityList);
                         LogUtils.LOG("ceshi",respose);
                         CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
                         LogUtils.LOG("ceshi",cityIDBean.getName());
                         LogUtils.LOG("ceshi", mList_address.get(position).getCityid()+"");
-//                       mList_address.get(position).getCityid().add(););
-                        finalHolder1.mTextview_address.setText(cityIDBean.getName());
+                        mList_address.get(position).getCityid().add(cityIDBean);
+                        address[0] =cityIDBean.getName();
+                        finalHolder.mTextview_address.setText(address[0]);
+
+                        if(bean.getCity()!=0){
+                            new  Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                                    mList_address.get(position).getCityid().add(cityIDBean);
+                                    address[1] =cityIDBean.getName();
+                                    finalHolder.mTextview_address.setText(address[0]+" "+ address[1]);
+                                        LogUtils.LOG("ceshi",bean.getCountry()+"country");
+                                    if(bean.getDistrict()!=0){
+                                        new  Volley_Utils(new Interface_volley_respose() {
+                                            @Override
+                                            public void onSuccesses(String respose) {
+                                                LogUtils.LOG("ceshi","第三层请求");
+                                                CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                                                mList_address.get(position).getCityid().add(cityIDBean);
+                                                address[2] =cityIDBean.getName();
+                                                finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+" "+address[2]);
+
+                                                if(bean.getTwon()!=0){
+                                                  new  Volley_Utils(new Interface_volley_respose() {
+                                                      @Override
+                                                      public void onSuccesses(String respose) {
+                                                          CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                                                          mList_address.get(position).getCityid().add(cityIDBean);
+                                                          address[3] =cityIDBean.getName();
+                                                          finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+" "+address[2]+" "+address[3]);
+                                                      }
+
+                                                      @Override
+                                                      public void onError(int error) {
+
+                                                      }
+                                                  }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getTwon(),mContext,0);
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onError(int error) {
+
+                                            }
+                                        }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getDistrict(),mContext,0);
+                                    }
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getCity(),mContext,0);
+                        }
                     }
 
                     @Override
                     public void onError(int error) {
 
                     }
-                }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getCity(),mContext,0);
-
+                }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getProvince(),mContext,0);
             }
 
             return convertView;
