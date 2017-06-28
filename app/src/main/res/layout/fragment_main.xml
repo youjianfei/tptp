@@ -88,6 +88,7 @@
                 android:background="@color/white"
                 >
                 <LinearLayout
+                    android:id="@+id/Linear_dianpujie"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -110,6 +111,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/Linear_pinpaijie"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -130,6 +132,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/Linear_dingdan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.kymart.shop.Activity.EmptyActivity;
 import com.kymart.shop.Activity.GoodDetailsActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.MainActivity;
@@ -59,7 +60,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
     private CustomerScrollView customerScrollView;
     private Banner mViewpager;//顶部轮播图
-    private LinearLayout mLearlayout_personcenter,mLinearlayout_search;
+    private LinearLayout linear_dianpujie,linear_pinpaijie,linear_dingdan, mLearlayout_personcenter,mLinearlayout_search;
 
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
@@ -69,6 +70,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     private LinearLayout viewpager_dot_second;
     private LinearLayout viewpager_dot_third;
     private LinearLayout viewpager_dot_fouth;
+
 
 
 
@@ -90,6 +92,9 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         customerScrollView= (CustomerScrollView) rootview.findViewById(R.id.scrollview);
         mViewpager = (Banner) rootview.findViewById(R.id.banner);//顶部轮播图
         mLinearlayout_search= (LinearLayout) rootview.findViewById(R.id.linearlayout_search);
+        linear_dianpujie= (LinearLayout) rootview.findViewById(R.id.Linear_dianpujie);
+        linear_pinpaijie= (LinearLayout) rootview.findViewById(R.id.Linear_pinpaijie);
+        linear_dingdan= (LinearLayout) rootview.findViewById(R.id.Linear_dingdan);
         mLearlayout_personcenter= (LinearLayout) rootview.findViewById(R.id.linearlayout_main_personcenter);
 
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
@@ -126,6 +131,9 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         mTextviewLoadmore.setOnClickListener(this);
         mLearlayout_personcenter.setOnClickListener(this);
         mLinearlayout_search.setOnClickListener(this);
+        linear_dianpujie.setOnClickListener(this);
+        linear_pinpaijie.setOnClickListener(this);
+        linear_dingdan.setOnClickListener(this);
 
 
         mViewPager_item_first.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -432,9 +440,21 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
                 mMainactivity.onClick(getActivity().findViewById(R.id.rl_4));
                 break;
             case R.id.linearlayout_search:
-                Intent intent=new Intent(getActivity(), GoodsListActivity.class);
-                intent.putExtra("id",100);
-                getActivity().startActivity(intent);
+                Intent intent_search=new Intent(getActivity(), GoodsListActivity.class);
+                intent_search.putExtra("id",100);
+                getActivity().startActivity(intent_search);
+                break;
+            case R.id.Linear_dianpujie:
+                Intent intent_dianpujie=new Intent(getActivity(), EmptyActivity.class);
+                getActivity().startActivity(intent_dianpujie);
+                break;
+            case R.id.Linear_pinpaijie:
+                Intent intent_pinpaijie=new Intent(getActivity(), EmptyActivity.class);
+                getActivity().startActivity(intent_pinpaijie);
+                break;
+            case R.id.Linear_dingdan:
+                Intent intent_dingdan=new Intent(getActivity(), EmptyActivity.class);
+                getActivity().startActivity(intent_dingdan);
                 break;
 
         }

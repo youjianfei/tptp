@@ -35,9 +35,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_below="@+id/RelativeLayout_title"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
@@ -61,26 +62,30 @@
             android:layout_centerHorizontal="true"
             />
         <TextView
-            android:id="@+id/textview_tuiPerson"
+            android:id="@+id/textview_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:textColor="@color/white"
             android:text=""
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             />
+
+    </LinearLayout>
         <TextView
-            android:id="@+id/text_exit"
+            android:id="@+id/Textview_sell_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="注销登录"
-            android:textSize="12dp"
-            android:padding="5dp"
-            android:textColor="@color/LightGrey"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:text=""
             />
-    </LinearLayout>
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_yue"
         android:layout_width="match_parent"
@@ -422,6 +427,17 @@
             />
 
     </RelativeLayout>
+       <TextView
+           android:id="@+id/text_exit"
+           android:layout_width="match_parent"
+           android:layout_height="40dp"
+           android:text="退 出 登 录"
+           android:textSize="16dp"
+           android:layout_margin="10dp"
+           android:textColor="@color/white"
+           android:gravity="center"
+           android:background="@drawable/button_conner_5"
+           />
     </LinearLayout>
    </com.kymart.shop.CustomView.CustomerScrollView>
 </LinearLayout>

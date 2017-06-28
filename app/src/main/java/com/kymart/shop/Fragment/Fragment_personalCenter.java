@@ -40,7 +40,7 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 public class Fragment_personalCenter extends Fragment implements View.OnClickListener{
     View rootView;
     CircleImageView mImage_head;
-    TextView mTextview_name,mTextview_tuiPerson,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
+    TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
     RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_quanbudingdan;
 
     personCenterBean person;
@@ -79,7 +79,8 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
             name=person.getResult().getMobile();
         }
         mTextview_name.setText(person.getResult().getNickname());
-        mTextview_tuiPerson.setVisibility(View.GONE);
+        mTextview_ID.setText(person.getResult().getOperator_status()==0? "会员ID:"+(person.getResult().getUser_id() ):"会员ID:"+(person.getResult().getUser_id())+"(运营商)");
+        mTextview_sellState.setText(person.getResult().getSell_status()==0? "预备会员":"开心果");
         mTextview_blance.setText("￥"+person.getResult().getUser_money()+"");
         mTextview_sharePrice.setText("￥"+person.getResult().getBonus());
     }
@@ -103,7 +104,8 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     private void initview() {
         mImage_head= (CircleImageView) rootView.findViewById(R.id.image_head);
         mTextview_name= (TextView) rootView.findViewById(R.id.textview_accountname);
-        mTextview_tuiPerson= (TextView) rootView.findViewById(R.id.textview_tuiPerson);
+        mTextview_ID= (TextView) rootView.findViewById(R.id.textview_id);
+        mTextview_sellState= (TextView) rootView.findViewById(R.id.Textview_sell_status);
         mTextview_blance= (TextView) rootView.findViewById(R.id.text_balance);
         mTextview_sharePrice= (TextView) rootView.findViewById(R.id.text_sharePrice);
         mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
