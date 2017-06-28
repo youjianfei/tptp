@@ -7,13 +7,7 @@
     android:orientation="vertical"
     tools:context="com.kymart.shop.Activity.GoodDetailsActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_goodDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-
-    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_title"
@@ -58,6 +52,12 @@
 
 
     </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/fragment_goodDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+
+    </FrameLayout>
 
 </LinearLayout>

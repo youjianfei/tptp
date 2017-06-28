@@ -101,7 +101,7 @@ public class FindPasswordActivity extends BaseActivityother {
                 if(pasAgain.equals(password)&&!pasAgain.equals("")){
                     map.put("username",mob);
                     map.put("password",password);
-                    map.put("code",yanzhengma);
+                    map.put("check_code",yanzhengma);
 
                     requestRegister(map);
                 }else{
@@ -158,9 +158,22 @@ public class FindPasswordActivity extends BaseActivityother {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("status");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
+                    LogUtils.LOG("ceshi","找回成功"+respose);
+                    finish();
+                }else{
+                    ToastUtils.showToast(FindPasswordActivity.this,msg);
+                }
 
-                LogUtils.LOG("ceshi","找回成功"+respose);
-                finish();
 
             }
 
