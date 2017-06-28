@@ -47,5 +47,7 @@ public class BaseUrl {
     public static String  addAddress="m=api&c=user&a=addAddress&unique_id=";//添加地址    +"&token="
     public static String  delAddress="m=api&c=user&a=del_address&unique_id=";//删除地址  post   参数"id"  +"&token="
     public static String  cityId="m=Api&c=other&a=getregion&id=";//根据城市id获得城市地址等信息
+    public static String  money="m=api&c=User&a=money_list&unique_id=";//我的钱包明细
+    public static String  bonus="m=api&c=User&a=bonus_list&unique_id=";//我的奖金明细
 
 }

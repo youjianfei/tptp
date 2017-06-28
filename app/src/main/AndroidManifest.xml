@@ -52,10 +52,8 @@
         <activity android:name="com.kymart.shop.Activity.AllOrderActivity" />
         <activity android:name="com.kymart.shop.Activity.SettingActivity" />
         <activity android:name="com.kymart.shop.Activity.AddressActivity" />
-        <activity android:name="com.kymart.shop.Activity.AddAddressActivity">
-
-
-        </activity>
+        <activity android:name="com.kymart.shop.Activity.AddAddressActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.MoneyActivity"></activity>
     </application>
 
 </manifest>

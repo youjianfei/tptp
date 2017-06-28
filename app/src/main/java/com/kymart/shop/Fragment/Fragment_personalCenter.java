@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.kymart.shop.Activity.AddAddressActivity;
 import com.kymart.shop.Activity.AddressActivity;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Activity.MoneyActivity;
 import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.personCenterBean;
@@ -40,7 +41,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_tuiPerson,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_yue,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_quanbudingdan;
+    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_quanbudingdan;
 
     personCenterBean person;
 
@@ -66,6 +67,8 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_Exit.setOnClickListener(this);
         mRE_shezhi.setOnClickListener(this);
         mRE_shouhudizhi.setOnClickListener(this);
+        mRE_wodeqianbao.setOnClickListener(this);
+        mRE_jiangjin.setOnClickListener(this);
     }
 
     String name="";
@@ -106,6 +109,8 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
         mRE_shezhi= (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
         mRE_shouhudizhi= (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
+        mRE_wodeqianbao= (RelativeLayout) rootView.findViewById(R.id.re_wodeqianbao);
+        mRE_jiangjin= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinmingxi);
     }
 
     @Override
@@ -123,6 +128,18 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
             case R.id.re_dizhi:
                 Intent intent_addAddress=new Intent(getActivity(), AddressActivity.class);
                 getActivity().startActivity(intent_addAddress);
+                break;
+            case R.id.re_wodeqianbao:
+                Intent intent_money= new Intent(getActivity(), MoneyActivity.class);
+                intent_money.putExtra("yue","￥"+person.getResult().getUser_money());
+                intent_money.putExtra("id",1);
+                getActivity().startActivity(intent_money);
+                break;
+            case R.id.re_jiangjinmingxi:
+                Intent intent_bonus= new Intent(getActivity(), MoneyActivity.class);
+                intent_bonus.putExtra("yue","￥"+person.getResult().getBonus());
+                intent_bonus.putExtra("id",2);
+                getActivity().startActivity(intent_bonus);
                 break;
         }
     }
