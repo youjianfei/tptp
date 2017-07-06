@@ -3,6 +3,7 @@ package com.kymart.shop.AppStaticData;
 import com.kymart.shop.Bean.AddressListBean;
 import com.kymart.shop.Bean.BuyGoodBean;
 import com.kymart.shop.Bean.UserBean;
+import com.kymart.shop.Bean.personCenterBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Staticdata {
 
     public static BuyGoodBean bean= new BuyGoodBean();
     public static AddressListBean.ResultBean mList_address= new AddressListBean.ResultBean();
+    public static personCenterBean personCenterBean= new personCenterBean();
 
 
 
