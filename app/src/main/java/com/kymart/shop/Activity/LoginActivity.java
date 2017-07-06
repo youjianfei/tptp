@@ -134,7 +134,6 @@ public class LoginActivity extends BaseActivityother {
                 }
 
                 requestlogin(map);
-
             }
 
             @Override

@@ -54,7 +54,8 @@
         <activity android:name="com.kymart.shop.Activity.AddressActivity" />
         <activity android:name="com.kymart.shop.Activity.AddAddressActivity" />
         <activity android:name="com.kymart.shop.Activity.MoneyActivity" />
-        <activity android:name="com.kymart.shop.Activity.EmptyActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.EmptyActivity" />
+        <activity android:name="com.kymart.shop.Activity.QRcodeActivity"></activity>
     </application>
 
 </manifest>

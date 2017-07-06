@@ -15,6 +15,7 @@ import com.kymart.shop.Activity.AddAddressActivity;
 import com.kymart.shop.Activity.AddressActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.Activity.MoneyActivity;
+import com.kymart.shop.Activity.QRcodeActivity;
 import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.personCenterBean;
@@ -41,7 +42,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_quanbudingdan;
+    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode;
 
     personCenterBean person;
 
@@ -69,6 +70,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_shouhudizhi.setOnClickListener(this);
         mRE_wodeqianbao.setOnClickListener(this);
         mRE_jiangjin.setOnClickListener(this);
+        mRE_QRcode.setOnClickListener(this);
     }
 
     String name="";
@@ -113,6 +115,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_shouhudizhi= (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
         mRE_wodeqianbao= (RelativeLayout) rootView.findViewById(R.id.re_wodeqianbao);
         mRE_jiangjin= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinmingxi);
+        mRE_QRcode=(RelativeLayout)rootView.findViewById(R.id.re_erweima);
     }
 
     @Override
@@ -143,6 +146,9 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 intent_bonus.putExtra("id",2);
                 getActivity().startActivity(intent_bonus);
                 break;
+            case R.id.re_erweima:
+                Intent intent_QRcode=new Intent(getActivity(), QRcodeActivity.class);
+                getActivity().startActivity(intent_QRcode);
         }
     }
 

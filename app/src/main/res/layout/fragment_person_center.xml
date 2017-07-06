@@ -367,7 +367,6 @@
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/re_erweima"
-
             android:layout_width="match_parent"
             android:layout_height="50dp"
             >
@@ -382,7 +381,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:text="二维码"
+                android:text="推广二维码"
                 android:layout_marginLeft="55dp"
                 android:layout_centerVertical="true"
                 />

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_qrcode"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kymart.shop.Activity.QRcodeActivity">
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二维码"
+            android:textSize="@dimen/top_title"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+    <com.kymart.shop.CustomView.CustomerScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/RelativeLayout_title"
+        >
+        <RelativeLayout
+            android:id="@+id/REL_QRcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/REL_title"
+            >
+
+
+        </RelativeLayout>
+    </com.kymart.shop.CustomView.CustomerScrollView>
+
+
+
+</RelativeLayout>
