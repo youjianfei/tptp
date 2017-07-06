@@ -35,14 +35,7 @@ public class QRcodeActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        int width = SizeUtils.getScreenWidthPx(this);
-        int height = (int) (width * 1.77);
-        ImageView imageView=new ImageView(this);
-        LogUtils.LOG("ceshi",BaseUrl.BaseURL+BaseUrl.QR_code+ Staticdata.userBean_static.getResult().getToken());
-        Glide.with(this).load(BaseUrl.BaseURL+BaseUrl.QR_code+ Staticdata.userBean_static.getResult().getToken()).into(imageView);
-        LinearLayout.LayoutParams mLayoutParams = new LinearLayout.LayoutParams(
-                width, height);
-        mainREL.addView(imageView, mLayoutParams);
+
     }
 
     @Override
@@ -52,6 +45,7 @@ public class QRcodeActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        requestIMG();
         mainREL= (RelativeLayout) findViewById(R.id.REL_QRcode);
 
     }
@@ -69,8 +63,13 @@ public class QRcodeActivity extends BaseActivityother {
                    e.printStackTrace();
                }
 
-
-
+               int width = SizeUtils.getScreenWidthPx(QRcodeActivity.this);
+               int height = (int) (width * 1.77);
+               ImageView imageView=new ImageView(QRcodeActivity.this);
+               Glide.with(QRcodeActivity.this).load(BaseUrl.BasegoodlistURL+URL_QRcode).into(imageView);
+               LinearLayout.LayoutParams mLayoutParams = new LinearLayout.LayoutParams(
+                       width, height);
+               mainREL.addView(imageView, mLayoutParams);
            }
 
            @Override

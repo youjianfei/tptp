@@ -8,14 +8,14 @@ public class BaseUrl {
     //https://kymart.cn/  正式接口
 
 
-//    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
-//    public  static String BaseURL="http://test.kymart.cn/index.php?";// 主接口——测试接口
-//    public  static String BasegoodlistURL="http://test.kymart.cn";//商品列表主接口——测试接口
+    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
+    public  static String BaseURL="http://test.kymart.cn/index.php?";// 主接口——测试接口
+    public  static String BasegoodlistURL="http://test.kymart.cn";//商品列表主接口——测试接口
 
 ////
-    public  static String checkUpdate="https://kymart.cn/api/index/checkupdate";//强制更新——正式接口
-    public  static String BaseURL="https://kymart.cn/index.php?";//主接口——测试接口正式接口
-    public  static String BasegoodlistURL="https://kymart.cn";//商品列表主接口——测试接口
+//    public  static String checkUpdate="https://kymart.cn/api/index/checkupdate";//强制更新——正式接口
+//    public  static String BaseURL="https://kymart.cn/index.php?";//主接口——测试接口正式接口
+//    public  static String BasegoodlistURL="https://kymart.cn";//商品列表主接口——测试接口
 
 
     public  static String mainURL="m=api&c=Index&a=homePage";
