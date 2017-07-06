@@ -159,8 +159,22 @@ public class RegisteredActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
 
-                LogUtils.LOG("ceshi","注册成功"+respose);
-                finish();
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("status");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
+                    LogUtils.LOG("ceshi","zhuce成功"+respose);
+                    finish();
+                }else{
+
+                    ToastUtils.showToast(RegisteredActivity.this,msg);
+                }
 
             }
 

@@ -10,8 +10,12 @@ import android.widget.LinearLayout;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
+import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -141,8 +145,22 @@ public class SettingActivity extends BaseActivityother {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose);
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("status");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
+                    ToastUtils.showToast(SettingActivity.this,"密码修改成功！");
+                }else{
+                    ToastUtils.showToast(SettingActivity.this,msg);
+                }
 
-                ToastUtils.showToast(SettingActivity.this,"密码修改成功！");
             }
 
             @Override
