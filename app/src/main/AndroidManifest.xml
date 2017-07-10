@@ -35,7 +35,9 @@
         </activity>
         <activity android:name="com.kymart.shop.Activity.GoodsListActivity" />
         <activity android:name="com.kymart.shop.Activity.GoodDetailsActivity" />
-        <activity android:name="com.kymart.shop.Activity.LoginActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name="com.kymart.shop.Activity.LoginActivity"
+            android:launchMode="singleTop" />
         <activity android:name="com.kymart.shop.Activity.RegisteredActivity" />
 
         <provider
@@ -56,7 +58,9 @@
         <activity android:name="com.kymart.shop.Activity.MoneyActivity" />
         <activity android:name="com.kymart.shop.Activity.EmptyActivity" />
         <activity android:name="com.kymart.shop.Activity.QRcodeActivity" />
-        <activity android:name="com.kymart.shop.Activity.CashoutActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.CashoutActivity" />
+        <activity android:name="com.kymart.shop.Activity.JiangZYActivity" />
+        <activity android:name="com.kymart.shop.Activity.ShareFriendsActivity"></activity>
     </application>
 
 </manifest>

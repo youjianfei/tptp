@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_share_friends"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.kymart.shop.Activity.ShareFriendsActivity">
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red"
+        >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的分享好友"
+            android:textSize="@dimen/top_title"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+    <com.kymart.shop.CustomView.CustomerScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:id="@+id/linearlayout_head"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_below="@+id/RelativeLayout_title"
+                android:gravity="center"
+                android:background="@mipmap/userbg"
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_head"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@mipmap/user68"
+                    />
+                <TextView
+                    android:id="@+id/textview_accountname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:text="姓名"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    />
+                <TextView
+                    android:id="@+id/textview_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:text="会员ID"
+                    android:layout_marginTop="8dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    />
+
+            </LinearLayout>
+            <com.kymart.shop.CustomView.MyListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.kymart.shop.CustomView.MyListView>
+
+        </LinearLayout>
+    </com.kymart.shop.CustomView.CustomerScrollView>
+
+</RelativeLayout>

@@ -50,5 +50,6 @@ public class BaseUrl {
     public static String  money="m=api&c=User&a=money_list&unique_id=";//我的钱包明细
     public static String  bonus="m=api&c=User&a=bonus_list&unique_id=";//我的奖金明细
     public static String  QR_code="m=api&c=User&a=qr_code&token=";//二维码
+    public static String  JiangJZY="m=api&c=User&a=changebonus&unique_id=";//奖金转余额  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
 
 }

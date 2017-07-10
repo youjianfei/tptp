@@ -1,13 +1,18 @@
 package com.kymart.shop.Activity;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Size;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
@@ -17,6 +22,8 @@ import com.kymart.shop.Utils.Volley_Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 import cn.kymart.tptp.R;
 
@@ -65,8 +72,20 @@ public class QRcodeActivity extends BaseActivityother {
 
                int width = SizeUtils.getScreenWidthPx(QRcodeActivity.this);
                int height = (int) (width * 1.77);
-               ImageView imageView=new ImageView(QRcodeActivity.this);
+               final ImageView imageView=new ImageView(QRcodeActivity.this);
                Glide.with(QRcodeActivity.this).load(BaseUrl.BasegoodlistURL+URL_QRcode).into(imageView);
+               imageView.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       Bitmap bitmap = imageView.getDrawingCache();
+                       if(bitmap!=null){
+                           LogUtils.LOG("ceshi","图片不为空");
+                           MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "title", "description");
+                       }
+                       LogUtils.LOG("ceshi","图片为空");
+                   }
+               });
+
                LinearLayout.LayoutParams mLayoutParams = new LinearLayout.LayoutParams(
                        width, height);
                mainREL.addView(imageView, mLayoutParams);

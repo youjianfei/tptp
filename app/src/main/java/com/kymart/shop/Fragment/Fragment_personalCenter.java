@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.kymart.shop.Activity.AddAddressActivity;
 import com.kymart.shop.Activity.AddressActivity;
 import com.kymart.shop.Activity.CashoutActivity;
+import com.kymart.shop.Activity.JiangZYActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.Activity.MoneyActivity;
 import com.kymart.shop.Activity.QRcodeActivity;
@@ -43,7 +44,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian;
+    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue;
 
     personCenterBean person;
 
@@ -73,6 +74,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_jiangjin.setOnClickListener(this);
         mRE_QRcode.setOnClickListener(this);
         mRE_shenqingtixian.setOnClickListener(this);
+        mRE_jiangjinzhuanyue.setOnClickListener(this);
     }
 
     String name="";
@@ -120,6 +122,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_jiangjin= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinmingxi);
         mRE_QRcode=(RelativeLayout)rootView.findViewById(R.id.re_erweima);
         mRE_shenqingtixian= (RelativeLayout) rootView.findViewById(R.id.re_shenqingtixian);
+        mRE_jiangjinzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinzhuanyue);
     }
 
     @Override
@@ -153,9 +156,15 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
             case R.id.re_erweima:
                 Intent intent_QRcode=new Intent(getActivity(), QRcodeActivity.class);
                 getActivity().startActivity(intent_QRcode);
+                break;
             case R.id.re_shenqingtixian:
                 Intent intent_Cashout=new Intent(getActivity(), CashoutActivity.class);
                 getActivity().startActivity(intent_Cashout);
+                break;
+            case R.id.re_jiangjinzhuanyue:
+                Intent intent_JiangJZyue=new Intent(getActivity(), JiangZYActivity.class);
+                getActivity().startActivity(intent_JiangJZyue);
+                break;
         }
     }
 

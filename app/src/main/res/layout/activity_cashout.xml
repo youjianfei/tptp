@@ -290,20 +290,36 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/DarkGray"
                     />
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="3"
-                    android:hint="请输入验证码"
-                    android:textSize="15dp"
-                    android:textColorHint="@color/LightGrey"
-                    android:text=""
-                    android:textColor="@color/blank"
-                    android:padding="5dp"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:background="@drawable/main_serchbackgroud"
-                    />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="3"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="3"
+                            android:hint="请输入验证码"
+                            android:textSize="15dp"
+                            android:textColorHint="@color/LightGrey"
+                            android:text=""
+                            android:textColor="@color/blank"
+                            android:padding="5dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:background="@drawable/main_serchbackgroud"
+                            />
+                        <ImageView
+                            android:id="@+id/image_code"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="6dp"
+                            android:background="@color/blank"
+                            />
+                    </LinearLayout>
 
             </LinearLayout>
                 <Button
@@ -314,14 +330,13 @@
                     android:textSize="15dp"
                     android:textColor="@color/white"
                     />
-
+                <com.kymart.shop.CustomView.MyListView
+                    android:id="@+id/listview_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
             </LinearLayout>
-
-
-
         </RelativeLayout>
-
-
     </com.kymart.shop.CustomView.CustomerScrollView>
 
 
