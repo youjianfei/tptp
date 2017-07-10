@@ -47,7 +47,7 @@ public class JiangZYActivity extends BaseActivityother {
     protected void initData() {
         mTextview_name.setText(Staticdata.personCenterBean.getResult().getNickname());
         mTextview_ID.setText(Staticdata.personCenterBean.getResult().getOperator_status()==0? "会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id() ):"会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id())+"(运营商)");
-        mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getUser_money());
+        mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus());
         mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
         LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
 
@@ -120,8 +120,8 @@ public class JiangZYActivity extends BaseActivityother {
                         return;
                     }else{
                         ToastUtils.showToast(JiangZYActivity.this,"奖金转余额成功");
+                        finish();
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

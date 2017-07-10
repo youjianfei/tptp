@@ -49,6 +49,8 @@ public class BaseUrl {
     public static String  cityId="m=Api&c=other&a=getregion&id=";//根据城市id获得城市地址等信息
     public static String  money="m=api&c=User&a=money_list&unique_id=";//我的钱包明细
     public static String  bonus="m=api&c=User&a=bonus_list&unique_id=";//我的奖金明细
+    public static String  cashout="m=api&c=User&a=withdrawals&unique_id=";//  + &token=\(access_token())    申请提现  post = ["changetype":info?.changetype,"money":info?.money,"bank_name":info?.bank_name,"bank_card":info?.bank_card,"realname":info?.realname]
+    public static String  cashoutlist="m=api&c=User&a=withdrawals_list&unique_id=";//  + &token=\(access_token())    提现记录
     public static String  QR_code="m=api&c=User&a=qr_code&token=";//二维码
     public static String  JiangJZY="m=api&c=User&a=changebonus&unique_id=";//奖金转余额  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
     public static String  shareFriend="m=api&c=User&a=lower_list&level=1&token=";//我的分享好友   "\(basePath)m=api&c=User&a=lower_list&level=1&token=\(access_token())&p=\(page)"
