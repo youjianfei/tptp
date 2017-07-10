@@ -166,9 +166,14 @@ public class CashoutActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","提现记录"+respose);
                 if(page==1){
                     mListData.clear();
+
                 }
                 mListData.addAll(new Gson().fromJson(respose,CashoutListBean.class).getResult());
                 mAdapter.notifyDataSetChanged();
+                editText_money.setText(mListData.get(0).getMoney());
+                edit_bank.setText(mListData.get(0).getBank_name());
+                edit_bannumber.setText(mListData.get(0).getBank_card());
+                edit_name.setText(mListData.get(0).getRealname());
             }
 
             @Override
@@ -193,6 +198,7 @@ public class CashoutActivity extends BaseActivityother {
                 }
 
                 request_listview(1);
+
 
             }
 
