@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Activity.OrderActivity;
 import com.kymart.shop.Adapter.BaseAdapter;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.ShopCarBean;
@@ -71,6 +72,7 @@ public class Fragment_shopCar  extends Fragment{
     }
     Map map;
     private void initListener() {
+
         mButton_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +83,13 @@ public class Fragment_shopCar  extends Fragment{
                     getActivity().startActivity(intend);
 
                 }
+            }
+        });
+        mTextview_jiesuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_jiesuan=new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent_jiesuan);
             }
         });
     }
@@ -251,7 +260,7 @@ public class Fragment_shopCar  extends Fragment{
             holder.mText_goodName.setText(bean.getGoods_name());
             holder.mTextview_goodPrice.setText("￥"+bean.getGoods_price());
             holder.mTextview_goodProperty.setText(bean.getSpec_key_name());
-            Glide.with(mContext).load("http://test.kymart.cn/index.php?"+"m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id="+bean.getGoods_id()).into( holder.mImage_goodPIC);
+            Glide.with(mContext).load(BaseUrl.Baseimage+bean.getGoods_id()).into( holder.mImage_goodPIC);
             LogUtils.LOG("ceshi",bean.getGoods_id()+"");
             holder.mImage_delet.setOnClickListener(new View.OnClickListener() {//点击删除
                 @Override

@@ -60,7 +60,8 @@
         <activity android:name="com.kymart.shop.Activity.QRcodeActivity" />
         <activity android:name="com.kymart.shop.Activity.CashoutActivity" />
         <activity android:name="com.kymart.shop.Activity.JiangZYActivity" />
-        <activity android:name="com.kymart.shop.Activity.ShareFriendsActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.ShareFriendsActivity" />
+        <activity android:name="com.kymart.shop.Activity.OrderActivity"></activity>
     </application>
 
 </manifest>

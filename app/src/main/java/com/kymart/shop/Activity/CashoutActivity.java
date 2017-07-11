@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.kymart.shop.Adapter.Adapter_CashoutList;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.CashoutListBean;
