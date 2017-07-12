@@ -27,7 +27,11 @@ import com.kymart.shop.CustomView.MyExpandableListView;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URL;
@@ -113,14 +117,48 @@ public class OrderActivity extends BaseActivityother {
                 break;
             case R.id.button_useyue:
                 //点击使用余额按钮
-
+                String yue=edit_yue.getText()+"";
+                if(yue.equals("")){
+                    ToastUtils.showToast(this,"请输入金额");
+                    mapOrderSubmit.put("user_money",0+"");
+                    mapOrderSubmit.put("pay_points",0+"");
+                    return;
+                }else{
+                    mapOrderSubmit.put("user_money",yue);
+                    mapOrderSubmit.put("pay_points",0+"");
+                    requestOrderPrice(0);
+                }
                 break;
             case R.id.button_jifen:
                 //点击使用积分按钮
-
+                String jifen=edit_jifen.getText()+"";
+                if(jifen.equals("")){
+                    ToastUtils.showToast(this,"请输入积分");
+                    mapOrderSubmit.put("user_money",0+"");
+                    mapOrderSubmit.put("pay_points",0+"");
+                    return;
+                }else{
+                    mapOrderSubmit.put("user_money",0+"");
+                    mapOrderSubmit.put("pay_points",jifen+"");
+                    requestOrderPrice(0);
+                }
                 break;
             case R.id.button_cobmit:
                 //点击提交订单按钮
+                String yue_=edit_yue.getText()+"";
+                if(yue_.equals("")){
+                    mapOrderSubmit.put("user_money",0+"");
+                }else{
+                    mapOrderSubmit.put("user_money",yue_);
+                }
+                String jifen_=edit_jifen.getText()+"";
+                if(jifen_.equals("")){
+                    mapOrderSubmit.put("pay_points",0+"");
+                }else{
+                    mapOrderSubmit.put("pay_points",jifen_+"");
+
+                }
+                requestOrderPrice(1);
 
                 break;
         }
@@ -131,6 +169,20 @@ public class OrderActivity extends BaseActivityother {
        new Volley_Utils(new Interface_volley_respose() {
            @Override
            public void onSuccesses(String respose) {
+               JSONObject object = null;
+               try {
+                   object = new JSONObject(respose);
+                   int status = (Integer) object.get("status");
+                   String  msg = (String) object.get("msg");
+                   if(status!=1){
+                       ToastUtils.showToast(OrderActivity.this,msg);
+                       return;
+                   }
+               } catch (JSONException e) {
+                   e.printStackTrace();
+               }
+
+
                LogUtils.LOG("ceshi","生成订单"+respose);
                orderBean=new Gson().fromJson(respose,OrderBean.class);
                if(orderBean.getStatus()!=1){
@@ -245,7 +297,7 @@ public class OrderActivity extends BaseActivityother {
                edit_jifen.setHint("可以使用的积分为"+orderBean.getResult().getUserInfo().getPay_points());
 
 
-               requestOrderPrice();
+               requestOrderPrice(0);
            }
 
            @Override
@@ -257,9 +309,15 @@ public class OrderActivity extends BaseActivityother {
     Map mapOrderSubmit=new HashMap();
     cart_form_data  upJson=new cart_form_data();//对象转JSON
 
-    void requestOrderPrice(){
+    void requestOrderPrice(final int act){
         mapOrderSubmit.put("user_id",orderBean.getResult().getUserInfo().getUser_id()+"");
-        mapOrderSubmit.put("act","order_price");
+        if (act == 0) {
+            mapOrderSubmit.put("act","order_price");
+
+        }else{
+            mapOrderSubmit.put("act","submit_order");
+        }
+
         mapOrderSubmit.put("address_id",orderBean.getResult().getAddressList().getAddress_id()+"");
         HashMap map_Shipping_code=new HashMap();
         for(int i=0;i<orderBean.getResult().getStoreList().size();i++){
@@ -285,15 +343,50 @@ public class OrderActivity extends BaseActivityother {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi","订单金额信息"+respose);
-                oederpriceBean=new  Gson().fromJson(respose,OrderPriceBean.class);
-                shangpinzonge.setText("商品总额：￥"+oederpriceBean.getResult().getGoodsFee()+"元");
-                peisongfeiyong.setText("配送费用：￥"+oederpriceBean.getResult().getPostFee()+"元");
-                useyouhuiquan.setText("使用优惠券：￥"+oederpriceBean.getResult().getCouponFee()+"元");
-                usejifen.setText("使用积分：￥"+oederpriceBean.getResult().getPointsFee()+"元");
-                useyue.setText("使用余额：￥"+oederpriceBean.getResult().getBalance()+"元");
-                youhuihuodong.setText("优惠活动：￥"+oederpriceBean.getResult().getOrder_prom_amount()+"元");
-                orderprice.setText("应付金额：￥"+oederpriceBean.getResult().getPayables()+"元");
+                if(act==0){//金额变动
+                    JSONObject object = null;
+                    try {
+                        object = new JSONObject(respose);
+                        int status = (Integer) object.get("status");
+                        String  msg = (String) object.get("msg");
+                        if(status==1){
+                            LogUtils.LOG("ceshi","订单金额信息"+respose);
+                            oederpriceBean=new  Gson().fromJson(respose,OrderPriceBean.class);
+                            shangpinzonge.setText("商品总额：￥"+oederpriceBean.getResult().getGoodsFee()+"元");
+                            peisongfeiyong.setText("配送费用：￥"+oederpriceBean.getResult().getPostFee()+"元");
+                            useyouhuiquan.setText("使用优惠券：￥"+oederpriceBean.getResult().getCouponFee()+"元");
+                            usejifen.setText("使用积分：￥"+oederpriceBean.getResult().getPointsFee()+"元");
+                            useyue.setText("使用余额：￥"+oederpriceBean.getResult().getBalance()+"元");
+                            youhuihuodong.setText("优惠活动：￥"+oederpriceBean.getResult().getOrder_prom_amount()+"元");
+                            orderprice.setText("应付金额：￥"+oederpriceBean.getResult().getPayables()+"元");
+                        }else{
+                            ToastUtils.showToast(OrderActivity.this,msg);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{//提交订单
+                    JSONObject object = null;
+                    try {
+                        object = new JSONObject(respose);
+                        int status = (Integer) object.get("status");
+                        String  msg = (String) object.get("msg");
+                        String result=(String)object.get("msg");
+                        if(status==1){
+                            ToastUtils.showToast(OrderActivity.this,msg);
+                            LogUtils.LOG("ceshi","订单金额号码"+result);
+                        }else{
+                            ToastUtils.showToast(OrderActivity.this,msg);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
             }
 
             @Override
