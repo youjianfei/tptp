@@ -38,6 +38,7 @@ import java.util.Map;
 import cn.kymart.tptp.R;
 
 public class PayActivity extends BaseActivityother {
+    private IWXAPI api;
     String  orderNumber="",price="";
     TextView mTextview_number,mTextview_price;
 
@@ -85,6 +86,7 @@ public class PayActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        api = WXAPIFactory.createWXAPI(this, "wxcf54c829295655ba");
         Intent intent=getIntent();
         orderNumber=intent.getStringExtra("ordernumber");
         price=intent.getStringExtra("price");
@@ -180,9 +182,8 @@ public class PayActivity extends BaseActivityother {
                 String timeStamp=weBean.getResult().getTimestamp()+"";
                 String prepayid=weBean.getResult().getPrepayid();
                 String sign=weBean.getResult().getSign();
-                final IWXAPI msgApi =WXAPIFactory.createWXAPI(PayActivity.this, null);
-                msgApi.unregisterApp();
-                msgApi.registerApp(appid);// 将该app注册到微信
+//                final IWXAPI msgApi =WXAPIFactory.createWXAPI(PayActivity.this, null);
+//                msgApi.registerApp(appid);// 将该app注册到微信
                 PayReq request = new PayReq();
                 request.appId =appid ;
                 request.partnerId = partnerid;
@@ -191,7 +192,7 @@ public class PayActivity extends BaseActivityother {
                 request.nonceStr= noncestr;
                 request.timeStamp= timeStamp;
                 request.sign=sign;
-                msgApi.sendReq(request);
+                api.sendReq(request);
             }
 
             @Override
@@ -202,13 +203,6 @@ public class PayActivity extends BaseActivityother {
 
 
     }
-
-    public void onResp(BaseResp resp){
-        if(resp.getType()==ConstantsAPI.COMMAND_PAY_BY_WX){
-            Log.d("ceshi","onPayFinish,errCode="+resp.errCode);
-        }
-    }
-
 
     void alipay_PAY(String info){//调用支付宝
         final String orderInfo = info;   // 订单信息

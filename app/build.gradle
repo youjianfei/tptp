@@ -16,6 +16,19 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {//友盟要用到
+        debug {
+            storeFile file('keystore.keystore')
+            storePassword "123456"
+            keyAlias "kymt"
+            keyPassword "123456"
+        }
     }
 }
 

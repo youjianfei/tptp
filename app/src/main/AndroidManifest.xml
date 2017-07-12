@@ -81,7 +81,7 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="true"
             android:screenOrientation="behind"
-
+            android:launchMode="singleTop"
             />
     </application>
 
