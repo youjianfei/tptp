@@ -371,22 +371,20 @@ public class OrderActivity extends BaseActivityother {
                         object = new JSONObject(respose);
                         int status = (Integer) object.get("status");
                         String  msg = (String) object.get("msg");
-                        String result=(String)object.get("msg");
                         if(status==1){
+                            String result=(String)object.get("result");
                             ToastUtils.showToast(OrderActivity.this,msg);
                             LogUtils.LOG("ceshi","订单金额号码"+result);
+                            Map map_orderNumber=new HashMap();
+                            map_orderNumber.put("master_order_sn",result+"");
+                            requestOrderNumber(map_orderNumber,result);
                         }else{
                             ToastUtils.showToast(OrderActivity.this,msg);
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
-
-
             }
 
             @Override
@@ -394,7 +392,39 @@ public class OrderActivity extends BaseActivityother {
 
             }
         }).postHttp(URL,OrderActivity.this,1,mapOrderSubmit);
+    }
 
+    void requestOrderNumber(Map map, final String price){//提交订单号码跳转付款界面
+        String URL=BaseUrl.BaseURL+BaseUrl.ordernumber+Staticdata.userBean_static.getResult().getToken();
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","提交订单编号"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    int status = (Integer) object.get("status");
+                    String  msg = (String) object.get("msg");
+                    String result=object.get("result")+"";
+                    if(status!=1){
+                        ToastUtils.showToast(OrderActivity.this,msg);
+                        return;
+                    }
+                    Intent intent_pay=new Intent(OrderActivity.this,PayActivity.class);
+                    intent_pay.putExtra("ordernumber",price+"");
+                    intent_pay.putExtra("price",""+result);
+                    startActivity(intent_pay);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
 
     }
 

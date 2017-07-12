@@ -59,6 +59,7 @@ public class BaseUrl {
     public static String  shareFriend="m=api&c=User&a=lower_list&level=1&token=";//我的分享好友   "\(basePath)m=api&c=User&a=lower_list&level=1&token=\(access_token())&p=\(page)"
     public static String  order="m=Api&c=Cart&a=cart2&token=";//生成订单   m=Api&c=Cart&a=cart2&token=\(access_token())"
     public static String  orderprice="m=Api&c=Cart&a=cart3&token=";//订单金额信息    return "\(basePath)m=Api&c=Cart&a=cart3&token=\(access_token())"
+    public static String  ordernumber="m=Api&c=Cart&a=cart4&token=";//提交订单号码  "\(basePath)m=Api&c=Cart&a=cart4&token=\(access_token())"
 
 
 
