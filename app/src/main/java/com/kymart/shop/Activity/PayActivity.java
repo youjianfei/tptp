@@ -1,9 +1,11 @@
 package com.kymart.shop.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,13 +14,20 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.alipay.sdk.app.Result;
+import com.google.gson.Gson;
 import com.kymart.shop.AppStaticData.Staticdata;
+import com.kymart.shop.Bean.WechatPayBean;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 import com.kymart.shop.class_.PayResult;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,20 +129,19 @@ public class PayActivity extends BaseActivityother {
                 map_pay.clear();
                 if(pay==1){
                     map_pay.put("order_sn",orderNumber);
-
+                    requestAlipayPay(map_pay);
                 }else{
                     map_pay.put("master_order_sn",orderNumber);
+                    requestWechatPay(map_pay);
                 }
-                requestPay(map_pay,pay);
                 break;
         }
     }
-    void  requestPay(Map map, final int pay){
+    void  requestAlipayPay(Map map){//请求支付宝订单
         String URL= BaseUrl.BaseURL+BaseUrl.alipayPay+ Staticdata.userBean_static.getResult().getToken();
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                if(pay==1){
                     LogUtils.LOG("ceshi","支付宝"+respose);
                     JSONObject object = null;
                     try {
@@ -149,10 +157,41 @@ public class PayActivity extends BaseActivityother {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
 
+            @Override
+            public void onError(int error) {
 
+            }
+        }).postHttp(URL,this,1,map);
+    }
+    WechatPayBean weBean;
+    void requestWechatPay(Map map){//请求微信订单
+        String URL=BaseUrl.BaseURL+BaseUrl.wechatPay+Staticdata.userBean_static.getResult().getToken();
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","weixin"+respose);
+                weBean=new Gson().fromJson(respose,WechatPayBean.class);
+                String appid=weBean.getResult().getAppid();
+                String noncestr=weBean.getResult().getNoncestr();
+                String packagex=weBean.getResult().getPackageX();
+                String partnerid=weBean.getResult().getPartnerid();
+                String timeStamp=weBean.getResult().getTimestamp()+"";
+                String prepayid=weBean.getResult().getPrepayid();
+                String sign=weBean.getResult().getSign();
+                final IWXAPI msgApi =WXAPIFactory.createWXAPI(PayActivity.this, null);
+                msgApi.unregisterApp();
+                msgApi.registerApp(appid);// 将该app注册到微信
+                PayReq request = new PayReq();
+                request.appId =appid ;
+                request.partnerId = partnerid;
+                request.prepayId= prepayid;
+                request.packageValue = packagex;
+                request.nonceStr= noncestr;
+                request.timeStamp= timeStamp;
+                request.sign=sign;
+                msgApi.sendReq(request);
             }
 
             @Override
@@ -164,7 +203,14 @@ public class PayActivity extends BaseActivityother {
 
     }
 
-    void alipay_PAY(String info){
+    public void onResp(BaseResp resp){
+        if(resp.getType()==ConstantsAPI.COMMAND_PAY_BY_WX){
+            Log.d("ceshi","onPayFinish,errCode="+resp.errCode);
+        }
+    }
+
+
+    void alipay_PAY(String info){//调用支付宝
         final String orderInfo = info;   // 订单信息
 
         Runnable payRunnable = new Runnable() {

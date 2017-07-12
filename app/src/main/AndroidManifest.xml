@@ -77,6 +77,12 @@
             android:exported="false"
             android:screenOrientation="behind" >
         </activity>
+        <activity android:name="com.kymart.shop.wxapi.WXPayEntryActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="true"
+            android:screenOrientation="behind"
+
+            />
     </application>
 
 </manifest>
