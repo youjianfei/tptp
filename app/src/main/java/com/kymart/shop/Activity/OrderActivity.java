@@ -405,11 +405,11 @@ public class OrderActivity extends BaseActivityother {
                     object = new JSONObject(respose);
                     int status = (Integer) object.get("status");
                     String  msg = (String) object.get("msg");
-                    String result=object.get("result")+"";
                     if(status!=1){
                         ToastUtils.showToast(OrderActivity.this,msg);
                         return;
                     }
+                    String result=object.get("result")+"";
                     Intent intent_pay=new Intent(OrderActivity.this,PayActivity.class);
                     intent_pay.putExtra("ordernumber",price+"");
                     intent_pay.putExtra("price",""+result);

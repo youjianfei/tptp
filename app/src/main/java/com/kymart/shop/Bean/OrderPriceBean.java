@@ -64,13 +64,13 @@ public class OrderPriceBean {
          * store_goods_price : {"4":511,"2":3398}
          */
 
-        private int postFee;
-        private int couponFee;
-        private int balance;
-        private int pointsFee;
-        private int payables;
-        private int goodsFee;
-        private int order_prom_amount;
+        private float postFee;
+        private float couponFee;
+        private float balance;
+        private float pointsFee;
+        private float payables;
+        private float goodsFee;
+        private float order_prom_amount;
         private HashMap store_order_prom_id;
         private HashMap store_order_prom_amount;
         private HashMap store_order_amount;
@@ -80,59 +80,60 @@ public class OrderPriceBean {
         private HashMap store_balance;
         private HashMap store_goods_price;
 
-        public int getPostFee() {
+
+        public float getPostFee() {
             return postFee;
         }
 
-        public void setPostFee(int postFee) {
+        public void setPostFee(float postFee) {
             this.postFee = postFee;
         }
 
-        public int getCouponFee() {
+        public float getCouponFee() {
             return couponFee;
         }
 
-        public void setCouponFee(int couponFee) {
+        public void setCouponFee(float couponFee) {
             this.couponFee = couponFee;
         }
 
-        public int getBalance() {
+        public float getBalance() {
             return balance;
         }
 
-        public void setBalance(int balance) {
+        public void setBalance(float balance) {
             this.balance = balance;
         }
 
-        public int getPointsFee() {
+        public float getPointsFee() {
             return pointsFee;
         }
 
-        public void setPointsFee(int pointsFee) {
+        public void setPointsFee(float pointsFee) {
             this.pointsFee = pointsFee;
         }
 
-        public int getPayables() {
+        public float getPayables() {
             return payables;
         }
 
-        public void setPayables(int payables) {
+        public void setPayables(float payables) {
             this.payables = payables;
         }
 
-        public int getGoodsFee() {
+        public float getGoodsFee() {
             return goodsFee;
         }
 
-        public void setGoodsFee(int goodsFee) {
+        public void setGoodsFee(float goodsFee) {
             this.goodsFee = goodsFee;
         }
 
-        public int getOrder_prom_amount() {
+        public float getOrder_prom_amount() {
             return order_prom_amount;
         }
 
-        public void setOrder_prom_amount(int order_prom_amount) {
+        public void setOrder_prom_amount(float order_prom_amount) {
             this.order_prom_amount = order_prom_amount;
         }
 

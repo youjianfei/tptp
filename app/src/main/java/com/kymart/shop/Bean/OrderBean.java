@@ -11,7 +11,7 @@ public class OrderBean {
     /**
      * status : 1
      * msg : 获取成功
-     * result : {"addressList":{"address_id":38,"user_id":47,"consignee":"123","email":"","country":0,"province":1,"city":2,"district":3,"twon":4,"address":"13123133","zipcode":"212122","mobile":"18338220350","is_default":1},"totalPrice":{"total_fee":3909,"cut_fee":340,"num":8},"userInfo":{"user_id":47,"email":"","password":"519475228fe35ad067744465c42a19b2","sex":0,"birthday":0,"user_money":"2879.07","frozen_money":"0.00","distribut_money":"0.00","pay_points":0,"paypwd":"519475228fe35ad067744465c42a19b2","reg_time":1496569650,"last_login":1499740802,"last_ip":"","qq":"","mobile":"13653839640","mobile_validated":1,"oauth":"","openid":null,"unionid":null,"head_pic":null,"bank_name":"建行","bank_card":"44444","realname":"bb","idcard":null,"email_validated":0,"nickname":"13653839640","level":1,"discount":"1.00","total_amount":"7573.00","is_lock":0,"is_distribut":1,"first_leader":0,"second_leader":0,"third_leader":0,"token":"89d102485fc988749b65713ad9d182e7","underling_number":0,"message_mask":53,"push_id":"","ref_id":1,"bonus":"2988.00","total_bonus1":"121.72","total_bonus":"121.72","total_sell":"449.00","lft":2,"rgt":2,"deep":0,"operator_status":0,"sell_status":1},"storeList":[{"store_id":4,"store_name":"q","coupon_num":0,"shippingList":[{"shipping_area_id":52,"shipping_code":"ems","store_id":4,"name":"EMS","freight":0},{"shipping_area_id":58,"shipping_code":"huitong","store_id":4,"name":"百世汇通快递","freight":0},{"shipping_area_id":51,"shipping_code":"shentong","store_id":4,"name":"申通物流","freight":0},{"shipping_area_id":53,"shipping_code":"shunfeng","store_id":4,"name":"顺丰物流","freight":0},{"shipping_area_id":54,"shipping_code":"yuantong","store_id":4,"name":"圆通快递","freight":0}],"cartList":[{"id":30,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":162,"goods_sn":"TP0000162","goods_name":"直接上架","market_price":"130.00","goods_price":"100.00","member_goods_price":"100.00","goods_num":5,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675687,"prom_type":0,"prom_id":0,"sku":"","store_id":4,"goods_fee":500,"store_count":91},{"id":31,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":169,"goods_sn":"TP0000169","goods_name":"vvvvvv","market_price":"1.00","goods_price":"11.00","member_goods_price":"11.00","goods_num":1,"spec_key":"165_167","spec_key_name":"容量:6公斤 样式:侧开门","bar_code":"","selected":1,"add_time":1499675907,"prom_type":0,"prom_id":0,"sku":"11.00","store_id":4,"goods_fee":11,"store_count":10}]},{"store_id":2,"store_name":"海澜之家","coupon_num":0,"shippingList":[{"shipping_area_id":45,"shipping_code":"shentong","store_id":2,"name":"申通物流","freight":0},{"shipping_area_id":48,"shipping_code":"shunfeng","store_id":2,"name":"顺丰物流","freight":0}],"cartList":[{"id":32,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":143,"goods_sn":"TP0000143","goods_name":"haier海尔 BC-93TMPF 93升单门冰箱","market_price":"799.00","goods_price":"699.00","member_goods_price":"699.00","goods_num":1,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675913,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"goods_fee":699,"store_count":99},{"id":33,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":142,"goods_sn":"TP0000142","goods_name":"海尔（Haier）BCD-251WDGW 251升 无霜两门冰箱（白色）","market_price":"2799.00","goods_price":"2699.00","member_goods_price":"2699.00","goods_num":1,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675916,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"goods_fee":2699,"store_count":97}]}]}
+     * result : {"addressList":{"address_id":656,"user_id":456,"consignee":"jdjdj ","email":"","country":0,"province":636,"city":1291,"district":1329,"twon":1333,"address":"djdjcj ","zipcode":"452758","mobile":"18536363645","is_default":1},"totalPrice":{"total_fee":0.2,"cut_fee":0.2,"num":2},"userInfo":{"user_id":456,"email":"","password":"519475228fe35ad067744465c42a19b2","sex":0,"birthday":0,"user_money":"0.00","frozen_money":"0.00","distribut_money":"0.00","pay_points":0,"paypwd":null,"reg_time":1497457527,"last_login":1499845588,"last_ip":"","qq":"","mobile":"18737105569","mobile_validated":1,"oauth":"","openid":null,"unionid":null,"head_pic":null,"bank_name":null,"bank_card":null,"realname":null,"idcard":null,"email_validated":0,"nickname":"18737105569","level":1,"discount":"1.00","total_amount":"0.00","is_lock":0,"is_distribut":1,"first_leader":0,"second_leader":0,"third_leader":0,"token":"81d9f02d61890c6199c1cb804989f757","underling_number":0,"message_mask":63,"push_id":"","ref_id":1,"bonus":"0.00","total_bonus1":"0.00","total_bonus":"0.00","total_sell":"0.00","lft":8784,"rgt":8785,"deep":2,"operator_status":0,"sell_status":0},"storeList":[{"store_id":2,"store_name":"东韩科技(深圳)有限公司","coupon_num":0,"shippingList":[{"shipping_area_id":295,"shipping_code":"anneng","store_id":2,"name":"安能物流","freight":0},{"shipping_area_id":71,"shipping_code":"debangwuliu","store_id":2,"name":"德邦物流","freight":0},{"shipping_area_id":87,"shipping_code":"huitongkuaidi","store_id":2,"name":"百世汇通","freight":0},{"shipping_area_id":89,"shipping_code":"kuaijiesudi","store_id":2,"name":"快捷快递","freight":0},{"shipping_area_id":86,"shipping_code":"shentong","store_id":2,"name":"申通物流","freight":0},{"shipping_area_id":2,"shipping_code":"shunfeng","store_id":2,"name":"顺丰物流","freight":0},{"shipping_area_id":62,"shipping_code":"yuantong","store_id":2,"name":"圆通快递","freight":0},{"shipping_area_id":63,"shipping_code":"yunda","store_id":2,"name":"韵达快递","freight":0},{"shipping_area_id":88,"shipping_code":"zhongtong","store_id":2,"name":"中通快递","freight":0}],"cartList":[{"id":109,"user_id":456,"session_id":"146feab2-0139-4671-afea-751451118580","goods_id":455,"goods_sn":"TP0000455","goods_name":"测试商品，请勿购买不发货不退款","market_price":"0.20","goods_price":"0.10","member_goods_price":"0.10","goods_num":2,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499845118,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"is_day_bonus":1,"ky_type":0,"goods_fee":0.2,"store_count":87}]}]}
      */
 
     private int status;
@@ -44,10 +44,10 @@ public class OrderBean {
 
     public static class ResultBean {
         /**
-         * addressList : {"address_id":38,"user_id":47,"consignee":"123","email":"","country":0,"province":1,"city":2,"district":3,"twon":4,"address":"13123133","zipcode":"212122","mobile":"18338220350","is_default":1}
-         * totalPrice : {"total_fee":3909,"cut_fee":340,"num":8}
-         * userInfo : {"user_id":47,"email":"","password":"519475228fe35ad067744465c42a19b2","sex":0,"birthday":0,"user_money":"2879.07","frozen_money":"0.00","distribut_money":"0.00","pay_points":0,"paypwd":"519475228fe35ad067744465c42a19b2","reg_time":1496569650,"last_login":1499740802,"last_ip":"","qq":"","mobile":"13653839640","mobile_validated":1,"oauth":"","openid":null,"unionid":null,"head_pic":null,"bank_name":"建行","bank_card":"44444","realname":"bb","idcard":null,"email_validated":0,"nickname":"13653839640","level":1,"discount":"1.00","total_amount":"7573.00","is_lock":0,"is_distribut":1,"first_leader":0,"second_leader":0,"third_leader":0,"token":"89d102485fc988749b65713ad9d182e7","underling_number":0,"message_mask":53,"push_id":"","ref_id":1,"bonus":"2988.00","total_bonus1":"121.72","total_bonus":"121.72","total_sell":"449.00","lft":2,"rgt":2,"deep":0,"operator_status":0,"sell_status":1}
-         * storeList : [{"store_id":4,"store_name":"q","coupon_num":0,"shippingList":[{"shipping_area_id":52,"shipping_code":"ems","store_id":4,"name":"EMS","freight":0},{"shipping_area_id":58,"shipping_code":"huitong","store_id":4,"name":"百世汇通快递","freight":0},{"shipping_area_id":51,"shipping_code":"shentong","store_id":4,"name":"申通物流","freight":0},{"shipping_area_id":53,"shipping_code":"shunfeng","store_id":4,"name":"顺丰物流","freight":0},{"shipping_area_id":54,"shipping_code":"yuantong","store_id":4,"name":"圆通快递","freight":0}],"cartList":[{"id":30,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":162,"goods_sn":"TP0000162","goods_name":"直接上架","market_price":"130.00","goods_price":"100.00","member_goods_price":"100.00","goods_num":5,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675687,"prom_type":0,"prom_id":0,"sku":"","store_id":4,"goods_fee":500,"store_count":91},{"id":31,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":169,"goods_sn":"TP0000169","goods_name":"vvvvvv","market_price":"1.00","goods_price":"11.00","member_goods_price":"11.00","goods_num":1,"spec_key":"165_167","spec_key_name":"容量:6公斤 样式:侧开门","bar_code":"","selected":1,"add_time":1499675907,"prom_type":0,"prom_id":0,"sku":"11.00","store_id":4,"goods_fee":11,"store_count":10}]},{"store_id":2,"store_name":"海澜之家","coupon_num":0,"shippingList":[{"shipping_area_id":45,"shipping_code":"shentong","store_id":2,"name":"申通物流","freight":0},{"shipping_area_id":48,"shipping_code":"shunfeng","store_id":2,"name":"顺丰物流","freight":0}],"cartList":[{"id":32,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":143,"goods_sn":"TP0000143","goods_name":"haier海尔 BC-93TMPF 93升单门冰箱","market_price":"799.00","goods_price":"699.00","member_goods_price":"699.00","goods_num":1,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675913,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"goods_fee":699,"store_count":99},{"id":33,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":142,"goods_sn":"TP0000142","goods_name":"海尔（Haier）BCD-251WDGW 251升 无霜两门冰箱（白色）","market_price":"2799.00","goods_price":"2699.00","member_goods_price":"2699.00","goods_num":1,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675916,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"goods_fee":2699,"store_count":97}]}]
+         * addressList : {"address_id":656,"user_id":456,"consignee":"jdjdj ","email":"","country":0,"province":636,"city":1291,"district":1329,"twon":1333,"address":"djdjcj ","zipcode":"452758","mobile":"18536363645","is_default":1}
+         * totalPrice : {"total_fee":0.2,"cut_fee":0.2,"num":2}
+         * userInfo : {"user_id":456,"email":"","password":"519475228fe35ad067744465c42a19b2","sex":0,"birthday":0,"user_money":"0.00","frozen_money":"0.00","distribut_money":"0.00","pay_points":0,"paypwd":null,"reg_time":1497457527,"last_login":1499845588,"last_ip":"","qq":"","mobile":"18737105569","mobile_validated":1,"oauth":"","openid":null,"unionid":null,"head_pic":null,"bank_name":null,"bank_card":null,"realname":null,"idcard":null,"email_validated":0,"nickname":"18737105569","level":1,"discount":"1.00","total_amount":"0.00","is_lock":0,"is_distribut":1,"first_leader":0,"second_leader":0,"third_leader":0,"token":"81d9f02d61890c6199c1cb804989f757","underling_number":0,"message_mask":63,"push_id":"","ref_id":1,"bonus":"0.00","total_bonus1":"0.00","total_bonus":"0.00","total_sell":"0.00","lft":8784,"rgt":8785,"deep":2,"operator_status":0,"sell_status":0}
+         * storeList : [{"store_id":2,"store_name":"东韩科技(深圳)有限公司","coupon_num":0,"shippingList":[{"shipping_area_id":295,"shipping_code":"anneng","store_id":2,"name":"安能物流","freight":0},{"shipping_area_id":71,"shipping_code":"debangwuliu","store_id":2,"name":"德邦物流","freight":0},{"shipping_area_id":87,"shipping_code":"huitongkuaidi","store_id":2,"name":"百世汇通","freight":0},{"shipping_area_id":89,"shipping_code":"kuaijiesudi","store_id":2,"name":"快捷快递","freight":0},{"shipping_area_id":86,"shipping_code":"shentong","store_id":2,"name":"申通物流","freight":0},{"shipping_area_id":2,"shipping_code":"shunfeng","store_id":2,"name":"顺丰物流","freight":0},{"shipping_area_id":62,"shipping_code":"yuantong","store_id":2,"name":"圆通快递","freight":0},{"shipping_area_id":63,"shipping_code":"yunda","store_id":2,"name":"韵达快递","freight":0},{"shipping_area_id":88,"shipping_code":"zhongtong","store_id":2,"name":"中通快递","freight":0}],"cartList":[{"id":109,"user_id":456,"session_id":"146feab2-0139-4671-afea-751451118580","goods_id":455,"goods_sn":"TP0000455","goods_name":"测试商品，请勿购买不发货不退款","market_price":"0.20","goods_price":"0.10","member_goods_price":"0.10","goods_num":2,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499845118,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"is_day_bonus":1,"ky_type":0,"goods_fee":0.2,"store_count":87}]}]
          */
 
         private AddressListBean addressList;
@@ -89,18 +89,18 @@ public class OrderBean {
 
         public static class AddressListBean {
             /**
-             * address_id : 38
-             * user_id : 47
-             * consignee : 123
+             * address_id : 656
+             * user_id : 456
+             * consignee : jdjdj
              * email :
              * country : 0
-             * province : 1
-             * city : 2
-             * district : 3
-             * twon : 4
-             * address : 13123133
-             * zipcode : 212122
-             * mobile : 18338220350
+             * province : 636
+             * city : 1291
+             * district : 1329
+             * twon : 1333
+             * address : djdjcj
+             * zipcode : 452758
+             * mobile : 18536363645
              * is_default : 1
              */
 
@@ -225,28 +225,28 @@ public class OrderBean {
 
         public static class TotalPriceBean {
             /**
-             * total_fee : 3909
-             * cut_fee : 340
-             * num : 8
+             * total_fee : 0.2
+             * cut_fee : 0.2
+             * num : 2
              */
 
-            private int total_fee;
-            private int cut_fee;
+            private double total_fee;
+            private double cut_fee;
             private int num;
 
-            public int getTotal_fee() {
+            public double getTotal_fee() {
                 return total_fee;
             }
 
-            public void setTotal_fee(int total_fee) {
+            public void setTotal_fee(double total_fee) {
                 this.total_fee = total_fee;
             }
 
-            public int getCut_fee() {
+            public double getCut_fee() {
                 return cut_fee;
             }
 
-            public void setCut_fee(int cut_fee) {
+            public void setCut_fee(double cut_fee) {
                 this.cut_fee = cut_fee;
             }
 
@@ -261,54 +261,54 @@ public class OrderBean {
 
         public static class UserInfoBean {
             /**
-             * user_id : 47
+             * user_id : 456
              * email :
              * password : 519475228fe35ad067744465c42a19b2
              * sex : 0
              * birthday : 0
-             * user_money : 2879.07
+             * user_money : 0.00
              * frozen_money : 0.00
              * distribut_money : 0.00
              * pay_points : 0
-             * paypwd : 519475228fe35ad067744465c42a19b2
-             * reg_time : 1496569650
-             * last_login : 1499740802
+             * paypwd : null
+             * reg_time : 1497457527
+             * last_login : 1499845588
              * last_ip :
              * qq :
-             * mobile : 13653839640
+             * mobile : 18737105569
              * mobile_validated : 1
              * oauth :
              * openid : null
              * unionid : null
              * head_pic : null
-             * bank_name : 建行
-             * bank_card : 44444
-             * realname : bb
+             * bank_name : null
+             * bank_card : null
+             * realname : null
              * idcard : null
              * email_validated : 0
-             * nickname : 13653839640
+             * nickname : 18737105569
              * level : 1
              * discount : 1.00
-             * total_amount : 7573.00
+             * total_amount : 0.00
              * is_lock : 0
              * is_distribut : 1
              * first_leader : 0
              * second_leader : 0
              * third_leader : 0
-             * token : 89d102485fc988749b65713ad9d182e7
+             * token : 81d9f02d61890c6199c1cb804989f757
              * underling_number : 0
-             * message_mask : 53
+             * message_mask : 63
              * push_id :
              * ref_id : 1
-             * bonus : 2988.00
-             * total_bonus1 : 121.72
-             * total_bonus : 121.72
-             * total_sell : 449.00
-             * lft : 2
-             * rgt : 2
-             * deep : 0
+             * bonus : 0.00
+             * total_bonus1 : 0.00
+             * total_bonus : 0.00
+             * total_sell : 0.00
+             * lft : 8784
+             * rgt : 8785
+             * deep : 2
              * operator_status : 0
-             * sell_status : 1
+             * sell_status : 0
              */
 
             private int user_id;
@@ -320,7 +320,7 @@ public class OrderBean {
             private String frozen_money;
             private String distribut_money;
             private int pay_points;
-            private String paypwd;
+            private Object paypwd;
             private int reg_time;
             private int last_login;
             private String last_ip;
@@ -331,9 +331,9 @@ public class OrderBean {
             private Object openid;
             private Object unionid;
             private Object head_pic;
-            private String bank_name;
-            private String bank_card;
-            private String realname;
+            private Object bank_name;
+            private Object bank_card;
+            private Object realname;
             private Object idcard;
             private int email_validated;
             private String nickname;
@@ -432,11 +432,11 @@ public class OrderBean {
                 this.pay_points = pay_points;
             }
 
-            public String getPaypwd() {
+            public Object getPaypwd() {
                 return paypwd;
             }
 
-            public void setPaypwd(String paypwd) {
+            public void setPaypwd(Object paypwd) {
                 this.paypwd = paypwd;
             }
 
@@ -520,27 +520,27 @@ public class OrderBean {
                 this.head_pic = head_pic;
             }
 
-            public String getBank_name() {
+            public Object getBank_name() {
                 return bank_name;
             }
 
-            public void setBank_name(String bank_name) {
+            public void setBank_name(Object bank_name) {
                 this.bank_name = bank_name;
             }
 
-            public String getBank_card() {
+            public Object getBank_card() {
                 return bank_card;
             }
 
-            public void setBank_card(String bank_card) {
+            public void setBank_card(Object bank_card) {
                 this.bank_card = bank_card;
             }
 
-            public String getRealname() {
+            public Object getRealname() {
                 return realname;
             }
 
-            public void setRealname(String realname) {
+            public void setRealname(Object realname) {
                 this.realname = realname;
             }
 
@@ -747,11 +747,11 @@ public class OrderBean {
 
         public static class StoreListBean {
             /**
-             * store_id : 4
-             * store_name : q
+             * store_id : 2
+             * store_name : 东韩科技(深圳)有限公司
              * coupon_num : 0
-             * shippingList : [{"shipping_area_id":52,"shipping_code":"ems","store_id":4,"name":"EMS","freight":0},{"shipping_area_id":58,"shipping_code":"huitong","store_id":4,"name":"百世汇通快递","freight":0},{"shipping_area_id":51,"shipping_code":"shentong","store_id":4,"name":"申通物流","freight":0},{"shipping_area_id":53,"shipping_code":"shunfeng","store_id":4,"name":"顺丰物流","freight":0},{"shipping_area_id":54,"shipping_code":"yuantong","store_id":4,"name":"圆通快递","freight":0}]
-             * cartList : [{"id":30,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":162,"goods_sn":"TP0000162","goods_name":"直接上架","market_price":"130.00","goods_price":"100.00","member_goods_price":"100.00","goods_num":5,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499675687,"prom_type":0,"prom_id":0,"sku":"","store_id":4,"goods_fee":500,"store_count":91},{"id":31,"user_id":47,"session_id":"3843A7144E6540E2A4BCD6E2CA3A6AFA","goods_id":169,"goods_sn":"TP0000169","goods_name":"vvvvvv","market_price":"1.00","goods_price":"11.00","member_goods_price":"11.00","goods_num":1,"spec_key":"165_167","spec_key_name":"容量:6公斤 样式:侧开门","bar_code":"","selected":1,"add_time":1499675907,"prom_type":0,"prom_id":0,"sku":"11.00","store_id":4,"goods_fee":11,"store_count":10}]
+             * shippingList : [{"shipping_area_id":295,"shipping_code":"anneng","store_id":2,"name":"安能物流","freight":0},{"shipping_area_id":71,"shipping_code":"debangwuliu","store_id":2,"name":"德邦物流","freight":0},{"shipping_area_id":87,"shipping_code":"huitongkuaidi","store_id":2,"name":"百世汇通","freight":0},{"shipping_area_id":89,"shipping_code":"kuaijiesudi","store_id":2,"name":"快捷快递","freight":0},{"shipping_area_id":86,"shipping_code":"shentong","store_id":2,"name":"申通物流","freight":0},{"shipping_area_id":2,"shipping_code":"shunfeng","store_id":2,"name":"顺丰物流","freight":0},{"shipping_area_id":62,"shipping_code":"yuantong","store_id":2,"name":"圆通快递","freight":0},{"shipping_area_id":63,"shipping_code":"yunda","store_id":2,"name":"韵达快递","freight":0},{"shipping_area_id":88,"shipping_code":"zhongtong","store_id":2,"name":"中通快递","freight":0}]
+             * cartList : [{"id":109,"user_id":456,"session_id":"146feab2-0139-4671-afea-751451118580","goods_id":455,"goods_sn":"TP0000455","goods_name":"测试商品，请勿购买不发货不退款","market_price":"0.20","goods_price":"0.10","member_goods_price":"0.10","goods_num":2,"spec_key":"","spec_key_name":"","bar_code":"","selected":1,"add_time":1499845118,"prom_type":0,"prom_id":0,"sku":"","store_id":2,"is_day_bonus":1,"ky_type":0,"goods_fee":0.2,"store_count":87}]
              */
 
             private int store_id;
@@ -802,10 +802,10 @@ public class OrderBean {
 
             public static class ShippingListBean {
                 /**
-                 * shipping_area_id : 52
-                 * shipping_code : ems
-                 * store_id : 4
-                 * name : EMS
+                 * shipping_area_id : 295
+                 * shipping_code : anneng
+                 * store_id : 2
+                 * name : 安能物流
                  * freight : 0
                  */
 
@@ -858,27 +858,29 @@ public class OrderBean {
 
             public static class CartListBean {
                 /**
-                 * id : 30
-                 * user_id : 47
-                 * session_id : 3843A7144E6540E2A4BCD6E2CA3A6AFA
-                 * goods_id : 162
-                 * goods_sn : TP0000162
-                 * goods_name : 直接上架
-                 * market_price : 130.00
-                 * goods_price : 100.00
-                 * member_goods_price : 100.00
-                 * goods_num : 5
+                 * id : 109
+                 * user_id : 456
+                 * session_id : 146feab2-0139-4671-afea-751451118580
+                 * goods_id : 455
+                 * goods_sn : TP0000455
+                 * goods_name : 测试商品，请勿购买不发货不退款
+                 * market_price : 0.20
+                 * goods_price : 0.10
+                 * member_goods_price : 0.10
+                 * goods_num : 2
                  * spec_key :
                  * spec_key_name :
                  * bar_code :
                  * selected : 1
-                 * add_time : 1499675687
+                 * add_time : 1499845118
                  * prom_type : 0
                  * prom_id : 0
                  * sku :
-                 * store_id : 4
-                 * goods_fee : 500
-                 * store_count : 91
+                 * store_id : 2
+                 * is_day_bonus : 1
+                 * ky_type : 0
+                 * goods_fee : 0.2
+                 * store_count : 87
                  */
 
                 private int id;
@@ -900,7 +902,9 @@ public class OrderBean {
                 private int prom_id;
                 private String sku;
                 private int store_id;
-                private int goods_fee;
+                private int is_day_bonus;
+                private int ky_type;
+                private double goods_fee;
                 private int store_count;
 
                 public int getId() {
@@ -1055,11 +1059,27 @@ public class OrderBean {
                     this.store_id = store_id;
                 }
 
-                public int getGoods_fee() {
+                public int getIs_day_bonus() {
+                    return is_day_bonus;
+                }
+
+                public void setIs_day_bonus(int is_day_bonus) {
+                    this.is_day_bonus = is_day_bonus;
+                }
+
+                public int getKy_type() {
+                    return ky_type;
+                }
+
+                public void setKy_type(int ky_type) {
+                    this.ky_type = ky_type;
+                }
+
+                public double getGoods_fee() {
                     return goods_fee;
                 }
 
-                public void setGoods_fee(int goods_fee) {
+                public void setGoods_fee(double goods_fee) {
                     this.goods_fee = goods_fee;
                 }
 

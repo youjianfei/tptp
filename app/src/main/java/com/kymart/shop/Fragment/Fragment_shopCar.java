@@ -54,8 +54,8 @@ public class Fragment_shopCar  extends Fragment{
 
     Adapter_shopCarList mAdapter;
 
-    List<ShopCarBean.ResultEntity.StoreListEntity> mListAllStore;
-    List<ShopCarBean.ResultEntity.StoreListEntity.CartListEntity> mData;
+    List<ShopCarBean.ResultBean.StoreListBean> mListAllStore;
+    List<ShopCarBean.ResultBean.StoreListBean.CartListBean> mData;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class Fragment_shopCar  extends Fragment{
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi",respose);
                 shopCarChange=false;
-                ShopCarBean.ResultEntity resuleBEan=new Gson().fromJson(respose,ShopCarBean.class).getResult();
+                ShopCarBean.ResultBean resuleBEan=new Gson().fromJson(respose,ShopCarBean.class).getResult();
                 mTextview_allPrice.setText("￥"+resuleBEan.getTotal_price().getTotal_fee()+"元");
                 mListAllStore.clear();
                 mData.clear();
@@ -177,7 +177,7 @@ public class Fragment_shopCar  extends Fragment{
 
     boolean shopCarChange=false;
     class Adapter_shopCarList extends BaseAdapter {
-        List<ShopCarBean.ResultEntity.StoreListEntity.CartListEntity> mData;
+        List<ShopCarBean.ResultBean.StoreListBean.CartListBean> mData;
         private Context mContext;
         private LayoutInflater mInflater;
 
@@ -191,7 +191,7 @@ public class Fragment_shopCar  extends Fragment{
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder=null;
-            final ShopCarBean.ResultEntity.StoreListEntity.CartListEntity bean = mData.get(position);
+            final ShopCarBean.ResultBean.StoreListBean.CartListBean bean = mData.get(position);
             if(convertView==null){
                 holder=new ViewHolder();
                 convertView=mInflater.inflate(R.layout.item_listview_shopcar,null,false);
