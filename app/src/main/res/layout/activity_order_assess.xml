@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_all_order"
+    android:id="@+id/activity_order_assess"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kymart.shop.Activity.AllOrderActivity">
-
+    tools:context="com.kymart.shop.Activity.OrderAssessActivity">
     <RelativeLayout
         android:id="@+id/REL_title"
         android:layout_width="match_parent"
@@ -28,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我的订单"
+            android:text="评价"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -48,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="全部"
+                android:text="全部评价"
                 android:textSize="15dp" />
 
             <ImageView
@@ -68,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="待付款"
+                android:text="待评价"
                 android:textSize="15dp" />
 
             <ImageView
@@ -88,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="待发货"
+                android:text="已评价"
                 android:textSize="15dp" />
 
             <ImageView
@@ -98,54 +97,7 @@
                 android:background="@drawable/select_goods_list" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/RelativeLayout_NoAccept"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="待收货"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/select_goods_list" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/RelativeLayout_NoAssess"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="待评价"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/select_goods_list" />
-        </RelativeLayout>
     </LinearLayout>
-    <ExpandableListView
-        android:id="@+id/listview_allorder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:dividerHeight="0.5dp"
-        android:divider="@color/DarkGray"
-        android:groupIndicator="@null"
-        android:childDivider="@color/LightGrey"
-        />
 
 </LinearLayout>

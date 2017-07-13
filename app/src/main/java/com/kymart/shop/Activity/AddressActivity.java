@@ -199,7 +199,7 @@ public class AddressActivity extends BaseActivityother {
                                                           CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
                                                           mList_address.get(position).getCityid().add(cityIDBean);
                                                           address[3] =cityIDBean.getName();
-                                                          finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+" "+address[2]+" "+address[3]);
+                                                          finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+" "+address[2]+" "+address[3]+bean.getAddress());
                                                           mKProgressHUD.dismiss();
                                                       }
 
@@ -209,6 +209,7 @@ public class AddressActivity extends BaseActivityother {
                                                       }
                                                   }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getTwon(),mContext,0);
                                                 }else {
+                                                    finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+" "+address[2]+bean.getAddress());
                                                     mKProgressHUD.dismiss();
                                                 }
 
@@ -220,6 +221,7 @@ public class AddressActivity extends BaseActivityother {
                                             }
                                         }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getDistrict(),mContext,0);
                                     }else {
+                                        finalHolder.mTextview_address.setText(address[0]+" "+ address[1]+bean.getAddress());
                                         mKProgressHUD.dismiss();
                                     }
                                 }
@@ -230,6 +232,7 @@ public class AddressActivity extends BaseActivityother {
                                 }
                             }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getCity(),mContext,0);
                         }else {
+                            finalHolder.mTextview_address.setText(address[0]+bean.getAddress());
                             mKProgressHUD.dismiss();
                         }
                     }

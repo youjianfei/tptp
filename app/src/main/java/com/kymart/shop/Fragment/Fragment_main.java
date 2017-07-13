@@ -14,9 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.kymart.shop.Activity.AllOrderActivity;
 import com.kymart.shop.Activity.EmptyActivity;
 import com.kymart.shop.Activity.GoodDetailsActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
+import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.Activity.MainActivity;
 import com.kymart.shop.CustomView.CustomerScrollView;
 import com.youth.banner.Banner;
@@ -35,6 +37,7 @@ import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
 import static com.kymart.shop.Activity.MainActivity.mMainactivity;
+import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.Http.BaseUrl.BaseURL;
 import static com.kymart.shop.Http.BaseUrl.mainURL;
 import static com.kymart.shop.Http.BaseUrl.main_like;
@@ -453,8 +456,13 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
                 getActivity().startActivity(intent_pinpaijie);
                 break;
             case R.id.Linear_dingdan:
-                Intent intent_dingdan=new Intent(getActivity(), EmptyActivity.class);
-                getActivity().startActivity(intent_dingdan);
+                if(isLogin==1){
+                    Intent intent_dingdan=new Intent(getActivity(), AllOrderActivity.class);
+                    getActivity().startActivity(intent_dingdan);
+                }else{
+                    Intent intent=new Intent(getActivity(),LoginActivity.class);
+                    startActivityForResult(intent,0);
+                }
                 break;
 
         }

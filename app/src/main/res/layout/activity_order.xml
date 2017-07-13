@@ -96,7 +96,7 @@
                     android:layout_height="30dp"
                     android:src="@mipmap/more"
                     android:layout_marginRight="10dp"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     />
             </LinearLayout>
             <com.kymart.shop.CustomView.MyExpandableListView

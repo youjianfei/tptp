@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.jaeger.library.StatusBarUtil;
+
 import cn.kymart.tptp.R;
 
 
@@ -20,6 +22,7 @@ public abstract class BaseActivityother extends Activity implements OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(setLayoutResID());
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.red), 0);//状态栏颜色
         initView();
         initData();
         setData();

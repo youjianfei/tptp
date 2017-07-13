@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jaeger.library.StatusBarUtil;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.UserBean;
 import com.kymart.shop.Fragment.Fragment_classification;
@@ -83,6 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.red), 0);//状态栏颜色
         initView();
         initData();
         initListenner();

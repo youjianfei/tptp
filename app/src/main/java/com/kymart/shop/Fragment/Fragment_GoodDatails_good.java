@@ -61,7 +61,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private LinearLayout mLinear_bottom;
     private Banner mBanner;
     private TextView mTextview_GoodName;
-    private TextView mTextview_price,mTextview_result;
+    private TextView mTextview_price,mTextview_result,mtextview_Addshopcar;
 
 
 
@@ -97,6 +97,23 @@ public class Fragment_GoodDatails_good extends Fragment {
                 showPopwindow();
             }
         });
+        mtextview_Addshopcar.setOnClickListener(new View.OnClickListener() {//点击外面的加入购物车
+            @Override
+            public void onClick(View v) {
+                if(isLogin==1) {//登录状态,添加到购物车
+                    Map map;
+                    map=count();
+                    if(map!=null){
+                        request_addShopCar(map);
+                    }
+
+                }else{
+                    Intent intent=new Intent(getActivity(),LoginActivity.class);
+                    getActivity(). startActivity(intent);
+
+                }
+            }
+        });
     }
 
     private void setData() {
@@ -120,8 +137,7 @@ public class Fragment_GoodDatails_good extends Fragment {
         mTextview_price= (TextView) rootview.findViewById(R.id.textview_goodPrice);
         mTextview_result= (TextView) rootview.findViewById(R.id.text_result);
         mLinearout_result= (LinearLayout) rootview.findViewById(R.id.LinearLayout_result);
-
-
+        mtextview_Addshopcar= (TextView) rootview.findViewById(R.id.textview_Addshopcar);
 
 
     }
@@ -265,7 +281,11 @@ public class Fragment_GoodDatails_good extends Fragment {
     }
 
      Map  count(){//加入购物车之前   得到de选择
-        int goodCount=mNumberButton.getNumber();
+         int goodCount=1;
+         if(mNumberButton!=null){
+              goodCount=mNumberButton.getNumber();
+         }
+
         String goodCount_="";//添加的数量
 
         if(goodCount>Staticdata.bean.getGood_buy_store_count()){
@@ -352,7 +372,10 @@ public class Fragment_GoodDatails_good extends Fragment {
                     @Override
 
                     public void onResponse(JSONObject response) {
-                        mPopupWindow.dismiss();
+                        if(mPopupWindow!=null&&mPopupWindow.isShowing()){
+                            mPopupWindow.dismiss();
+                        }
+
                 ToastUtils.showToast(getActivity(),"添加购物车成功");
 
                     }

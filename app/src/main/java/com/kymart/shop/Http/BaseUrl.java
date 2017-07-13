@@ -62,7 +62,7 @@ public class BaseUrl {
     public static String  ordernumber="m=Api&c=Cart&a=cart4&token=";//提交订单号码  "\(basePath)m=Api&c=Cart&a=cart4&token=\(access_token())"
     public static String  alipayPay="m=Api&c=payment&a=alipay_sign&token=";//支付宝支付  \(basePath)m=Api&c=payment&a=alipay_sign&token=\(access_token())"
     public static String  wechatPay="m=Api&c=wxpay&a=dopay&token=";//微信支付  return "\(basePath)m=Api&c=wxpay&a=dopay&token=\(access_token())"
-
-
+    public static String  AllOrder="m=Api&c=User&a=getOrderList&token=";//订单列表  \(access_token())"
+//    return "\(basePath)m=Api&c=User&a=getOrderList&user_id=\(user_id)&p=\(page)&token=\(access_token())"
 
 }

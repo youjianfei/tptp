@@ -113,6 +113,8 @@ public class OrderActivity extends BaseActivityother {
         switch (v.getId()){
             case R.id.linearlayout_address:
                 //点击地址跳转
+                Intent intent_address=new Intent(this,AddressActivity.class);
+                startActivity(intent_address);
 
                 break;
             case R.id.button_useyue:
@@ -169,6 +171,7 @@ public class OrderActivity extends BaseActivityother {
        new Volley_Utils(new Interface_volley_respose() {
            @Override
            public void onSuccesses(String respose) {
+               LogUtils.LOG("ceshi","生成订单"+respose);
                JSONObject object = null;
                try {
                    object = new JSONObject(respose);
@@ -176,6 +179,8 @@ public class OrderActivity extends BaseActivityother {
                    String  msg = (String) object.get("msg");
                    if(status!=1){
                        ToastUtils.showToast(OrderActivity.this,msg);
+                       Intent intent_address=new Intent(OrderActivity.this,AddressActivity.class);
+                       startActivity(intent_address);
                        return;
                    }
                } catch (JSONException e) {
@@ -183,16 +188,12 @@ public class OrderActivity extends BaseActivityother {
                }
 
 
-               LogUtils.LOG("ceshi","生成订单"+respose);
+
                orderBean=new Gson().fromJson(respose,OrderBean.class);
-               if(orderBean.getStatus()!=1){
-                   Intent  intend_address=new Intent(OrderActivity.this,AddressActivity.class);
-                   startActivity(intend_address);
-                   return;
-               }
+
                //收货信息数据展示
-               name.setText(orderBean.getResult().getUserInfo().getNickname());
-               phonenumber.setText(orderBean.getResult().getUserInfo().getMobile());
+               name.setText(orderBean.getResult().getAddressList().getConsignee());
+               phonenumber.setText(orderBean.getResult().getAddressList().getMobile());
 
 
                //根据地址id获得地址
@@ -414,6 +415,7 @@ public class OrderActivity extends BaseActivityother {
                     intent_pay.putExtra("ordernumber",price+"");
                     intent_pay.putExtra("price",""+result);
                     startActivity(intent_pay);
+                    finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -431,7 +433,7 @@ public class OrderActivity extends BaseActivityother {
     @Override
     protected void onResume() {
         super.onResume();
-
+        requestOrder();
     }
 
     /*适配器*/

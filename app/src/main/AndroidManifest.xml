@@ -64,25 +64,24 @@
         <activity android:name="com.kymart.shop.Activity.JiangZYActivity" />
         <activity android:name="com.kymart.shop.Activity.ShareFriendsActivity" />
         <activity android:name="com.kymart.shop.Activity.OrderActivity" />
-        <activity android:name="com.kymart.shop.Activity.PayActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.PayActivity" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
-        <activity android:name="com.kymart.shop.wxapi.WXPayEntryActivity"
+            android:screenOrientation="behind"></activity>
+        <activity
+            android:name="com.kymart.shop.wxapi.WXPayEntryActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="true"
-            android:screenOrientation="behind"
             android:launchMode="singleTop"
-            />
+            android:screenOrientation="behind" />
+        <activity android:name="com.kymart.shop.Activity.OrderAssessActivity"></activity>
     </application>
 
 </manifest>

@@ -50,6 +50,7 @@ public class Fragment_shopCar  extends Fragment{
 
     private ListView mListview_shopcar;
     private TextView mTextview_jiesuan,mTextview_allPrice;
+    private double price;
 
 
     Adapter_shopCarList mAdapter;
@@ -88,6 +89,10 @@ public class Fragment_shopCar  extends Fragment{
         mTextview_jiesuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(price==0){
+                    ToastUtils.showToast(getActivity(),"购物车是空的");
+                    return;
+                }
                 Intent intent_jiesuan=new Intent(getActivity(), OrderActivity.class);
                 startActivity(intent_jiesuan);
             }
@@ -108,6 +113,7 @@ public class Fragment_shopCar  extends Fragment{
                 shopCarChange=false;
                 ShopCarBean.ResultBean resuleBEan=new Gson().fromJson(respose,ShopCarBean.class).getResult();
                 mTextview_allPrice.setText("￥"+resuleBEan.getTotal_price().getTotal_fee()+"元");
+                price=resuleBEan.getTotal_price().getTotal_fee();
                 mListAllStore.clear();
                 mData.clear();
                 if(resuleBEan.getStoreList()!=null){

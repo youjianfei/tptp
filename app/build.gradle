@@ -55,4 +55,5 @@ dependencies {
     compile project(':library_pulltorefresh')
     compile files('libs/alipaySdk-20170710.jar')
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile 'com.jaeger.statusbaruitl:library:1.0.0'
 }
