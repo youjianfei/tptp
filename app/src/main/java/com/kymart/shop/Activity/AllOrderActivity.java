@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -242,12 +243,27 @@ public class AllOrderActivity extends BaseActivityother {
                 convertView = mLayoutInflater.inflate(R.layout.item_allorder_group, parent, false);
                 holder.mtextview_ordernumber= (TextView) convertView.findViewById(R.id.textview_ordernumber);
                 holder.mtextview_allprice= (TextView) convertView.findViewById(R.id.textview_allprice);
+                holder.mbutton_pay= (Button) convertView.findViewById(R.id.button_pay);
+                holder.mbutton_cancle= (Button) convertView.findViewById(R.id.button_cancle);
                 convertView.setTag(holder);
             } else {
                 holder= (ViewHolder) convertView.getTag();
             }
             holder.mtextview_ordernumber.setText(group.get(groupPosition).getMaster_order_sn());
             holder.mtextview_allprice.setText("￥"+group.get(groupPosition).getGoods_price());
+            holder.mbutton_cancle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LogUtils.LOG("ceshi","取消被电击");
+
+                }
+            });
+            holder.mbutton_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LogUtils.LOG("ceshi","pay被电击");
+                }
+            });
             return convertView;
         }
 
@@ -283,13 +299,13 @@ public class AllOrderActivity extends BaseActivityother {
         private class ViewHolder {
             TextView mtextview_ordernumber;
             TextView mtextview_allprice;
+            Button mbutton_cancle;
+            Button mbutton_pay;
 
             TextView mtextview_goodname;
             TextView mtextview_goodnum;
             TextView mtextview_goodprice;
             ImageView mimage_good;
-
-
 
         }
     }
