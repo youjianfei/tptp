@@ -39,7 +39,7 @@ import cn.kymart.tptp.R;
 
 public class PayActivity extends BaseActivityother {
     private IWXAPI api;
-    String  orderNumber="",price="";
+    String  orderNumber="",price="",type="";
     TextView mTextview_number,mTextview_price;
 
     ImageView image_select_alipay,image_select_wechatpay;
@@ -90,6 +90,7 @@ public class PayActivity extends BaseActivityother {
         Intent intent=getIntent();
         orderNumber=intent.getStringExtra("ordernumber");
         price=intent.getStringExtra("price");
+        type=intent.getStringExtra("type");
         LogUtils.LOG("ceshi","intend得到"+orderNumber+".."+price);
         mTextview_number.setText(orderNumber);
         mTextview_price.setText("￥"+price);
@@ -130,10 +131,15 @@ public class PayActivity extends BaseActivityother {
                 Map map_pay=new HashMap();
                 map_pay.clear();
                 if(pay==1){
-                    map_pay.put("order_sn",orderNumber);
+                    map_pay.put("order_sn",orderNumber);//支付宝参数
                     requestAlipayPay(map_pay);
                 }else{
-                    map_pay.put("master_order_sn",orderNumber);
+                    if(type.equals("gouwuche")){
+                        map_pay.put("master_order_sn",orderNumber);//微信参数
+                    }else if(type.equals("dingdan")){
+                        map_pay.put("order_sn",orderNumber);
+                    }
+
                     requestWechatPay(map_pay);
                 }
                 break;

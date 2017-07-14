@@ -414,6 +414,7 @@ public class OrderActivity extends BaseActivityother {
                     Intent intent_pay=new Intent(OrderActivity.this,PayActivity.class);
                     intent_pay.putExtra("ordernumber",price+"");
                     intent_pay.putExtra("price",""+result);
+                    intent_pay.putExtra("type","gouwuche");
                     startActivity(intent_pay);
                     finish();
                 } catch (JSONException e) {

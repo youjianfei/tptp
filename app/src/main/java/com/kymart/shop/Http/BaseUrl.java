@@ -14,7 +14,7 @@ public class BaseUrl {
 //    public  static String Baseimage="http://test.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
 
-////
+//////
     public  static String checkUpdate="https://kymart.cn/api/index/checkupdate";//强制更新——正式接口
     public  static String BaseURL="https://kymart.cn/index.php?";//主接口——测试接口正式接口
     public  static String BasegoodlistURL="https://kymart.cn";//商品列表主接口——测试接口
@@ -64,6 +64,7 @@ public class BaseUrl {
     public static String  wechatPay="m=Api&c=wxpay&a=dopay&token=";//微信支付  return "\(basePath)m=Api&c=wxpay&a=dopay&token=\(access_token())"
     public static String  AllOrder="m=Api&c=User&a=getOrderList&token=";//订单列表  \(access_token())"
     public static String  cancleOrder="m=Api&c=user&a=cancelOrder&token=";//删除订单  \(basePath)m=Api&c=user&a=cancelOrder&token=\(access_token())"
+    public static String  Orderdetail="m=Api&c=order&a=order_detail&token=";//订单详情 "\(basePath)m=Api&c=order&a=order_detail    &user_id=\(user_id)&id=\(id)&token=\(access_token())"
 
 
 }

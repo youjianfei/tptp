@@ -9,6 +9,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -334,6 +335,7 @@ public class AllOrderActivity extends BaseActivityother {
                     Intent intent_pay=new Intent(AllOrderActivity.this,PayActivity.class);
                     intent_pay.putExtra("ordernumber",group.get(groupPosition).getOrder_sn()+"");
                     intent_pay.putExtra("price",""+group.get(groupPosition).getGoods_price());
+                    intent_pay.putExtra("type","dingdan");
                     startActivity(intent_pay);
                 }
             });
@@ -343,10 +345,11 @@ public class AllOrderActivity extends BaseActivityother {
         @Override
         public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             ViewHolder holder=null;
-            AllOrderBean.ResultBean.GoodsListBean childrenBean=children.get(groupPosition).get(childPosition);
+            final AllOrderBean.ResultBean.GoodsListBean childrenBean=children.get(groupPosition).get(childPosition);
             if (convertView == null) {
                 holder=new ViewHolder();
                 convertView = mLayoutInflater.inflate(R.layout.item_allorder_children, parent, false);
+                holder.mlinearlayout_chilren= (LinearLayout) convertView.findViewById(R.id.linrealayout_chgliren);
                 holder.mtextview_goodname= (TextView) convertView.findViewById(R.id.textview_goodsname);
                 holder.mtextview_goodnum= (TextView) convertView.findViewById(R.id.textview_number);
                 holder.mtextview_goodprice= (TextView) convertView.findViewById(R.id.textview_goodsprice);
@@ -359,7 +362,14 @@ public class AllOrderActivity extends BaseActivityother {
             holder.mtextview_goodname.setText(childrenBean.getGoods_name());
             holder.mtextview_goodprice.setText("￥"+childrenBean.getGoods_price()+"元");
             holder.mtextview_goodnum.setText("×"+childrenBean.getGoods_num());
-
+            holder.mlinearlayout_chilren.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent_order_detail=new Intent(AllOrderActivity.this,OrderDetail.class);
+                    intent_order_detail.putExtra("orderid",childrenBean.getOrder_id()+"");
+                    startActivity(intent_order_detail);
+                }
+            });
             return convertView;
         }
 
@@ -375,6 +385,7 @@ public class AllOrderActivity extends BaseActivityother {
             Button mbutton_cancle;
             Button mbutton_pay;
 
+            LinearLayout mlinearlayout_chilren;
             TextView mtextview_goodname;
             TextView mtextview_goodnum;
             TextView mtextview_goodprice;
