@@ -3,6 +3,8 @@ package com.kymart.shop.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -45,6 +47,7 @@ public class OrderDetail extends BaseActivityother {
     private TextView textview_yue;
     private TextView textview_huodongyouhui;
     private TextView textview_yingfujine;
+    private LinearLayout mLinLogistics;
 
     private MyListView mListview;
     List<OrderDetailsBean.ResultBean.GoodsListBean>mData;
@@ -75,7 +78,7 @@ public class OrderDetail extends BaseActivityother {
 
     @Override
     protected void initListener() {
-
+        mLinLogistics.setOnClickListener(this);
     }
 
     @Override
@@ -101,9 +104,23 @@ public class OrderDetail extends BaseActivityother {
         textview_yue= (TextView) findViewById(R.id.useyue);
         textview_huodongyouhui= (TextView) findViewById(R.id.youhuihuodong);
         textview_yingfujine= (TextView) findViewById(R.id.orderprice);
+        mLinLogistics= (LinearLayout) findViewById(R.id.linearlayout_logistics);
         mListview= (MyListView) findViewById(R.id.listview_goods);
 
     }
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.linearlayout_logistics:
+                Intent intend_logistics=new Intent(OrderDetail.this,LogisticsWebActivity.class);
+                LogUtils.LOG("ceshi","wuliuID"+orderDetailsBean.getResult().getOrder_id());
+                intend_logistics.putExtra("ordreID",orderDetailsBean.getResult().getOrder_id()+"");
+                startActivity(intend_logistics);
+                break;
+        }
+    }
+
     void  requestOrderDetail(String ID){//订单详情请求
         String  URL= BaseUrl.BaseURL+BaseUrl.Orderdetail+ Staticdata.userBean_static.getResult().getToken()+"&user_id="+Staticdata.userBean_static.getResult().getUser_id()+"&id="+ID;
         LogUtils.LOG("ceshi","订单详情"+URL);

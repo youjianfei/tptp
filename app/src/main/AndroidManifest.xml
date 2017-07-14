@@ -82,7 +82,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="behind" />
         <activity android:name="com.kymart.shop.Activity.OrderAssessActivity" />
-        <activity android:name="com.kymart.shop.Activity.OrderDetail"></activity>
+        <activity android:name="com.kymart.shop.Activity.OrderDetail" />
+        <activity android:name="com.kymart.shop.Activity.LogisticsWebActivity"></activity>
     </application>
 
 </manifest>
