@@ -26,7 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.kymart.tptp.R;
 
@@ -138,7 +140,7 @@ public class AllOrderActivity extends BaseActivityother {
         mRelativelayout_noAccepty.setSelected(false);
         mRelativeLayout_noAssess.setSelected(false);
     }
-    void  requestOrder(int p,String TYPE){
+    void  requestOrder(int p,String TYPE){//请求订单
         String URL;
         if(type.equals("")){
             URL = BaseUrl.BaseURL+BaseUrl.AllOrder+ Staticdata.userBean_static.getResult().getToken()+"&user_id="+Staticdata.userBean_static.getResult().getUser_id()+"&p="+p;
@@ -186,6 +188,62 @@ public class AllOrderActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","全部订单失败");
             }
         }).Http(URL,this,0);
+    }
+    void requestOrderNumber(Map map, final String price){//提交订单号码跳转付款界面
+        String URL=BaseUrl.BaseURL+BaseUrl.ordernumber+Staticdata.userBean_static.getResult().getToken();
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","提交订单编号"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    int status = (Integer) object.get("status");
+                    String  msg = (String) object.get("msg");
+                    if(status!=1){
+                        ToastUtils.showToast(AllOrderActivity.this,msg);
+                        return;
+                    }
+                    String result=object.get("result")+"";
+
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
+
+    }
+    void cancleOrder(Map map){
+        String URL=BaseUrl.BaseURL+BaseUrl.cancleOrder+Staticdata.userBean_static.getResult().getToken();
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","取消订单"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    String  msg = (String) object.get("msg");
+                    ToastUtils.showToast(AllOrderActivity.this,msg);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
+
+
     }
     /*适配器*/
     class ListAdapter extends BaseExpandableListAdapter {
@@ -249,12 +307,23 @@ public class AllOrderActivity extends BaseActivityother {
             } else {
                 holder= (ViewHolder) convertView.getTag();
             }
-            holder.mtextview_ordernumber.setText(group.get(groupPosition).getMaster_order_sn());
+            if(group.get(groupPosition).getOrder_status_code().equals("WAITPAY")){//如果状态是待付款
+                holder.mbutton_cancle.setVisibility(View.VISIBLE);
+                holder.mbutton_pay.setVisibility(View.VISIBLE);
+            }else{
+                holder.mbutton_cancle.setVisibility(View.INVISIBLE);
+                holder.mbutton_pay.setVisibility(View.INVISIBLE);
+            }
+
+            holder.mtextview_ordernumber.setText(group.get(groupPosition).getOrder_sn());
             holder.mtextview_allprice.setText("￥"+group.get(groupPosition).getGoods_price());
             holder.mbutton_cancle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LogUtils.LOG("ceshi","取消被电击");
+                    Map map_cancleorder=new HashMap();
+                    map_cancleorder.put("order_id",group.get(groupPosition).getOrder_id()+"");
+                    cancleOrder(map_cancleorder);
 
                 }
             });
@@ -262,6 +331,10 @@ public class AllOrderActivity extends BaseActivityother {
                 @Override
                 public void onClick(View view) {
                     LogUtils.LOG("ceshi","pay被电击");
+                    Intent intent_pay=new Intent(AllOrderActivity.this,PayActivity.class);
+                    intent_pay.putExtra("ordernumber",group.get(groupPosition).getOrder_sn()+"");
+                    intent_pay.putExtra("price",""+group.get(groupPosition).getGoods_price());
+                    startActivity(intent_pay);
                 }
             });
             return convertView;

@@ -86,8 +86,6 @@
                 android:background="@drawable/button_conner_5_white"
                 android:layout_toLeftOf="@+id/button_pay"
                 />
-
-
     </RelativeLayout>
 
 
