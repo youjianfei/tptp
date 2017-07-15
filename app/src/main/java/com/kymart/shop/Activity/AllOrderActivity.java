@@ -243,9 +243,19 @@ public class AllOrderActivity extends BaseActivityother {
 
             }
         }).postHttp(URL,this,1,map);
+    }
 
+
+    void isButton(Button button,int i){
+        if(i==0){
+            button.setVisibility(View.GONE);
+        }else {
+            button.setVisibility(View.VISIBLE);
+        }
 
     }
+
+
     /*适配器*/
     class ListAdapter extends BaseExpandableListAdapter {
 
@@ -304,17 +314,23 @@ public class AllOrderActivity extends BaseActivityother {
                 holder.mtextview_allprice= (TextView) convertView.findViewById(R.id.textview_allprice);
                 holder.mbutton_pay= (Button) convertView.findViewById(R.id.button_pay);
                 holder.mbutton_cancle= (Button) convertView.findViewById(R.id.button_cancle);
+                holder.button_shouhuo= (Button) convertView.findViewById(R.id.button_shouhuo);
+                holder.button_pingjia= (Button) convertView.findViewById(R.id.button_pingjia);
+                holder.button_tuihui= (Button) convertView.findViewById(R.id.button_tuihuo);
+
+
+
+
                 convertView.setTag(holder);
             } else {
                 holder= (ViewHolder) convertView.getTag();
             }
-            if(group.get(groupPosition).getOrder_status_code().equals("WAITPAY")){//如果状态是待付款
-                holder.mbutton_cancle.setVisibility(View.VISIBLE);
-                holder.mbutton_pay.setVisibility(View.VISIBLE);
-            }else{
-                holder.mbutton_cancle.setVisibility(View.INVISIBLE);
-                holder.mbutton_pay.setVisibility(View.INVISIBLE);
-            }
+            isButton(holder.mbutton_pay,group.get(groupPosition).getPay_btn());
+            isButton(holder.mbutton_cancle,group.get(groupPosition).getCancel_btn());
+            isButton(holder.button_shouhuo,group.get(groupPosition).getReceive_btn());
+            isButton(holder.button_pingjia,group.get(groupPosition).getReturn_btn());
+            isButton(holder.button_tuihui,group.get(groupPosition).getComment_btn());
+
 
             holder.mtextview_ordernumber.setText(group.get(groupPosition).getOrder_sn());
             holder.mtextview_allprice.setText("￥"+group.get(groupPosition).getGoods_price());
@@ -383,7 +399,8 @@ public class AllOrderActivity extends BaseActivityother {
             TextView mtextview_ordernumber;
             TextView mtextview_allprice;
             Button mbutton_cancle;
-            Button mbutton_pay;
+            Button mbutton_pay,button_shouhuo,button_pingjia,button_tuihui;
+
 
             LinearLayout mlinearlayout_chilren;
             TextView mtextview_goodname;

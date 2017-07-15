@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,10 +18,16 @@ import com.kymart.shop.CustomView.MyListView;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.kymart.tptp.R;
 
@@ -48,6 +55,7 @@ public class OrderDetail extends BaseActivityother {
     private TextView textview_huodongyouhui;
     private TextView textview_yingfujine;
     private LinearLayout mLinLogistics;
+    private Button  button_pay,button_cancle,button_shouhuo,button_pingjia,button_tuihui;
 
     private MyListView mListview;
     List<OrderDetailsBean.ResultBean.GoodsListBean>mData;
@@ -73,12 +81,16 @@ public class OrderDetail extends BaseActivityother {
         mAdapter=new Adapter_orderDetailsGoodslist(mData,this);
         mListview.setAdapter(mAdapter);
         requestOrderDetail(orderID);
-
     }
 
     @Override
     protected void initListener() {
         mLinLogistics.setOnClickListener(this);
+        button_pay.setOnClickListener(this);
+        button_cancle.setOnClickListener(this);
+        button_shouhuo.setOnClickListener(this);
+        button_pingjia.setOnClickListener(this);
+        button_tuihui.setOnClickListener(this);
     }
 
     @Override
@@ -106,6 +118,11 @@ public class OrderDetail extends BaseActivityother {
         textview_yingfujine= (TextView) findViewById(R.id.orderprice);
         mLinLogistics= (LinearLayout) findViewById(R.id.linearlayout_logistics);
         mListview= (MyListView) findViewById(R.id.listview_goods);
+        button_pay= (Button) findViewById(R.id.button_pay);
+        button_cancle= (Button) findViewById(R.id.button_cancle);
+        button_shouhuo= (Button) findViewById(R.id.button_shouhuo);
+        button_pingjia= (Button) findViewById(R.id.button_pingjia);
+        button_tuihui= (Button) findViewById(R.id.button_tuihuo);
 
     }
     @Override
@@ -117,6 +134,26 @@ public class OrderDetail extends BaseActivityother {
                 LogUtils.LOG("ceshi","wuliuID"+orderDetailsBean.getResult().getOrder_id());
                 intend_logistics.putExtra("ordreID",orderDetailsBean.getResult().getOrder_id()+"");
                 startActivity(intend_logistics);
+                break;
+            case R.id.button_pay:
+                LogUtils.LOG("ceshi","pay被电击");
+                Intent intent_pay=new Intent(OrderDetail.this,PayActivity.class);
+                intent_pay.putExtra("ordernumber",orderDetailsBean.getResult().getOrder_sn()+"");
+                intent_pay.putExtra("price",""+orderDetailsBean.getResult().getGoods_price());
+                intent_pay.putExtra("type","dingdan");
+                startActivity(intent_pay);
+                break;
+            case R.id.button_cancle:
+                LogUtils.LOG("ceshi","取消被电击");
+                Map map_cancleorder=new HashMap();
+                map_cancleorder.put("order_id",orderDetailsBean.getResult().getOrder_id()+"");
+                cancleOrder(map_cancleorder);
+                break;
+            case R.id.button_shouhuo:
+                break;
+            case R.id.button_pingjia:
+                break;
+            case R.id.button_tuihuo:
                 break;
         }
     }
@@ -246,5 +283,44 @@ public class OrderDetail extends BaseActivityother {
         textview_yue.setText("使用余额：￥"+orderDetailsBean.getResult().getUser_money()+"元");
         textview_huodongyouhui.setText("优惠活动：￥"+orderDetailsBean.getResult().getOrder_prom_amount()+"元");
         textview_yingfujine.setText("应付金额：￥"+orderDetailsBean.getResult().getOrder_amount()+"元");
+        isButton(button_pay,orderDetailsBean.getResult().getPay_btn());
+        isButton(button_cancle,orderDetailsBean.getResult().getCancel_btn());
+        isButton(button_shouhuo,orderDetailsBean.getResult().getReceive_btn());
+        isButton(button_tuihui,orderDetailsBean.getResult().getReturn_btn());
+        isButton(button_pingjia,orderDetailsBean.getResult().getComment_btn());
+    }
+
+    void isButton(Button button,int i){
+        if(i==0){
+            button.setVisibility(View.GONE);
+        }else {
+            button.setVisibility(View.VISIBLE);
+        }
+
+    }
+    void cancleOrder(Map map){
+        String URL=BaseUrl.BaseURL+BaseUrl.cancleOrder+Staticdata.userBean_static.getResult().getToken();
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","取消订单"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    String  msg = (String) object.get("msg");
+                    ToastUtils.showToast(OrderDetail.this,msg);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
+
+
     }
 }
