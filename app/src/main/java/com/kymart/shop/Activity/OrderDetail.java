@@ -150,6 +150,10 @@ public class OrderDetail extends BaseActivityother {
                 cancleOrder(map_cancleorder);
                 break;
             case R.id.button_shouhuo:
+                LogUtils.LOG("ceshi","确认收货被电击");
+                Map map_shouhuo=new HashMap();
+                map_shouhuo.put("order_id",orderDetailsBean.getResult().getOrder_id()+"");
+                shouhuo(map_shouhuo);
                 break;
             case R.id.button_pingjia:
                 break;
@@ -304,6 +308,31 @@ public class OrderDetail extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi","取消订单"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    String  msg = (String) object.get("msg");
+                    ToastUtils.showToast(OrderDetail.this,msg);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
+
+
+    }
+    void shouhuo(Map map){
+        String URL=BaseUrl.BaseURL+BaseUrl.shouhuo+Staticdata.userBean_static.getResult().getToken();
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","确认收货"+respose);
                 JSONObject object = null;
                 try {
                     object = new JSONObject(respose);

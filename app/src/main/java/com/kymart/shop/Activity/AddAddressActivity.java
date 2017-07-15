@@ -270,6 +270,7 @@ public class AddAddressActivity extends BaseActivityother {
                     int  state= (int) object.get("status");
                     if(state==1){
                         ToastUtils.showToast(AddAddressActivity.this,"添加地址成功");
+                        finish();
                     }else {
                         ToastUtils.showToast(AddAddressActivity.this,"请确保每项格式正确");
                     }

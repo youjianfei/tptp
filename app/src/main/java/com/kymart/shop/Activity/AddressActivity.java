@@ -146,11 +146,29 @@ public class AddressActivity extends BaseActivityother {
             holder.mTextview_phonenumber.setText(bean.getMobile());
             if(bean.getIs_default()==1){
                 holder.mImageView_select.setSelected(true);
+                Intent mIntent = new Intent();
+                mIntent.putExtra("Province", bean.getProvince());
+                if(bean.getCity()!=0){
+                    mIntent.putExtra("City", bean.getCity());
+                }
+                if(bean.getDistrict()!=0){
+                    mIntent.putExtra("District", bean.getDistrict());
+                }
+                if(bean.getTwon()!=0){
+                    mIntent.putExtra("Twon", bean.getTwon());
+                }
+                mIntent.putExtra("Address", bean.getAddress());
+                mIntent.putExtra("Address_id", bean.getAddress_id());
+                mIntent.putExtra("Consignee", bean.getConsignee());
+                mIntent.putExtra("Mobile", bean.getMobile());
+
+                // 设置结果，并进行传送
+               setResult(RESULT_OK, mIntent);
             }else{
 
                 holder.mImageView_select.setSelected(false);
             }
-//            holder.mTextview_address.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getDistrict()+"  "+bean.getTwon()+" "+bean.getAddress());
+
 
             if (bean.getProvince()!=0){//请求网络 根据ID获得市县信息
                 final viewHolder finalHolder = holder;
@@ -243,6 +261,7 @@ public class AddressActivity extends BaseActivityother {
                     }
                 }).Http(BaseUrl.BaseURL+BaseUrl.cityId+bean.getProvince(),mContext,0);
             }
+
             holder.mImageView_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

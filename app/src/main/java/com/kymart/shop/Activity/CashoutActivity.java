@@ -37,8 +37,6 @@ public class CashoutActivity extends BaseActivityother {
     private ImageView mImage_Code;
     MyListView myListView;
 
-
-
     List<CashoutListBean.ResultBean> mListData;
     Adapter_CashoutList mAdapter;
 
@@ -169,10 +167,13 @@ public class CashoutActivity extends BaseActivityother {
                 }
                 mListData.addAll(new Gson().fromJson(respose,CashoutListBean.class).getResult());
                 mAdapter.notifyDataSetChanged();
-                editText_money.setText(mListData.get(0).getMoney());
-                edit_bank.setText(mListData.get(0).getBank_name());
-                edit_bannumber.setText(mListData.get(0).getBank_card());
-                edit_name.setText(mListData.get(0).getRealname());
+                if(mListData.size()>0){
+                    editText_money.setText(mListData.get(0).getMoney());
+                    edit_bank.setText(mListData.get(0).getBank_name());
+                    edit_bannumber.setText(mListData.get(0).getBank_card());
+                    edit_name.setText(mListData.get(0).getRealname());
+                }
+
             }
 
             @Override

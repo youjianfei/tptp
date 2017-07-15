@@ -47,7 +47,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@color/blank"
+                    android:background="@mipmap/order"
                     android:layout_centerVertical="true"
                     />
                 <LinearLayout
@@ -139,7 +139,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@color/blank"
+                    android:background="@mipmap/pay"
                     android:layout_centerVertical="true"
                     />
                 <LinearLayout
@@ -216,7 +216,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/dizhi"
+                    android:src="@mipmap/weizhi"
                     android:layout_marginLeft="10dp"
                     />
                 <RelativeLayout
@@ -272,7 +272,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/dizhi"
+                    android:src="@mipmap/wuliu"
                     android:layout_marginLeft="10dp"
                     />
                 <RelativeLayout

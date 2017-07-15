@@ -114,7 +114,7 @@ public class OrderActivity extends BaseActivityother {
             case R.id.linearlayout_address:
                 //点击地址跳转
                 Intent intent_address=new Intent(this,AddressActivity.class);
-                startActivity(intent_address);
+                startActivityForResult(intent_address,0);
 
                 break;
             case R.id.button_useyue:
@@ -165,6 +165,27 @@ public class OrderActivity extends BaseActivityother {
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) {
+            case RESULT_OK://
+                LogUtils.LOG("ceshi","选择地址返回");
+                orderBean.getResult().getAddressList().setAddress(data.getStringExtra("Address"));
+                orderBean.getResult().getAddressList().setProvince(data.getIntExtra("Province",0));
+                orderBean.getResult().getAddressList().setCity(data.getIntExtra("City",0));
+                orderBean.getResult().getAddressList().setDistrict(data.getIntExtra("District",0));
+                orderBean.getResult().getAddressList().setTwon(data.getIntExtra("Twon",0));
+                orderBean.getResult().getAddressList().setAddress_id(data.getIntExtra("Address_id",0));
+                orderBean.getResult().getAddressList().setConsignee(data.getStringExtra("Consignee"));
+                orderBean.getResult().getAddressList().setMobile(data.getStringExtra("Mobile"));
+                requestAddressName();
+                break;
+            default:
+                break;
+        }
+    }
+
     KProgressHUD mKProgressHUD;
    void  requestOrder(){
        String  URL= BaseUrl.BaseURL+BaseUrl.order+ Staticdata.userBean_static.getResult().getToken();
@@ -191,93 +212,9 @@ public class OrderActivity extends BaseActivityother {
 
                orderBean=new Gson().fromJson(respose,OrderBean.class);
 
-               //收货信息数据展示
-               name.setText(orderBean.getResult().getAddressList().getConsignee());
-               phonenumber.setText(orderBean.getResult().getAddressList().getMobile());
 
 
-               //根据地址id获得地址
-               final String[] address = {"","","",""};
-               mKProgressHUD.setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                       .setCancellable(true)
-                       .setAnimationSpeed(2)
-                       .setDimAmount(0.5f)
-                       .show();
-               new  Volley_Utils(new Interface_volley_respose() {
-                   @Override
-                   public void onSuccesses(String respose) {
-                       final List<CityIDBean> cityList=new ArrayList<>();
-                       LogUtils.LOG("ceshi",respose);
-                       CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
-                       LogUtils.LOG("ceshi",cityIDBean.getName());
-                       address[0] =cityIDBean.getName();
-                       address_.setText(address[0]);
-                       if(orderBean.getResult().getAddressList().getCity()!=0){
-                           new  Volley_Utils(new Interface_volley_respose() {
-                               @Override
-                               public void onSuccesses(String respose) {
-                                   CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
-                                   address[1] =cityIDBean.getName();
-                                   address_.setText(address[0]+" "+ address[1]);
-                                   if(orderBean.getResult().getAddressList().getDistrict()!=0){
-                                       new  Volley_Utils(new Interface_volley_respose() {
-                                           @Override
-                                           public void onSuccesses(String respose) {
-                                               LogUtils.LOG("ceshi","第三层请求");
-                                               CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
-                                               address[2] =cityIDBean.getName();
-                                               address_.setText(address[0]+" "+ address[1]+" "+address[2]);
-
-                                               if(orderBean.getResult().getAddressList().getTwon()!=0){
-                                                   new  Volley_Utils(new Interface_volley_respose() {
-                                                       @Override
-                                                       public void onSuccesses(String respose) {
-                                                           CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
-                                                           address[3] =cityIDBean.getName();
-                                                           address_.setText(address[0]+" "+ address[1]+" "+address[2]+" "+address[3]+orderBean.getResult().getAddressList().getAddress());
-                                                           mKProgressHUD.dismiss();
-                                                       }
-
-                                                       @Override
-                                                       public void onError(int error) {
-
-                                                       }
-                                                   }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getTwon(),OrderActivity.this,0);
-                                               }else {
-                                                   address_.setText(address[0]+" "+ address[1]+" "+address[2]+orderBean.getResult().getAddressList().getAddress());
-                                                   mKProgressHUD.dismiss();
-                                               }
-
-                                           }
-
-                                           @Override
-                                           public void onError(int error) {
-
-                                           }
-                                       }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getDistrict(),OrderActivity.this,0);
-                                   }else {
-                                       address_.setText(address[0]+" "+ address[1]+orderBean.getResult().getAddressList().getAddress());
-                                       mKProgressHUD.dismiss();
-                                   }
-                               }
-
-                               @Override
-                               public void onError(int error) {
-
-                               }
-                           }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getCity(),OrderActivity.this,0);
-                       }else {
-                           address_.setText(address[0]+orderBean.getResult().getAddressList().getAddress());
-                           mKProgressHUD.dismiss();
-                       }
-                   }
-
-                   @Override
-                   public void onError(int error) {
-
-                   }
-               }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getProvince(),OrderActivity.this,0);
-
+               requestAddressName();
                //商品列表数据
                mListDataGroup.clear();
                mListDataChildren.clear();
@@ -394,7 +331,94 @@ public class OrderActivity extends BaseActivityother {
             }
         }).postHttp(URL,OrderActivity.this,1,mapOrderSubmit);
     }
+    void requestAddressName(){
+        //收货信息数据展示
+        name.setText(orderBean.getResult().getAddressList().getConsignee());
+        phonenumber.setText(orderBean.getResult().getAddressList().getMobile());
+        //根据地址id获得地址
+        final String[] address = {"","","",""};
+        mKProgressHUD.setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                final List<CityIDBean> cityList=new ArrayList<>();
+                LogUtils.LOG("ceshi",respose);
+                CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                LogUtils.LOG("ceshi",cityIDBean.getName());
+                address[0] =cityIDBean.getName();
+                address_.setText(address[0]);
+                if(orderBean.getResult().getAddressList().getCity()!=0){
+                    new  Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                            address[1] =cityIDBean.getName();
+                            address_.setText(address[0]+" "+ address[1]);
+                            if(orderBean.getResult().getAddressList().getDistrict()!=0){
+                                new  Volley_Utils(new Interface_volley_respose() {
+                                    @Override
+                                    public void onSuccesses(String respose) {
+                                        LogUtils.LOG("ceshi","第三层请求");
+                                        CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                                        address[2] =cityIDBean.getName();
+                                        address_.setText(address[0]+" "+ address[1]+" "+address[2]);
 
+                                        if(orderBean.getResult().getAddressList().getTwon()!=0){
+                                            new  Volley_Utils(new Interface_volley_respose() {
+                                                @Override
+                                                public void onSuccesses(String respose) {
+                                                    CityIDBean  cityIDBean=new  Gson().fromJson(respose,CityIDBean.class);
+                                                    address[3] =cityIDBean.getName();
+                                                    address_.setText(address[0]+" "+ address[1]+" "+address[2]+" "+address[3]+orderBean.getResult().getAddressList().getAddress());
+                                                    mKProgressHUD.dismiss();
+                                                }
+
+                                                @Override
+                                                public void onError(int error) {
+
+                                                }
+                                            }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getTwon(),OrderActivity.this,0);
+                                        }else {
+                                            address_.setText(address[0]+" "+ address[1]+" "+address[2]+orderBean.getResult().getAddressList().getAddress());
+                                            mKProgressHUD.dismiss();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onError(int error) {
+
+                                    }
+                                }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getDistrict(),OrderActivity.this,0);
+                            }else {
+                                address_.setText(address[0]+" "+ address[1]+orderBean.getResult().getAddressList().getAddress());
+                                mKProgressHUD.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getCity(),OrderActivity.this,0);
+                }else {
+                    address_.setText(address[0]+orderBean.getResult().getAddressList().getAddress());
+                    mKProgressHUD.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(BaseUrl.BaseURL+BaseUrl.cityId+orderBean.getResult().getAddressList().getProvince(),OrderActivity.this,0);
+
+
+    }
     void requestOrderNumber(Map map, final String price){//提交订单号码跳转付款界面
         String URL=BaseUrl.BaseURL+BaseUrl.ordernumber+Staticdata.userBean_static.getResult().getToken();
         new  Volley_Utils(new Interface_volley_respose() {
@@ -434,7 +458,7 @@ public class OrderActivity extends BaseActivityother {
     @Override
     protected void onResume() {
         super.onResume();
-        requestOrder();
+//        requestOrder();
     }
 
     /*适配器*/

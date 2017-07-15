@@ -1,7 +1,9 @@
 package com.kymart.shop.AppStaticData;
 
 import com.kymart.shop.Bean.AddressListBean;
+import com.kymart.shop.Bean.AddressNameBean;
 import com.kymart.shop.Bean.BuyGoodBean;
+import com.kymart.shop.Bean.OrderBean;
 import com.kymart.shop.Bean.UserBean;
 import com.kymart.shop.Bean.personCenterBean;
 
@@ -27,8 +29,6 @@ public class Staticdata {
     public static BuyGoodBean bean= new BuyGoodBean();
     public static AddressListBean.ResultBean mList_address= new AddressListBean.ResultBean();
     public static personCenterBean personCenterBean= new personCenterBean();
-
-
-
+    public static AddressNameBean addressNameBean= new AddressNameBean();
 
 }

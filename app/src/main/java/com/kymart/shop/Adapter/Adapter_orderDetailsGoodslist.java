@@ -51,7 +51,7 @@ public class Adapter_orderDetailsGoodslist extends  BaseAdapter{
         holdr.mtext_name.setText(bean.getGoods_name());
         holdr.mtext_num.setText("×"+bean.getGoods_num());
         holdr.mtext_goodprice.setText(bean.getGoods_price());
-        holdr.mtext_price.setText(bean.getMarket_price());
+        holdr.mtext_price.setText(bean.getGoods_price()+"×"+bean.getGoods_num());
         return convertView;
     }
 

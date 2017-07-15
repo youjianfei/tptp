@@ -232,7 +232,7 @@ public class AllOrderActivity extends BaseActivityother {
                     object = new JSONObject(respose);
                     String  msg = (String) object.get("msg");
                     ToastUtils.showToast(AllOrderActivity.this,msg);
-
+                    requestOrder(1,type);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -244,7 +244,31 @@ public class AllOrderActivity extends BaseActivityother {
             }
         }).postHttp(URL,this,1,map);
     }
+    void shouhuo(Map map){
+        String URL=BaseUrl.BaseURL+BaseUrl.shouhuo+Staticdata.userBean_static.getResult().getToken();
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","确认收货"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    String  msg = (String) object.get("msg");
+                    ToastUtils.showToast(AllOrderActivity.this,msg);
+                    requestOrder(1,type);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
+
+
+    }
 
     void isButton(Button button,int i){
         if(i==0){
@@ -341,6 +365,16 @@ public class AllOrderActivity extends BaseActivityother {
                     Map map_cancleorder=new HashMap();
                     map_cancleorder.put("order_id",group.get(groupPosition).getOrder_id()+"");
                     cancleOrder(map_cancleorder);
+
+                }
+            });
+            holder.button_shouhuo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LogUtils.LOG("ceshi","确认收货");
+                    Map map_shouhuo=new HashMap();
+                    map_shouhuo.put("order_id",group.get(groupPosition).getOrder_id()+"");
+                    shouhuo(map_shouhuo);
 
                 }
             });

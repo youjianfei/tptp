@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.AddAddressActivity;
 import com.kymart.shop.Activity.AddressActivity;
+import com.kymart.shop.Activity.AllOrderActivity;
 import com.kymart.shop.Activity.CashoutActivity;
 import com.kymart.shop.Activity.JiangZYActivity;
 import com.kymart.shop.Activity.LoginActivity;
@@ -45,7 +46,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends;
+    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan;
 
     personCenterBean person;
 
@@ -77,6 +78,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_shenqingtixian.setOnClickListener(this);
         mRE_jiangjinzhuanyue.setOnClickListener(this);
         mRE_shareFrends.setOnClickListener(this);
+        mRE_quanbudingdan.setOnClickListener(this);
     }
 
     String name="";
@@ -126,6 +128,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_shenqingtixian= (RelativeLayout) rootView.findViewById(R.id.re_shenqingtixian);
         mRE_jiangjinzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinzhuanyue);
         mRE_shareFrends= (RelativeLayout) rootView.findViewById(R.id.re_fenxianghaoyou);
+        mRE_quanbudingdan= (RelativeLayout) rootView.findViewById(R.id.re_dingdan);
     }
 
     @Override
@@ -171,6 +174,10 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
             case R.id.re_fenxianghaoyou:
                 Intent intent_sahreFrends=new Intent(getActivity(), ShareFriendsActivity.class);
                 getActivity().startActivity(intent_sahreFrends);
+                break;
+            case R.id.re_dingdan:
+                Intent intent_dingdan=new Intent(getActivity(), AllOrderActivity.class);
+                getActivity().startActivity(intent_dingdan);
                 break;
         }
     }

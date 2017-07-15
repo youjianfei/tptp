@@ -66,6 +66,7 @@ public class BaseUrl {
     public static String  cancleOrder="m=Api&c=user&a=cancelOrder&token=";//删除订单  \(basePath)m=Api&c=user&a=cancelOrder&token=\(access_token())"
     public static String  Orderdetail="m=Api&c=order&a=order_detail&token=";//订单详情 "\(basePath)m=Api&c=order&a=order_detail    &user_id=\(user_id)&id=\(id)&token=\(access_token())"
     public static String  logistics="m=Api&c=user&a=express&token=";//物流信息  return "\(basePath)m=Api&c=user&a=express&order_id=\(order_id)&token=\(access_token())"
+    public static String  shouhuo="m=Api&c=user&a=orderConfirm&token=";//确认收货  return "\(basePath)m=Api&c=user&a=orderConfirm&token=\(access_token())"
 
 
 }
