@@ -48,7 +48,7 @@ public class Adapter_Grid_main_viewpager_Promotion extends BaseAdapter {
         }
         Glide.with(mContext).load(BaseUrl.BaseURL+BaseUrl.main_imgURL+bean.getGoods_id()).into(holder.mImageview);
         holder.mtextview_name.setText(bean.getGoods_name());
-        holder.mTextview_price.setText(bean.getShop_price());
+        holder.mTextview_price.setText("￥"+bean.getShop_price());
 
 
 

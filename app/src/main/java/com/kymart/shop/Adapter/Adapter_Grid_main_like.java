@@ -48,7 +48,7 @@ public class Adapter_Grid_main_like extends BaseAdapter{
         }
         Glide.with(mContext).load(BaseUrl.BaseURL+BaseUrl.main_imgURL+bean.getGoods_id()).into(holder.mImage);
         holder.mtextview_name.setText(bean.getGoods_name());
-        holder.mtextview_price.setText(bean.getShop_price());
+        holder.mtextview_price.setText("￥"+bean.getShop_price());
 
 
         return convertView;
