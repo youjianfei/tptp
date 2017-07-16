@@ -74,17 +74,7 @@ public class QRcodeActivity extends BaseActivityother {
                int height = (int) (width * 1.77);
                final ImageView imageView=new ImageView(QRcodeActivity.this);
                Glide.with(QRcodeActivity.this).load(BaseUrl.BasegoodlistURL+URL_QRcode).into(imageView);
-               imageView.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       Bitmap bitmap = imageView.getDrawingCache();
-                       if(bitmap!=null){
-                           LogUtils.LOG("ceshi","图片不为空");
-                           MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "title", "description");
-                       }
-                       LogUtils.LOG("ceshi","图片为空");
-                   }
-               });
+
 
                LinearLayout.LayoutParams mLayoutParams = new LinearLayout.LayoutParams(
                        width, height);

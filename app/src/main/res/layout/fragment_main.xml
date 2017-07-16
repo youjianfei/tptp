@@ -192,7 +192,25 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 />
-
+            <!--三张自定义图片适应宽高-->
+            <RelativeLayout
+                android:id="@+id/REL_fenxiangqu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/REL_title"
+                />
+            <RelativeLayout
+                android:id="@+id/REL_cuxiaoqu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/REL_title"
+                />
+            <RelativeLayout
+                android:id="@+id/REL_miaoshaoqu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/REL_title"
+                />
 
 
 

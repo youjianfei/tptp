@@ -33,11 +33,11 @@
         android:layout_below="@+id/RelativeLayout_title"
         >
         <RelativeLayout
-            android:id="@+id/REL_QRcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/REL_title"
-            >
+        android:id="@+id/REL_QRcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/REL_title"
+        >
 
 
         </RelativeLayout>

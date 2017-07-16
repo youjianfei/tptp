@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -19,8 +21,8 @@ import com.kymart.shop.Activity.EmptyActivity;
 import com.kymart.shop.Activity.GoodDetailsActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.LoginActivity;
-import com.kymart.shop.Activity.MainActivity;
 import com.kymart.shop.CustomView.CustomerScrollView;
+import com.kymart.shop.Utils.SizeUtils;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -74,6 +76,10 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
     private ViewPager mViewPager_main_icon;
 
+    private RelativeLayout mre_image_fenxiangqu;
+    private RelativeLayout mre_image_cuxiaoqu;
+    private RelativeLayout mre_image_miaoshaqu;
+
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
     private ViewPager mViewPager_item_thred;
@@ -113,6 +119,10 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
 
         mViewPager_main_icon= (ViewPager) rootview.findViewById(R.id.viewpager_main_icon);
+
+        mre_image_fenxiangqu= (RelativeLayout) rootview.findViewById(R.id.REL_fenxiangqu);
+        mre_image_cuxiaoqu= (RelativeLayout) rootview.findViewById(R.id.REL_cuxiaoqu);
+        mre_image_miaoshaqu= (RelativeLayout) rootview.findViewById(R.id.REL_miaoshaoqu);
 
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
         mViewPager_item_second = (ViewPager) rootview.findViewById(R.id.viewpager_second);
@@ -481,6 +491,8 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         mainFragment_icon.add(mainFragmnet_icon_one);
         mainFragment_icon.add(mainFragmnet_icon_two);
 
+        //添加分享区  促销区 秒杀区图片
+        initfenxiangqu();
 
 
 
@@ -511,6 +523,28 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
 
     }
+    //添加分享区  促销区 秒杀区图片
+   void initfenxiangqu(){
+       int width = SizeUtils.getScreenWidthPx(getActivity());
+       int height = (int) (width * 0.22);
+       final ImageView imageView_fenxiang=new ImageView(getActivity());
+       imageView_fenxiang.setImageResource(R.mipmap.fenxiangqu_);
+       LinearLayout.LayoutParams mLayoutParams_fenxiang = new LinearLayout.LayoutParams(
+               width, height);
+       mre_image_fenxiangqu.addView(imageView_fenxiang, mLayoutParams_fenxiang);
+
+       final ImageView imageView_cuxiaoqu=new ImageView(getActivity());
+       imageView_cuxiaoqu.setImageResource(R.mipmap.cuxiaoqu_l);
+       LinearLayout.LayoutParams mLayoutParams_cuxiao = new LinearLayout.LayoutParams(
+               width, height);
+       mre_image_cuxiaoqu.addView(imageView_cuxiaoqu, mLayoutParams_cuxiao);
+
+       final ImageView imageView_miaoshao=new ImageView(getActivity());
+       imageView_miaoshao.setImageResource(R.mipmap.miaoshaoqu_l);
+       LinearLayout.LayoutParams mLayoutParams_miaosha = new LinearLayout.LayoutParams(
+               width, height);
+       mre_image_miaoshaqu.addView(imageView_miaoshao, mLayoutParams_miaosha);
+   }
 
     @Override
     public void onClick(View v) {
