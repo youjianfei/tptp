@@ -175,6 +175,32 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+
+
+            <!--图标翻页viewpager-->
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_main_icon"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
+            <LinearLayout
+                android:id="@+id/dot_group_main_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                />
+
+
+
+
+
+
+
+
+
             <include
                 android:id="@+id/include_first"
                 layout="@layout/viewpager_item_first"

@@ -65,10 +65,21 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     private Banner mViewpager;//顶部轮播图
     private LinearLayout linear_dianpujie,linear_pinpaijie,linear_dingdan, mLearlayout_personcenter,mLinearlayout_search;
 
+
+
+
+    Fragment mainFragmnet_icon_one;
+    Fragment mainFragmnet_icon_two;
+    List<Fragment> mainFragment_icon;
+
+    private ViewPager mViewPager_main_icon;
+
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
     private ViewPager mViewPager_item_thred;
     private ViewPager mViewPager_item_fouth;
+
+    private LinearLayout Viewpager_dot_mainIcon;
     private LinearLayout viewpager_dot_first;
     private LinearLayout viewpager_dot_second;
     private LinearLayout viewpager_dot_third;
@@ -100,11 +111,16 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         linear_dingdan= (LinearLayout) rootview.findViewById(R.id.Linear_dingdan);
         mLearlayout_personcenter= (LinearLayout) rootview.findViewById(R.id.linearlayout_main_personcenter);
 
+
+        mViewPager_main_icon= (ViewPager) rootview.findViewById(R.id.viewpager_main_icon);
+
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
         mViewPager_item_second = (ViewPager) rootview.findViewById(R.id.viewpager_second);
         mViewPager_item_thred = (ViewPager) rootview.findViewById(R.id.viewpager_thred);
         mViewPager_item_fouth = (ViewPager) rootview.findViewById(R.id.viewpager_fouth);
 
+
+        Viewpager_dot_mainIcon= (LinearLayout) rootview.findViewById(R.id.dot_group_main_icon);
         viewpager_dot_first= (LinearLayout) rootview.findViewById(R.id.dot_group_first);
         viewpager_dot_second= (LinearLayout) rootview.findViewById(R.id.dot_group_second);
         viewpager_dot_third= (LinearLayout) rootview.findViewById(R.id.dot_group_third);
@@ -137,7 +153,25 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         linear_dianpujie.setOnClickListener(this);
         linear_pinpaijie.setOnClickListener(this);
         linear_dingdan.setOnClickListener(this);
+        mViewPager_main_icon.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i=0;i<2;i++){
+                    Viewpager_dot_mainIcon.getChildAt(i).setEnabled(false);//把上一个小圆点设为false
+                }
+                Viewpager_dot_mainIcon.getChildAt(position).setEnabled(true);//设置小点为白色
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         mViewPager_item_first.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -254,10 +288,18 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         /**
          * 初始化Adapter
          */
+
+
+        FragmentAdapter mFragmentAdapter_main_icon = new FragmentAdapter(getFragmentManager(), mainFragment_icon);
+        mViewPager_main_icon.setAdapter(mFragmentAdapter_main_icon);
+
         FragmentAdapter mFragmentAdapter1 = new FragmentAdapter(getFragmentManager(), fragments.get(0));
         FragmentAdapter mFragmentAdapter2 = new FragmentAdapter(getFragmentManager(), fragments.get(1));
         FragmentAdapter mFragmentAdapter3 = new FragmentAdapter(getFragmentManager(), fragments.get(2));
         FragmentAdapter mFragmentAdapter4 = new FragmentAdapter(getFragmentManager(), fragments.get(3));
+        /**
+         * 给各个viewpager绑定fragment
+         */
         mViewPager_item_first.setAdapter(mFragmentAdapter1);
         mViewPager_item_second.setAdapter(mFragmentAdapter2);
         mViewPager_item_thred.setAdapter(mFragmentAdapter3);
@@ -329,6 +371,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
     }
 
+
     /**
      *促销商品viewpager数据初始化
      * @param mlist  每个viewpager的总数居
@@ -395,6 +438,29 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
         }
     }
+    void addDot_mainIcon(LinearLayout viewpager_dot,int count){
+        View dotview;
+        for(int i=0;i<2;i++){
+            //准备小圆点的数据
+            dotview=new View(getContext());
+            dotview.setBackgroundResource(R.drawable.dot_selector);
+            //设置小圆点的宽和高
+            LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(15,15);
+            if(i!=0){
+                params.leftMargin=10;//设置小白点间距
+            }
+            dotview.setLayoutParams(params);
+            //设置小圆点的状态
+            if(i==0){
+                dotview.setEnabled(true);//第一个小白点初始化
+            }else{
+                dotview.setEnabled(false);
+            }
+            //把小圆点添加到线性布局中
+            viewpager_dot.addView(dotview);
+
+        }
+    }
 
 
     private void initData() {
@@ -408,6 +474,17 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
             mImagesURL.add(adBean.get(i).getAd_code());
 
         }
+
+        mainFragmnet_icon_one=new Fragment_main_icon_one();
+        mainFragmnet_icon_two=new Fragment_main_icon_two();
+        mainFragment_icon=new ArrayList<>();
+        mainFragment_icon.add(mainFragmnet_icon_one);
+        mainFragment_icon.add(mainFragmnet_icon_two);
+
+
+
+
+
         //初始化数据   四种类型  初始化四次
         if(mData_viewpager_promotion.size()==0){
             rootview.findViewById(R.id.include_first).setVisibility(View.GONE);
@@ -421,6 +498,9 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         if(mData_viewpager_hot.size()==0){
             rootview.findViewById(R.id.include_fouth).setVisibility(View.GONE);
         }
+
+        addDot_mainIcon(Viewpager_dot_mainIcon,2);
+
         initDataPromotion(mData_viewpager_promotion,viewpager_dot_first,0);
         initDataPromotion(mData_viewpager_highQuality,viewpager_dot_second,1);
         initDataPromotion(mData_viewpager_flashSale,viewpager_dot_third,2);
