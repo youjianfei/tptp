@@ -391,7 +391,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         mProgress.show();
                         // 直接下载
                      new downloadApkThread().start();
-                      new   downloadApkThread().start();
 
                     }
 
