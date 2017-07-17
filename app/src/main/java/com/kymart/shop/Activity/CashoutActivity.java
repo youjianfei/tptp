@@ -31,10 +31,9 @@ import cn.kymart.tptp.R;
 public class CashoutActivity extends BaseActivityother {
     private TextView textview_name,textview_ID,text_loadmore;
     private ImageView image_seclect_yue,image_sseclect_cashout;
-    private EditText editText_money,edit_bank,edit_bannumber,edit_name,edit_QRcode;
+    private EditText editText_money,edit_bank,edit_bannumber,edit_name;
     Button mbutton_submit;
 
-    private ImageView mImage_Code;
     MyListView myListView;
 
     List<CashoutListBean.ResultBean> mListData;
@@ -47,8 +46,8 @@ public class CashoutActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        mImage_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
-        LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
+//        mImage_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
+//        LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
         request_listview(1);//请求提现记录列表
 
 
@@ -65,7 +64,7 @@ public class CashoutActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mImage_Code.setOnClickListener(this);
+//        mImage_Code.setOnClickListener(this);
         text_loadmore.setOnClickListener(this);
         image_seclect_yue.setOnClickListener(this);
         image_sseclect_cashout.setOnClickListener(this);
@@ -80,14 +79,14 @@ public class CashoutActivity extends BaseActivityother {
         edit_bank= (EditText) findViewById(R.id.edit_bank);
         edit_bannumber= (EditText) findViewById(R.id.edit_banknumber);
         edit_name= (EditText) findViewById(R.id.edit_name);
-        edit_QRcode= (EditText) findViewById(R.id.edit_QRcode);
+//        edit_QRcode= (EditText) findViewById(R.id.edit_QRcode);
         mbutton_submit= (Button) findViewById(R.id.button_submit);
 
         image_seclect_yue= (ImageView) findViewById(R.id.seclect_yue);
         image_seclect_yue.setSelected(true);//默认余额提现
         image_sseclect_cashout= (ImageView) findViewById(R.id.seclect_cashout);
 
-        mImage_Code= (ImageView) findViewById(R.id.image_code);
+//        mImage_Code= (ImageView) findViewById(R.id.image_code);
         myListView= (MyListView) findViewById(R.id.listview_item);
         text_loadmore= (TextView) findViewById(R.id.textview_loadmore);
     }
@@ -127,11 +126,11 @@ public class CashoutActivity extends BaseActivityother {
                     ToastUtils.showToast(this,"请填写开户名");
                     return;
                 }
-                String  QRcode=edit_QRcode.getText()+"";
-                if(!QRcode.equals(CodeUtils.getInstance().getCode())){
-                    ToastUtils.showToast(this,"验证码不正确");
-                    return;
-                }
+//                String  QRcode=edit_QRcode.getText()+"";
+//                if(!QRcode.equals(CodeUtils.getInstance().getCode())){
+//                    ToastUtils.showToast(this,"验证码不正确");
+//                    return;
+//                }
                 Map  map_cashout=new HashMap();
                 map_cashout.put("changetype",""+type);
                 map_cashout.put("money",money);
@@ -143,10 +142,10 @@ public class CashoutActivity extends BaseActivityother {
 
 
                 break;
-            case R.id.image_code:
-                mImage_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
-                LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
-                break;
+//            case R.id.image_code:
+//                mImage_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
+//                LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
+//                break;
             case R.id.textview_loadmore:
                 page++;
                 request_listview(page);

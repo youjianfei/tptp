@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Activity.ShopcarActivity;
 import com.kymart.shop.Adapter.Adapter_List_popwindow;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.BuyGoodBean;
@@ -63,7 +64,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private LinearLayout mLinear_bottom;
     private Banner mBanner;
     private TextView mTextview_GoodName;
-    private TextView mTextview_price,mTextview_result,mtextview_Addshopcar;
+    private TextView mTextview_price,mTextview_result,mtextview_Addshopcar,mtextview_buynow;
     private ImageView mImageview_icon;
 
 
@@ -106,7 +107,23 @@ public class Fragment_GoodDatails_good extends Fragment {
                     Map map;
                     map=count();
                     if(map!=null){
-                        request_addShopCar(map);
+                        request_addShopCar(map,false);
+                    }
+
+                }else{
+                    Intent intent=new Intent(getActivity(),LoginActivity.class);
+                    getActivity(). startActivity(intent);
+                }
+            }
+        });
+        mtextview_buynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isLogin==1) {//登录状态,添加到购物车
+                    Map map;
+                    map=count();
+                    if(map!=null){
+                        request_addShopCar(map,true);
                     }
 
                 }else{
@@ -141,7 +158,7 @@ public class Fragment_GoodDatails_good extends Fragment {
         mTextview_result= (TextView) rootview.findViewById(R.id.text_result);
         mLinearout_result= (LinearLayout) rootview.findViewById(R.id.LinearLayout_result);
         mtextview_Addshopcar= (TextView) rootview.findViewById(R.id.textview_Addshopcar);
-
+        mtextview_buynow= (TextView) rootview.findViewById(R.id.textview_buy);
 
     }
     void request(){
@@ -343,7 +360,7 @@ public class Fragment_GoodDatails_good extends Fragment {
                     Map map=new HashMap();
                     map=count();
                     if(map!=null){
-                        request_addShopCar(map);
+                        request_addShopCar(map,false);
                     }
 
                 }else{
@@ -366,7 +383,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     RequestQueue requestQueue ;
 
 
-    void request_addShopCar(Map<String ,Object> map){
+    void request_addShopCar(Map<String ,Object> map, final boolean isbuynow){
         LogUtils.LOG("ceshi","postMap"+map.toString());
         requestQueue = Volley.newRequestQueue(getActivity());
 
@@ -388,6 +405,10 @@ public class Fragment_GoodDatails_good extends Fragment {
                             String  msg = (String) object.get("msg");
                             LogUtils.LOG("ceshi","添加购物车成功"+response);
                             ToastUtils.showToast(getActivity(),msg);
+                            if(isbuynow&&status==1){//如果是立即购买
+                            Intent intent=new Intent(getActivity(), ShopcarActivity.class);
+                                startActivity(intent);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

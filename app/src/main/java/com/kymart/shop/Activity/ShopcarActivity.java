@@ -1,9 +1,9 @@
-package com.kymart.shop.Fragment;
+package com.kymart.shop.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +14,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.kymart.shop.Activity.LoginActivity;
-import com.kymart.shop.Activity.OrderActivity;
 import com.kymart.shop.Adapter.BaseAdapter;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.ShopCarBean;
+import com.kymart.shop.Fragment.Fragment_shopCar;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
@@ -33,19 +32,13 @@ import java.util.List;
 import java.util.Map;
 
 import cn.kymart.tptp.R;
-import ren.qinc.numberbutton.NumberButton;
 
 import static com.kymart.shop.Activity.MainActivity.mMainactivity;
 import static com.kymart.shop.AppStaticData.Staticdata.UUID_static;
 import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 
-/**
- * Created by Administrator on 2017/6/11.
- */
-
-public class Fragment_shopCar  extends Fragment{
-    View  rootView;
+public class ShopcarActivity extends BaseActivityother {
     private Button mButton_add;
 
     private ListView mListview_shopcar;
@@ -53,63 +46,34 @@ public class Fragment_shopCar  extends Fragment{
     private double price;
 
 
-    Adapter_shopCarList mAdapter;
+   Adapter_shopCarList mAdapter;
 
     List<ShopCarBean.ResultBean.StoreListBean> mListAllStore;
     List<ShopCarBean.ResultBean.StoreListBean.CartListBean> mData;
+    @Override
+    public int setLayoutResID() {
+        return R.layout.activity_shopcar;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-        rootView=inflater.inflate(R.layout.fragment_shopcar,container,false);
-        initview();
-        initData();
-        setData();
-        initListener();
-
-
-
-
-        return rootView;
-    }
-    Map map;
-    private void initListener() {
-
-        mButton_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isLogin==1){
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
-                }else{
-                    Intent intend=new Intent(getActivity(), LoginActivity.class);
-                    getActivity().startActivity(intend);
-
-                }
-            }
-        });
-        mTextview_jiesuan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(price==0){
-                    ToastUtils.showToast(getActivity(),"购物车是空的");
-                    return;
-                }
-                Intent intent_jiesuan=new Intent(getActivity(), OrderActivity.class);
-                startActivity(intent_jiesuan);
-            }
-        });
-    }
-
-    private void setData() {
-
-
+    protected void setData() {
 
     }
 
+    @Override
+    protected void initData() {
+        map=new HashMap();
+        mListAllStore=new ArrayList<>();
+        mData=new ArrayList<>();
+
+
+        mAdapter=new Adapter_shopCarList(mData,this);
+        mListview_shopcar.setAdapter(mAdapter);
+    }
     private void request(Map map) {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi","购物车列表"+BaseUrl.BaseURL+BaseUrl.shopCarList);
                 LogUtils.LOG("ceshi",respose);
                 shopCarChange=false;
                 ShopCarBean.ResultBean resuleBEan=new Gson().fromJson(respose,ShopCarBean.class).getResult();
@@ -139,29 +103,44 @@ public class Fragment_shopCar  extends Fragment{
             public void onError(int error) {
 
             }
-        }).postHttp(BaseUrl.BaseURL+BaseUrl.shopCarList,getActivity(),1,map);
+        }).postHttp(BaseUrl.BaseURL+BaseUrl.shopCarList,this,1,map);
 
     }
-
-    private void initData() {
-        map=new HashMap();
-        mListAllStore=new ArrayList<>();
-        mData=new ArrayList<>();
-
-
-        mAdapter=new Adapter_shopCarList(mData,getContext());
-        mListview_shopcar.setAdapter(mAdapter);
-
-
+    Map map;
+    @Override
+    protected void initListener() {
+//        mButton_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(isLogin==1){
+//                    mMainactivity.onClick(ShopcarActivity.this.findViewById(R.id.rl_2));
+//                }else{
+//                    Intent intend=new Intent(ShopcarActivity.this, LoginActivity.class);
+//                    ShopcarActivity.this.startActivity(intend);
+//
+//                }
+//            }
+//        });
+        mTextview_jiesuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(price==0){
+                    ToastUtils.showToast(ShopcarActivity.this,"购物车是空的");
+                    return;
+                }
+                Intent intent_jiesuan=new Intent(ShopcarActivity.this, OrderActivity.class);
+                startActivity(intent_jiesuan);
+            }
+        });
     }
 
-    private void initview() {
-        mButton_add= (Button) rootView.findViewById(R.id.add_shopCar);
-        mListview_shopcar= (ListView) rootView.findViewById(R.id.Listview_shopcar);
-        mTextview_jiesuan= (TextView) rootView.findViewById(R.id.text_jiesuan);
-        mTextview_allPrice= (TextView) rootView.findViewById(R.id.text_allPrice);
+    @Override
+    protected void initView() {
+        mButton_add= (Button) findViewById(R.id.add_shopCar);
+        mListview_shopcar= (ListView) findViewById(R.id.Listview_shopcar);
+        mTextview_jiesuan= (TextView) findViewById(R.id.text_jiesuan);
+        mTextview_allPrice= (TextView) findViewById(R.id.text_allPrice);
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -174,12 +153,11 @@ public class Fragment_shopCar  extends Fragment{
             if(!shopCarChange){//判断是否是点击 加减 产生的请求，如果false，  cart_form_data字段为空
                 map.put("cart_form_data","");
             }
-            LogUtils.LOG("ceshi","unique_id："+UUID_static+"user_id："+userBean_static.getResult().getUser_id() +"token："+userBean_static.getResult().getToken()+"cart_form_data:"+ "");
+            LogUtils.LOG("ceshi","unique_id"+UUID_static+"user_id"+userBean_static.getResult().getUser_id() +"token"+userBean_static.getResult().getToken() );
 
             request(map);
         }
     }
-
 
 
     boolean shopCarChange=false;
@@ -211,7 +189,7 @@ public class Fragment_shopCar  extends Fragment{
                 holder.mNumberButton= (AnimShopButton) convertView.findViewById(R.id.numberButton_count);
                 convertView.setTag(holder);
             }else{
-                holder= (ViewHolder) convertView.getTag();
+                holder= (Adapter_shopCarList.ViewHolder) convertView.getTag();
             }
             holder.mImage_check.setSelected(true);
 //            holder.mNumberButton.setCurrentNumber(bean.getGoods_num());
@@ -279,11 +257,11 @@ public class Fragment_shopCar  extends Fragment{
 
                     LogUtils.LOG("ceshi","删除商品信息ids...."+bean.getId()+"token..."+Staticdata.userBean_static.getResult().getToken()+"unique_id..."+Staticdata.UUID_static);
 
-                    new  Volley_Utils(new Interface_volley_respose() {
+                    new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
                             LogUtils.LOG("ceshi","删除商品成功"+respose);
-                            ToastUtils.showToast(getActivity(),"删除成功");
+                            ToastUtils.showToast(ShopcarActivity.this,"删除成功");
                             request(map);
                         }
 
@@ -291,7 +269,7 @@ public class Fragment_shopCar  extends Fragment{
                         public void onError(int error) {
 
                         }
-                    }).postHttp(BaseUrl.BaseURL+BaseUrl.delGood,getActivity(),1,delmap);
+                    }).postHttp(BaseUrl.BaseURL+BaseUrl.delGood,ShopcarActivity.this,1,delmap);
                 }
             });
 
@@ -299,20 +277,6 @@ public class Fragment_shopCar  extends Fragment{
             return convertView;
         }
 
-//        public void shopcarChange( Map map_change){//编辑商品数量
-//            new Volley_Utils(new Interface_volley_respose() {
-//                @Override
-//                public void onSuccesses(String respose) {
-//
-//                }
-//
-//                @Override
-//                public void onError(int error) {
-//
-//                }
-//            }).postHttp(BaseUrl.BaseURL+BaseUrl.shopCarList,mContext,1,map_change);
-//
-//        }
         class ViewHolder {
             ImageView mImage_check;
             ImageView mImage_goodPIC;

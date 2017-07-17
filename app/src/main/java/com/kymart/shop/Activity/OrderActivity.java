@@ -53,6 +53,7 @@ public class OrderActivity extends BaseActivityother {
     OrderPriceBean oederpriceBean;
 
     private TextView name,phonenumber,address_,shangpinzonge,peisongfeiyong,useyouhuiquan,usejifen,useyue,youhuihuodong,orderprice;
+    private TextView keyongyue,keyongjifen;
     private EditText edit_yue,edit_jifen;
 
     private Button mButton_submit,mButton_useyue,mButton_usejifen;
@@ -90,6 +91,8 @@ public class OrderActivity extends BaseActivityother {
     protected void initView() {
         mLinearlayout_address= (LinearLayout) findViewById(R.id.linearlayout_address);
         mListview= (MyExpandableListView) findViewById(R.id.MyExpandableListView);
+        keyongyue= (TextView) findViewById(R.id.text_keyongyue);
+        keyongjifen= (TextView) findViewById(R.id.text_keyongjifen);
         name= (TextView) findViewById(R.id.textview_name);
         phonenumber= (TextView) findViewById(R.id.textview_phonenumber);
         address_= (TextView) findViewById(R.id.textview_address);
@@ -232,8 +235,9 @@ public class OrderActivity extends BaseActivityother {
                }
 
                edit_yue.setHint("可以使用的余额为"+orderBean.getResult().getUserInfo().getUser_money());
+               keyongyue.setText("可用余额:￥"+orderBean.getResult().getUserInfo().getUser_money());
                edit_jifen.setHint("可以使用的积分为"+orderBean.getResult().getUserInfo().getPay_points());
-
+                keyongjifen.setText("可用积分:"+orderBean.getResult().getUserInfo().getPay_points());
 
                requestOrderPrice(0);
            }

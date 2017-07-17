@@ -27,10 +27,9 @@ import cn.kymart.tptp.R;
 import static cn.kymart.tptp.R.id.textview_accountname;
 
 public class JiangZYActivity extends BaseActivityother {
-    ImageView mImageview_Code;
     TextView mTextview_money,mTextview_name,mTextview_ID;
     Button mButton_submit;
-    EditText mEdit_moneynumber,mEdit_QRcode;
+    EditText mEdit_moneynumber;
     String QRcode="";
     int  moneyNumber=0;
     @Override
@@ -48,37 +47,37 @@ public class JiangZYActivity extends BaseActivityother {
         mTextview_name.setText(Staticdata.personCenterBean.getResult().getNickname());
         mTextview_ID.setText(Staticdata.personCenterBean.getResult().getOperator_status()==0? "会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id() ):"会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id())+"(运营商)");
         mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus());
-        mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
-        LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
+//        mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
+//        LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
 
     }
 
     @Override
     protected void initListener() {
-        mImageview_Code.setOnClickListener(this);
+//        mImageview_Code.setOnClickListener(this);
         mButton_submit.setOnClickListener(this);
 
     }
 
     @Override
     protected void initView() {
-        mImageview_Code= (ImageView) findViewById(R.id.image_code);
+//        mImageview_Code= (ImageView) findViewById(R.id.image_code);
         mTextview_money= (TextView) findViewById(R.id.textview_money);
         mTextview_name= (TextView) findViewById(textview_accountname);
         mTextview_ID= (TextView) findViewById(R.id.textview_id);
         mButton_submit= (Button) findViewById(R.id.button_submit);
         mEdit_moneynumber= (EditText) findViewById(R.id.editText_moneynumber);
-        mEdit_QRcode= (EditText) findViewById(R.id.edit_QRcode);
+//        mEdit_QRcode= (EditText) findViewById(R.id.edit_QRcode);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
-            case R.id.image_code:
-                mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
-                LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
-                break;
+//            case R.id.image_code:
+////                mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
+//                LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
+//                break;
             case R.id.button_submit:
                 String money=mEdit_moneynumber.getText()+"";
                 if(money.equals("")){
@@ -91,11 +90,11 @@ public class JiangZYActivity extends BaseActivityother {
                     ToastUtils.showToast(this,"输入金额有误!");
                     return;
                 }
-                QRcode=mEdit_QRcode.getText()+"";
-                if(!QRcode.equals(CodeUtils.getInstance().getCode())){
-                    ToastUtils.showToast(this,"请输入正确的验证码!");
-                    return;
-                }
+//                QRcode=mEdit_QRcode.getText()+"";
+//                if(!QRcode.equals(CodeUtils.getInstance().getCode())){
+//                    ToastUtils.showToast(this,"请输入正确的验证码!");
+//                    return;
+//                }
 
                 LogUtils.LOG("ceshi","一切输入正确!");
                 jzyMap.put("money",moneyNumber+"");
