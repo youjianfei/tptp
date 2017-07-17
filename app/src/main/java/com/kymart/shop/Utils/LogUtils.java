@@ -7,13 +7,13 @@ import android.util.Log;
  */
 
 public   class LogUtils {
-    static boolean log =true;
+    static boolean log =false;
 
    public static void LOG(String tag, String message){
        if(log){
            Log.i(tag,message);
        }else{
-           Log.i("ceshi","log日志关闭");
+//           Log.i("ceshi","log日志关闭");
        }
 
    }
