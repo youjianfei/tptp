@@ -53,6 +53,7 @@ import java.util.Map;
 import static com.kymart.shop.AppStaticData.Staticdata.UUID_static;
 import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
+import static com.kymart.shop.Fragment.Fragment_classification.fragment_classification;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
   public static  MainActivity mMainactivity;
@@ -536,6 +537,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
                     mLastTime = System.currentTimeMillis();
                 } else {
+//                    if(fragment_classification!=null){
+//                        fragment_classification=null;
+//                    }
                     // 两次返回时间小于两秒，可以退出
                     finish();
                 }
@@ -547,6 +551,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 mLastTime = System.currentTimeMillis();
             } else {
                 // 两次返回时间小于两秒，可以退出
+//                if(fragment_classification!=null){
+//                    fragment_classification=null;
+//                }
                 finish();
             }
         }

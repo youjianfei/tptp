@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.kymart.shop.Activity.AllOrderActivity;
+import com.kymart.shop.Activity.FenLeiActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
 
@@ -62,43 +63,53 @@ public class Fragment_main_icon_two  extends Fragment implements View.OnClickLis
                     Intent intent=new Intent(getActivity(),LoginActivity.class);
                     startActivityForResult(intent,0);
                 }
+
                 break;
             case R.id.Linear_meizhuanggehu:
-                Staticdata.left_position=1;
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
-                if(fragment_classification!=null){
-                    fragment_classification.repuestDataLeft(1);
-                }
-
+//                Staticdata.left_position=1;
+//                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
+//                if(fragment_classification!=null){
+//                    fragment_classification.repuestDataLeft(1);
+//                }
+                Intent intent10=new Intent(getActivity(), FenLeiActivity.class);
+                intent10.putExtra("ID",10);
+                startActivity(intent10);
                 break;
 
             case R.id.Linear_yundonghuwai:
-                Staticdata.left_position=2;
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
-                if(fragment_classification!=null){
-                    fragment_classification.repuestDataLeft(2);
-                }
-
+//                Staticdata.left_position=2;
+//                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
+//                if(fragment_classification!=null){
+//                    fragment_classification.repuestDataLeft(2);
+//                }
+                Intent intent11=new Intent(getActivity(), FenLeiActivity.class);
+                intent11.putExtra("ID",11);
+                startActivity(intent11);
 
 
                 break;
 
             case R.id.Linear_qicheyongpin:
-                Staticdata.left_position=3;
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
-                if(fragment_classification!=null){
-                    fragment_classification.repuestDataLeft(3);
-                }
-
+//                Staticdata.left_position=3;
+//                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
+//                if(fragment_classification!=null){
+//                    fragment_classification.repuestDataLeft(3);
+//                }
+                Intent intent12=new Intent(getActivity(), FenLeiActivity.class);
+                intent12.putExtra("ID",12);
+                startActivity(intent12);
 
                 break;
 
             case R.id.linearlayout_shenghuochuxing:
                 Staticdata.left_position=5;
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
-                if(fragment_classification!=null){
-                    fragment_classification.repuestDataLeft(5);
-                }
+//                mMainactivity.onClick(getActivity().findViewById(R.id.rl_2));
+//                if(fragment_classification!=null){
+//                    fragment_classification.repuestDataLeft(5);
+//                }
+                Intent intent399=new Intent(getActivity(), FenLeiActivity.class);
+                intent399.putExtra("ID",399);
+                startActivity(intent399);
                 break;
 
             case R.id.Linear_dianpujie:

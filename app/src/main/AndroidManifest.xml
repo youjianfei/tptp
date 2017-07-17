@@ -85,7 +85,8 @@
         <activity android:name="com.kymart.shop.Activity.OrderDetail" />
         <activity android:name="com.kymart.shop.Activity.LogisticsWebActivity" />
         <activity android:name="com.kymart.shop.Activity.GoodList_moduleActivity" />
-        <activity android:name="com.kymart.shop.Activity.GoodSearchActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.GoodSearchActivity" />
+        <activity android:name="com.kymart.shop.Activity.FenLeiActivity"></activity>
     </application>
 
 </manifest>

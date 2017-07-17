@@ -19,6 +19,7 @@ import com.kymart.shop.Adapter.Adapter_classification_right_list;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.Classifacation_leftBean;
 import com.kymart.shop.Bean.Classification_rightBean;
+import com.kymart.shop.Bean.MainBean;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import cn.kymart.tptp.R;
@@ -41,6 +42,7 @@ public class Fragment_classification extends Fragment {
     private List<Classification_rightBean.ResultEntity> mData_right;//分类  右边的列表的数据
     private Adapter_classification_right_list Adapter_right;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_classification, container, false);
@@ -61,7 +63,8 @@ public class Fragment_classification extends Fragment {
      */
     public void repuestDataLeft(final int leftposition) {//请求左边列表数据的网络请求
         String URL = BaseUrl.BaseURL + BaseUrl.classificationleft;
-        LogUtils.LOG("ceshi","volley"+fragment_classification.getActivity());
+//        LogUtils.LOG("ceshi","左边"+fragment_classification.getActivity());
+
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -72,19 +75,18 @@ public class Fragment_classification extends Fragment {
                 Adapter_left.notifyDataSetInvalidated();//重新加载到listview
                 Adapter_left.notifyDataSetChanged();
                 requestDataRight(mData_left.get(leftposition).getId());
-
             }
 
             @Override
             public void onError(int error) {
 
             }
-        }).Http(URL, fragment_classification.getActivity(), 0);
+        }).Http(URL, getActivity(), 0);
     }
 
     private void requestDataRight(int id) {//请求右边
         // 列表数据的网络请求
-        LogUtils.LOG("ceshi", "点击" + id);
+        LogUtils.LOG("ceshi", "点击" + id+"...."+BaseUrl.BaseURL + BaseUrl.classificationright + id);
         String URL = BaseUrl.BaseURL + BaseUrl.classificationright + id;
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -123,6 +125,7 @@ public class Fragment_classification extends Fragment {
      */
     private void initData() {
         fragment_classification=this;
+        LogUtils.LOG("ceshi","kljkljklj");
         mData_left = new ArrayList<>();
         Adapter_left = new Adapter_classification_left(mData_left, getContext());
         mListview_left.setAdapter(Adapter_left);
@@ -137,6 +140,5 @@ public class Fragment_classification extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 }
