@@ -152,6 +152,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     mFragment_classification=new Fragment_classification();
                     transaction.add(R.id.fl_main, mFragment_classification).commit();
                 }else{
+
                     transaction.show(mFragment_classification).commit();
                 }
                 break;
@@ -526,14 +527,30 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private long mLastTime = 0;
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() - mLastTime > 2000) {
-            // 两次返回时间超出两秒
-            Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
-            mLastTime = System.currentTimeMillis();
-        } else {
-            // 两次返回时间小于两秒，可以退出
-            finish();
+        if(mFragment_classification!=null){
+            if(!mFragment_classification.isHidden()){
+                mMainactivity.onClick(this.findViewById(R.id.rl_1));
+            }else{
+                if (System.currentTimeMillis() - mLastTime > 2000) {
+                    // 两次返回时间超出两秒
+                    Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
+                    mLastTime = System.currentTimeMillis();
+                } else {
+                    // 两次返回时间小于两秒，可以退出
+                    finish();
+                }
+            }
+        }else{
+            if (System.currentTimeMillis() - mLastTime > 2000) {
+                // 两次返回时间超出两秒
+                Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
+                mLastTime = System.currentTimeMillis();
+            } else {
+                // 两次返回时间小于两秒，可以退出
+                finish();
+            }
         }
+
     }
 
 

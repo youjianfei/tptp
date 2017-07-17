@@ -29,6 +29,7 @@ public class Staticdata {
     public static BuyGoodBean bean= new BuyGoodBean();
     public static AddressListBean.ResultBean mList_address= new AddressListBean.ResultBean();
     public static personCenterBean personCenterBean= new personCenterBean();
-    public static AddressNameBean addressNameBean= new AddressNameBean();
+
+    public static int  left_position=0;//商品列表左边点击的位置
 
 }

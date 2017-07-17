@@ -83,7 +83,9 @@
             android:screenOrientation="behind" />
         <activity android:name="com.kymart.shop.Activity.OrderAssessActivity" />
         <activity android:name="com.kymart.shop.Activity.OrderDetail" />
-        <activity android:name="com.kymart.shop.Activity.LogisticsWebActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.LogisticsWebActivity" />
+        <activity android:name="com.kymart.shop.Activity.GoodList_moduleActivity" />
+        <activity android:name="com.kymart.shop.Activity.GoodSearchActivity"></activity>
     </application>
 
 </manifest>

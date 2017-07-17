@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_goods_list"
+    android:id="@+id/activity_good_list_module"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kymart.shop.Activity.GoodsListActivity">
-
+    tools:context="com.kymart.shop.Activity.GoodList_moduleActivity">
     <RelativeLayout
         android:id="@+id/REL_title"
         android:layout_width="match_parent"
@@ -63,98 +62,6 @@
             android:textCursorDrawable="@null"
             android:textSize="16dp" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-        <RelativeLayout
-            android:id="@+id/RelativeLayout_Latest"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="最新"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/select_goods_list" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/RelativeLayout_Sales"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="销量"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/select_goods_list" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/RelativeLayout_Comments"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="评论"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/select_goods_list" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/RelativeLayout_Price"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/textview_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="价格"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/textview_price"
-                android:src="@mipmap/sort" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/select_goods_list" />
-        </RelativeLayout>
-    </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -191,8 +98,6 @@
         </LinearLayout>
 
     </com.kymart.shop.CustomView.CustomerScrollView>
-
-
 
 
 </LinearLayout>

@@ -12,6 +12,7 @@
         android:background="@color/white"
         >
 
+
     <com.youth.banner.Banner
         android:id="@+id/Banner_goodImage"
         android:layout_width="match_parent"
@@ -114,6 +115,12 @@
 
     </LinearLayout>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/imageview_icon"
+        android:layout_width="54dp"
+        android:layout_height="68dp"
+        android:layout_alignParentRight="true"
+        />
     <TextView
         android:id="@+id/textview_Addshopcar"
         android:layout_width="match_parent"

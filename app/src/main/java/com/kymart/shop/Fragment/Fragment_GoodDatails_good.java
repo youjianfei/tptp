@@ -33,11 +33,13 @@ import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.ToastUtils;
+import com.kymart.shop.Utils.Utils;
 import com.kymart.shop.Utils.Volley_Utils;
 import com.kymart.shop.class_.GlideImageLoader;
 import com.youth.banner.Banner;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private Banner mBanner;
     private TextView mTextview_GoodName;
     private TextView mTextview_price,mTextview_result,mtextview_Addshopcar;
-
+    private ImageView mImageview_icon;
 
 
 
@@ -133,6 +135,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private void initview() {
         mLinear_bottom= (LinearLayout) rootview.findViewById(R.id.LinearLayout_bottom);
         mBanner= (Banner) rootview.findViewById(R.id.Banner_goodImage);
+        mImageview_icon= (ImageView) rootview.findViewById(R.id.imageview_icon);
         mTextview_GoodName= (TextView) rootview.findViewById(R.id.textview_goodName);
         mTextview_price= (TextView) rootview.findViewById(R.id.textview_goodPrice);
         mTextview_result= (TextView) rootview.findViewById(R.id.text_result);
@@ -145,6 +148,8 @@ public class Fragment_GoodDatails_good extends Fragment {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","商品详情url:"+BaseUrl.BaseURL+BaseUrl.goodDetails+"&id="+Id);
+                LogUtils.LOG("ceshi","商品详情："+respose);
 
                 if(resultBean==null){
                     return;
@@ -154,11 +159,12 @@ public class Fragment_GoodDatails_good extends Fragment {
                     return;
                 }
                 goodBean=resultBean.getGoods();
+
                 if(galleryBean==null){
                     return;
                 }
                 galleryBean=resultBean.getGallery();
-
+                mImageview_icon.setImageResource(Utils.selectICON(goodBean.getKy_type()));
                 lunBoTU();//顶部轮播图方法执行
                 mTextview_GoodName.setText(goodBean.getGoods_name());
 
@@ -375,8 +381,16 @@ public class Fragment_GoodDatails_good extends Fragment {
                         if(mPopupWindow!=null&&mPopupWindow.isShowing()){
                             mPopupWindow.dismiss();
                         }
-
-                ToastUtils.showToast(getActivity(),"添加购物车成功");
+                        JSONObject object = null;
+                        try {
+                            object = new JSONObject(response.toString());
+                            int status = (Integer) object.get("status");
+                            String  msg = (String) object.get("msg");
+                            LogUtils.LOG("ceshi","添加购物车成功"+response);
+                            ToastUtils.showToast(getActivity(),msg);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
 
@@ -393,7 +407,6 @@ public class Fragment_GoodDatails_good extends Fragment {
 
         requestQueue.add(jsonRequest);
     }
-
 
 
 

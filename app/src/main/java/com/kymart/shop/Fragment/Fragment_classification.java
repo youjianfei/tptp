@@ -1,5 +1,6 @@
 package com.kymart.shop.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import com.kymart.shop.Adapter.Adapter_classification_left;
 import com.kymart.shop.Adapter.Adapter_classification_right_list;
+import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.Classifacation_leftBean;
 import com.kymart.shop.Bean.Classification_rightBean;
 import com.kymart.shop.Http.BaseUrl;
@@ -28,7 +30,9 @@ import com.kymart.shop.Utils.Volley_Utils;
  */
 
 public class Fragment_classification extends Fragment {
+    public static Fragment_classification fragment_classification;
     View rootview;
+
     private ListView mListview_left;//分类  左边的列表
     private List<Classifacation_leftBean.ResultEntity> mData_left;//分类  左边的列表的数据
     private Adapter_classification_left Adapter_left;//分类  左边的列表的数据的适配器
@@ -46,7 +50,8 @@ public class Fragment_classification extends Fragment {
 
         initData();
         initListenner();
-        repuestDataLeft();
+        LogUtils.LOG("ceshi","kljkljklj");
+        repuestDataLeft(Staticdata.left_position);
 
         return rootview;
     }
@@ -54,17 +59,19 @@ public class Fragment_classification extends Fragment {
     /**
      * 网络请求
      */
-    private void repuestDataLeft() {//请求左边列表数据的网络请求
+    public void repuestDataLeft(final int leftposition) {//请求左边列表数据的网络请求
         String URL = BaseUrl.BaseURL + BaseUrl.classificationleft;
+        LogUtils.LOG("ceshi","volley"+fragment_classification.getActivity());
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","请求左侧数据");
+                mData_left.clear();
                 mData_left.addAll(new Gson().fromJson(respose, Classifacation_leftBean.class).getResult());
+                Adapter_left.setSelectedPosition(leftposition);//传入点击的条目位置
+                Adapter_left.notifyDataSetInvalidated();//重新加载到listview
                 Adapter_left.notifyDataSetChanged();
-
-                requestDataRight(mData_left.get(0).getId());//默认请求第一个二级菜单
-
-                
+                requestDataRight(mData_left.get(leftposition).getId());
 
             }
 
@@ -72,7 +79,7 @@ public class Fragment_classification extends Fragment {
             public void onError(int error) {
 
             }
-        }).Http(URL, getContext(), 0);
+        }).Http(URL, fragment_classification.getActivity(), 0);
     }
 
     private void requestDataRight(int id) {//请求右边
@@ -101,6 +108,7 @@ public class Fragment_classification extends Fragment {
         mListview_left.setOnItemClickListener(new AdapterView.OnItemClickListener() {//监听左边列表的点击  颜色变化
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {//监听左边列表点击
+                LogUtils.LOG("ceshi","条目点击的位置"+position);
                 Adapter_left.setSelectedPosition(position);//传入点击的条目位置
                 Adapter_left.notifyDataSetInvalidated();//重新加载到listview
 
@@ -114,6 +122,7 @@ public class Fragment_classification extends Fragment {
      * 初始化数据
      */
     private void initData() {
+        fragment_classification=this;
         mData_left = new ArrayList<>();
         Adapter_left = new Adapter_classification_left(mData_left, getContext());
         mListview_left.setAdapter(Adapter_left);
@@ -125,4 +134,9 @@ public class Fragment_classification extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 }

@@ -18,6 +18,7 @@ public class Goods_ListBean {
     private String msg;
     private ResultBean result;
 
+
     public int getStatus() {
         return status;
     }
@@ -169,6 +170,7 @@ public class Goods_ListBean {
              */
 
             private int goods_id;
+            private int ky_type;
             private int cat_id3;
             private String goods_sn;
             private String goods_name;
@@ -230,6 +232,14 @@ public class Goods_ListBean {
 
             public void setGood_comment_rate(int good_comment_rate) {
                 this.good_comment_rate = good_comment_rate;
+            }
+
+            public int getKy_type() {
+                return ky_type;
+            }
+
+            public void setKy_type(int ky_type) {
+                this.ky_type = ky_type;
             }
         }
 

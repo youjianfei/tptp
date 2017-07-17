@@ -872,6 +872,7 @@ public class GoodDetailsBean {
              * goods_content :
              */
 
+            private int ky_type;
             private int goods_id;
             private int cat_id1;
             private int cat_id2;
@@ -921,6 +922,14 @@ public class GoodDetailsBean {
             private int is_own_shop;
             private int prom_is_able;
             private String goods_content;
+
+            public int getKy_type() {
+                return ky_type;
+            }
+
+            public void setKy_type(int ky_type) {
+                this.ky_type = ky_type;
+            }
 
             public int getGoods_id() {
                 return goods_id;

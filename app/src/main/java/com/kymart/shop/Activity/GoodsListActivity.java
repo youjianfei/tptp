@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,8 +27,9 @@ import com.kymart.shop.Utils.Volley_Utils;
 
 public class GoodsListActivity extends BaseActivityother {
     private RelativeLayout mRelativeLayout_Latest, mRelativeLayout_Sales, mRelativeLayout_Price, mRelativeLayout_Comments;//顶部四个按钮控件
+    private LinearLayout mLinearlayout_search;
     private MyGridView mGridview;
-    private TextView mTextVIew_loadMore,mTextview_search;//加载更多控件
+    private TextView mTextVIew_loadMore;//加载更多控件
     private EditText medit_view;
 
 
@@ -60,7 +62,7 @@ public class GoodsListActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
 
                 resultBean=new Gson().fromJson(respose,Goods_ListBean.class).getResult();
-                LogUtils.LOG("ceshi",respose);
+                LogUtils.LOG("ceshi","商品列表"+respose);
                 LogUtils.LOG("ceshi","url"+BaseUrl.BasegoodlistURL+url+page);
                 LogUtils.LOG("ceshi",resultBean.getSort()+respose);
                 if(page==1&&resultBean.getGoods_list()!=null){
@@ -72,15 +74,12 @@ public class GoodsListActivity extends BaseActivityother {
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
                 }
-
             }
-
             @Override
             public void onError(int error) {
 
             }
         }).Http(URLl,this,0);
-
     }
 
     @Override
@@ -88,7 +87,12 @@ public class GoodsListActivity extends BaseActivityother {
 
         Intent intent=getIntent();
         ID=intent.getIntExtra("id",1);
-        url="/index.php/api/Goods/goodsList/id/"+ID+"/sort/is_new/sort_asc/desc/p/";
+        if(ID==0){
+
+            url="/index.php?m=Api&c=Goods&a=goodsList&p=";
+        }else{
+            url="/index.php/api/Goods/goodsList/id/"+ID+"/sort/is_new/sort_asc/desc/p/";
+        }
         mDate=new ArrayList<>();
         mAdapter=new Adapter_Grid_goodsList(mDate,this);
         mGridview.setAdapter(mAdapter);
@@ -100,8 +104,8 @@ public class GoodsListActivity extends BaseActivityother {
         mRelativeLayout_Sales.setOnClickListener(this);
         mRelativeLayout_Price.setOnClickListener(this);
         mRelativeLayout_Comments.setOnClickListener(this);
+        mLinearlayout_search.setOnClickListener(this);
         mTextVIew_loadMore.setOnClickListener(this);
-        mTextview_search.setOnClickListener(this);
 
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -115,11 +119,11 @@ public class GoodsListActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mTextview_search= (TextView) findViewById(R.id.text_serach);
         mRelativeLayout_Latest = (RelativeLayout) findViewById(R.id.RelativeLayout_Latest);
         mRelativeLayout_Sales = (RelativeLayout) findViewById(R.id.RelativeLayout_Sales);
         mRelativeLayout_Price = (RelativeLayout) findViewById(R.id.RelativeLayout_Price);
         mRelativeLayout_Comments = (RelativeLayout) findViewById(R.id.RelativeLayout_Comments);
+        mLinearlayout_search= (LinearLayout) findViewById(R.id.linearlayout_search);
         medit_view= (EditText) findViewById(R.id.edit_serach);
         mGridview= (MyGridView) findViewById(R.id.GridView_goodslist);
         mTextVIew_loadMore= (TextView) findViewById(R.id.textview_loadmore);
@@ -178,15 +182,17 @@ public class GoodsListActivity extends BaseActivityother {
             case R.id.textview_loadmore://加载更多
                 requestData(++page);
                 break;
-            case R.id.text_serach:
-                search_name =medit_view.getText()+"";
-                if(!search_name.equals("")){
-                    mRelativeLayout_Latest.setSelected(true);
-                    afterchange= ZhuanMa(search_name);
-                    url="/index.php/api/Goods/search/id/0/sort/is_new/sort_asc/desc/q/"+afterchange+"/p/";
-                    requestData(1);
-                }
-
+            case R.id.linearlayout_search:
+//                search_name =medit_view.getText()+"";
+//                if(!search_name.equals("")){
+//                    mRelativeLayout_Latest.setSelected(true);
+//                    afterchange= ZhuanMa(search_name);
+//                    url="/index.php/api/Goods/search/id/0/sort/is_new/sort_asc/desc/q/"+afterchange+"/p/";
+//                    requestData(1);
+//                }
+                Intent intent_seach=new Intent(this,GoodSearchActivity.class);
+                intent_seach.putExtra("search_kt",0);
+                startActivity(intent_seach);
                 break;
 
         }

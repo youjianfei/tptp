@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 import com.kymart.shop.Activity.AllOrderActivity;
 import com.kymart.shop.Activity.EmptyActivity;
 import com.kymart.shop.Activity.GoodDetailsActivity;
+import com.kymart.shop.Activity.GoodList_moduleActivity;
+import com.kymart.shop.Activity.GoodSearchActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.CustomView.CustomerScrollView;
@@ -65,7 +67,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
     private CustomerScrollView customerScrollView;
     private Banner mViewpager;//顶部轮播图
-    private LinearLayout linear_dianpujie,linear_pinpaijie,linear_dingdan, mLearlayout_personcenter,mLinearlayout_search;
+    private LinearLayout mLinearlayout_search;
 
 
 
@@ -112,10 +114,10 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         customerScrollView= (CustomerScrollView) rootview.findViewById(R.id.scrollview);
         mViewpager = (Banner) rootview.findViewById(R.id.banner);//顶部轮播图
         mLinearlayout_search= (LinearLayout) rootview.findViewById(R.id.linearlayout_search);
-        linear_dianpujie= (LinearLayout) rootview.findViewById(R.id.Linear_dianpujie);
-        linear_pinpaijie= (LinearLayout) rootview.findViewById(R.id.Linear_pinpaijie);
-        linear_dingdan= (LinearLayout) rootview.findViewById(R.id.Linear_dingdan);
-        mLearlayout_personcenter= (LinearLayout) rootview.findViewById(R.id.linearlayout_main_personcenter);
+//        linear_dianpujie= (LinearLayout) rootview.findViewById(R.id.Linear_dianpujie);
+//        linear_pinpaijie= (LinearLayout) rootview.findViewById(R.id.Linear_pinpaijie);
+//        linear_dingdan= (LinearLayout) rootview.findViewById(R.id.Linear_dingdan);
+//        mLearlayout_personcenter= (LinearLayout) rootview.findViewById(R.id.linearlayout_main_personcenter);
 
 
         mViewPager_main_icon= (ViewPager) rootview.findViewById(R.id.viewpager_main_icon);
@@ -158,11 +160,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         int  main_like_page=1;//猜你喜欢接口的  页数  默认第一页
     private void initListenner() {
         mTextviewLoadmore.setOnClickListener(this);
-        mLearlayout_personcenter.setOnClickListener(this);
         mLinearlayout_search.setOnClickListener(this);
-        linear_dianpujie.setOnClickListener(this);
-        linear_pinpaijie.setOnClickListener(this);
-        linear_dingdan.setOnClickListener(this);
         mViewPager_main_icon.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -532,18 +530,42 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
        LinearLayout.LayoutParams mLayoutParams_fenxiang = new LinearLayout.LayoutParams(
                width, height);
        mre_image_fenxiangqu.addView(imageView_fenxiang, mLayoutParams_fenxiang);
+       mre_image_fenxiangqu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intend_fenxiangqu=new Intent(getActivity(),GoodsListActivity.class);
+               intend_fenxiangqu.putExtra("id",0);
+               getActivity().startActivity(intend_fenxiangqu);
+           }
+       });
 
        final ImageView imageView_cuxiaoqu=new ImageView(getActivity());
        imageView_cuxiaoqu.setImageResource(R.mipmap.cuxiaoqu_l);
        LinearLayout.LayoutParams mLayoutParams_cuxiao = new LinearLayout.LayoutParams(
                width, height);
        mre_image_cuxiaoqu.addView(imageView_cuxiaoqu, mLayoutParams_cuxiao);
+       mre_image_cuxiaoqu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent_cuxiaoqu=new Intent(getActivity(), GoodList_moduleActivity.class);
+               intent_cuxiaoqu.putExtra("type","onsale_list");
+               getActivity().startActivity(intent_cuxiaoqu);
+           }
+       });
 
        final ImageView imageView_miaoshao=new ImageView(getActivity());
        imageView_miaoshao.setImageResource(R.mipmap.miaoshaoqu_l);
        LinearLayout.LayoutParams mLayoutParams_miaosha = new LinearLayout.LayoutParams(
                width, height);
        mre_image_miaoshaqu.addView(imageView_miaoshao, mLayoutParams_miaosha);
+       mre_image_miaoshaqu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent_miaoshaqu=new Intent(getActivity(), GoodList_moduleActivity.class);
+               intent_miaoshaqu.putExtra("type","miaosha_list");
+               getActivity().startActivity(intent_miaoshaqu);
+           }
+       });
    }
 
     @Override
@@ -553,32 +575,11 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
                 main_like_page++;
                 requestLikeData(main_like_page);
                 break;
-            case R.id.linearlayout_main_personcenter://点击个人中心
-                mMainactivity.onClick(getActivity().findViewById(R.id.rl_4));
-                break;
             case R.id.linearlayout_search:
-                Intent intent_search=new Intent(getActivity(), GoodsListActivity.class);
-                intent_search.putExtra("id",100);
-                getActivity().startActivity(intent_search);
+                Intent intent_seach=new Intent(getActivity(),GoodSearchActivity.class);
+                intent_seach.putExtra("search_kt",0);
+                startActivity(intent_seach);
                 break;
-            case R.id.Linear_dianpujie:
-                Intent intent_dianpujie=new Intent(getActivity(), EmptyActivity.class);
-                getActivity().startActivity(intent_dianpujie);
-                break;
-            case R.id.Linear_pinpaijie:
-                Intent intent_pinpaijie=new Intent(getActivity(), EmptyActivity.class);
-                getActivity().startActivity(intent_pinpaijie);
-                break;
-            case R.id.Linear_dingdan:
-                if(isLogin==1){
-                    Intent intent_dingdan=new Intent(getActivity(), AllOrderActivity.class);
-                    getActivity().startActivity(intent_dingdan);
-                }else{
-                    Intent intent=new Intent(getActivity(),LoginActivity.class);
-                    startActivityForResult(intent,0);
-                }
-                break;
-
         }
     }
 
