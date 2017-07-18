@@ -87,7 +87,9 @@
         <activity android:name="com.kymart.shop.Activity.GoodList_moduleActivity" />
         <activity android:name="com.kymart.shop.Activity.GoodSearchActivity" />
         <activity android:name="com.kymart.shop.Activity.FenLeiActivity" />
-        <activity android:name="com.kymart.shop.Activity.ShopcarActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.ShopcarActivity"
+            android:launchMode="singleTask"
+            ></activity>
     </application>
 
 </manifest>

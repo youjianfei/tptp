@@ -147,8 +147,6 @@ public class ShopcarActivity extends BaseActivityother {
             request(map);
         }
     }
-
-
     boolean shopCarChange=false;
     class Adapter_shopCarList extends BaseAdapter {
         List<ShopCarBean.ResultBean.StoreListBean.CartListBean> mData;
