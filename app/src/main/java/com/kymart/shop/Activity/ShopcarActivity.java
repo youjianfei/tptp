@@ -109,18 +109,6 @@ public class ShopcarActivity extends BaseActivityother {
     Map map;
     @Override
     protected void initListener() {
-//        mButton_add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(isLogin==1){
-//                    mMainactivity.onClick(ShopcarActivity.this.findViewById(R.id.rl_2));
-//                }else{
-//                    Intent intend=new Intent(ShopcarActivity.this, LoginActivity.class);
-//                    ShopcarActivity.this.startActivity(intend);
-//
-//                }
-//            }
-//        });
         mTextview_jiesuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +162,7 @@ public class ShopcarActivity extends BaseActivityother {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder=null;
             final ShopCarBean.ResultBean.StoreListBean.CartListBean bean = mData.get(position);
             if(convertView==null){
@@ -191,8 +179,53 @@ public class ShopcarActivity extends BaseActivityother {
             }else{
                 holder= (Adapter_shopCarList.ViewHolder) convertView.getTag();
             }
-            holder.mImage_check.setSelected(true);
-//            holder.mNumberButton.setCurrentNumber(bean.getGoods_num());
+            if(bean.getSelected()==1){
+                holder.mImage_check.setSelected(true);
+            }else{
+                holder.mImage_check.setSelected(false);
+            }
+            final ViewHolder finalHolder = holder;
+            holder.mImage_check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(finalHolder.mImage_check.isSelected()){
+                        finalHolder.mImage_check.setSelected(false);
+                        //自定义json
+                        int goods_num=bean.getGoods_num();
+                        String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
+                                bean.getStore_count()+"\",\"selected\":\"0\"}]";
+
+                        LogUtils.LOG("ceshi","json"+Json);
+
+                        map.put("cart_form_data",Json);
+                        shopCarChange=true;
+
+                        request(map);
+                    }else{
+                        finalHolder.mImage_check.setSelected(true);
+                        //自定义json
+                        int goods_num=bean.getGoods_num();
+                        String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
+                                bean.getStore_count()+"\",\"selected\":\"1\"}]";
+
+                        LogUtils.LOG("ceshi","json"+Json);
+
+                        map.put("cart_form_data",Json);
+                        shopCarChange=true;
+
+                        request(map);
+                    }
+
+                }
+            });
+            holder.mText_goodName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intend_gooddetail=new Intent(ShopcarActivity.this, GoodDetailsActivity.class);
+                    intend_gooddetail.putExtra("ID",mData.get(position).getGoods_id());
+                    startActivity(intend_gooddetail);
+                }
+            });
             holder.mNumberButton.setCount(bean.getGoods_num());
             holder.mNumberButton.setOnAddDelListener(new IOnAddDelListener() {
                 @Override

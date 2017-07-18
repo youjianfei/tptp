@@ -408,6 +408,7 @@ public class Fragment_GoodDatails_good extends Fragment {
                             if(isbuynow&&status==1){//如果是立即购买
                             Intent intent=new Intent(getActivity(), ShopcarActivity.class);
                                 startActivity(intent);
+                                getActivity().finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

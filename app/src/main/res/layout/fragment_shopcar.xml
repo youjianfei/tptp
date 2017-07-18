@@ -53,24 +53,15 @@
         <TextView
             android:id="@+id/text_allPrice"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:textSize="13dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
             android:text="￥0.00"
             android:textColor="@color/red"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/text_jiesuan"
-            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:textSize="13dp"
-            android:text="不含运费"
-            android:layout_toLeftOf="@+id/text_jiesuan"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/text_allPrice"
-            android:layout_marginTop="2dp"
-            />
+
 
     </RelativeLayout>
     <ListView
