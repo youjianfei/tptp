@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -168,13 +169,14 @@ public class ShopcarActivity extends BaseActivityother {
             if(convertView==null){
                 holder=new ViewHolder();
                 convertView=mInflater.inflate(R.layout.item_listview_shopcar,null,false);
+                holder.mLinButton= (LinearLayout) convertView.findViewById(R.id.Lin_button);
                 holder.mImage_check= (ImageView) convertView.findViewById(R.id.image_check);
                 holder.mImage_goodPIC= (ImageView) convertView.findViewById(R.id.imageView);
                 holder.mImage_delet= (ImageView) convertView.findViewById(R.id.image_delate);
                 holder.mText_goodName= (TextView) convertView.findViewById(R.id.text_goodname);
                 holder.mTextview_goodProperty= (TextView) convertView.findViewById(R.id.text_goodProperty);
                 holder.mTextview_goodPrice= (TextView) convertView.findViewById(R.id.text_price);
-                holder.mNumberButton= (AnimShopButton) convertView.findViewById(R.id.numberButton_count);
+//                holder.mNumberButton= (AnimShopButton) convertView.findViewById(R.id.numberButton_count);
                 convertView.setTag(holder);
             }else{
                 holder= (Adapter_shopCarList.ViewHolder) convertView.getTag();
@@ -184,50 +186,19 @@ public class ShopcarActivity extends BaseActivityother {
             }else{
                 holder.mImage_check.setSelected(false);
             }
-            final ViewHolder finalHolder = holder;
-            holder.mImage_check.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(finalHolder.mImage_check.isSelected()){
-                        finalHolder.mImage_check.setSelected(false);
-                        //自定义json
-                        int goods_num=bean.getGoods_num();
-                        String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
-                                bean.getStore_count()+"\",\"selected\":\"0\"}]";
 
-                        LogUtils.LOG("ceshi","json"+Json);
-
-                        map.put("cart_form_data",Json);
-                        shopCarChange=true;
-
-                        request(map);
-                    }else{
-                        finalHolder.mImage_check.setSelected(true);
-                        //自定义json
-                        int goods_num=bean.getGoods_num();
-                        String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
-                                bean.getStore_count()+"\",\"selected\":\"1\"}]";
-
-                        LogUtils.LOG("ceshi","json"+Json);
-
-                        map.put("cart_form_data",Json);
-                        shopCarChange=true;
-
-                        request(map);
-                    }
-
-                }
-            });
-            holder.mText_goodName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intend_gooddetail=new Intent(ShopcarActivity.this, GoodDetailsActivity.class);
-                    intend_gooddetail.putExtra("ID",mData.get(position).getGoods_id());
-                    startActivity(intend_gooddetail);
-                }
-            });
-            holder.mNumberButton.setCount(bean.getGoods_num());
-            holder.mNumberButton.setOnAddDelListener(new IOnAddDelListener() {
+            AnimShopButton buttonview=new  AnimShopButton(ShopcarActivity.this);//创建增删按钮  因为它的设置数量不可用
+            buttonview.setAddEnableBgColor(getResources().getColor(R.color.red));
+            buttonview.setAddEnableFgColor(getResources().getColor(R.color.white));
+            buttonview.setGapBetweenCircle((float) 100);
+            buttonview.setHintBgColor(getResources().getColor(R.color.red));
+            buttonview.setHintFgColor(getResources().getColor(R.color.white));
+            buttonview.setMaxCount(99);
+            buttonview.setCount(bean.getGoods_num());
+            if(holder.mLinButton.getChildCount()==3){
+                holder.mLinButton.removeViewAt(2);
+            }
+            buttonview.setOnAddDelListener(new IOnAddDelListener() {
                 @Override
                 public void onAddSuccess(int i) {
 
@@ -271,6 +242,51 @@ public class ShopcarActivity extends BaseActivityother {
 
                 }
             });
+            holder.mLinButton.addView(buttonview);
+
+            final ViewHolder finalHolder = holder;
+            holder.mImage_check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(finalHolder.mImage_check.isSelected()){
+                        finalHolder.mImage_check.setSelected(false);
+                        //自定义json
+                        int goods_num=bean.getGoods_num();
+                        String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
+                                bean.getStore_count()+"\",\"selected\":\"0\"}]";
+
+                        LogUtils.LOG("ceshi","json"+Json);
+
+                        map.put("cart_form_data",Json);
+                        shopCarChange=true;
+
+                        request(map);
+                    }else{
+                        finalHolder.mImage_check.setSelected(true);
+                        //自定义json
+                        int goods_num=bean.getGoods_num();
+                        String  Json="[{\"cartID\":\""+bean.getId()+"\",\"goodsNum\":\""+goods_num+"\",\"storeCount\":\""+
+                                bean.getStore_count()+"\",\"selected\":\"1\"}]";
+
+                        LogUtils.LOG("ceshi","json"+Json);
+
+                        map.put("cart_form_data",Json);
+                        shopCarChange=true;
+
+                        request(map);
+                    }
+
+                }
+            });
+            holder.mText_goodName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intend_gooddetail=new Intent(ShopcarActivity.this, GoodDetailsActivity.class);
+                    intend_gooddetail.putExtra("ID",mData.get(position).getGoods_id());
+                    startActivity(intend_gooddetail);
+                }
+            });
+//            holder.mNumberButton.setCount(bean.getGoods_num());
 
 
 
@@ -315,9 +331,10 @@ public class ShopcarActivity extends BaseActivityother {
             ImageView mImage_goodPIC;
             TextView  mText_goodName;
             TextView  mTextview_goodProperty;
-            AnimShopButton mNumberButton;
+//            AnimShopButton mNumberButton;
             TextView mTextview_goodPrice;
             ImageView mImage_delet;
+            LinearLayout mLinButton;
         }
     }
 }
