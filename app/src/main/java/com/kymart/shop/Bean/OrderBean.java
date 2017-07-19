@@ -757,6 +757,7 @@ public class OrderBean {
             private int store_id;
             private String store_name;
             private int coupon_num;
+            private String usernote;
             private List<ShippingListBean> shippingList;
             private List<CartListBean> cartList;
 
@@ -770,6 +771,14 @@ public class OrderBean {
 
             public String getStore_name() {
                 return store_name;
+            }
+
+            public String getUsernote() {
+                return usernote;
+            }
+
+            public void setUsernote(String usernote) {
+                this.usernote = usernote;
             }
 
             public void setStore_name(String store_name) {

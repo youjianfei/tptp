@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -250,8 +252,9 @@ public class OrderActivity extends BaseActivityother {
    }
     Map mapOrderSubmit=new HashMap();
     cart_form_data  upJson=new cart_form_data();//对象转JSON
-
+    HashMap map_user_note=new HashMap();//post留言的map
     void requestOrderPrice(final int act){
+        mAdapter.notifyDataSetInvalidated();//刷新adapter
         mapOrderSubmit.put("user_id",orderBean.getResult().getUserInfo().getUser_id()+"");
         if (act == 0) {
             mapOrderSubmit.put("act","order_price");
@@ -262,23 +265,27 @@ public class OrderActivity extends BaseActivityother {
 
         mapOrderSubmit.put("address_id",orderBean.getResult().getAddressList().getAddress_id()+"");
         HashMap map_Shipping_code=new HashMap();
-        for(int i=0;i<orderBean.getResult().getStoreList().size();i++){
+        for(int i=0;i<orderBean.getResult().getStoreList().size();i++){//post物流信息
             map_Shipping_code.put(orderBean.getResult().getStoreList().get(i).getStore_id()+"",orderBean.getResult().getStoreList().get(i).getShippingList().get(0).getShipping_code()+"");
         }
         upJson.setShipping_code(map_Shipping_code);
-        HashMap map_user_note=new HashMap();
+
         HashMap map_couponTypeSelect=new HashMap();
         HashMap map_coupon_id=new HashMap();
         HashMap map_couponCode=new HashMap();
         for(int i=0;i<orderBean.getResult().getStoreList().size();i++){
-            map_user_note.put(orderBean.getResult().getStoreList().get(i).getStore_id()+"","");
+            if(mListDataGroup.get(i).getUsernote()==null||mListDataGroup.get(i).getUsernote().equals("")){
+                map_user_note.put(orderBean.getResult().getStoreList().get(i).getStore_id()+"","");
+            }else{
+                map_user_note.put(orderBean.getResult().getStoreList().get(i).getStore_id()+"",mListDataGroup.get(i).getUsernote());
+            }
         }
         upJson.setUser_note(map_user_note);
         upJson.setCouponTypeSelect(map_couponTypeSelect);
         upJson.setCoupon_id(map_coupon_id);
         upJson.setCouponCode(map_couponCode);
         String json=new  Gson().toJson(upJson);
-        LogUtils.LOG("ceshi","json"+ BaseUrl.BaseURL+BaseUrl.orderprice+Staticdata.userBean_static.getResult().getToken());
+        LogUtils.LOG("ceshi","json"+ json);
         mapOrderSubmit.put("cart_form_data",json);
         LogUtils.LOG("ceshi","hashmap"+mapOrderSubmit.toString());
         String URL=BaseUrl.BaseURL+BaseUrl.orderprice+Staticdata.userBean_static.getResult().getToken();
@@ -465,6 +472,8 @@ public class OrderActivity extends BaseActivityother {
 //        requestOrder();
     }
 
+    int  editPosition=0;
+
     /*适配器*/
     class ListAdapter extends BaseExpandableListAdapter {
 
@@ -514,17 +523,50 @@ public class OrderActivity extends BaseActivityother {
         }
 
         @Override// 获取第groupPosition组的视图
-        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            ViewHolder holder;
+        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, final ViewGroup parent) {
+            final ViewHolder holder;
             if (convertView == null) {
                 convertView = mLayoutInflater.inflate(R.layout.item_expandablelistview_group, parent, false);
                 holder = new ViewHolder();
                 holder.mgroup_name = (TextView) convertView.findViewById(R.id.textview_storeName);
+                holder.mEdit_message= (EditText) convertView.findViewById(R.id.edit_message);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.mgroup_name.setText(group.get(groupPosition).getStore_name());
+            holder.mEdit_message.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(hasFocus){
+                        LogUtils.LOG("ceshi",groupPosition+"焦点");
+                        editPosition=groupPosition;
+                    }
+                }
+            });
+            TextWatcher textWatcher=new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                            if(groupPosition==editPosition){
+                                LogUtils.LOG("ceshi", s + "...." +group.get(groupPosition).getStore_id()+"...."+groupPosition);
+                                mListDataGroup.get(groupPosition).setUsernote(s+"");
+                            }
+                }
+            };
+            holder.mEdit_message.addTextChangedListener(textWatcher);
+
+
+
             return convertView;
         }
 
@@ -561,6 +603,7 @@ public class OrderActivity extends BaseActivityother {
 
         private class ViewHolder {
             TextView mgroup_name;
+            EditText mEdit_message;
 
             ImageView mchild_goodPIC;
             TextView mchild_name;
