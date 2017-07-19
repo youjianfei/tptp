@@ -1,5 +1,6 @@
 package com.kymart.shop.Activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -10,10 +11,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -389,8 +392,23 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         // 对话框显示出来
                         mProgress.setCancelable(true);
                         mProgress.show();
-                        // 直接下载
-                     new downloadApkThread().start();
+
+                        /**
+                         * 判断是否有存储权限
+                         */
+                        int checkWriteStoragePermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
+                        if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
+                            mProgress.dismiss();
+                            ToastUtils.showToast(MainActivity.this,"请打开应用的存储权限");
+                            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0x123);
+                           //请求获取该种权限
+                        }else{
+                            // 直接下载
+                            new downloadApkThread().start();
+                        }
+
+//                        // 直接下载
+//                     new downloadApkThread().start();
 
                     }
 
