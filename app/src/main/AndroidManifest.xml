@@ -90,6 +90,9 @@
         <activity android:name="com.kymart.shop.Activity.ShopcarActivity"
             android:launchMode="singleTask"
             ></activity>
+
+
+
     </application>
 
 </manifest>

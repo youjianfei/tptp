@@ -119,6 +119,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void initData() {
+        quanxian();//请求存储权限
+
         mMainactivity=this;
         mFragment_main = new Fragment_main();
         /**
@@ -369,6 +371,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private ProgressDialog mProgress;
     private int progress; //apk下载的进度
+    void quanxian(){
+        /**
+         * 判断是否有存储权限
+         */
+        int checkWriteStoragePermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
+        if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
+            mProgress.dismiss();
+            ToastUtils.showToast(MainActivity.this,"请打开应用的存储权限");
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0x123);
+            //请求获取该种权限
+        }
+    }
 
     private void showUpdateDialog(final int code, final String apkurl) {
         runOnUiThread(new Runnable() {
