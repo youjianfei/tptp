@@ -47,7 +47,7 @@ public class DownLoadImage implements Runnable {
                     .get();
             if (bitmap != null) {
                 // 在这里执行图片保存方法
-//                SavaImage( bitmap);
+                SavaImage( bitmap);
 
             }
         } catch (Exception e) {
