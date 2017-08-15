@@ -2,6 +2,7 @@ package com.kymart.shop.Activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -123,9 +124,14 @@ public class PayActivity extends BaseActivityother {
                 pay=1;
                 break;
             case R.id.seclect_wechat:
-                image_select_alipay.setSelected(false);
-                image_select_wechatpay.setSelected(true);
-                pay=2;
+//                image_select_alipay.setSelected(false);
+//                image_select_wechatpay.setSelected(true);
+//                pay=2;
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("http://www.btc38.com");
+                intent.setData(content_url);
+                startActivity(intent);
                 break;
             case R.id.button_submit:
                 Map map_pay=new HashMap();
