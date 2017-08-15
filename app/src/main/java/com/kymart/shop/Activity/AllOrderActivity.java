@@ -41,7 +41,8 @@ public class AllOrderActivity extends BaseActivityother {
     TextView mtextview_footLoadmore;
     int  page=1;
     String type="";
-    List<AllOrderBean.ResultBean> mlist_group=new ArrayList<>();
+
+    List<AllOrderBean.ResultBean> mlist_group_all=new ArrayList<>();//总的组
     List<List<AllOrderBean.ResultBean.GoodsListBean>> mlist_children=new ArrayList<>();
     ListAdapter mAdapter;
 
@@ -57,7 +58,7 @@ public class AllOrderActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        mAdapter=new ListAdapter(mlist_children,mlist_group,this);
+        mAdapter=new ListAdapter(mlist_children,mlist_group_all,this);
         mListview.setAdapter(mAdapter);
         requestOrder(1,type);
     }
@@ -166,8 +167,9 @@ public class AllOrderActivity extends BaseActivityother {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                List<AllOrderBean.ResultBean> mlist_group=new ArrayList<>();//每次请求单页的组
                 if(page==1){
-                    mlist_group.clear();
+                    mlist_group_all.clear();
                     mlist_children.clear();
                 }
                 mlist_group.addAll(new Gson().fromJson(respose,AllOrderBean.class).getResult());
@@ -175,9 +177,11 @@ public class AllOrderActivity extends BaseActivityother {
                     List<AllOrderBean.ResultBean.GoodsListBean> child=new ArrayList();
                     for(int j=0;j<mlist_group.get(i).getGoods_list().size();j++){
                         child.add(mlist_group.get(i).getGoods_list().get(j));
+                        LogUtils.LOG("ceshi","childrenPrice"+mlist_group.get(i).getGoods_list().get(j).getGoods_price());
                     }
                     mlist_children.add(child);
                 }
+                mlist_group_all.addAll(mlist_group);
                 mAdapter.notifyDataSetChanged();
                 for(int i = 0; i < mAdapter.getGroupCount(); i++){//默认展开
                     mListview.expandGroup(i);
@@ -411,6 +415,7 @@ public class AllOrderActivity extends BaseActivityother {
             Glide.with(AllOrderActivity.this).load(BaseUrl.Baseimage+childrenBean.getGoods_id()).into(holder.mimage_good);
             holder.mtextview_goodname.setText(childrenBean.getGoods_name());
             holder.mtextview_goodprice.setText("￥"+childrenBean.getGoods_price()+"元");
+            LogUtils.LOG("ceshi","ccccccccc"+"￥"+childrenBean.getGoods_price()+"元");
             holder.mtextview_goodnum.setText("×"+childrenBean.getGoods_num());
             holder.mlinearlayout_chilren.setOnClickListener(new View.OnClickListener() {
                 @Override
