@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 import com.kymart.shop.class_.PayResult;
+import com.kymart.shop.class_.PopWindowClass;
 import com.kymart.shop.class_.ShareClass;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -40,13 +42,15 @@ import java.util.Map;
 import cn.kymart.tptp.R;
 
 public class PayActivity extends BaseActivityother {
+    LinearLayout mLinearlayout_main;
     ShareClass shareClass;
+    PopWindowClass popWindowClass;
 
     private IWXAPI api;
     String  orderNumber="",price="",type="";
     TextView mTextview_number,mTextview_price;
 
-    ImageView image_select_alipay,image_select_wechatpay;
+    ImageView image_select_alipay,image_select_wechatpay,image_select_kuaiqian;
 
     Button button_pay;
     private Handler mHandler = new Handler() {
@@ -86,6 +90,7 @@ public class PayActivity extends BaseActivityother {
     @Override
     protected void setData() {
         shareClass=new ShareClass(this);
+        popWindowClass=new PopWindowClass(this,mLinearlayout_main);
     }
 
     @Override
@@ -104,15 +109,18 @@ public class PayActivity extends BaseActivityother {
     protected void initListener() {
         image_select_alipay.setOnClickListener(this);
         image_select_wechatpay.setOnClickListener(this);
+        image_select_kuaiqian.setOnClickListener(this);
         button_pay.setOnClickListener(this);
     }
 
     @Override
     protected void initView() {
+        mLinearlayout_main= (LinearLayout) findViewById(R.id.activity_pay);
         mTextview_number= (TextView) findViewById(R.id.text_ordernumber);
         mTextview_price= (TextView) findViewById(R.id.text_orderPrice);
         image_select_alipay= (ImageView) findViewById(R.id.seclect_alipay);
         image_select_wechatpay= (ImageView) findViewById(R.id.seclect_wechat);
+        image_select_kuaiqian= (ImageView) findViewById(R.id.seclect_kuaiqian);
         image_select_alipay.setSelected(true);
         button_pay= (Button) findViewById(R.id.button_submit);
     }
@@ -126,11 +134,11 @@ public class PayActivity extends BaseActivityother {
                 image_select_wechatpay.setSelected(false);
                 pay=1;
                 break;
-            case R.id.seclect_wechat:
-//                image_select_alipay.setSelected(false);
-//                image_select_wechatpay.setSelected(true);
-//                pay=2;
-
+            case R.id.seclect_kuaiqian://快钱支付
+                image_select_alipay.setSelected(false);
+                image_select_wechatpay.setSelected(false);
+                image_select_kuaiqian.setSelected(true);
+                pay=3;
 
 //                Intent intent = new Intent();
 //                intent.setAction("android.intent.action.VIEW");
@@ -138,9 +146,16 @@ public class PayActivity extends BaseActivityother {
 //                intent.setData(content_url);
 //                startActivity(intent);
 
+//                shareClass.shareapp();//分享ceshi
 
+                popWindowClass.initpopwindow();
 
-                shareClass.shareapp();
+                break;
+            case R.id.seclect_wechat:
+                image_select_alipay.setSelected(false);
+                image_select_wechatpay.setSelected(true);
+                pay=2;
+
                 break;
             case R.id.button_submit:
                 Map map_pay=new HashMap();
