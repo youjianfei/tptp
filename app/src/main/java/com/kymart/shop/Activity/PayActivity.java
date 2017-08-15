@@ -24,6 +24,7 @@ import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 import com.kymart.shop.class_.PayResult;
+import com.kymart.shop.class_.ShareClass;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -39,6 +40,8 @@ import java.util.Map;
 import cn.kymart.tptp.R;
 
 public class PayActivity extends BaseActivityother {
+    ShareClass shareClass;
+
     private IWXAPI api;
     String  orderNumber="",price="",type="";
     TextView mTextview_number,mTextview_price;
@@ -82,7 +85,7 @@ public class PayActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-
+        shareClass=new ShareClass(this);
     }
 
     @Override
@@ -127,11 +130,17 @@ public class PayActivity extends BaseActivityother {
 //                image_select_alipay.setSelected(false);
 //                image_select_wechatpay.setSelected(true);
 //                pay=2;
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("http://www.btc38.com");
-                intent.setData(content_url);
-                startActivity(intent);
+
+
+//                Intent intent = new Intent();
+//                intent.setAction("android.intent.action.VIEW");
+//                Uri content_url = Uri.parse("http://www.btc38.com");
+//                intent.setData(content_url);
+//                startActivity(intent);
+
+
+
+                shareClass.shareapp();
                 break;
             case R.id.button_submit:
                 Map map_pay=new HashMap();
