@@ -124,7 +124,7 @@ public class PayActivity extends BaseActivityother {
         image_select_kuaiqian.setSelected(true);
         button_pay= (Button) findViewById(R.id.button_submit);
     }
-    int  pay=1;
+    int  pay=3;
     @Override
     public void onClick(View v) {
         super.onClick(v);

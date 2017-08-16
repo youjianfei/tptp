@@ -55,8 +55,8 @@ public class MoneyActivity extends BaseActivityother {
             mtextview_mm.setText("账户余额");
             URL= BaseUrl.BaseURL+BaseUrl.money+ Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
         }else{
-            mTextview_title.setText("奖金明细");
-            mtextview_mm.setText("分享奖金");
+            mTextview_title.setText("优惠券明细");
+            mtextview_mm.setText("优惠券");
             URL= BaseUrl.BaseURL+BaseUrl.bonus+ Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
         }
         mTextview_yue.setText(yue);

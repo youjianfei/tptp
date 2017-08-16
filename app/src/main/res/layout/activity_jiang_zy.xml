@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="奖金转余额"
+            android:text="优惠券转余额"
             android:textSize="@dimen/top_title"
             android:textColor="@color/white"
             android:layout_centerInParent="true"
@@ -85,15 +85,17 @@
             android:layout_marginRight="20dp"
             android:gravity="center_vertical"
             >
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="分享奖金:"
+                android:text="优 惠 券:"
                 android:textSize="15dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/DarkGray"
-                />
+                android:id="@+id/textView" />
+
             <TextView
                 android:id="@+id/textview_money"
                 android:layout_width="0dp"

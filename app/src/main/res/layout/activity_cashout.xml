@@ -131,7 +131,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/DarkGray"
-                            android:text="奖金提现"
+                            android:text="优惠券提现"
                             android:layout_marginLeft="5dp"
                             />
 
@@ -163,7 +163,7 @@
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="3"
-                        android:hint="最少提现额度100元"
+                        android:hint="最少提现额度50元"
                         android:textSize="15dp"
                         android:textColorHint="@color/LightGrey"
                         android:text=""
