@@ -103,7 +103,6 @@ public class MoneyActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mTextview_title= (TextView) findViewById(R.id.textview_title);
-
         mListview_money= (PullToRefreshListView) findViewById(R.id.listView_money);
         mListview_money.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
 

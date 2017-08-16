@@ -88,38 +88,35 @@
         <activity android:name="com.kymart.shop.Activity.GoodList_moduleActivity" />
         <activity android:name="com.kymart.shop.Activity.GoodSearchActivity" />
         <activity android:name="com.kymart.shop.Activity.FenLeiActivity" />
-        <activity android:name="com.kymart.shop.Activity.ShopcarActivity"
-            android:launchMode="singleTask"
-            ></activity>
+        <activity
+            android:name="com.kymart.shop.Activity.ShopcarActivity"
+            android:launchMode="singleTask" />
 
-
-        <!--友盟appkey-->
+        <!-- 友盟appkey -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59925f71bbea835cb20019a3" >
-        </meta-data>
+            android:value="59925f71bbea835cb20019a3"></meta-data>
 
-        <!--qq分享配置-->
+        <!-- qq分享配置 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
-
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent100424468" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
-
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name="com.kymart.shop.Activity.RechargeActivity"></activity>
     </application>
 
 </manifest>

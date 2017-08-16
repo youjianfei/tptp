@@ -90,7 +90,7 @@ public class PayActivity extends BaseActivityother {
     @Override
     protected void setData() {
         shareClass=new ShareClass(this);
-        popWindowClass=new PopWindowClass(this,mLinearlayout_main);
+        popWindowClass=new PopWindowClass(this,mLinearlayout_main,orderNumber);
     }
 
     @Override

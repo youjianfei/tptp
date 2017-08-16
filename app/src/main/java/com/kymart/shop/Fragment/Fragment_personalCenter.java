@@ -19,6 +19,7 @@ import com.kymart.shop.Activity.JiangZYActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.Activity.MoneyActivity;
 import com.kymart.shop.Activity.QRcodeActivity;
+import com.kymart.shop.Activity.RechargeActivity;
 import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.Activity.ShareFriendsActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
@@ -46,7 +47,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     View rootView;
     CircleImageView mImage_head;
     TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
-    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan;
+    RelativeLayout mRE_yue,mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan;
 
     personCenterBean person;
 
@@ -69,6 +70,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     }
 
     private void initListener() {
+        mRE_yue.setOnClickListener(this);
         mTextview_Exit.setOnClickListener(this);
         mRE_shezhi.setOnClickListener(this);
         mRE_shouhudizhi.setOnClickListener(this);
@@ -120,6 +122,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_blance= (TextView) rootView.findViewById(R.id.text_balance);
         mTextview_sharePrice= (TextView) rootView.findViewById(R.id.text_sharePrice);
         mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
+        mRE_yue= (RelativeLayout) rootView.findViewById(R.id.re_yue);
         mRE_shezhi= (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
         mRE_shouhudizhi= (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
         mRE_wodeqianbao= (RelativeLayout) rootView.findViewById(R.id.re_wodeqianbao);
@@ -138,6 +141,10 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 Map map=new HashMap();
                 map.put("token",Staticdata.userBean_static.getResult().getToken());
                 loginOut(map);
+                break;
+            case R.id.re_yue:
+                Intent intent_yue=new Intent(getActivity(), RechargeActivity.class);
+                getActivity().startActivity(intent_yue);
                 break;
             case R.id.re_shezhi:
                 Intent intent=new Intent(getActivity(), SettingActivity.class);

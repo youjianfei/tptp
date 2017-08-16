@@ -283,6 +283,11 @@ public class AllOrderActivity extends BaseActivityother {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestOrder(1,type);
+    }
 
     /*适配器*/
     class ListAdapter extends BaseExpandableListAdapter {

@@ -31,5 +31,6 @@ public class Staticdata {
     public static personCenterBean personCenterBean= new personCenterBean();
 
     public static int  left_position=0;//商品列表左边点击的位置
+    public static int  orderID=0;//订单ID
 
 }
