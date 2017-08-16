@@ -121,7 +121,7 @@ public class PayActivity extends BaseActivityother {
         image_select_alipay= (ImageView) findViewById(R.id.seclect_alipay);
         image_select_wechatpay= (ImageView) findViewById(R.id.seclect_wechat);
         image_select_kuaiqian= (ImageView) findViewById(R.id.seclect_kuaiqian);
-        image_select_alipay.setSelected(true);
+        image_select_kuaiqian.setSelected(true);
         button_pay= (Button) findViewById(R.id.button_submit);
     }
     int  pay=1;
@@ -132,6 +132,7 @@ public class PayActivity extends BaseActivityother {
             case R.id.seclect_alipay:
                 image_select_alipay.setSelected(true);
                 image_select_wechatpay.setSelected(false);
+                image_select_kuaiqian.setSelected(false);
                 pay=1;
                 break;
             case R.id.seclect_kuaiqian://快钱支付
@@ -140,20 +141,13 @@ public class PayActivity extends BaseActivityother {
                 image_select_kuaiqian.setSelected(true);
                 pay=3;
 
-//                Intent intent = new Intent();
-//                intent.setAction("android.intent.action.VIEW");
-//                Uri content_url = Uri.parse("http://www.btc38.com");
-//                intent.setData(content_url);
-//                startActivity(intent);
-
 //                shareClass.shareapp();//分享ceshi
-
-                popWindowClass.initpopwindow();
 
                 break;
             case R.id.seclect_wechat:
                 image_select_alipay.setSelected(false);
                 image_select_wechatpay.setSelected(true);
+                image_select_kuaiqian.setSelected(false);
                 pay=2;
 
                 break;
@@ -163,7 +157,7 @@ public class PayActivity extends BaseActivityother {
                 if(pay==1){
                     map_pay.put("order_sn",orderNumber);//支付宝参数
                     requestAlipayPay(map_pay);
-                }else{
+                }else if(pay==2){
                     if(type.equals("gouwuche")){
                         map_pay.put("master_order_sn",orderNumber);//微信参数
                     }else if(type.equals("dingdan")){
@@ -172,8 +166,47 @@ public class PayActivity extends BaseActivityother {
 
                     requestWechatPay(map_pay);
                 }
+                else if(pay==3){
+                    requestQuaiqianPay();
+                }
                 break;
         }
+    }
+    void  requestQuaiqianPay(){//请求快钱支付网址
+        String URL= BaseUrl.BaseURL+BaseUrl.kuaiqianPay+orderNumber;
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","快钱"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    int status = (Integer) object.get("status");
+                    if(status==1){
+                        String  url = (String) object.get("url");
+                        LogUtils.LOG("ceshi","快钱"+url);
+                        popWindowClass.initpopwindow();
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri content_url = Uri.parse(url);
+                        intent.setData(content_url);
+                        startActivity(intent);
+
+                    }else{
+                        String  msg = (String) object.get("msg");
+                        ToastUtils.showToast(PayActivity.this,msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(URL,this,0);
+
     }
     void  requestAlipayPay(Map map){//请求支付宝订单
         String URL= BaseUrl.BaseURL+BaseUrl.alipayPay+ Staticdata.userBean_static.getResult().getToken();

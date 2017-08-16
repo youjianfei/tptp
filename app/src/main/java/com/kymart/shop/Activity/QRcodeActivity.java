@@ -63,6 +63,7 @@ public class QRcodeActivity extends BaseActivityother {
     }
    void  requestIMG(){
        String URL=BaseUrl.BaseURL+BaseUrl.QR_code+ Staticdata.userBean_static.getResult().getToken();
+       LogUtils.LOG("ceshi","推广二维码"+URL);
        new Volley_Utils(new Interface_volley_respose() {
            @Override
            public void onSuccesses(String respose) {
