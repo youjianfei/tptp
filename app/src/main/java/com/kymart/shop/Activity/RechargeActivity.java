@@ -23,7 +23,9 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.google.gson.Gson;
 import com.kymart.shop.AppStaticData.Staticdata;
+import com.kymart.shop.Bean.WechatPayBean;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import com.kymart.shop.Utils.LogUtils;
@@ -31,6 +33,9 @@ import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 import com.kymart.shop.class_.PayResult;
 import com.kymart.shop.class_.PopWindowClass;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +53,7 @@ public class RechargeActivity extends BaseActivityother {
 
     private WebView webView_recharge;
 
-
+    private IWXAPI api;
 
 
     private Handler mHandler = new Handler() {
@@ -93,6 +98,7 @@ public class RechargeActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        api = WXAPIFactory.createWXAPI(this, "wxcf54c829295655ba");
     }
 
     @Override
@@ -301,6 +307,42 @@ public class RechargeActivity extends BaseActivityother {
 
             }
         }).Http(URL,this,0);
+
+    }
+    WechatPayBean weBean;
+    void requestWechatPay(Map map){//请求微信订单
+        String URL=BaseUrl.BaseURL+BaseUrl.wechatPay+Staticdata.userBean_static.getResult().getToken();
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","weixin"+respose);
+                weBean=new Gson().fromJson(respose,WechatPayBean.class);
+                String appid=weBean.getResult().getAppid();
+                String noncestr=weBean.getResult().getNoncestr();
+                String packagex=weBean.getResult().getPackageX();
+                String partnerid=weBean.getResult().getPartnerid();
+                String timeStamp=weBean.getResult().getTimestamp()+"";
+                String prepayid=weBean.getResult().getPrepayid();
+                String sign=weBean.getResult().getSign();
+//                final IWXAPI msgApi =WXAPIFactory.createWXAPI(PayActivity.this, null);
+//                msgApi.registerApp(appid);// 将该app注册到微信
+                PayReq request = new PayReq();
+                request.appId =appid ;
+                request.partnerId = partnerid;
+                request.prepayId= prepayid;
+                request.packageValue = packagex;
+                request.nonceStr= noncestr;
+                request.timeStamp= timeStamp;
+                request.sign=sign;
+                api.sendReq(request);
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(URL,this,1,map);
+
 
     }
 

@@ -181,6 +181,53 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_waityouhuiquan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/mine_4"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="待发放优惠券"
+                android:layout_marginLeft="55dp"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:id="@+id/text_waitsharePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_dingdan"
         android:layout_width="match_parent"
@@ -424,7 +471,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:text="我的分享好友"
+                android:text="我的分享会员"
                 android:layout_marginLeft="55dp"
                 android:layout_centerVertical="true"
                 />

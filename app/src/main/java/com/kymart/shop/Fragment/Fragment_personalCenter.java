@@ -46,7 +46,7 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 public class Fragment_personalCenter extends Fragment implements View.OnClickListener{
     View rootView;
     CircleImageView mImage_head;
-    TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit;
+    TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit,mTextview_daiFaFang;
     RelativeLayout mRE_yue,mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan;
 
     personCenterBean person;
@@ -95,6 +95,11 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_sellState.setText(person.getResult().getSell_status()==0? "预备会员":"开心果");
         mTextview_blance.setText("￥"+person.getResult().getUser_money()+"");
         mTextview_sharePrice.setText("￥"+person.getResult().getBonus());
+        double daiFaFang=Double.parseDouble(person.getResult().getTotal_sell())-Double.parseDouble(person.getResult().getTotal_bonus1());
+
+        mTextview_daiFaFang.setText("￥"+new java.text.DecimalFormat("0.00").format(daiFaFang));
+
+
     }
    void  request(){
        new Volley_Utils(new Interface_volley_respose() {
@@ -115,6 +120,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     }
 
     private void initview() {
+        mTextview_daiFaFang= (TextView) rootView.findViewById(R.id.text_waitsharePrice);
         mImage_head= (CircleImageView) rootView.findViewById(R.id.image_head);
         mTextview_name= (TextView) rootView.findViewById(R.id.textview_accountname);
         mTextview_ID= (TextView) rootView.findViewById(R.id.textview_id);
