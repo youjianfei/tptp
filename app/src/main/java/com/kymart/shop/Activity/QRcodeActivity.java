@@ -5,11 +5,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -22,6 +24,11 @@ import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.SizeUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +40,12 @@ import cn.kymart.tptp.R;
 
 public class QRcodeActivity extends BaseActivityother {
     private RelativeLayout mainREL;
-    private String URL_QRcode;
+    private String URL_QRcode="";
+    private String shareTitle="";
+    private String shareContent="";
+    private String share_url="";
+    private ImageView share_weixin,share_weixincircle,share_qq;
+    public UMShareListener umShareListener;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_qrcode;
@@ -47,11 +59,99 @@ public class QRcodeActivity extends BaseActivityother {
     @Override
     protected void initData() {
         ToastUtils.showToast(this,"图片正在加载，点击图片可以下载到本地相册");
+        umShareListener = new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA platform) {
+                Log.d("plat", "platform" + platform);
+
+                Toast.makeText(getApplicationContext(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA platform, Throwable t) {
+                Toast.makeText(getApplicationContext(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+                if (t != null) {
+                    Log.d("throw", "throw:" + t.getMessage());
+                }
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media) {
+
+            }
+        };
+
+    }
+    void share(int share){
+        UMImage image = new UMImage(QRcodeActivity.this, URL_QRcode);//第一张图片URL
+        UMImage thumb = new UMImage(QRcodeActivity.this, share_url);
+        image.setThumb(thumb);
+        if (share == 2) {
+            UMWeb web = new UMWeb(share_url);
+            web.setTitle(shareTitle);//标题
+            web.setDescription(shareContent);//描述
+            web.setThumb(image);
+            new ShareAction(QRcodeActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                    .withMedia(web)
+                    .setCallback(umShareListener)
+                    .share();
+
+        }
+        if (share == 1) {
+
+            UMWeb web = new UMWeb(share_url);
+            web.setTitle(shareTitle);//标题
+            web.setDescription(shareContent);//描述
+            web.setThumb(image);
+            new ShareAction(QRcodeActivity.this).setPlatform(SHARE_MEDIA.WEIXIN)
+                    .withMedia(web)
+                    .setCallback(umShareListener)
+                    .share();
+        }
+        if (share == 3) {
+            UMWeb web = new UMWeb(share_url);
+            web.setTitle(shareTitle);//标题
+            web.setThumb(thumb);  //缩略图
+            web.setDescription(shareContent);//描述
+            new ShareAction(QRcodeActivity.this).setPlatform(SHARE_MEDIA.QQ)
+                    .withMedia(web)
+                    .setCallback(umShareListener)
+                    .share();
+        }
+
 
     }
 
     @Override
     protected void initListener() {
+        share_weixin.setOnClickListener(this);
+        share_weixincircle.setOnClickListener(this);
+        share_qq.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.share_weixin:
+                share(1);
+
+                break;
+            case R.id.share_weixincircle:
+                share(2);
+
+                break;
+            case R.id.share_qq:
+                share(3);
+
+                break;
+        }
 
     }
 
@@ -59,6 +159,9 @@ public class QRcodeActivity extends BaseActivityother {
     protected void initView() {
         requestIMG();
         mainREL= (RelativeLayout) findViewById(R.id.REL_QRcode);
+        share_weixin= (ImageView) findViewById(R.id.share_weixin);
+        share_weixincircle= (ImageView) findViewById(R.id.share_weixincircle);
+        share_qq= (ImageView) findViewById(R.id.share_qq);
 
     }
    void  requestIMG(){
@@ -71,7 +174,14 @@ public class QRcodeActivity extends BaseActivityother {
                JSONObject jo = null;
                try {
                    jo = new JSONObject(respose);
-                   URL_QRcode = (String) jo.get("url");//图片地址
+                   int status=(Integer) jo.get("status");
+                   if(status==1){
+                       URL_QRcode = (String) jo.get("url");//图片地址
+                       shareTitle =(String) jo.get("title");
+                       shareContent =(String) jo.get("content");
+                       share_url =(String) jo.get("share_url");
+                   }
+
                } catch (JSONException e) {
                    e.printStackTrace();
                }
@@ -126,4 +236,7 @@ public class QRcodeActivity extends BaseActivityother {
         //启动图片下载线程
         new Thread(service).start();
     }
+
+
+
 }

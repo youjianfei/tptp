@@ -53,6 +53,7 @@ public class ShareFriends {
         private String nickname;
         private int user_id;
         private int reg_time;
+        private int sell_status;
         private Object head_pic;
 
         public String getNickname() {
@@ -69,6 +70,14 @@ public class ShareFriends {
 
         public void setUser_id(int user_id) {
             this.user_id = user_id;
+        }
+
+        public int getSell_status() {
+            return sell_status;
+        }
+
+        public void setSell_status(int sell_status) {
+            this.sell_status = sell_status;
         }
 
         public int getReg_time() {

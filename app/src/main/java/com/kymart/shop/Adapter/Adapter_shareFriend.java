@@ -48,7 +48,9 @@ public class Adapter_shareFriend extends  BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
         Glide.with(mContext).load(BaseUrl.BasegoodlistURL+bean.getHead_pic()).error(R.mipmap.user68).into(holder.mimage_head);
-        holder.mtext_nick.setText("昵称："+bean.getNickname());
+        int huiyuanshenfen =mData.get(position).getSell_status();
+        String shenfen= huiyuanshenfen ==0 ? "预备会员":"开心果";
+        holder.mtext_nick.setText("昵称："+bean.getNickname()+"("+  shenfen +")");
         holder.mtext_time.setText("加盟时间："+ DateUtils.timet(bean.getReg_time()+""));
         holder.mtext_ID.setText("会员ID："+bean.getUser_id());
 
