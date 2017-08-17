@@ -90,7 +90,7 @@ public class PayActivity extends BaseActivityother {
     @Override
     protected void setData() {
         shareClass=new ShareClass(this);
-        popWindowClass=new PopWindowClass(this,mLinearlayout_main,orderNumber);
+        popWindowClass=new PopWindowClass(this,mLinearlayout_main);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class PayActivity extends BaseActivityother {
         }
     }
     void  requestQuaiqianPay(){//请求快钱支付网址
-        String URL= BaseUrl.BaseURL+BaseUrl.kuaiqianPay+orderNumber;
+        String URL= BaseUrl.BaseURL+BaseUrl.kuaiqianPay+orderNumber+"&user_id="+Staticdata.userBean_static.getResult().getUser_id();
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {

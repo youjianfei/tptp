@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.kymart.shop.Activity.RechargeActivity">
+
     <RelativeLayout
         android:id="@+id/RelativeLayout_title"
         android:layout_width="match_parent"
@@ -28,6 +29,18 @@
             android:layout_centerInParent="true"
             />
     </RelativeLayout>
+    <com.kymart.shop.CustomView.CustomerScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/RelativeLayout_title"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -53,10 +66,10 @@
             />
         <Button
             android:id="@+id/button_recharge"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
             android:text="充值"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:layout_margin="10dp"
             android:textColor="@color/white"
             android:background="@drawable/button_conner_5"
@@ -67,6 +80,14 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/LightGrey"/>
+     <WebView
+         android:id="@+id/webview_recharge"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+     </WebView>
 
 
+    </LinearLayout>
+    </com.kymart.shop.CustomView.CustomerScrollView>
 </LinearLayout>

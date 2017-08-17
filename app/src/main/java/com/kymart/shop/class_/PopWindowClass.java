@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -22,16 +23,17 @@ import cn.kymart.tptp.R;
 public class PopWindowClass {
     Activity activity;
     LinearLayout layout;
-    String orderID;
 
 
     PopupWindow mPopwinsow_isPay;
     Button mButtonset,mButtoncancel;
 
-    public PopWindowClass(Activity activity, LinearLayout layout,String orderID) {
+
+
+
+    public PopWindowClass(Activity activity, LinearLayout layout) {
         this.activity = activity;
         this.layout = layout;
-        this.orderID=orderID;
     }
 
     public void initpopwindow(){
@@ -52,6 +54,9 @@ public class PopWindowClass {
             }
         });
     }
+
+
+
 
     public void poplistenner(){
         mButtonset.setOnClickListener(new View.OnClickListener() {

@@ -2,11 +2,24 @@ package com.kymart.shop.Activity;
 
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.webkit.URLUtil;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
@@ -17,6 +30,7 @@ import com.kymart.shop.Utils.LogUtils;
 import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 import com.kymart.shop.class_.PayResult;
+import com.kymart.shop.class_.PopWindowClass;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,8 +41,14 @@ import java.util.Map;
 import cn.kymart.tptp.R;
 
 public class RechargeActivity extends BaseActivityother {
+    LinearLayout linearLayout_main;
 
     Button button_recharge;
+    PopupWindow mPopwinsow_recharge;
+
+    private WebView webView_recharge;
+
+
 
 
     private Handler mHandler = new Handler() {
@@ -68,12 +88,11 @@ public class RechargeActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-
+        webview_show();
     }
 
     @Override
     protected void initData() {
-
     }
 
     @Override
@@ -84,7 +103,9 @@ public class RechargeActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        linearLayout_main= (LinearLayout) findViewById(R.id.activity_recharge);
         button_recharge= (Button) findViewById(R.id.button_recharge);
+        webView_recharge= (WebView) findViewById(R.id.webview_recharge);
     }
 
     @Override
@@ -93,16 +114,131 @@ public class RechargeActivity extends BaseActivityother {
         switch (v.getId()){
             case R.id.button_recharge:
                 LogUtils.LOG("ceshi","支付宝充值点击");
-                    Map map_pay=new HashMap();
-                    map_pay.put("user_id",Staticdata.userBean_static.getResult().getUser_id()+"");//支付宝参数
-                    map_pay.put("amount","0.1");//支付宝参数
-                    requestAlipayPay(map_pay);
+                initpopwindow_recharge();
+
                 break;
         }
     }
+    void webview_show(){
+        webView_recharge.setVerticalScrollbarOverlay(true);
+        //设置WebView支持JavaScript
+        webView_recharge.getSettings().setJavaScriptEnabled(true);
 
+        String url = BaseUrl.recharge_jilu+Staticdata.userBean_static.getResult().getToken();
+        webView_recharge.loadUrl(url);
+        WebSettings settings = webView_recharge.getSettings();
+
+        // 设置缩放级别
+        settings.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
+        // 支持缩放
+        settings.setSupportZoom(true);
+        // 设置网页中可执行javascript代码
+        settings.setJavaScriptEnabled(true);
+        // 将网页内容以单列显示
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView_recharge.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                webView_recharge.loadUrl(url);
+
+                return true;
+            }
+
+
+        });
+
+    }
+    int  recharge_money=0;
+    int recharge=0;
+    public void initpopwindow_recharge(){
+        View popview = getLayoutInflater().inflate(R.layout.popwindow_recharge, null, false);
+        mPopwinsow_recharge = new PopupWindow(popview, ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        mPopwinsow_recharge.setBackgroundDrawable(getResources().getDrawable(R.drawable.pop_background));// 设置背景图片，不能在布局中设置，要通过代码来设置
+        mPopwinsow_recharge.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
+        mPopwinsow_recharge.setAnimationStyle(R.style.popwindow_anim_style); // 设置动画
+        mPopwinsow_recharge.showAtLocation(linearLayout_main, Gravity.CENTER, 0, 0);//定位pop位置
+        setAlpha((float) 0.3);
+        final EditText editText_money= (EditText) popview.findViewById(R.id.editText_moneynumber);
+        Button  mButtonset= (Button) popview.findViewById(R.id.button_set);
+        Button mButtoncancel= (Button) popview.findViewById(R.id.button_cancel);
+        final ImageView image_select_alipay,image_select_wechatpay,image_select_kuaiqian;
+        image_select_alipay= (ImageView)popview. findViewById(R.id.seclect_alipay);
+        image_select_wechatpay= (ImageView) popview.findViewById(R.id.seclect_wechat);
+        image_select_kuaiqian= (ImageView) popview.findViewById(R.id.seclect_kuaiqian);
+        image_select_kuaiqian.setSelected(true);
+        image_select_alipay.setOnClickListener(new View.OnClickListener() {//选择支付宝监听
+            @Override
+            public void onClick(View v) {
+                image_select_alipay.setSelected(true);
+                image_select_wechatpay.setSelected(false);
+                image_select_kuaiqian.setSelected(false);
+                recharge=1;
+            }
+        });
+        image_select_wechatpay.setOnClickListener(new View.OnClickListener() {//选择微信监听
+            @Override
+            public void onClick(View v) {
+                image_select_alipay.setSelected(false);
+                image_select_wechatpay.setSelected(true);
+                image_select_kuaiqian.setSelected(false);
+                recharge=2;
+
+            }
+        });
+        image_select_kuaiqian.setOnClickListener(new View.OnClickListener() {//选择快钱监听
+            @Override
+            public void onClick(View v) {
+                image_select_alipay.setSelected(false);
+                image_select_wechatpay.setSelected(false);
+                image_select_kuaiqian.setSelected(true);
+                recharge=3;
+
+            }
+        });
+        mButtonset.setOnClickListener(new View.OnClickListener() {//点击确定
+            @Override
+            public void onClick(View v) {
+                String edit=editText_money.getText()+"";
+                if(!edit.equals("")){
+                    recharge_money= Integer.parseInt(editText_money.getText()+"");
+                    LogUtils.LOG("ceshi","充值金额"+recharge_money);
+                    if(recharge==1){
+                        Map map_pay=new HashMap();
+                        map_pay.put("user_id",Staticdata.userBean_static.getResult().getUser_id()+"");//支付宝参数
+                        map_pay.put("amount",recharge_money+"");//支付宝参数
+                        requestAlipayPay(map_pay);
+                        mPopwinsow_recharge.dismiss();
+                    }
+                    if(recharge==3){
+                        requestQuaiqianPay(recharge_money);
+                        mPopwinsow_recharge.dismiss();
+                    }
+                }else{
+                    ToastUtils.showToast(getApplicationContext(),"请输入正确的金额");
+                }
+
+
+
+            }
+        });
+        mButtoncancel.setOnClickListener(new View.OnClickListener() {//点击取消
+            @Override
+            public void onClick(View v) {
+                mPopwinsow_recharge.dismiss();
+
+            }
+        });
+        mPopwinsow_recharge.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setAlpha((float) 1);
+            }
+        });
+    }
     void  requestAlipayPay(Map map){//请求支付宝订单
-        String URL= BaseUrl.BaseURL+BaseUrl.alipayPay_recharge+"&user_id="+Staticdata.userBean_static.getResult().getUser_id()+"&amount="+"0.1";
+        String URL= BaseUrl.BaseURL+BaseUrl.alipayPay_recharge;
         LogUtils.LOG("ceshi","支付宝充值"+URL);
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -128,7 +264,44 @@ public class RechargeActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
+        }).postHttp(URL,this,1,map);
+    }
+    void  requestQuaiqianPay(int  amount){//请求快钱充值网址
+        String URL= BaseUrl.BaseURL+BaseUrl.kuaiqianrecharge+"&user_id="+Staticdata.userBean_static.getResult().getUser_id()+"&amount="+amount;
+        LogUtils.LOG("ceshi","快钱URL"+URL);
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","快钱"+respose);
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(respose);
+                    int status = (Integer) object.get("status");
+                    if(status==1){
+                        String  url = (String) object.get("url");
+                        LogUtils.LOG("ceshi","快钱"+url);
+//                        popWindowClass.initpopwindow();
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri content_url = Uri.parse(url);
+                        intent.setData(content_url);
+                        startActivity(intent);
+
+                    }else{
+                        String  msg = (String) object.get("msg");
+                        ToastUtils.showToast(RechargeActivity.this,msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
         }).Http(URL,this,0);
+
     }
 
     void alipay_PAY(String info){//调用支付宝
@@ -150,5 +323,13 @@ public class RechargeActivity extends BaseActivityother {
         // 必须异步调用
         Thread payThread = new Thread(payRunnable);
         payThread.start();
+    }
+
+
+
+    public void setAlpha(float bgAlpha) {//设置背景遮罩颜色
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
     }
 }

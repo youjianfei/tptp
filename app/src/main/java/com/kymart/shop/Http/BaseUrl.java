@@ -64,12 +64,14 @@ public class BaseUrl {
     public static String  alipayPay_recharge="m=Api&c=payment&a=recharge_alipay";//支付宝充值  \(basePath)m=Api&c=payment&a=alipay_sign&token=\(access_token())"
     public static String  wechatPay="m=Api&c=wxpay&a=dopay&token=";//微信支付  return "\(basePath)m=Api&c=wxpay&a=dopay&token=\(access_token())"
     public static String  kuaiqianPay="m=api&c=Payment&a=bill&order_sn=";//快钱支付支付  order_sn=201707260855086512
+    public static String  kuaiqianrecharge="m=Api&c=payment&a=recharge_bill";//快钱支付充值  https://kymart.cn/index.php?m=Api&c=payment&a=recharge_bill
+
     public static String  AllOrder="m=Api&c=User&a=getOrderList&token=";//订单列表  \(access_token())"
     public static String  cancleOrder="m=Api&c=user&a=cancelOrder&token=";//删除订单  \(basePath)m=Api&c=user&a=cancelOrder&token=\(access_token())"
     public static String  Orderdetail="m=Api&c=order&a=order_detail&token=";//订单详情 "\(basePath)m=Api&c=order&a=order_detail    &user_id=\(user_id)&id=\(id)&token=\(access_token())"
     public static String  logistics="m=Api&c=user&a=express&token=";//物流信息  return "\(basePath)m=Api&c=user&a=express&order_id=\(order_id)&token=\(access_token())"
     public static String  shouhuo="m=Api&c=user&a=orderConfirm&token=";//确认收货  return "\(basePath)m=Api&c=user&a=orderConfirm&token=\(access_token())"
-
+    public static String  recharge_jilu="http://www.kymart.cn/index.php/api/user/recharge_list.html?token=";//充值记录
 
 
 
