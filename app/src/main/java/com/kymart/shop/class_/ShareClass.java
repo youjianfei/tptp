@@ -34,7 +34,7 @@ public class ShareClass {
     /**
      * 微信分享方法
      */
-    public  void shareapp() {
+    public  void shareapp(final String title, final String url_good,final  String ImageUrl) {
         LogUtils.LOG("ceshi","我是拉出来的微信分享");
 //        shareJsonBean=  new Gson().fromJson(sharejson, shareJson.class);//分享json解析对象
 //        imageurl=shareJsonBean.getData().getImageurl();
@@ -70,13 +70,13 @@ public class ShareClass {
 
             @Override
             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                UMImage image = new UMImage(activity, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502778967523&di=68a491051a11ccd02a03471d55bacda5&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fc8177f3e6709c93d72318d2d993df8dcd000542c.jpg");//第一张图片URL
-                UMImage thumb = new UMImage(activity, "https://www.baidu.com");
+                UMImage image = new UMImage(activity,ImageUrl);
+                UMImage thumb = new UMImage(activity, url_good);
                 image.setThumb(thumb);
                 if (share_media == share_media.WEIXIN_CIRCLE) {
-                    UMWeb web = new UMWeb("https://www.baidu.com");
-                    web.setTitle("我是分享标题");//标题
-                    web.setDescription("我是分享描述");//描述
+                    UMWeb web = new UMWeb(url_good);
+                    web.setTitle(title);//标题
+                    web.setDescription("开心购物,快乐分享");//描述
                     web.setThumb(image);
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                             .withMedia(web)
@@ -86,9 +86,9 @@ public class ShareClass {
                 }
                 if (share_media == share_media.WEIXIN) {
 
-                    UMWeb web = new UMWeb("https://www.baidu.com");
-                    web.setTitle("我是分享标题");//标题
-                    web.setDescription("我是分享描述");//描述
+                    UMWeb web = new UMWeb(url_good);
+                    web.setTitle(title);//标题
+                    web.setDescription("开心购物,快乐分享");//描述
                     web.setThumb(image);
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.WEIXIN)
                             .withMedia(web)
@@ -96,10 +96,10 @@ public class ShareClass {
                             .share();
                 }
                 if (share_media == share_media.QQ) {
-                    UMWeb web = new UMWeb("https://www.baidu.com");
-                    web.setTitle("我是分享标题");//标题
+                    UMWeb web = new UMWeb(url_good);
+                    web.setTitle(title);//标题
                     web.setThumb(thumb);  //缩略图
-                    web.setDescription("我是分享描述");//描述
+                    web.setDescription("开心购物,快乐分享");//描述
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.QQ)
                             .withMedia(web)
                             .setCallback(umShareListener)

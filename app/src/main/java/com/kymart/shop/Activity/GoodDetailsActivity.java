@@ -4,13 +4,21 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Fragment.Fragment_GoodDatails_good;
 import com.kymart.shop.Fragment.Fragment_GoodDetails_web;
+import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.class_.ShareClass;
+
+import java.util.Map;
 
 import cn.kymart.tptp.R;
+
+import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 
 public class GoodDetailsActivity extends BaseActivityother {
     int ID=0;
@@ -20,6 +28,7 @@ public class GoodDetailsActivity extends BaseActivityother {
      * @return
      */
     public static GoodDetailsActivity goodDetailsActivity;
+    ShareClass shareClass;
 
    public  Fragment_GoodDatails_good fragment_goodDatails_good;
     public Fragment_GoodDetails_web  fragment_goodDetails_web;
@@ -27,6 +36,7 @@ public class GoodDetailsActivity extends BaseActivityother {
 
     private TextView mTextview_produce;
     private TextView mTextview_produceWeb;
+    private ImageView image_share;
 
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
@@ -44,7 +54,7 @@ public class GoodDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        shareClass=new ShareClass(this);
 
     }
 
@@ -52,6 +62,7 @@ public class GoodDetailsActivity extends BaseActivityother {
     protected void initListener() {
         mTextview_produce.setOnClickListener(this);
         mTextview_produceWeb.setOnClickListener(this);
+        image_share.setOnClickListener(this);
     }
 
     @Override
@@ -62,7 +73,7 @@ public class GoodDetailsActivity extends BaseActivityother {
 
         mTextview_produce= (TextView) findViewById(R.id.text_produce);
         mTextview_produceWeb= (TextView) findViewById(R.id.text_produceWeb);
-
+        image_share= (ImageView) findViewById(R.id.iv_share);
 
         fragment_goodDatails_good=new Fragment_GoodDatails_good(ID);
         fragmetnmanager = getFragmentManager();
@@ -97,6 +108,20 @@ public class GoodDetailsActivity extends BaseActivityother {
                     transaction.add(R.id.fragment_goodDetails, fragment_goodDetails_web).commit();
                 } else {
                     transaction.show(fragment_goodDetails_web).commit();
+                }
+
+
+                break;
+            case R.id.iv_share:
+                if(fragment_goodDatails_good!=null&&fragment_goodDatails_good.Id!=0){
+                    if(isLogin==1) {//登录状态,添加到购物车
+                        String URL= BaseUrl.BaseURL+BaseUrl.shareGoodDetails+fragment_goodDatails_good.Id+"first_leader="+ Staticdata.userBean_static.getResult().getUser_id();
+                        shareClass.shareapp(fragment_goodDatails_good.title,URL,fragment_goodDatails_good.ImageURL);
+
+                    }else{
+                        String URL= BaseUrl.BaseURL+BaseUrl.shareGoodDetails+fragment_goodDatails_good.Id;
+                        shareClass.shareapp(fragment_goodDatails_good.title,URL,fragment_goodDatails_good.ImageURL);
+                    }
                 }
 
 

@@ -21,6 +21,7 @@ public class BaseUrl {
     public  static String Baseimage="http://api.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
 
+
     public  static String mainURL="m=api&c=Index&a=homePage";
     public static String  main_imgURL="m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//main  轮播
     public static String  main_like="m=api&c=Index&a=favourite&p=";//猜你喜欢
@@ -33,6 +34,7 @@ public class BaseUrl {
     public static String  messageCode_find="m=Home&c=Api&a=send_validate_code&scene=2&type=mobile";//找回密码使用的短信验证码
     public static String  findPassword="m=api&c=user&a=forgetPassword";//找回密码使用的短信验证码
     public static String  goodDetails="m=Api&c=Goods&a=goodsInfo";//商品详情
+    public static String  shareGoodDetails="m=Mobile&c=Goods&a=goodsInfo&id=";//商品详情分享  http://www.kymart.cn/index.php?m=Mobile&c=Goods&a=goodsInfo&id=3155&first_leader=user_id
     public static String  goodDetails_web="m=api&c=goods&a=goodsContent&id=";//商品详情
     public static String  addShopCar="m=Api&c=Cart&a=addCart&unique_id=";//
     public static String  shopCarList="m=Api&c=Cart&a=cartList";//购物车列表

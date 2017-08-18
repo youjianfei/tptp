@@ -59,8 +59,12 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
  */
 @SuppressLint("ValidFragment")
 public class Fragment_GoodDatails_good extends Fragment {
+
+    public static Fragment_GoodDatails_good fragment_goodDatails_good;
     View rootview;
-    private int Id;
+    public int Id;
+    public String title="";
+    public String ImageURL="";
     private LinearLayout mLinear_bottom;
     private Banner mBanner;
     private TextView mTextview_GoodName;
@@ -87,6 +91,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,  Bundle savedInstanceState) {
         rootview=inflater.inflate(R.layout.fragment_gooddetails_good,container,false);
+        fragment_goodDatails_good=this;
         initview();
         setData();
         initListenner();
@@ -183,6 +188,7 @@ public class Fragment_GoodDatails_good extends Fragment {
                 galleryBean=resultBean.getGallery();
                 mImageview_icon.setImageResource(Utils.selectICON(goodBean.getKy_type()));
                 lunBoTU();//顶部轮播图方法执行
+                title=goodBean.getGoods_name();
                 mTextview_GoodName.setText(goodBean.getGoods_name());
 
                 mData_Spec=resultBean.getGoods_spec_list();
@@ -244,6 +250,7 @@ public class Fragment_GoodDatails_good extends Fragment {
             for(int i=0;i<galleryBean.size();i++){
                 mImagesURL.add(galleryBean.get(i).getImage_url());
             }
+            ImageURL=mImagesURL.get(0);
             mImagesURL.addAll(mImagesURL);
             //设置图片加载器
             mBanner.setImageLoader(new GlideImageLoader());

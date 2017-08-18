@@ -40,7 +40,7 @@
             android:lines="2"
             android:textSize="15dp"
             android:layout_margin="15dp"
-            android:text="长虹（CHANGHONG)49A1U 49英寸双 64位4超清智能网络LED液晶电视" />
+            android:text="" />
 
     </LinearLayout>
     <TextView
