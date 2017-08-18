@@ -17,7 +17,7 @@ public class BaseUrl {
 //  正式接口
     public  static String checkUpdate="http://api.kymart.cn/api/index/checkupdate";//强制更新——正式接口
     public  static String BaseURL="http://api.kymart.cn/index.php?";//主接口——测试接口正式接口
-    public  static String BasegoodlistURL="http://api.kymart.cn";//商品列表主接口——测试接口
+    public  static String BasegoodlistURL="http://api.kymart.cn";//商品列表主接口——测试接口 http://api.kymart.cn/
     public  static String Baseimage="http://api.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
 

@@ -49,6 +49,15 @@ public class MainBean {
         private List<PromotionGoodsBean> new_goods;
         private List<PromotionGoodsBean> hot_goods;
         private List<AdBean> ad;
+        private List<ZoneBean> zone;
+
+        public List<ZoneBean> getZone() {
+            return zone;
+        }
+
+        public void setZone(List<ZoneBean> zone) {
+            this.zone = zone;
+        }
 
         public List<PromotionGoodsBean> getPromotion_goods() {
             return promotion_goods;
@@ -144,114 +153,6 @@ public class MainBean {
             }
         }
 
-//        public static class HighQualityGoodsBean {
-//            /**
-//             * goods_id : 143
-//             * goods_name : haier海尔 BC-93TMPF 93升单门冰箱
-//             * shop_price : 699.00
-//             */
-//
-//            private int goods_id;
-//            private String goods_name;
-//            private String shop_price;
-//
-//            public int getGoods_id() {
-//                return goods_id;
-//            }
-//
-//            public void setGoods_id(int goods_id) {
-//                this.goods_id = goods_id;
-//            }
-//
-//            public String getGoods_name() {
-//                return goods_name;
-//            }
-//
-//            public void setGoods_name(String goods_name) {
-//                this.goods_name = goods_name;
-//            }
-//
-//            public String getShop_price() {
-//                return shop_price;
-//            }
-//
-//            public void setShop_price(String shop_price) {
-//                this.shop_price = shop_price;
-//            }
-//        }
-//
-//        public static class NewGoodsBean {
-//            /**
-//             * goods_id : 103
-//             * goods_name : 珂兰钻石 18K金90分效果群镶钻石戒指 倾城 需定制
-//             * shop_price : 1999.00
-//             */
-//
-//            private int goods_id;
-//            private String goods_name;
-//            private String shop_price;
-//
-//            public int getGoods_id() {
-//                return goods_id;
-//            }
-//
-//            public void setGoods_id(int goods_id) {
-//                this.goods_id = goods_id;
-//            }
-//
-//            public String getGoods_name() {
-//                return goods_name;
-//            }
-//
-//            public void setGoods_name(String goods_name) {
-//                this.goods_name = goods_name;
-//            }
-//
-//            public String getShop_price() {
-//                return shop_price;
-//            }
-//
-//            public void setShop_price(String shop_price) {
-//                this.shop_price = shop_price;
-//            }
-//        }
-//
-//        public static class HotGoodsBean {
-//            /**
-//             * goods_id : 1
-//             * goods_name : Apple iPhone 6s Plus 16G 玫瑰金 移动联通电信4G手机
-//             * shop_price : 200.00
-//             */
-//
-//            private int goods_id;
-//            private String goods_name;
-//            private String shop_price;
-//
-//            public int getGoods_id() {
-//                return goods_id;
-//            }
-//
-//            public void setGoods_id(int goods_id) {
-//                this.goods_id = goods_id;
-//            }
-//
-//            public String getGoods_name() {
-//                return goods_name;
-//            }
-//
-//            public void setGoods_name(String goods_name) {
-//                this.goods_name = goods_name;
-//            }
-//
-//            public String getShop_price() {
-//                return shop_price;
-//            }
-//
-//            public void setShop_price(String shop_price) {
-//                this.shop_price = shop_price;
-//            }
-//        }
-
         public static class AdBean {
             /**
              * ad_link : http://test.kymart.cn/index.php?m=Home&c=Goods&a=goodsInfo&id=1
@@ -285,6 +186,26 @@ public class MainBean {
 
             public void setAd_code(String ad_code) {
                 this.ad_code = ad_code;
+            }
+        }
+        public static class ZoneBean{
+            private String img_url;
+            private String api_url;
+
+            public String getImg_url() {
+                return img_url;
+            }
+
+            public void setImg_url(String img_url) {
+                this.img_url = img_url;
+            }
+
+            public String getApi_url() {
+                return api_url;
+            }
+
+            public void setApi_url(String api_url) {
+                this.api_url = api_url;
             }
         }
     }

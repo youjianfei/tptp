@@ -25,7 +25,9 @@ import com.kymart.shop.Activity.GoodSearchActivity;
 import com.kymart.shop.Activity.GoodlistActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Adapter.Adapter_fenxiangquTupian;
 import com.kymart.shop.CustomView.CustomerScrollView;
+import com.kymart.shop.CustomView.MyListView;
 import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Utils.SizeUtils;
 import com.youth.banner.Banner;
@@ -64,6 +66,8 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_flashSale;// viewpager 新品上市viewpager总数据
     List<MainBean.ResultBean.PromotionGoodsBean> mData_viewpager_hot;// viewpager 热销商品viewpager总数据
 
+    List<MainBean.ResultBean.ZoneBean> mData_fenxiangquTupian;
+    Adapter_fenxiangquTupian  madapter_fenxiangqutupian;
 
     List<mainLike.ResultBean.FavouriteGoodsBean> mList_like;//猜你喜欢 数据
     Adapter_Grid_main_like mAdapter_main_like;//猜你喜欢数据网格列表
@@ -82,9 +86,9 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
     private ViewPager mViewPager_main_icon;
 
-    private RelativeLayout mre_image_fenxiangqu;
-    private RelativeLayout mre_image_cuxiaoqu;
-    private RelativeLayout mre_image_miaoshaqu;
+    private MyListView myListView_fenxinagquTupian;
+
+
 
     private ViewPager mViewPager_item_first;
     private ViewPager mViewPager_item_second;
@@ -126,9 +130,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
         mViewPager_main_icon= (ViewPager) rootview.findViewById(R.id.viewpager_main_icon);
 
-        mre_image_fenxiangqu= (RelativeLayout) rootview.findViewById(R.id.REL_fenxiangqu);
-        mre_image_cuxiaoqu= (RelativeLayout) rootview.findViewById(R.id.REL_cuxiaoqu);
-        mre_image_miaoshaqu= (RelativeLayout) rootview.findViewById(R.id.REL_miaoshaoqu);
+        myListView_fenxinagquTupian= (MyListView) rootview.findViewById(R.id.listview_fenxiangqu_Tupian);
 
         mViewPager_item_first = (ViewPager) rootview.findViewById(R.id.viewpager_first);
         mViewPager_item_second = (ViewPager) rootview.findViewById(R.id.viewpager_second);
@@ -153,6 +155,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
         mData_viewpager_highQuality = new ArrayList<>();//精品推荐 viewpager 总数据
         mData_viewpager_flashSale=new ArrayList<>();//新品上市 viewpager 总数据
         mData_viewpager_hot=new ArrayList<>();//热销商品  viewpager总数据
+        mData_fenxiangquTupian=new ArrayList<>();//分享区图片list
 
         mList_like = new ArrayList<>();//猜你喜欢数据
 
@@ -325,6 +328,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     public void requestData() {//主页数据网络请求  &cid=2&page=1&count=20
 
         String URL = BaseURL + mainURL;
+        LogUtils.LOG("ceshi","homepage_URL"+BaseURL + mainURL);
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -336,6 +340,8 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
                 mData_viewpager_highQuality=mainbean.getResult().getHigh_quality_goods();//精品推荐 数据添加
                 mData_viewpager_flashSale=mainbean.getResult().getNew_goods();//新品上市数据添加
                 mData_viewpager_hot=mainbean.getResult().getHot_goods();//热销产品数据添加
+                mData_fenxiangquTupian=mainbean.getResult().getZone();
+                LogUtils.LOG("ceshi","3个图片的list"+mData_fenxiangquTupian.size());
                 initData();
                 setData();
                 requestLikeData(1);//请求  猜你喜欢 数据
@@ -528,53 +534,13 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     //添加分享区  促销区 秒杀区图片 public class GoodlistActivity extends BaseActivityother {
 
     void initfenxiangqu(){
-       int width = SizeUtils.getScreenWidthPx(getActivity());
-       int height = (int) (width * 0.22);
-       final ImageView imageView_fenxiang=new ImageView(getActivity());
-//       imageView_fenxiang.setImageResource(R.mipmap.fenxiangqu_);
-        Glide.with(this).load("http://api.kymart.cn/public/app/01.jpg").into(imageView_fenxiang);
-       LinearLayout.LayoutParams mLayoutParams_fenxiang = new LinearLayout.LayoutParams(
-               width, height);
-       mre_image_fenxiangqu.addView(imageView_fenxiang, mLayoutParams_fenxiang);
-       mre_image_fenxiangqu.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intend_fenxiangqu=new Intent(getActivity(),GoodlistActivity.class);
-               intend_fenxiangqu.putExtra("url",BaseURL+"m=api&c=activity&a=zone&zid=0");
-               getActivity().startActivity(intend_fenxiangqu);
-           }
-       });
+        int width = SizeUtils.getScreenWidthPx(getActivity());
 
-       final ImageView imageView_cuxiaoqu=new ImageView(getActivity());
-//       imageView_cuxiaoqu.setImageResource(R.mipmap.cuxiaoqu_l);
-        Glide.with(this).load("http://api.kymart.cn/public/app/02.jpg").into(imageView_cuxiaoqu);
-       LinearLayout.LayoutParams mLayoutParams_cuxiao = new LinearLayout.LayoutParams(
-               width, height);
-       mre_image_cuxiaoqu.addView(imageView_cuxiaoqu, mLayoutParams_cuxiao);
-       mre_image_cuxiaoqu.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent_cuxiaoqu=new Intent(getActivity(), GoodlistActivity.class);
-               intent_cuxiaoqu.putExtra("url",BaseURL+"m=api&c=activity&a=zone&zid=3");
-               getActivity().startActivity(intent_cuxiaoqu);
-           }
-       });
+        madapter_fenxiangqutupian=new Adapter_fenxiangquTupian(mData_fenxiangquTupian,getActivity(),width);
+        myListView_fenxinagquTupian.setAdapter(madapter_fenxiangqutupian);
 
-       final ImageView imageView_miaoshao=new ImageView(getActivity());
-//       imageView_miaoshao.setImageResource(R.mipmap.miaoshaoqu_l);
-        Glide.with(this).load("http://api.kymart.cn/public/app/03.jpg").into(imageView_miaoshao);
 
-        LinearLayout.LayoutParams mLayoutParams_miaosha = new LinearLayout.LayoutParams(
-               width, height);
-       mre_image_miaoshaqu.addView(imageView_miaoshao, mLayoutParams_miaosha);
-       mre_image_miaoshaqu.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent_miaoshaqu=new Intent(getActivity(), GoodlistActivity.class);
-               intent_miaoshaqu.putExtra("url",BaseURL+"m=api&c=activity&a=yuebing");
-               getActivity().startActivity(intent_miaoshaqu);
-           }
-       });
+
    }
 
     @Override
