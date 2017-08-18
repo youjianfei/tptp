@@ -15,15 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kymart.shop.Activity.AllOrderActivity;
 import com.kymart.shop.Activity.EmptyActivity;
 import com.kymart.shop.Activity.GoodDetailsActivity;
 import com.kymart.shop.Activity.GoodList_moduleActivity;
 import com.kymart.shop.Activity.GoodSearchActivity;
+import com.kymart.shop.Activity.GoodlistActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.LoginActivity;
 import com.kymart.shop.CustomView.CustomerScrollView;
+import com.kymart.shop.Http.BaseUrl;
 import com.kymart.shop.Utils.SizeUtils;
 import com.youth.banner.Banner;
 
@@ -43,6 +46,7 @@ import com.kymart.shop.Utils.Volley_Utils;
 import static com.kymart.shop.Activity.MainActivity.mMainactivity;
 import static com.kymart.shop.AppStaticData.Staticdata.isLogin;
 import static com.kymart.shop.Http.BaseUrl.BaseURL;
+import static com.kymart.shop.Http.BaseUrl.BasegoodlistURL;
 import static com.kymart.shop.Http.BaseUrl.mainURL;
 import static com.kymart.shop.Http.BaseUrl.main_like;
 
@@ -521,48 +525,53 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
 
 
     }
-    //添加分享区  促销区 秒杀区图片
-   void initfenxiangqu(){
+    //添加分享区  促销区 秒杀区图片 public class GoodlistActivity extends BaseActivityother {
+
+    void initfenxiangqu(){
        int width = SizeUtils.getScreenWidthPx(getActivity());
        int height = (int) (width * 0.22);
        final ImageView imageView_fenxiang=new ImageView(getActivity());
-       imageView_fenxiang.setImageResource(R.mipmap.fenxiangqu_);
+//       imageView_fenxiang.setImageResource(R.mipmap.fenxiangqu_);
+        Glide.with(this).load("http://api.kymart.cn/public/app/01.jpg").into(imageView_fenxiang);
        LinearLayout.LayoutParams mLayoutParams_fenxiang = new LinearLayout.LayoutParams(
                width, height);
        mre_image_fenxiangqu.addView(imageView_fenxiang, mLayoutParams_fenxiang);
        mre_image_fenxiangqu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intend_fenxiangqu=new Intent(getActivity(),GoodsListActivity.class);
-               intend_fenxiangqu.putExtra("id",0);
+               Intent intend_fenxiangqu=new Intent(getActivity(),GoodlistActivity.class);
+               intend_fenxiangqu.putExtra("url",BaseURL+"m=api&c=activity&a=zone&zid=0");
                getActivity().startActivity(intend_fenxiangqu);
            }
        });
 
        final ImageView imageView_cuxiaoqu=new ImageView(getActivity());
-       imageView_cuxiaoqu.setImageResource(R.mipmap.cuxiaoqu_l);
+//       imageView_cuxiaoqu.setImageResource(R.mipmap.cuxiaoqu_l);
+        Glide.with(this).load("http://api.kymart.cn/public/app/02.jpg").into(imageView_cuxiaoqu);
        LinearLayout.LayoutParams mLayoutParams_cuxiao = new LinearLayout.LayoutParams(
                width, height);
        mre_image_cuxiaoqu.addView(imageView_cuxiaoqu, mLayoutParams_cuxiao);
        mre_image_cuxiaoqu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent_cuxiaoqu=new Intent(getActivity(), GoodList_moduleActivity.class);
-               intent_cuxiaoqu.putExtra("type","onsale_list");
+               Intent intent_cuxiaoqu=new Intent(getActivity(), GoodlistActivity.class);
+               intent_cuxiaoqu.putExtra("url",BaseURL+"m=api&c=activity&a=zone&zid=3");
                getActivity().startActivity(intent_cuxiaoqu);
            }
        });
 
        final ImageView imageView_miaoshao=new ImageView(getActivity());
-       imageView_miaoshao.setImageResource(R.mipmap.miaoshaoqu_l);
-       LinearLayout.LayoutParams mLayoutParams_miaosha = new LinearLayout.LayoutParams(
+//       imageView_miaoshao.setImageResource(R.mipmap.miaoshaoqu_l);
+        Glide.with(this).load("http://api.kymart.cn/public/app/03.jpg").into(imageView_miaoshao);
+
+        LinearLayout.LayoutParams mLayoutParams_miaosha = new LinearLayout.LayoutParams(
                width, height);
        mre_image_miaoshaqu.addView(imageView_miaoshao, mLayoutParams_miaosha);
        mre_image_miaoshaqu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent_miaoshaqu=new Intent(getActivity(), GoodList_moduleActivity.class);
-               intent_miaoshaqu.putExtra("type","miaosha_list");
+               Intent intent_miaoshaqu=new Intent(getActivity(), GoodlistActivity.class);
+               intent_miaoshaqu.putExtra("url",BaseURL+"m=api&c=activity&a=yuebing");
                getActivity().startActivity(intent_miaoshaqu);
            }
        });

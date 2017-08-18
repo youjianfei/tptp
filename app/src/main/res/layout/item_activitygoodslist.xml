@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/LightGrey"
+        >
+
+        <TextView
+            android:id="@+id/textview_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="促销商品"
+            android:textColor="@color/red"
+            android:textSize="22dp"
+            android:layout_margin="8dp"
+            android:layout_below="@+id/banner"
+            />
+        <TextView
+            android:id="@+id/text_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更多宝贝"
+            android:textColor="@color/blank"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/image_item_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/LightGrey"
+        android:layout_below="@+id/textview_item_title"
+        />
+    <com.kymart.shop.CustomView.MyGridView
+        android:id="@+id/gridview_goods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/LightGrey"
+        android:scrollbars="none"
+        android:numColumns="2"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        >
+
+    </com.kymart.shop.CustomView.MyGridView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:src="@color/LightGrey"
+        />
+
+</LinearLayout>

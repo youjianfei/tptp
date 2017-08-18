@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.kymart.shop.Adapter.Adapter_Grid_goodsList;
+import com.kymart.shop.Adapter.Adapter_Grid_goodsList12fenlei;
+import com.kymart.shop.Bean.GoodList12fenlei;
 import com.kymart.shop.Bean.Goods_ListBean;
 import com.kymart.shop.CustomView.MyGridView;
 import com.kymart.shop.Http.BaseUrl;
@@ -31,12 +34,18 @@ public class GoodSearchActivity extends BaseActivityother {
     private MyGridView mGridview;
     private TextView mTextVIew_loadMore,mTextview_search;//加载更多控件
     private EditText medit_view;
+    private TextView mtext_title;
+    private LinearLayout mlinearlayout_search;
 
 
     private List<Goods_ListBean.ResultBean.GoodsListBean> mDate;//grid数据集合
+    private List<GoodList12fenlei.ResultBean> mDate12fenlei;//grid数据集合
     private Goods_ListBean.ResultBean  resultBean;
     private Adapter_Grid_goodsList mAdapter;
+    Adapter_Grid_goodsList12fenlei mAdapter12;
 
+
+    String more_URL="";
 
     @Override
     public int setLayoutResID() {
@@ -59,23 +68,39 @@ public class GoodSearchActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-
-                resultBean=new Gson().fromJson(respose,Goods_ListBean.class).getResult();
-                LogUtils.LOG("ceshi","商品列表"+respose);
-                LogUtils.LOG("ceshi","url"+BaseUrl.BasegoodlistURL+url+page);
-                LogUtils.LOG("ceshi",resultBean.getSort()+respose);
-                if(page==1&&resultBean.getGoods_list()!=null){
-                    mDate.clear();
-
-                    mDate.addAll(resultBean.getGoods_list());
-                    mAdapter.notifyDataSetChanged();
-                    if(mDate.size()==0){
-                        ToastUtils.showToast(GoodSearchActivity.this,"没有该商品");
+                LogUtils.LOG("ceshi","2222"+more_URL+respose);
+                if(more_URL!=null&&!more_URL.equals("")){
+                    if(page==1){
+                        mDate12fenlei.clear();
+                        LogUtils.LOG("ceshi",respose);
+                        mDate12fenlei.addAll(new Gson().fromJson(respose,GoodList12fenlei.class).getResult());
+                        mAdapter12.notifyDataSetChanged();
+                        if(mDate12fenlei.size()==0){
+                            ToastUtils.showToast(GoodSearchActivity.this,"没有该商品");
+                        }
+                    }else if(page!=1){
+                        mDate12fenlei.addAll(new Gson().fromJson(respose,GoodList12fenlei.class).getResult());
+                        mAdapter12.notifyDataSetChanged();
                     }
-                }else if(page!=1&&resultBean.getGoods_list()!=null){
-                    mDate.addAll(resultBean.getGoods_list());
-                    mAdapter.notifyDataSetChanged();
+                }else{
+                    resultBean=new Gson().fromJson(respose,Goods_ListBean.class).getResult();
+                    LogUtils.LOG("ceshi","商品列表"+respose);
+                    LogUtils.LOG("ceshi","url"+BaseUrl.BasegoodlistURL+url+page);
+                    LogUtils.LOG("ceshi",resultBean.getSort()+respose);
+                    if(page==1&&resultBean.getGoods_list()!=null){
+                        mDate.clear();
+                        mDate.addAll(resultBean.getGoods_list());
+                        mAdapter.notifyDataSetChanged();
+                        if(mDate.size()==0){
+                            ToastUtils.showToast(GoodSearchActivity.this,"没有该商品");
+                        }
+                    }else if(page!=1&&resultBean.getGoods_list()!=null){
+                        mDate.addAll(resultBean.getGoods_list());
+                        mAdapter.notifyDataSetChanged();
+                    }
                 }
+
+
 
             }
 
@@ -92,21 +117,42 @@ public class GoodSearchActivity extends BaseActivityother {
 
         Intent intent=getIntent();
         search_kt=intent.getIntExtra("search_kt",0);
+        more_URL=intent.getStringExtra("more_url");
         mDate=new ArrayList<>();
-        mAdapter=new Adapter_Grid_goodsList(mDate,this);
-        mGridview.setAdapter(mAdapter);
+        mDate12fenlei=new ArrayList<>();
+        if(more_URL!=null&&!more_URL.equals("")){
+            mtext_title.setText("商品列表");
+            mlinearlayout_search.setVisibility(View.GONE);
+            mAdapter12=new Adapter_Grid_goodsList12fenlei(mDate12fenlei,this);
+            mGridview.setAdapter(mAdapter12);
+        }else{
+            mAdapter=new Adapter_Grid_goodsList(mDate,this);
+            mGridview.setAdapter(mAdapter);
+        }
+
+        if(more_URL!=null&&!more_URL.equals("")){//从12个分类跳转过来
+            url=more_URL+"&p=";
+            requestData(1);
+        }
     }
 
     @Override
     protected void initListener() {
+
         mTextVIew_loadMore.setOnClickListener(this);
         mTextview_search.setOnClickListener(this);
 
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Intent intent=new Intent(GoodSearchActivity.this,GoodDetailsActivity.class);
-                intent.putExtra("ID",mDate.get(i).getGoods_id());
+                if(more_URL!=null&&!more_URL.equals("")){
+                    intent.putExtra("ID",mDate12fenlei.get(i).getGoods_id());
+                }else{
+                    intent.putExtra("ID",mDate.get(i).getGoods_id());
+                }
+
                 GoodSearchActivity.this.startActivity(intent);
             }
         });
@@ -114,6 +160,8 @@ public class GoodSearchActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        mtext_title= (TextView) findViewById(R.id.text_title);
+        mlinearlayout_search= (LinearLayout) findViewById(R.id.linearlayout_search);
         mTextview_search= (TextView) findViewById(R.id.text_serach);
         medit_view= (EditText) findViewById(R.id.edit_serach);
         mGridview= (MyGridView) findViewById(R.id.GridView_goodslist);
@@ -160,4 +208,5 @@ public class GoodSearchActivity extends BaseActivityother {
 
         return nameStr;
     }
+
 }

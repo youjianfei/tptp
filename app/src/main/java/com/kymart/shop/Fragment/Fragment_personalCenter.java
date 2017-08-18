@@ -150,6 +150,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 break;
             case R.id.re_yue:
                 Intent intent_yue=new Intent(getActivity(), RechargeActivity.class);
+                intent_yue.putExtra("yue","￥"+person.getResult().getUser_money()+"");
                 getActivity().startActivity(intent_yue);
                 break;
             case R.id.re_shezhi:

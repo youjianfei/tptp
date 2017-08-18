@@ -15,10 +15,10 @@ public class BaseUrl {
 
 
 //  正式接口
-    public  static String checkUpdate="https://kymart.cn/api/index/checkupdate";//强制更新——正式接口
-    public  static String BaseURL="https://kymart.cn/index.php?";//主接口——测试接口正式接口
-    public  static String BasegoodlistURL="https://kymart.cn";//商品列表主接口——测试接口
-    public  static String Baseimage="https://kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
+    public  static String checkUpdate="http://api.kymart.cn/api/index/checkupdate";//强制更新——正式接口
+    public  static String BaseURL="http://api.kymart.cn/index.php?";//主接口——测试接口正式接口
+    public  static String BasegoodlistURL="http://api.kymart.cn";//商品列表主接口——测试接口
+    public  static String Baseimage="http://api.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
 
     public  static String mainURL="m=api&c=Index&a=homePage";
@@ -63,6 +63,7 @@ public class BaseUrl {
     public static String  alipayPay="m=Api&c=payment&a=alipay_sign&token=";//支付宝支付  \(basePath)m=Api&c=payment&a=alipay_sign&token=\(access_token())"
     public static String  alipayPay_recharge="m=Api&c=payment&a=recharge_alipay";//支付宝充值  \(basePath)m=Api&c=payment&a=alipay_sign&token=\(access_token())"
     public static String  wechatPay="m=Api&c=wxpay&a=dopay&token=";//微信支付  return "\(basePath)m=Api&c=wxpay&a=dopay&token=\(access_token())"
+    public static String  wechat_recharge="m=Api&c=wxpay&a=recharge";//微信充值
     public static String  kuaiqianPay="m=api&c=Payment&a=bill&order_sn=";//快钱支付支付  order_sn=201707260855086512
     public static String  kuaiqianrecharge="m=Api&c=payment&a=recharge_bill";//快钱支付充值  https://kymart.cn/index.php?m=Api&c=payment&a=recharge_bill
 

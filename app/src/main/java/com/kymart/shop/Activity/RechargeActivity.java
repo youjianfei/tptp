@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
@@ -48,6 +49,8 @@ import cn.kymart.tptp.R;
 public class RechargeActivity extends BaseActivityother {
     LinearLayout linearLayout_main;
 
+    TextView mtexyview_yue;
+    String yue="";
     Button button_recharge;
     PopupWindow mPopwinsow_recharge;
 
@@ -99,6 +102,9 @@ public class RechargeActivity extends BaseActivityother {
     @Override
     protected void initData() {
         api = WXAPIFactory.createWXAPI(this, "wxcf54c829295655ba");
+        Intent intent=getIntent();
+        yue= intent.getStringExtra("yue");
+        mtexyview_yue.setText(yue);
     }
 
     @Override
@@ -109,6 +115,7 @@ public class RechargeActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        mtexyview_yue= (TextView) findViewById(R.id.textview_yue);
         linearLayout_main= (LinearLayout) findViewById(R.id.activity_recharge);
         button_recharge= (Button) findViewById(R.id.button_recharge);
         webView_recharge= (WebView) findViewById(R.id.webview_recharge);
@@ -119,7 +126,6 @@ public class RechargeActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()){
             case R.id.button_recharge:
-                LogUtils.LOG("ceshi","支付宝充值点击");
                 initpopwindow_recharge();
 
                 break;
@@ -157,7 +163,7 @@ public class RechargeActivity extends BaseActivityother {
 
     }
     int  recharge_money=0;
-    int recharge=0;
+    int recharge=3;
     public void initpopwindow_recharge(){
         View popview = getLayoutInflater().inflate(R.layout.popwindow_recharge, null, false);
         mPopwinsow_recharge = new PopupWindow(popview, ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -176,7 +182,7 @@ public class RechargeActivity extends BaseActivityother {
         image_select_kuaiqian.setSelected(true);
         image_select_alipay.setOnClickListener(new View.OnClickListener() {//选择支付宝监听
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//支付宝充值
                 image_select_alipay.setSelected(true);
                 image_select_wechatpay.setSelected(false);
                 image_select_kuaiqian.setSelected(false);
@@ -185,7 +191,7 @@ public class RechargeActivity extends BaseActivityother {
         });
         image_select_wechatpay.setOnClickListener(new View.OnClickListener() {//选择微信监听
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//微信充值
                 image_select_alipay.setSelected(false);
                 image_select_wechatpay.setSelected(true);
                 image_select_kuaiqian.setSelected(false);
@@ -195,7 +201,7 @@ public class RechargeActivity extends BaseActivityother {
         });
         image_select_kuaiqian.setOnClickListener(new View.OnClickListener() {//选择快钱监听
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//块钱充值
                 image_select_alipay.setSelected(false);
                 image_select_wechatpay.setSelected(false);
                 image_select_kuaiqian.setSelected(true);
@@ -216,6 +222,12 @@ public class RechargeActivity extends BaseActivityother {
                         map_pay.put("amount",recharge_money+"");//支付宝参数
                         requestAlipayPay(map_pay);
                         mPopwinsow_recharge.dismiss();
+                    }
+                    if(recharge==2){
+                        Map map_pay=new HashMap();
+                        map_pay.put("user_id",Staticdata.userBean_static.getResult().getUser_id()+"");//支付宝参数
+                        map_pay.put("amount",recharge_money+"");
+                        requestWechatPay(map_pay);
                     }
                     if(recharge==3){
                         requestQuaiqianPay(recharge_money);
@@ -311,7 +323,8 @@ public class RechargeActivity extends BaseActivityother {
     }
     WechatPayBean weBean;
     void requestWechatPay(Map map){//请求微信订单
-        String URL=BaseUrl.BaseURL+BaseUrl.wechatPay+Staticdata.userBean_static.getResult().getToken();
+        String URL=BaseUrl.BaseURL+BaseUrl.wechat_recharge;
+        LogUtils.LOG("ceshi","weixin充值"+URL);
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -367,7 +380,11 @@ public class RechargeActivity extends BaseActivityother {
         payThread.start();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        webview_show();
+    }
 
     public void setAlpha(float bgAlpha) {//设置背景遮罩颜色
         WindowManager.LayoutParams lp = getWindow().getAttributes();

@@ -54,9 +54,9 @@
         </provider>
 
         <activity android:name="com.kymart.shop.Activity.FindPasswordActivity" />
-        <activity android:name="com.kymart.shop.Activity.AllOrderActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name="com.kymart.shop.Activity.AllOrderActivity"
+            android:launchMode="singleTask" />
         <activity android:name="com.kymart.shop.Activity.SettingActivity" />
         <activity android:name="com.kymart.shop.Activity.AddressActivity" />
         <activity android:name="com.kymart.shop.Activity.AddAddressActivity" />
@@ -97,7 +97,7 @@
         <!-- 友盟appkey -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59925f71bbea835cb20019a3"></meta-data>
+            android:value="59925f71bbea835cb20019a3" />
 
         <!-- qq分享配置 -->
         <activity
@@ -118,7 +118,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name="com.kymart.shop.Activity.RechargeActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.RechargeActivity" />
+        <activity android:name="com.kymart.shop.Activity.GoodlistActivity">
+
+        </activity>
     </application>
 
 </manifest>

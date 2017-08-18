@@ -17,7 +17,15 @@ public class Goods_ListBean {
     private int status;
     private String msg;
     private ResultBean result;
+    private int search_kt;
 
+    public int getSearch_kt() {
+        return search_kt;
+    }
+
+    public void setSearch_kt(int search_kt) {
+        this.search_kt = search_kt;
+    }
 
     public int getStatus() {
         return status;
