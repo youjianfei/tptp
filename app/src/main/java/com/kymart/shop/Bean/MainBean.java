@@ -191,6 +191,15 @@ public class MainBean {
         public static class ZoneBean{
             private String img_url;
             private String api_url;
+            private String title;
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
 
             public String getImg_url() {
                 return img_url;

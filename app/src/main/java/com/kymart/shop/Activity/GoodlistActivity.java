@@ -38,6 +38,9 @@ public class GoodlistActivity extends BaseActivityother {
     private PullToRefreshListView mlistview_goods;
 
     String url__="";
+    String title="";
+
+    private  TextView textview_title;
 
     List <Activity_goodList.ResultBean> AllListData;
 
@@ -59,6 +62,8 @@ public class GoodlistActivity extends BaseActivityother {
     protected void initData() {
         Intent intent=getIntent();
         url__=intent.getStringExtra("url");
+        title=intent.getStringExtra("title");
+        textview_title.setText(title);
         request(url__);
         AllListData=new ArrayList<>();
         mAdapter=new Adapter_list_all(AllListData,this);
@@ -101,6 +106,7 @@ public class GoodlistActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_title= (TextView) findViewById(R.id.textview_title);
         mlistview_goods= (PullToRefreshListView) findViewById(R.id.listView_goods);
     }
 

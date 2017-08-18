@@ -65,6 +65,11 @@ public class Adapter_fenxiangquTupian  extends BaseAdapter{
             public void onClick(View v) {
                 Intent intend_fenxiangqu=new Intent(mContext,GoodlistActivity.class);
                 intend_fenxiangqu.putExtra("url",BaseURL+bean.getApi_url());
+                if(bean.getTitle().equals("")){
+                    intend_fenxiangqu.putExtra("title","商品详情");
+                }else{
+                    intend_fenxiangqu.putExtra("title",bean.getTitle());
+                }
                 mContext.startActivity(intend_fenxiangqu);
             }
         });
