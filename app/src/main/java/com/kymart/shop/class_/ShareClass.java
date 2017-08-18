@@ -98,7 +98,7 @@ public class ShareClass {
                 if (share_media == share_media.QQ) {
                     UMWeb web = new UMWeb(url_good);
                     web.setTitle(title);//标题
-                    web.setThumb(thumb);  //缩略图
+                    web.setThumb(image);  //缩略图
                     web.setDescription("开心购物,快乐分享");//描述
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.QQ)
                             .withMedia(web)

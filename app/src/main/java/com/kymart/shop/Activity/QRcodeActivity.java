@@ -1,8 +1,13 @@
 package com.kymart.shop.Activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +58,19 @@ public class QRcodeActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        /**
+         * 判断是否有存储权限
+         */
+        if (Build.VERSION.SDK_INT >= 23) {  //判断当前系统的版本 ，动态添加权限
+
+            LogUtils.LOG("version", "version大于23");
+            int checkWriteStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
+            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
+                ToastUtils.showToast(this,"请打开应用的存储权限");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0x123);
+                return;//请求获取该种权限
+            }
+        }
 
     }
 
@@ -221,9 +239,13 @@ public class QRcodeActivity extends BaseActivityother {
 
                     @Override
                     public void onDownLoadSuccess(Bitmap bitmap) {//图片下载成功之后
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                        ToastUtils.showToast(QRcodeActivity.this,"图片已经下载到本地相册");
-
+                                ToastUtils.showToast(QRcodeActivity.this,"图片已经下载到本地相册");
+                            }
+                        });
                     }
 
                     @Override
