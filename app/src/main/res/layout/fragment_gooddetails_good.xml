@@ -3,7 +3,16 @@
     xmlns:youth="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
    >
+    <com.kymart.shop.CustomView.CustomerScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -129,7 +138,12 @@
         android:layout_height="68dp"
         android:layout_alignParentRight="true"
         />
+
+
+    </RelativeLayout>
+    </com.kymart.shop.CustomView.CustomerScrollView>
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -159,6 +173,4 @@
             />
 
     </LinearLayout>
-
-
 </RelativeLayout>
