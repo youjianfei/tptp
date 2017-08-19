@@ -97,6 +97,7 @@ public class AllOrderActivity extends BaseActivityother {
         switch (v.getId()){
             case R.id.RelativeLayout_AllOrder://全部订单
                 mRelativeLayout_allOrder.setSelected(true);
+                mListview.setSelectedGroup(0);
                 type="";
                 page=1;
                 requestOrder(1,type);
@@ -106,6 +107,7 @@ public class AllOrderActivity extends BaseActivityother {
                 type="WAITPAY";
                 page=1;
                 requestOrder(1,type);
+                mListview.setSelectedGroup(0);
 
             break;
             case R.id.RelativeLayout_NoConsignment://待发货
@@ -113,12 +115,14 @@ public class AllOrderActivity extends BaseActivityother {
                 type="WAITSEND";
                 page=1;
                 requestOrder(1,type);
+                mListview.setSelectedGroup(0);
             break;
             case R.id.RelativeLayout_NoAccept://待收货
                 mRelativelayout_noAccepty.setSelected(true);
                 type="WAITRECEIVE";
                 page=1;
                 requestOrder(1,type);
+                mListview.setSelectedGroup(0);
 
             break;
             case R.id.RelativeLayout_NoAssess:
@@ -352,8 +356,6 @@ public class AllOrderActivity extends BaseActivityother {
                 holder.button_tuihui= (Button) convertView.findViewById(R.id.button_tuihuo);
 
 
-
-
                 convertView.setTag(holder);
             } else {
                 holder= (ViewHolder) convertView.getTag();
@@ -361,9 +363,9 @@ public class AllOrderActivity extends BaseActivityother {
             isButton(holder.mbutton_pay,group.get(groupPosition).getPay_btn());
             isButton(holder.mbutton_cancle,group.get(groupPosition).getCancel_btn());
             isButton(holder.button_shouhuo,group.get(groupPosition).getReceive_btn());
-            isButton(holder.button_pingjia,group.get(groupPosition).getReturn_btn());
-            isButton(holder.button_tuihui,group.get(groupPosition).getComment_btn());
-
+            isButton(holder.button_pingjia,group.get(groupPosition).getComment_btn());
+            LogUtils.LOG("ceshi","退货按钮"+group.get(groupPosition).getReturn_btn());
+            isButton(holder.button_tuihui,0);
 
             holder.mtextview_ordernumber.setText(group.get(groupPosition).getOrder_sn());
             holder.mtextview_allprice.setText("￥"+group.get(groupPosition).getGoods_price());

@@ -268,11 +268,11 @@ public class AddAddressActivity extends BaseActivityother {
                 try {
                     JSONObject object=new JSONObject(respose);
                     int  state= (int) object.get("status");
+                    String  msg= (String) object.get("msg");
                     if(state==1){
-                        ToastUtils.showToast(AddAddressActivity.this,"添加地址成功");
+                        ToastUtils.showToast(AddAddressActivity.this,msg);
                         finish();
                     }else {
-                        String  msg= (String) object.get("msg");
                         ToastUtils.showToast(AddAddressActivity.this,msg);
                     }
                 } catch (JSONException e) {

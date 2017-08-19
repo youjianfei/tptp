@@ -243,25 +243,38 @@ public class PayActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi","weixin"+respose);
-                weBean=new Gson().fromJson(respose,WechatPayBean.class);
-                String appid=weBean.getResult().getAppid();
-                String noncestr=weBean.getResult().getNoncestr();
-                String packagex=weBean.getResult().getPackageX();
-                String partnerid=weBean.getResult().getPartnerid();
-                String timeStamp=weBean.getResult().getTimestamp()+"";
-                String prepayid=weBean.getResult().getPrepayid();
-                String sign=weBean.getResult().getSign();
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("status");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1) {
+                    weBean = new Gson().fromJson(respose, WechatPayBean.class);
+                    String appid = weBean.getResult().getAppid();
+                    String noncestr = weBean.getResult().getNoncestr();
+                    String packagex = weBean.getResult().getPackageX();
+                    String partnerid = weBean.getResult().getPartnerid();
+                    String timeStamp = weBean.getResult().getTimestamp() + "";
+                    String prepayid = weBean.getResult().getPrepayid();
+                    String sign = weBean.getResult().getSign();
 //                final IWXAPI msgApi =WXAPIFactory.createWXAPI(PayActivity.this, null);
 //                msgApi.registerApp(appid);// 将该app注册到微信
-                PayReq request = new PayReq();
-                request.appId =appid ;
-                request.partnerId = partnerid;
-                request.prepayId= prepayid;
-                request.packageValue = packagex;
-                request.nonceStr= noncestr;
-                request.timeStamp= timeStamp;
-                request.sign=sign;
-                api.sendReq(request);
+                    PayReq request = new PayReq();
+                    request.appId = appid;
+                    request.partnerId = partnerid;
+                    request.prepayId = prepayid;
+                    request.packageValue = packagex;
+                    request.nonceStr = noncestr;
+                    request.timeStamp = timeStamp;
+                    request.sign = sign;
+                    api.sendReq(request);
+                }else {
+                    ToastUtils.showToast(PayActivity.this,msg);
+                }
             }
 
             @Override
