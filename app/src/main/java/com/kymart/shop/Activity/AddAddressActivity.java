@@ -272,7 +272,8 @@ public class AddAddressActivity extends BaseActivityother {
                         ToastUtils.showToast(AddAddressActivity.this,"添加地址成功");
                         finish();
                     }else {
-                        ToastUtils.showToast(AddAddressActivity.this,"请确保每项格式正确");
+                        String  msg= (String) object.get("msg");
+                        ToastUtils.showToast(AddAddressActivity.this,msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -321,6 +322,7 @@ public class AddAddressActivity extends BaseActivityother {
        Volley_Utils volley_utils;
     void requestAddress(int level,int parent_id){
         String URL_address= BaseUrl.BaseURL+BaseUrl.Address+level+"&parent_id="+parent_id;
+        LogUtils.LOG("ceshi","地址URL"+URL_address);
         volley_utils .Http(URL_address,this,0);
         TAG=level;
     }
