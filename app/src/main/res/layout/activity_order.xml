@@ -135,7 +135,7 @@
                     android:hint="输入金额"
                     android:textColorHint="@color/LightGrey"
                     android:textColor="@color/red"
-                    android:inputType="number"
+                    android:digits="0123456789."
                     android:textSize="14dp"
                     android:layout_marginLeft="5dp"
                     android:paddingLeft="10dp"

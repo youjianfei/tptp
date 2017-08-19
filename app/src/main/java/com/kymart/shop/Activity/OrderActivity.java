@@ -308,6 +308,9 @@ public class OrderActivity extends BaseActivityother {
                             useyue.setText("使用余额：￥"+oederpriceBean.getResult().getBalance()+"元");
                             youhuihuodong.setText("优惠活动：￥"+oederpriceBean.getResult().getOrder_prom_amount()+"元");
                             orderprice.setText("应付金额：￥"+oederpriceBean.getResult().getPayables()+"元");
+                            if(oederpriceBean.getResult().getPayables()==0){
+                                LogUtils.LOG("ceshi","应付金额为0");
+                            }
                         }else{
                             ToastUtils.showToast(OrderActivity.this,msg);
                         }
@@ -446,12 +449,19 @@ public class OrderActivity extends BaseActivityother {
                         return;
                     }
                     String result=object.get("result")+"";
-                    Intent intent_pay=new Intent(OrderActivity.this,PayActivity.class);
-                    intent_pay.putExtra("ordernumber",price+"");
-                    intent_pay.putExtra("price",""+result);
-                    intent_pay.putExtra("type","gouwuche");
-                    startActivity(intent_pay);
-                    finish();
+                    if(result.equals("0")){
+                        Intent intent_pay=new Intent(OrderActivity.this,AllOrderActivity.class);
+                        startActivity(intent_pay);
+                        finish();
+                    }else {
+                        Intent intent_pay=new Intent(OrderActivity.this,PayActivity.class);
+                        intent_pay.putExtra("ordernumber",price+"");
+                        intent_pay.putExtra("price",""+result);
+                        intent_pay.putExtra("type","gouwuche");
+                        startActivity(intent_pay);
+                        finish();
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
