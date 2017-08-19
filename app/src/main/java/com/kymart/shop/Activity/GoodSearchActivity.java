@@ -154,6 +154,7 @@ public class GoodSearchActivity extends BaseActivityother {
         mGridview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+                page=1;
                 requestData(1);
             }
 

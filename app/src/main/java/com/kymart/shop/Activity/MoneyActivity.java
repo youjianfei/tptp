@@ -70,7 +70,7 @@ public class MoneyActivity extends BaseActivityother {
     String URL;
     int  page=1;
     private void request_money(String mURL,int page) {
-        mURL=mURL+"&page="+page;
+        mURL=mURL+"&p="+page;
         LogUtils.LOG("ceshi",mURL);
         new Volley_Utils(new Interface_volley_respose() {
             @Override

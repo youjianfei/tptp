@@ -75,14 +75,14 @@ public class GoodsListActivity extends BaseActivityother {
                 }
                 if(page==1&&resultBean.getGoods_list()!=null){
                     mDate.clear();
-
+                    LogUtils.LOG("ceshi","商品列表1"+respose);
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
 
                 }else if(page!=1&&resultBean.getGoods_list()!=null){
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
-
+                    LogUtils.LOG("ceshi","商品列表2"+respose);
                 }
 
             }
@@ -122,6 +122,7 @@ public class GoodsListActivity extends BaseActivityother {
         mGridview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+                page=1;
                 requestData(1);
             }
 
