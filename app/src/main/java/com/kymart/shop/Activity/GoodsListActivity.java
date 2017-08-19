@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.kymart.shop.Http.BaseUrl;
 
 import java.io.UnsupportedEncodingException;
@@ -23,13 +26,13 @@ import com.kymart.shop.CustomView.MyGridView;
 import com.kymart.shop.Interface.Interface_volley_respose;
 import cn.kymart.tptp.R;
 import com.kymart.shop.Utils.LogUtils;
+import com.kymart.shop.Utils.ToastUtils;
 import com.kymart.shop.Utils.Volley_Utils;
 
 public class GoodsListActivity extends BaseActivityother {
     private RelativeLayout mRelativeLayout_Latest, mRelativeLayout_Sales, mRelativeLayout_Price, mRelativeLayout_Comments;//顶部四个按钮控件
     private LinearLayout mLinearlayout_search;
-    private MyGridView mGridview;
-    private TextView mTextVIew_loadMore;//加载更多控件
+    private PullToRefreshGridView mGridview;
     private EditText medit_view;
 
 
@@ -60,24 +63,34 @@ public class GoodsListActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-
+                if (mGridview.isRefreshing()) {
+                    mGridview.onRefreshComplete();
+                }
                 resultBean=new Gson().fromJson(respose,Goods_ListBean.class).getResult();
                 LogUtils.LOG("ceshi","商品列表"+respose);
                 LogUtils.LOG("ceshi","url"+BaseUrl.BasegoodlistURL+url+page);
                 LogUtils.LOG("ceshi",resultBean.getSort()+respose);
+                if(resultBean.getGoods_list()==null||resultBean.getGoods_list().size()==0){
+                    ToastUtils.showToast(GoodsListActivity.this,"没有更多了");
+                }
                 if(page==1&&resultBean.getGoods_list()!=null){
                     mDate.clear();
 
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
+
                 }else if(page!=1&&resultBean.getGoods_list()!=null){
                     mDate.addAll(resultBean.getGoods_list());
                     mAdapter.notifyDataSetChanged();
+
                 }
+
             }
             @Override
             public void onError(int error) {
-
+                if (mGridview.isRefreshing()) {
+                    mGridview.onRefreshComplete();
+                }
             }
         }).Http(URLl,this,0);
     }
@@ -105,7 +118,18 @@ public class GoodsListActivity extends BaseActivityother {
         mRelativeLayout_Price.setOnClickListener(this);
         mRelativeLayout_Comments.setOnClickListener(this);
         mLinearlayout_search.setOnClickListener(this);
-        mTextVIew_loadMore.setOnClickListener(this);
+
+        mGridview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+                requestData(1);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+                requestData(++page);
+            }
+        });
 
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -125,8 +149,7 @@ public class GoodsListActivity extends BaseActivityother {
         mRelativeLayout_Comments = (RelativeLayout) findViewById(R.id.RelativeLayout_Comments);
         mLinearlayout_search= (LinearLayout) findViewById(R.id.linearlayout_search);
         medit_view= (EditText) findViewById(R.id.edit_serach);
-        mGridview= (MyGridView) findViewById(R.id.GridView_goodslist);
-        mTextVIew_loadMore= (TextView) findViewById(R.id.textview_loadmore);
+        mGridview= (PullToRefreshGridView) findViewById(R.id.GridView_goodslist);
         mRelativeLayout_Latest.setSelected(true);//初始最新  设为选中
 
     }
@@ -179,17 +202,9 @@ public class GoodsListActivity extends BaseActivityother {
                 page=1;
                 requestData(1);
                 break;
-            case R.id.textview_loadmore://加载更多
-                requestData(++page);
-                break;
+
             case R.id.linearlayout_search:
-//                search_name =medit_view.getText()+"";
-//                if(!search_name.equals("")){
-//                    mRelativeLayout_Latest.setSelected(true);
-//                    afterchange= ZhuanMa(search_name);
-//                    url="/index.php/api/Goods/search/id/0/sort/is_new/sort_asc/desc/q/"+afterchange+"/p/";
-//                    requestData(1);
-//                }
+
                 Intent intent_seach=new Intent(this,GoodSearchActivity.class);
                 intent_seach.putExtra("search_kt",0);
                 startActivity(intent_seach);

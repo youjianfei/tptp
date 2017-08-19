@@ -160,39 +160,28 @@
         android:layout_height="0.5dp"
         android:background="@color/LightGrey"
         />
-    <com.kymart.shop.CustomView.CustomerScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        <com.handmark.pulltorefresh.library.PullToRefreshGridView xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/GridView_goodslist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:drawSelectorOnTop="false"
+            android:fadeScrollbars="true"
+            android:horizontalSpacing="5dp"
+            android:listSelector="#00000000"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"
+            ptr:ptrMode="both">
+            </com.handmark.pulltorefresh.library.PullToRefreshGridView>
 
-
-            <com.kymart.shop.CustomView.MyGridView
-                android:id="@+id/GridView_goodslist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:horizontalSpacing="5dp"
-                android:numColumns="2"
-                android:verticalSpacing="5dp"/>
-
-            <TextView
-                android:id="@+id/textview_loadmore"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="点击加载更多"
-                android:gravity="center"
-                android:textSize="14dp"
-                android:background="@color/LightGrey"
-                android:textColor="@color/blank"
-                />
-        </LinearLayout>
-
-    </com.kymart.shop.CustomView.CustomerScrollView>
-
-
-
+            <!--<com.kymart.shop.CustomView.MyGridView-->
+                <!--android:id="@+id/GridView_goodslist"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:horizontalSpacing="5dp"-->
+                <!--android:numColumns="2"-->
+                <!--android:verticalSpacing="5dp"/>-->
 
 </LinearLayout>

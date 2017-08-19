@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.kymart.shop.Adapter.Adapter_Grid_goodsList;
 import com.kymart.shop.Adapter.Adapter_Grid_goodsList12fenlei;
 import com.kymart.shop.Bean.GoodList12fenlei;
@@ -31,8 +34,8 @@ import cn.kymart.tptp.R;
 
 public class GoodSearchActivity extends BaseActivityother {
 
-    private MyGridView mGridview;
-    private TextView mTextVIew_loadMore,mTextview_search;//加载更多控件
+    private PullToRefreshGridView mGridview;
+    private TextView mTextview_search;//
     private EditText medit_view;
     private TextView mtext_title;
     private LinearLayout mlinearlayout_search;
@@ -68,6 +71,9 @@ public class GoodSearchActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                if (mGridview.isRefreshing()) {
+                    mGridview.onRefreshComplete();
+                }
                 LogUtils.LOG("ceshi","2222"+more_URL+respose);
                 if(more_URL!=null&&!more_URL.equals("")){
                     if(page==1){
@@ -87,6 +93,9 @@ public class GoodSearchActivity extends BaseActivityother {
                     LogUtils.LOG("ceshi","商品列表"+respose);
                     LogUtils.LOG("ceshi","url"+BaseUrl.BasegoodlistURL+url+page);
                     LogUtils.LOG("ceshi",resultBean.getSort()+respose);
+                    if(resultBean.getGoods_list()==null||resultBean.getGoods_list().size()==0){
+                        ToastUtils.showToast(GoodSearchActivity.this,"没有更多了");
+                    }
                     if(page==1&&resultBean.getGoods_list()!=null){
                         mDate.clear();
                         mDate.addAll(resultBean.getGoods_list());
@@ -106,7 +115,9 @@ public class GoodSearchActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                if (mGridview.isRefreshing()) {
+                    mGridview.onRefreshComplete();
+                }
             }
         }).Http(URLl,this,0);
 
@@ -139,9 +150,18 @@ public class GoodSearchActivity extends BaseActivityother {
     @Override
     protected void initListener() {
 
-        mTextVIew_loadMore.setOnClickListener(this);
         mTextview_search.setOnClickListener(this);
+        mGridview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+                requestData(1);
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+                requestData(++page);
+            }
+        });
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -164,8 +184,7 @@ public class GoodSearchActivity extends BaseActivityother {
         mlinearlayout_search= (LinearLayout) findViewById(R.id.linearlayout_search);
         mTextview_search= (TextView) findViewById(R.id.text_serach);
         medit_view= (EditText) findViewById(R.id.edit_serach);
-        mGridview= (MyGridView) findViewById(R.id.GridView_goodslist);
-        mTextVIew_loadMore= (TextView) findViewById(R.id.textview_loadmore);
+        mGridview= (PullToRefreshGridView) findViewById(R.id.GridView_goodslist);
 
     }
     String search_name="";//转码前搜索的文字
@@ -176,10 +195,6 @@ public class GoodSearchActivity extends BaseActivityother {
 
         switch (v.getId()) {
 
-
-            case R.id.textview_loadmore://加载更多
-                requestData(++page);
-                break;
             case R.id.text_serach:
                 search_name =medit_view.getText()+"";
                 if(!search_name.equals("")){
