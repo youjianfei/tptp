@@ -68,7 +68,7 @@ public class Fragment_GoodDatails_good extends Fragment {
     private LinearLayout mLinear_bottom;
     private Banner mBanner;
     private TextView mTextview_GoodName;
-    private TextView mTextview_price,mTextview_result,mtextview_Addshopcar,mtextview_buynow;
+    private TextView mTextview_price,mTextview_result,mtextview_Addshopcar,mtextview_buynow,payCount;
     private ImageView mImageview_icon;
 
 
@@ -164,7 +164,7 @@ public class Fragment_GoodDatails_good extends Fragment {
         mLinearout_result= (LinearLayout) rootview.findViewById(R.id.LinearLayout_result);
         mtextview_Addshopcar= (TextView) rootview.findViewById(R.id.textview_Addshopcar);
         mtextview_buynow= (TextView) rootview.findViewById(R.id.textview_buy);
-
+        payCount= (TextView) rootview.findViewById(R.id.payCount);
     }
     void request(){
         new Volley_Utils(new Interface_volley_respose() {
@@ -236,8 +236,10 @@ public class Fragment_GoodDatails_good extends Fragment {
 
 
     public  void afterQequest(){
+
          mTextview_price.setText("￥"+Staticdata.bean.getGood_buy_price());
          mTextview_result.setText(Staticdata.bean.getGood_select_info());
+        payCount.setText(goodBean.getSales_sum()+"人已付款");
 
      }
 
