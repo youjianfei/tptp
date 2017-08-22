@@ -341,7 +341,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
                 mData_viewpager_flashSale=mainbean.getResult().getNew_goods();//新品上市数据添加
                 mData_viewpager_hot=mainbean.getResult().getHot_goods();//热销产品数据添加
                 mData_fenxiangquTupian=mainbean.getResult().getZone();
-                LogUtils.LOG("ceshi","3个图片的list"+mData_fenxiangquTupian.size());
+//                LogUtils.LOG("ceshi","3个图片的list"+mData_fenxiangquTupian.size());
                 initData();
                 setData();
                 requestLikeData(1);//请求  猜你喜欢 数据
