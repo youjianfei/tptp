@@ -55,7 +55,6 @@ public class Adapter_fenxiangquTupian  extends BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
         final ImageView imageView_fenxiang=new ImageView(mContext);
-//       imageView_fenxiang.setImageResource(R.mipmap.fenxiangqu_);
         Glide.with(mContext).load(BasegoodlistURL+"/"+bean.getImg_url()).into(imageView_fenxiang);
         LinearLayout.LayoutParams mLayoutParams_fenxiang = new LinearLayout.LayoutParams(
                 width,hight );

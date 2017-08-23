@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_return_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.kymart.shop.Activity.ReturnDetailActivity">
+    <com.kymart.shop.CustomView.CustomerScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:id="@+id/image_goodsppic"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@mipmap/pay_alipay"
+                android:scaleType="centerCrop"
+                />
+            <TextView
+                android:id="@+id/textview_goodname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/DarkGray"
+                android:textSize="15dp"
+                android:text="这里是填写商品信息的名字"
+                android:layout_marginLeft="15dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_marginTop="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="@color/blank"
+                    android:text="售后信息"
+                    android:layout_marginLeft="15dp"
+                    />
+                <TextView
+                    android:id="@+id/textview_errostate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="这里是填写商品信息的名字"
+                    android:textColor="@color/DarkGray"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_marginTop="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/blank"
+                    android:text="问题描述"
+                    />
+                <TextView
+                    android:id="@+id/textview_errodescribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="这里是填写商品信息的名字"
+                    android:textColor="@color/DarkGray"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_marginTop="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="@color/blank"
+                    android:text="问题备注"
+                    android:layout_marginLeft="15dp"
+                    />
+                <TextView
+                    android:id="@+id/textview_erroRemark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="这里是填写商品信息的名字"
+                    android:textColor="@color/DarkGray"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/LightGrey"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/DarkGray"
+                android:textSize="15dp"
+                android:text="问题图片"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                />
+            <com.kymart.shop.CustomView.MyGridView
+                android:id="@+id/gridview_erroPIC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:numColumns="3"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                >
+
+            </com.kymart.shop.CustomView.MyGridView>
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+    </com.kymart.shop.CustomView.CustomerScrollView>
+    
+
+
+</RelativeLayout>
