@@ -55,6 +55,7 @@ public class ReturnDetailActivity extends BaseActivityother {
     @Override
     protected void initListener() {
 
+
     }
 
     @Override
@@ -65,6 +66,11 @@ public class ReturnDetailActivity extends BaseActivityother {
         mtextview_errodescribe= (TextView) findViewById(R.id.textview_errodescribe);
         mtextview_erroRemark= (TextView) findViewById(R.id.textview_erroRemark);
         mGrid_erropic= (MyGridView) findViewById(R.id.gridview_erroPIC);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
     }
 
     public class Adapter_mgrid_erroPIC  extends BaseAdapter {
