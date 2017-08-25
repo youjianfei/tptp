@@ -75,7 +75,7 @@ public class BaseUrl {
     public static String  logistics="m=Api&c=user&a=express&token=";//物流信息  return "\(basePath)m=Api&c=user&a=express&order_id=\(order_id)&token=\(access_token())"
     public static String  shouhuo="m=Api&c=user&a=orderConfirm&token=";//确认收货  return "\(basePath)m=Api&c=user&a=orderConfirm&token=\(access_token())"
     public static String  recharge_jilu="http://www.kymart.cn/index.php/api/user/recharge_list.html?token=";//充值记录
-
+    public static String  returngoods="m=Api&c=Order&a=return_goods&token=";//申请退换货
 
 
 

@@ -158,6 +158,11 @@ public class OrderDetail extends BaseActivityother {
             case R.id.button_pingjia:
                 break;
             case R.id.button_tuihuo:
+                LogUtils.LOG("ceshi","退货被电击");
+                Intent intent_tuihuo=new Intent(OrderDetail.this,WriteReturnActivity.class);
+                intent_tuihuo.putExtra("orderid",orderID);
+                startActivity(intent_tuihuo);
+
                 break;
         }
     }
@@ -290,7 +295,7 @@ public class OrderDetail extends BaseActivityother {
         isButton(button_pay,orderDetailsBean.getResult().getPay_btn());
         isButton(button_cancle,orderDetailsBean.getResult().getCancel_btn());
         isButton(button_shouhuo,orderDetailsBean.getResult().getReceive_btn());
-        isButton(button_tuihui,0);
+        isButton(button_tuihui,orderDetailsBean.getResult().getReturn_btn());
         isButton(button_pingjia,orderDetailsBean.getResult().getComment_btn());
     }
 

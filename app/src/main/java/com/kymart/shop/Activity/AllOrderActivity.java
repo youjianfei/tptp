@@ -365,7 +365,7 @@ public class AllOrderActivity extends BaseActivityother {
             isButton(holder.button_shouhuo,group.get(groupPosition).getReceive_btn());
             isButton(holder.button_pingjia,group.get(groupPosition).getComment_btn());
             LogUtils.LOG("ceshi","退货按钮"+group.get(groupPosition).getReturn_btn());
-            isButton(holder.button_tuihui,0);
+            isButton(holder.button_tuihui,group.get(groupPosition).getReturn_btn());
 
             holder.mtextview_ordernumber.setText(group.get(groupPosition).getOrder_sn());
             holder.mtextview_allprice.setText("￥"+group.get(groupPosition).getGoods_price());
