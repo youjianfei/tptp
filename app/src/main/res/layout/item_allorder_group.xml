@@ -71,17 +71,7 @@
         android:gravity="right"
         android:layout_marginBottom="5dp"
         >
-        <Button
-            android:id="@+id/button_tuihuo"
-            android:layout_width="70dp"
-            android:layout_height="25dp"
-            android:textSize="14dp"
-            android:text="退货"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:textColor="@color/DarkGray"
-            android:background="@drawable/button_conner_5_white"
-            />
+
         <Button
             android:id="@+id/button_pingjia"
             android:layout_width="70dp"

@@ -353,7 +353,6 @@ public class AllOrderActivity extends BaseActivityother {
                 holder.mbutton_cancle= (Button) convertView.findViewById(R.id.button_cancle);
                 holder.button_shouhuo= (Button) convertView.findViewById(R.id.button_shouhuo);
                 holder.button_pingjia= (Button) convertView.findViewById(R.id.button_pingjia);
-                holder.button_tuihui= (Button) convertView.findViewById(R.id.button_tuihuo);
 
 
                 convertView.setTag(holder);
@@ -364,8 +363,6 @@ public class AllOrderActivity extends BaseActivityother {
             isButton(holder.mbutton_cancle,group.get(groupPosition).getCancel_btn());
             isButton(holder.button_shouhuo,group.get(groupPosition).getReceive_btn());
             isButton(holder.button_pingjia,group.get(groupPosition).getComment_btn());
-            LogUtils.LOG("ceshi","退货按钮"+group.get(groupPosition).getReturn_btn());
-            isButton(holder.button_tuihui,group.get(groupPosition).getReturn_btn());
 
             holder.mtextview_ordernumber.setText(group.get(groupPosition).getOrder_sn());
             holder.mtextview_allprice.setText("￥"+group.get(groupPosition).getGoods_price());
@@ -445,7 +442,7 @@ public class AllOrderActivity extends BaseActivityother {
             TextView mtextview_ordernumber;
             TextView mtextview_allprice;
             Button mbutton_cancle;
-            Button mbutton_pay,button_shouhuo,button_pingjia,button_tuihui;
+            Button mbutton_pay,button_shouhuo,button_pingjia;
 
 
             LinearLayout mlinearlayout_chilren;

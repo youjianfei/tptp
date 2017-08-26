@@ -55,7 +55,7 @@ public class OrderDetail extends BaseActivityother {
     private TextView textview_huodongyouhui;
     private TextView textview_yingfujine;
     private LinearLayout mLinLogistics;
-    private Button  button_pay,button_cancle,button_shouhuo,button_pingjia,button_tuihui;
+    private Button  button_pay,button_cancle,button_shouhuo,button_pingjia;
 
     private MyListView mListview;
     List<OrderDetailsBean.ResultBean.GoodsListBean>mData;
@@ -90,7 +90,6 @@ public class OrderDetail extends BaseActivityother {
         button_cancle.setOnClickListener(this);
         button_shouhuo.setOnClickListener(this);
         button_pingjia.setOnClickListener(this);
-        button_tuihui.setOnClickListener(this);
     }
 
     @Override
@@ -122,7 +121,6 @@ public class OrderDetail extends BaseActivityother {
         button_cancle= (Button) findViewById(R.id.button_cancle);
         button_shouhuo= (Button) findViewById(R.id.button_shouhuo);
         button_pingjia= (Button) findViewById(R.id.button_pingjia);
-        button_tuihui= (Button) findViewById(R.id.button_tuihuo);
 
     }
     @Override
@@ -157,13 +155,13 @@ public class OrderDetail extends BaseActivityother {
                 break;
             case R.id.button_pingjia:
                 break;
-            case R.id.button_tuihuo:
-                LogUtils.LOG("ceshi","退货被电击");
-                Intent intent_tuihuo=new Intent(OrderDetail.this,WriteReturnActivity.class);
-                intent_tuihuo.putExtra("orderid",orderID);
-                startActivity(intent_tuihuo);
+//            case R.id.button_tuihuo:
+//                LogUtils.LOG("ceshi","退货被电击");
+//                Intent intent_tuihuo=new Intent(OrderDetail.this,WriteReturnActivity.class);
+//                intent_tuihuo.putExtra("orderid",orderID);
+//                startActivity(intent_tuihuo);
 
-                break;
+//                break;
         }
     }
 
@@ -295,7 +293,6 @@ public class OrderDetail extends BaseActivityother {
         isButton(button_pay,orderDetailsBean.getResult().getPay_btn());
         isButton(button_cancle,orderDetailsBean.getResult().getCancel_btn());
         isButton(button_shouhuo,orderDetailsBean.getResult().getReceive_btn());
-        isButton(button_tuihui,orderDetailsBean.getResult().getReturn_btn());
         isButton(button_pingjia,orderDetailsBean.getResult().getComment_btn());
     }
 
