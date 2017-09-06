@@ -79,7 +79,8 @@ public class BaseUrl {
     public static String  returngoods="m=Api&c=Order&a=return_goods&token=";//申请退换货
     public static String  returngoodsList="m=api&c=order&a=return_goods_list&token=";//退换货列表
     public static String  refound="m=Api&c=user&a=return_goods&token=";//申请退款     "https://test.kymart.cn/index.php?m=Api&c=user&a=return_goods&token=001f6453f9ee8a6e94ca3de03797116e"
-
+    public static String  XTmessage="m=api&c=user&a=push_system&token=";// 系统消息列表
+    public static String  DDmessage="m=api&c=user&a=push_user&token=";//订单消息列表
 
 
 

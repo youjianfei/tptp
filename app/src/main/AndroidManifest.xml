@@ -124,7 +124,8 @@
         <activity android:name="com.kymart.shop.Activity.ReturnGoodListActivity" />
         <activity android:name="com.kymart.shop.Activity.WriteReturnActivity" />
         <activity android:name="com.kymart.shop.Activity.ShouhouActivity" />
-        <activity android:name="com.kymart.shop.Activity.RefundActivity"></activity>
+        <activity android:name="com.kymart.shop.Activity.RefundActivity" />
+        <activity android:name="com.kymart.shop.Activity.MessageActivity"></activity>
     </application>
 
 </manifest>

@@ -21,6 +21,15 @@
             android:text="开元玛特"
             android:textColor="@color/white"
             android:textSize="18dp" />
+        <ImageView
+            android:id="@+id/image_message"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/message"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
 
     </RelativeLayout>
     <com.kymart.shop.CustomView.CustomerScrollView

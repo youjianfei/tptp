@@ -25,7 +25,9 @@ import com.kymart.shop.Activity.GoodSearchActivity;
 import com.kymart.shop.Activity.GoodlistActivity;
 import com.kymart.shop.Activity.GoodsListActivity;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Activity.MessageActivity;
 import com.kymart.shop.Adapter.Adapter_fenxiangquTupian;
+import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.CustomView.CustomerScrollView;
 import com.kymart.shop.CustomView.MyListView;
 import com.kymart.shop.Http.BaseUrl;
@@ -58,6 +60,7 @@ import static com.kymart.shop.Http.BaseUrl.main_like;
 
 public class Fragment_main extends Fragment implements View.OnClickListener{
     View rootview;
+    ImageView image_message;
     List<String> mImagesURL;//顶部轮播图图片下载地址数据
 
 
@@ -119,8 +122,11 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_main, container, false);
+        image_message= (ImageView) rootview.findViewById(R.id.image_message);
         customerScrollView= (CustomerScrollView) rootview.findViewById(R.id.scrollview);
         mViewpager = (Banner) rootview.findViewById(R.id.banner);//顶部轮播图
+
+
         mLinearlayout_search= (LinearLayout) rootview.findViewById(R.id.linearlayout_search);
 //        linear_dianpujie= (LinearLayout) rootview.findViewById(R.id.Linear_dianpujie);
 //        linear_pinpaijie= (LinearLayout) rootview.findViewById(R.id.Linear_pinpaijie);
@@ -166,6 +172,7 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
     }
         int  main_like_page=1;//猜你喜欢接口的  页数  默认第一页
     private void initListenner() {
+        image_message.setOnClickListener(this);
         mTextviewLoadmore.setOnClickListener(this);
         mLinearlayout_search.setOnClickListener(this);
         mViewPager_main_icon.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -555,6 +562,16 @@ public class Fragment_main extends Fragment implements View.OnClickListener{
                 intent_seach.putExtra("search_kt",0);
                 startActivity(intent_seach);
                 break;
+            case R.id.image_message:
+                if(Staticdata.isLogin==1){
+                    Intent intent_message=new Intent(getActivity(), MessageActivity.class);
+                    startActivity(intent_message);
+                }else {
+                    Intent intent_message=new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent_message);
+                }
+
+
         }
     }
 
