@@ -173,6 +173,7 @@ public class OrderDetail extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi","订单详情"+respose);
                 orderDetailsBean=new Gson().fromJson(respose,OrderDetailsBean.class);
+                Staticdata.isrefound=orderDetailsBean.getResult().getPay_status()==1&&orderDetailsBean.getResult().getConfirm_time()==0? 1:0;
                 setDATA();
 
             }
@@ -185,6 +186,7 @@ public class OrderDetail extends BaseActivityother {
     }
     KProgressHUD mKProgressHUD;
     void setDATA(){
+        Staticdata.refoundBean.setOrder_sn(orderDetailsBean.getResult().getOrder_sn());
         textview_dingdanzhuangtai.setText(orderDetailsBean.getResult().getOrder_status_desc());
         textview_dingdannumber.setText(orderDetailsBean.getResult().getOrder_sn());
         textview_peisongprice.setText(orderDetailsBean.getResult().getShipping_price());

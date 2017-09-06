@@ -30,7 +30,6 @@ import cn.kymart.tptp.R;
 
 public class CashoutActivity extends BaseActivityother {
     private TextView textview_name,textview_ID,text_loadmore;
-    private ImageView image_seclect_yue,image_sseclect_cashout;
     private EditText editText_money,edit_bank,edit_bannumber,edit_name;
     Button mbutton_submit;
 
@@ -66,8 +65,6 @@ public class CashoutActivity extends BaseActivityother {
     protected void initListener() {
 //        mImage_Code.setOnClickListener(this);
         text_loadmore.setOnClickListener(this);
-        image_seclect_yue.setOnClickListener(this);
-        image_sseclect_cashout.setOnClickListener(this);
         mbutton_submit.setOnClickListener(this);
     }
 
@@ -82,9 +79,6 @@ public class CashoutActivity extends BaseActivityother {
 //        edit_QRcode= (EditText) findViewById(R.id.edit_QRcode);
         mbutton_submit= (Button) findViewById(R.id.button_submit);
 
-        image_seclect_yue= (ImageView) findViewById(R.id.seclect_yue);
-        image_seclect_yue.setSelected(true);//默认余额提现
-        image_sseclect_cashout= (ImageView) findViewById(R.id.seclect_cashout);
 
 //        mImage_Code= (ImageView) findViewById(R.id.image_code);
         myListView= (MyListView) findViewById(R.id.listview_item);
@@ -95,17 +89,8 @@ public class CashoutActivity extends BaseActivityother {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
-            case R.id.seclect_yue:
-                image_seclect_yue.setSelected(true);
-                image_sseclect_cashout.setSelected(false);
-                break;
-            case R.id.seclect_cashout:
-                image_seclect_yue.setSelected(false);
-                image_sseclect_cashout.setSelected(true);
-                break;
             case R.id.button_submit:
-                int type=0;
-                type=image_seclect_yue.isSelected()? 1:2;
+                int type=1;
                 String money=editText_money.getText()+"";
                 if(money.equals("")){
                     ToastUtils.showToast(this,"请填写金额");

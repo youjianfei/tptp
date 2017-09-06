@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.kymart.shop.Activity.QRcodeActivity;
 import com.kymart.shop.Activity.RechargeActivity;
 import com.kymart.shop.Activity.SettingActivity;
 import com.kymart.shop.Activity.ShareFriendsActivity;
+import com.kymart.shop.Activity.ShouhouActivity;
 import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.personCenterBean;
 import com.kymart.shop.Http.BaseUrl;
@@ -46,9 +48,9 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
 public class Fragment_personalCenter extends Fragment implements View.OnClickListener{
     View rootView;
     CircleImageView mImage_head;
-    TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit,mTextview_daiFaFang;
-    RelativeLayout mRE_yue,mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan;
-
+    TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit,mTextview_daiFaFang,mTextview_tuiguangfeiyong;
+    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan,mRE_tuiguangzhuanyue,mRE_shouhoufuwu;
+    LinearLayout mRE_yue;
     personCenterBean person;
 
     @Override
@@ -81,6 +83,8 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_jiangjinzhuanyue.setOnClickListener(this);
         mRE_shareFrends.setOnClickListener(this);
         mRE_quanbudingdan.setOnClickListener(this);
+        mRE_tuiguangzhuanyue.setOnClickListener(this);
+        mRE_shouhoufuwu.setOnClickListener(this);
     }
 
     String name="";
@@ -92,9 +96,10 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         }
         mTextview_name.setText(person.getResult().getNickname());
         mTextview_ID.setText(person.getResult().getOperator_status()==0? "会员ID:"+(person.getResult().getUser_id() ):"会员ID:"+(person.getResult().getUser_id())+"(运营商)");
-        mTextview_sellState.setText(person.getResult().getSell_status()==0? "预备会员":"开心果");
+        mTextview_sellState.setText(person.getResult().getLevel_name());
         mTextview_blance.setText("￥"+person.getResult().getUser_money()+"");
         mTextview_sharePrice.setText("￥"+person.getResult().getBonus());
+        mTextview_tuiguangfeiyong.setText("￥"+person.getResult().getBonus1());
         double daiFaFang=Double.parseDouble(person.getResult().getTotal_sell())-Double.parseDouble(person.getResult().getTotal_bonus1());
 
         mTextview_daiFaFang.setText("￥"+new java.text.DecimalFormat("0.00").format(daiFaFang));
@@ -128,7 +133,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_blance= (TextView) rootView.findViewById(R.id.text_balance);
         mTextview_sharePrice= (TextView) rootView.findViewById(R.id.text_sharePrice);
         mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
-        mRE_yue= (RelativeLayout) rootView.findViewById(R.id.re_yue);
+        mRE_yue= (LinearLayout) rootView.findViewById(R.id.re_yue);
         mRE_shezhi= (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
         mRE_shouhudizhi= (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
         mRE_wodeqianbao= (RelativeLayout) rootView.findViewById(R.id.re_wodeqianbao);
@@ -138,6 +143,9 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_jiangjinzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinzhuanyue);
         mRE_shareFrends= (RelativeLayout) rootView.findViewById(R.id.re_fenxianghaoyou);
         mRE_quanbudingdan= (RelativeLayout) rootView.findViewById(R.id.re_dingdan);
+        mTextview_tuiguangfeiyong= (TextView) rootView.findViewById(R.id.text_tuiguangfeiyong);
+        mRE_tuiguangzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_tuiguangzhuanyue);
+        mRE_shouhoufuwu= (RelativeLayout) rootView.findViewById(R.id.re_shouhoufuwu);
     }
 
     @Override
@@ -183,7 +191,13 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
                 break;
             case R.id.re_jiangjinzhuanyue:
                 Intent intent_JiangJZyue=new Intent(getActivity(), JiangZYActivity.class);
+                intent_JiangJZyue.putExtra("type","youhuiquan");
                 getActivity().startActivity(intent_JiangJZyue);
+                break;
+            case R.id.re_tuiguangzhuanyue:
+                Intent intent_tuiguangzyue=new Intent(getActivity(), JiangZYActivity.class);
+                intent_tuiguangzyue.putExtra("type","tuiguang");
+                getActivity().startActivity(intent_tuiguangzyue);
                 break;
             case R.id.re_fenxianghaoyou:
                 Intent intent_sahreFrends=new Intent(getActivity(), ShareFriendsActivity.class);
@@ -192,6 +206,10 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
             case R.id.re_dingdan:
                 Intent intent_dingdan=new Intent(getActivity(), AllOrderActivity.class);
                 getActivity().startActivity(intent_dingdan);
+                break;
+            case R.id.re_shouhoufuwu:
+                Intent intent_shouhou=new Intent(getActivity(), ShouhouActivity.class);
+                getActivity().startActivity(intent_shouhou);
                 break;
         }
     }

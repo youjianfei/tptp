@@ -4,6 +4,7 @@ import com.kymart.shop.Bean.AddressListBean;
 import com.kymart.shop.Bean.AddressNameBean;
 import com.kymart.shop.Bean.BuyGoodBean;
 import com.kymart.shop.Bean.OrderBean;
+import com.kymart.shop.Bean.RefoundBean;
 import com.kymart.shop.Bean.UserBean;
 import com.kymart.shop.Bean.personCenterBean;
 
@@ -30,7 +31,11 @@ public class Staticdata {
     public static AddressListBean.ResultBean mList_address= new AddressListBean.ResultBean();
     public static personCenterBean personCenterBean= new personCenterBean();
 
+    public static RefoundBean refoundBean=new RefoundBean();
+    public static int isrefound=0;//0  否  1  是
+
     public static int  left_position=0;//商品列表左边点击的位置
     public static int  orderID=0;//订单ID
+
 
 }

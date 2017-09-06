@@ -1,5 +1,6 @@
 package com.kymart.shop.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,11 +28,11 @@ import cn.kymart.tptp.R;
 import static cn.kymart.tptp.R.id.textview_accountname;
 
 public class JiangZYActivity extends BaseActivityother {
-    TextView mTextview_money,mTextview_name,mTextview_ID;
+    TextView mTextview_title,mTextview_money,mTextview_name,mTextview_ID,mTextview_type;
     Button mButton_submit;
     EditText mEdit_moneynumber;
-    String QRcode="";
     int  moneyNumber=0;
+    String type="";
     @Override
     public int setLayoutResID() {
         return R.layout.activity_jiang_zy;
@@ -44,17 +45,27 @@ public class JiangZYActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        Intent intent=getIntent();
+        type=intent.getStringExtra("type");
+        if(type.equals("youhuiquan")){
+            mTextview_title.setText("优惠券转余额");
+            mTextview_type.setText("优 惠 券:");
+            mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus());
+
+        }else {
+            mTextview_title.setText("推广费用转余额");
+            mTextview_type.setText("推广费用:");
+            mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus1());
+
+        }
+
         mTextview_name.setText(Staticdata.personCenterBean.getResult().getNickname());
         mTextview_ID.setText(Staticdata.personCenterBean.getResult().getOperator_status()==0? "会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id() ):"会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id())+"(运营商)");
-        mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus());
-//        mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
-//        LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
 
     }
 
     @Override
     protected void initListener() {
-//        mImageview_Code.setOnClickListener(this);
         mButton_submit.setOnClickListener(this);
 
     }
@@ -62,6 +73,8 @@ public class JiangZYActivity extends BaseActivityother {
     @Override
     protected void initView() {
 //        mImageview_Code= (ImageView) findViewById(R.id.image_code);
+        mTextview_type= (TextView) findViewById(R.id.textView_type);
+        mTextview_title= (TextView) findViewById(R.id.text_title);
         mTextview_money= (TextView) findViewById(R.id.textview_money);
         mTextview_name= (TextView) findViewById(textview_accountname);
         mTextview_ID= (TextView) findViewById(R.id.textview_id);
@@ -105,7 +118,12 @@ public class JiangZYActivity extends BaseActivityother {
     }
     Map jzyMap=new HashMap();
     void  request(Map map ){
-        String  URL= BaseUrl.BaseURL+BaseUrl.JiangJZY+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
+        String  URL="";
+        if(type.equals("youhuiquan")){
+           URL = BaseUrl.BaseURL+BaseUrl.JiangJZY+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
+        }else{
+            URL = BaseUrl.BaseURL+BaseUrl.TuiguangZY+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
+        }
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -118,7 +136,7 @@ public class JiangZYActivity extends BaseActivityother {
                         ToastUtils.showToast(JiangZYActivity.this,message);
                         return;
                     }else{
-                        ToastUtils.showToast(JiangZYActivity.this,"奖金转余额成功");
+                        ToastUtils.showToast(JiangZYActivity.this,"操作成功");
                         finish();
                     }
 

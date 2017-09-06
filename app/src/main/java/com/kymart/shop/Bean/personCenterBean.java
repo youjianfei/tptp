@@ -10,7 +10,7 @@ public class personCenterBean {
     /**
      * status : 1
      * msg : 获取成功
-     * result : {"user_id":47,"email":"","password":"519475228fe35ad067744465c42a19b2","sex":0,"birthday":0,"user_money":"3343.79","frozen_money":"0.00","distribut_money":"0.00","pay_points":0,"paypwd":"519475228fe35ad067744465c42a19b2","reg_time":1496569650,"last_login":1498632115,"last_ip":"","qq":"","mobile":"13653839640","mobile_validated":1,"oauth":"","openid":null,"unionid":null,"head_pic":null,"bank_name":"建行","bank_card":"44444","realname":"bb","idcard":null,"email_validated":0,"nickname":"13653839640","level":1,"discount":"1.00","total_amount":"7473.00","is_lock":0,"is_distribut":1,"first_leader":0,"second_leader":0,"third_leader":0,"token":"feaabcb0fa827a21d561652d1d788887","underling_number":0,"message_mask":53,"push_id":"","ref_id":1,"bonus":"17.12","total_bonus1":"121.72","total_bonus":"121.72","total_sell":"431.00","lft":2,"rgt":2,"deep":0,"operator_status":0,"sell_status":1,"coupon_count":0,"collect_count":0,"waitPay":4,"waitSend":7,"waitReceive":1,"comment_count":0,"order_count":12,"waitComment":14,"return_count":1}
+     * result : {"user_id":456,"email":"","password":"519475228fe35ad067744465c42a19b2","sex":0,"birthday":0,"user_money":"0.50","frozen_money":"0.00","distribut_money":"0.00","pay_points":0,"paypwd":null,"reg_time":1497457527,"last_login":1504659987,"last_ip":"","qq":"","mobile":"18737105569","mobile_validated":1,"oauth":"","openid":null,"unionid":null,"head_pic":null,"bank_name":null,"bank_card":null,"realname":null,"idcard":null,"email_validated":0,"nickname":"18737105569","level":2,"discount":"1.00","total_amount":"1.30","is_lock":0,"is_distribut":1,"first_leader":0,"second_leader":0,"third_leader":0,"token":"fe163021f6818d638f63be1a80d9c0fa","underling_number":0,"message_mask":63,"push_id":"","ref_id":1,"bonus":"0.00","bonus1":"0.00","total_bonus1":"0.00","total_bonus":"0.00","total_sell":"0.00","lft":10294,"rgt":10295,"deep":2,"operator_status":0,"sell_status":0,"coupon_count":0,"collect_count":0,"waitPay":34,"waitSend":12,"waitReceive":0,"comment_count":0,"order_count":46,"waitComment":0,"return_count":0,"ref_nickname":"","level_name":"一级开心果"}
      */
 
     private int status;
@@ -43,63 +43,66 @@ public class personCenterBean {
 
     public static class ResultBean {
         /**
-         * user_id : 47
+         * user_id : 456
          * email :
          * password : 519475228fe35ad067744465c42a19b2
          * sex : 0
          * birthday : 0
-         * user_money : 3343.79
+         * user_money : 0.50
          * frozen_money : 0.00
          * distribut_money : 0.00
          * pay_points : 0
-         * paypwd : 519475228fe35ad067744465c42a19b2
-         * reg_time : 1496569650
-         * last_login : 1498632115
+         * paypwd : null
+         * reg_time : 1497457527
+         * last_login : 1504659987
          * last_ip :
          * qq :
-         * mobile : 13653839640
+         * mobile : 18737105569
          * mobile_validated : 1
          * oauth :
          * openid : null
          * unionid : null
          * head_pic : null
-         * bank_name : 建行
-         * bank_card : 44444
-         * realname : bb
+         * bank_name : null
+         * bank_card : null
+         * realname : null
          * idcard : null
          * email_validated : 0
-         * nickname : 13653839640
-         * level : 1
+         * nickname : 18737105569
+         * level : 2
          * discount : 1.00
-         * total_amount : 7473.00
+         * total_amount : 1.30
          * is_lock : 0
          * is_distribut : 1
          * first_leader : 0
          * second_leader : 0
          * third_leader : 0
-         * token : feaabcb0fa827a21d561652d1d788887
+         * token : fe163021f6818d638f63be1a80d9c0fa
          * underling_number : 0
-         * message_mask : 53
+         * message_mask : 63
          * push_id :
          * ref_id : 1
-         * bonus : 17.12
-         * total_bonus1 : 121.72
-         * total_bonus : 121.72
-         * total_sell : 431.00
-         * lft : 2
-         * rgt : 2
-         * deep : 0
+         * bonus : 0.00
+         * bonus1 : 0.00
+         * total_bonus1 : 0.00
+         * total_bonus : 0.00
+         * total_sell : 0.00
+         * lft : 10294
+         * rgt : 10295
+         * deep : 2
          * operator_status : 0
-         * sell_status : 1
+         * sell_status : 0
          * coupon_count : 0
          * collect_count : 0
-         * waitPay : 4
-         * waitSend : 7
-         * waitReceive : 1
+         * waitPay : 34
+         * waitSend : 12
+         * waitReceive : 0
          * comment_count : 0
-         * order_count : 12
-         * waitComment : 14
-         * return_count : 1
+         * order_count : 46
+         * waitComment : 0
+         * return_count : 0
+         * ref_nickname :
+         * level_name : 一级开心果
          */
 
         private int user_id;
@@ -111,7 +114,7 @@ public class personCenterBean {
         private String frozen_money;
         private String distribut_money;
         private int pay_points;
-        private String paypwd;
+        private Object paypwd;
         private int reg_time;
         private int last_login;
         private String last_ip;
@@ -122,9 +125,9 @@ public class personCenterBean {
         private Object openid;
         private Object unionid;
         private Object head_pic;
-        private String bank_name;
-        private String bank_card;
-        private String realname;
+        private Object bank_name;
+        private Object bank_card;
+        private Object realname;
         private Object idcard;
         private int email_validated;
         private String nickname;
@@ -142,6 +145,7 @@ public class personCenterBean {
         private String push_id;
         private int ref_id;
         private String bonus;
+        private String bonus1;
         private String total_bonus1;
         private String total_bonus;
         private String total_sell;
@@ -159,6 +163,8 @@ public class personCenterBean {
         private int order_count;
         private int waitComment;
         private int return_count;
+        private String ref_nickname;
+        private String level_name;
 
         public int getUser_id() {
             return user_id;
@@ -232,11 +238,11 @@ public class personCenterBean {
             this.pay_points = pay_points;
         }
 
-        public String getPaypwd() {
+        public Object getPaypwd() {
             return paypwd;
         }
 
-        public void setPaypwd(String paypwd) {
+        public void setPaypwd(Object paypwd) {
             this.paypwd = paypwd;
         }
 
@@ -320,27 +326,27 @@ public class personCenterBean {
             this.head_pic = head_pic;
         }
 
-        public String getBank_name() {
+        public Object getBank_name() {
             return bank_name;
         }
 
-        public void setBank_name(String bank_name) {
+        public void setBank_name(Object bank_name) {
             this.bank_name = bank_name;
         }
 
-        public String getBank_card() {
+        public Object getBank_card() {
             return bank_card;
         }
 
-        public void setBank_card(String bank_card) {
+        public void setBank_card(Object bank_card) {
             this.bank_card = bank_card;
         }
 
-        public String getRealname() {
+        public Object getRealname() {
             return realname;
         }
 
-        public void setRealname(String realname) {
+        public void setRealname(Object realname) {
             this.realname = realname;
         }
 
@@ -480,6 +486,14 @@ public class personCenterBean {
             this.bonus = bonus;
         }
 
+        public String getBonus1() {
+            return bonus1;
+        }
+
+        public void setBonus1(String bonus1) {
+            this.bonus1 = bonus1;
+        }
+
         public String getTotal_bonus1() {
             return total_bonus1;
         }
@@ -614,6 +628,22 @@ public class personCenterBean {
 
         public void setReturn_count(int return_count) {
             this.return_count = return_count;
+        }
+
+        public String getRef_nickname() {
+            return ref_nickname;
+        }
+
+        public void setRef_nickname(String ref_nickname) {
+            this.ref_nickname = ref_nickname;
+        }
+
+        public String getLevel_name() {
+            return level_name;
+        }
+
+        public void setLevel_name(String level_name) {
+            this.level_name = level_name;
         }
     }
 }

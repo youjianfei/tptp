@@ -58,6 +58,7 @@ public class BaseUrl {
     public static String  cashoutlist="m=api&c=User&a=withdrawals_list&unique_id=";//  + &token=\(access_token())    提现记录
     public static String  QR_code="m=api&c=User&a=qr_code&token=";//二维码
     public static String  JiangJZY="m=api&c=User&a=changebonus&unique_id=";//奖金转余额  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
+    public static String  TuiguangZY="m=api&c=User&a=changebonus1&unique_id=";//推广转余额  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
     public static String  shareFriend="m=api&c=User&a=lower_list&level=1&token=";//我的分享好友   "\(basePath)m=api&c=User&a=lower_list&level=1&token=\(access_token())&p=\(page)"
     public static String  order="m=Api&c=Cart&a=cart2&token=";//生成订单   m=Api&c=Cart&a=cart2&token=\(access_token())"
     public static String  orderprice="m=Api&c=Cart&a=cart3&token=";//订单金额信息    return "\(basePath)m=Api&c=Cart&a=cart3&token=\(access_token())"
@@ -76,6 +77,10 @@ public class BaseUrl {
     public static String  shouhuo="m=Api&c=user&a=orderConfirm&token=";//确认收货  return "\(basePath)m=Api&c=user&a=orderConfirm&token=\(access_token())"
     public static String  recharge_jilu="http://www.kymart.cn/index.php/api/user/recharge_list.html?token=";//充值记录
     public static String  returngoods="m=Api&c=Order&a=return_goods&token=";//申请退换货
+    public static String  returngoodsList="m=api&c=order&a=return_goods_list&token=";//退换货列表
+    public static String  refound="m=Api&c=user&a=return_goods&token=";//申请退款     "https://test.kymart.cn/index.php?m=Api&c=user&a=return_goods&token=001f6453f9ee8a6e94ca3de03797116e"
+
+
 
 
 
