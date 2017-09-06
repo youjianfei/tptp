@@ -86,6 +86,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
 
+    String JpushpushID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         StatusBarUtil.setColor(this, getResources().getColor(R.color.red), 0);//状态栏颜色
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+       JpushpushID=JPushInterface.getRegistrationID(MainActivity.this);
         initView();
         initData();
         initListenner();
@@ -274,7 +276,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     String result=  jsonObject.getString("result");
                     map.put("unique_id", UUID);
                     map.put("capache", result);
-                    map.put("capapush_id", "");
+                    map.put("push_id", JpushpushID);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

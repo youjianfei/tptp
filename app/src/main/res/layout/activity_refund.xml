@@ -149,6 +149,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/button_conner_5"
                     android:text="申请退款"
+                    android:textSize="14dp"
                     android:textColor="@color/white"
                     android:layout_margin="5dp"
                     />

@@ -29,6 +29,9 @@ import com.kymart.shop.Utils.Volley_Utils;
 import com.mcxtzhang.lib.AnimShopButton;
 import com.mcxtzhang.lib.IOnAddDelListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,6 +114,16 @@ public class Fragment_shopCar  extends Fragment{
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("status");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
                 LogUtils.LOG("ceshi","购物车列表"+BaseUrl.BaseURL+BaseUrl.shopCarList);
                 LogUtils.LOG("ceshi",respose);
                 shopCarChange=false;
@@ -135,6 +148,9 @@ public class Fragment_shopCar  extends Fragment{
                     mListview_shopcar.setVisibility(View.INVISIBLE);
                 }
                 mAdapter.notifyDataSetChanged();
+                }else {
+                    ToastUtils.showToast(getActivity(),msg);
+                }
             }
 
             @Override

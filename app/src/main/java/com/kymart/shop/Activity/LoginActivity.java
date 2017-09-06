@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.kymart.tptp.R;
 
 import static com.kymart.shop.AppStaticData.Staticdata.UUID_static;
@@ -36,7 +37,7 @@ public class LoginActivity extends BaseActivityother {
 
     String mob;
     String password;
-
+    String JpushpushID=JPushInterface.getRegistrationID(LoginActivity.this);
 
     UserBean userbean;
 
@@ -50,6 +51,7 @@ public class LoginActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        LogUtils.LOG("ceshi","pushid=="+JpushpushID);
 
     }
 
@@ -126,7 +128,7 @@ public class LoginActivity extends BaseActivityother {
                     String result=  jsonObject.getString("result");
                     map.put("unique_id", UUID);
                     map.put("capache", result);
-                    map.put("capapush_id", "");
+                    map.put("push_id", JpushpushID);
                     LogUtils.LOG("ceshi",UUID+"..."+result);
 
                 } catch (JSONException e) {
