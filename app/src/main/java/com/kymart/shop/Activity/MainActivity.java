@@ -28,6 +28,8 @@ import com.kymart.shop.AppStaticData.Staticdata;
 import com.kymart.shop.Bean.UserBean;
 import com.kymart.shop.Fragment.Fragment_classification;
 import com.kymart.shop.Fragment.Fragment_main;
+
+import cn.jpush.android.api.JPushInterface;
 import cn.kymart.tptp.R;
 
 import com.kymart.shop.Fragment.Fragment_personalCenter;
@@ -89,6 +91,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.red), 0);//状态栏颜色
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         initView();
         initData();
         initListenner();
