@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.kymart.shop.Activity.AllOrderActivity;
 import com.kymart.shop.Activity.CashoutActivity;
 import com.kymart.shop.Activity.JiangZYActivity;
 import com.kymart.shop.Activity.LoginActivity;
+import com.kymart.shop.Activity.MessageActivity;
 import com.kymart.shop.Activity.MoneyActivity;
 import com.kymart.shop.Activity.QRcodeActivity;
 import com.kymart.shop.Activity.RechargeActivity;
@@ -52,6 +54,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan,mRE_tuiguangzhuanyue,mRE_shouhoufuwu;
     LinearLayout mRE_yue;
     personCenterBean person;
+    private ImageView Image_message;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
@@ -85,6 +88,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_quanbudingdan.setOnClickListener(this);
         mRE_tuiguangzhuanyue.setOnClickListener(this);
         mRE_shouhoufuwu.setOnClickListener(this);
+        Image_message.setOnClickListener(this);
     }
 
     String name="";
@@ -146,11 +150,22 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mTextview_tuiguangfeiyong= (TextView) rootView.findViewById(R.id.text_tuiguangfeiyong);
         mRE_tuiguangzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_tuiguangzhuanyue);
         mRE_shouhoufuwu= (RelativeLayout) rootView.findViewById(R.id.re_shouhoufuwu);
+        Image_message= (ImageView) rootView.findViewById(R.id.image_message);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.image_message://推送通知
+                if(Staticdata.isLogin==1){
+                    Intent intent_message=new Intent(getActivity(), MessageActivity.class);
+                    startActivity(intent_message);
+                }else {
+                    Intent intent_message=new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent_message);
+                }
+
+                break;
             case R.id.text_exit://注销登录
                 Map map=new HashMap();
                 map.put("token",Staticdata.userBean_static.getResult().getToken());

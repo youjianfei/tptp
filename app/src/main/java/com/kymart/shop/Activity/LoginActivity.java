@@ -169,6 +169,7 @@ public class LoginActivity extends BaseActivityother {
                     //记住帐号密码,下次自动登录
                     SharedPreferencesUtils.putString(LoginActivity.this,"kymt","account", mEdit_account.getText() + "");
                     SharedPreferencesUtils.putString(LoginActivity.this,"kymt","password", mEdit_password.getText() + "");
+                    SharedPreferencesUtils.putString(LoginActivity.this,"kymt","token",userBean_static.getResult().getToken());
                     Staticdata.isLogin=1;
                     setResult(RESULT_OK);
                     finish();

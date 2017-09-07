@@ -1,0 +1,17 @@
+.subTitle .name{
+	font-size: 14px;
+}
+.content p{
+	font-size: 15px !important;
+}
+.subTitle .text-mini{
+	font-size: 12px;
+}
+.mainCont{
+	font-size: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.author{
+	margin-top: px;
+}

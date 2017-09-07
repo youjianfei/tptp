@@ -95,6 +95,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
        JpushpushID=JPushInterface.getRegistrationID(MainActivity.this);
+        LogUtils.LOG("ceshi","JPUSH......................................"+JpushpushID);
         initView();
         initData();
         initListenner();
@@ -308,6 +309,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 if (status == 1) {
                     LogUtils.LOG("ceshi", "登录成功" + respose);
                     userBean_static = new Gson().fromJson(respose, UserBean.class);//将用户信息写入全局变量
+                    SharedPreferencesUtils.putString(MainActivity.this,"kymt","token",userBean_static.getResult().getToken());
                     Staticdata.isLogin = 1;
                     setResult(RESULT_OK);
                 } else {

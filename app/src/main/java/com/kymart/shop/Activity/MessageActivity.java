@@ -1,11 +1,13 @@
 package com.kymart.shop.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,7 +38,7 @@ public class MessageActivity extends BaseActivityother {
     List <MessageBean.ResultBean> mData;
     Adapter mAdapter;
 
-    int type=0;
+    int type=1;
     int page=1;
     String messageURL="";
 
@@ -76,6 +78,16 @@ public class MessageActivity extends BaseActivityother {
 
             }
         });
+        mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi","点击了position"+position+"..."+mData.get(position-1).getId());
+                Intent intent=new Intent(MessageActivity.this,MessageDetailsActivity.class);
+                intent.putExtra("type",type);
+                intent.putExtra("id",mData.get(position-1).getId());
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -95,7 +107,7 @@ public class MessageActivity extends BaseActivityother {
                 mTextview_XTmessage.setTextColor(getResources().getColor(R.color.red));
                 mTextview_DDmessage.setTextColor(getResources().getColor(R.color.white));
                 mTextview_DDmessage.setBackgroundResource(R.drawable.btn_rightfind2x);
-                type=0;
+                type=1;
                 request(1);
                 break;
             case R.id.text_DDmessage:
@@ -103,13 +115,13 @@ public class MessageActivity extends BaseActivityother {
                 mTextview_DDmessage.setBackgroundResource(R.drawable.btn_rightfind);
                 mTextview_XTmessage.setTextColor(getResources().getColor(R.color.white));
                 mTextview_DDmessage.setTextColor(getResources().getColor(R.color.red));
-                type=1;
+                type=2;
                 request(1);
                 break;
         }
     }
     public void request(final int page){
-        if(type==0){
+        if(type==1){
             messageURL= BaseUrl.BaseURL+BaseUrl.XTmessage+Staticdata.userBean_static.getResult().getToken()+"&p="+page;
         }else {
             messageURL= BaseUrl.BaseURL+BaseUrl.DDmessage+Staticdata.userBean_static.getResult().getToken()+"&p="+page;
@@ -167,7 +179,7 @@ public class MessageActivity extends BaseActivityother {
                 holder= (ViewHolder) convertView.getTag();
 
             }
-            if(type==0){
+            if(type==1){
                 holder.text_title.setText(bean.getTitle());
             }else {
                 holder.text_title.setText(bean.getContent());

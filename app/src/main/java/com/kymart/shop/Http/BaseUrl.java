@@ -8,17 +8,17 @@ public class BaseUrl {
 
 
 //测试接口
-//    public  static String checkUpdate="http://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
-//    public  static String BaseURL="http://test.kymart.cn/index.php?";// 主接口——测试接口
-//    public  static String BasegoodlistURL="http://test.kymart.cn";//商品列表主接口——测试接口
-//    public  static String Baseimage="http://test.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
+    public  static String checkUpdate="https://test.kymart.cn/api/index/checkupdate";//强制更新——测试接口
+    public  static String BaseURL="https://test.kymart.cn/index.php?";// 主接口——测试接口
+    public  static String BasegoodlistURL="https://test.kymart.cn";//商品列表主接口——测试接口
+    public  static String Baseimage="https://test.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
 
 //  正式接口
-    public  static String checkUpdate="http://api.kymart.cn/api/index/checkupdate";//强制更新——正式接口
-    public  static String BaseURL="http://api.kymart.cn/index.php?";//主接口——测试接口正式接口
-    public  static String BasegoodlistURL="http://api.kymart.cn";//商品列表主接口——测试接口 http://api.kymart.cn/
-    public  static String Baseimage="http://api.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
+//    public  static String checkUpdate="http://api.kymart.cn/api/index/checkupdate";//强制更新——正式接口
+//    public  static String BaseURL="http://api.kymart.cn/index.php?";//主接口——测试接口正式接口
+//    public  static String BasegoodlistURL="http://api.kymart.cn";//商品列表主接口——测试接口 http://api.kymart.cn/
+//    public  static String Baseimage="http://api.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
 
 
@@ -81,6 +81,9 @@ public class BaseUrl {
     public static String  refound="m=Api&c=user&a=return_goods&token=";//申请退款     "https://test.kymart.cn/index.php?m=Api&c=user&a=return_goods&token=001f6453f9ee8a6e94ca3de03797116e"
     public static String  XTmessage="m=api&c=user&a=push_system&token=";// 系统消息列表
     public static String  DDmessage="m=api&c=user&a=push_user&token=";//订单消息列表
+    public static String  DDmessageDetails="m=api&c=user&a=push_user&token=";//订单消息详情       return "\(basePath)m=api&c=user&a=push_user&id=\(id)&token=\(access_token())"
+    public static String  XTmessageDetails="m=api&c=user&a=push_system&token=";//系统消息详情       return "\(basePath)m=api&c=user&a=push_user&id=\(id)&token=\(access_token())"
+
 
 
 
