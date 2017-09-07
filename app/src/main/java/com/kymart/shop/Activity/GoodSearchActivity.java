@@ -201,6 +201,7 @@ public class GoodSearchActivity extends BaseActivityother {
                 if(!search_name.equals("")){
                     afterchange= ZhuanMa(search_name);
                     url="/index.php?m=Api&c=goods&a=search&q="+afterchange+"&kt="+search_kt+"&p=";
+
                     requestData(1);
                 }
 
