@@ -114,13 +114,16 @@ public class GoodDetailsActivity extends BaseActivityother {
                 break;
             case R.id.iv_share:
                 if(fragment_goodDatails_good!=null&&fragment_goodDatails_good.Id!=0){
-                    if(isLogin==1) {//登录状态,添加到购物车
-                        String URL= BaseUrl.BaseURL+BaseUrl.shareGoodDetails+fragment_goodDatails_good.Id+"first_leader="+ Staticdata.userBean_static.getResult().getUser_id();
+                    if(isLogin==1) {
+
+                        String URL= BaseUrl.BaseURL+BaseUrl.shareGoodDetails+fragment_goodDatails_good.Id+"&first_leader="+ Staticdata.userBean_static.getResult().getUser_id();
                         shareClass.shareapp(fragment_goodDatails_good.title,URL,fragment_goodDatails_good.ImageURL);
+                        LogUtils.LOG("ceshi","登录状态："+URL);
 
                     }else{
                         String URL= BaseUrl.BaseURL+BaseUrl.shareGoodDetails+fragment_goodDatails_good.Id;
                         shareClass.shareapp(fragment_goodDatails_good.title,URL,fragment_goodDatails_good.ImageURL);
+                        LogUtils.LOG("ceshi","未登录状态："+URL);
                     }
                 }
 
