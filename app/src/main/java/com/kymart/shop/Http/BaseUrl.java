@@ -20,7 +20,7 @@ public class BaseUrl {
     public  static String BasegoodlistURL="http://api.kymart.cn";//商品列表主接口——测试接口 http://api.kymart.cn/
     public  static String Baseimage="http://api.kymart.cn/index.php?m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//图片拼接ID
 
-
+    public  static String TAGURL ="http://www.kymart.cn/public/app/goods/";
 
     public  static String mainURL="m=api&c=Index&a=homePage";
     public static String  main_imgURL="m=api&c=goods&a=goodsThumImages&width=400&height=400&goods_id=";//main  轮播
@@ -59,6 +59,7 @@ public class BaseUrl {
     public static String  QR_code="m=api&c=User&a=qr_code&token=";//二维码
     public static String  JiangJZY="m=api&c=User&a=changebonus&unique_id=";//奖金转余额  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
     public static String  TuiguangZY="m=api&c=User&a=changebonus1&unique_id=";//推广转余额  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
+    public static String  DaifafangZJF="m=api&c=User&a=changepoint&unique_id=";//待发放转积分  post  参数  "money"   &unique_id=\(SingleManager.getUUID())&token=\(access_token())"
     public static String  shareFriend="m=api&c=User&a=lower_list&level=1&token=";//我的分享好友   "\(basePath)m=api&c=User&a=lower_list&level=1&token=\(access_token())&p=\(page)"
     public static String  order="m=Api&c=Cart&a=cart2&token=";//生成订单   m=Api&c=Cart&a=cart2&token=\(access_token())"
     public static String  orderprice="m=Api&c=Cart&a=cart3&token=";//订单金额信息    return "\(basePath)m=Api&c=Cart&a=cart3&token=\(access_token())"

@@ -186,7 +186,7 @@ public class Fragment_GoodDatails_good extends Fragment {
                     return;
                 }
                 galleryBean=resultBean.getGallery();
-                mImageview_icon.setImageResource(Utils.selectICON(goodBean.getKy_type()));
+                Glide.with(getActivity()).load(BaseUrl.TAGURL+goodBean.getKy_type()+".png").into(mImageview_icon);
                 lunBoTU();//顶部轮播图方法执行
                 title=goodBean.getGoods_name();
                 mTextview_GoodName.setText(goodBean.getGoods_name());

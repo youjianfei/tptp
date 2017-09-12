@@ -206,7 +206,7 @@ public class GoodlistActivity extends BaseActivityother {
             Glide.with(mContext).load(BaseUrl.BaseURL+BaseUrl.main_imgURL+bean.getGoods_id()).into(holder.mImage);
             holder.mtextview_name.setText(bean.getGoods_name());
             holder.mtextview_price.setText("￥"+bean.getShop_price());
-            holder.mImageView_icon.setImageResource(Utils.selectICON(bean.getKy_type()));
+            Glide.with(mContext).load(BaseUrl.TAGURL+bean.getKy_type()+".png").into(holder.mImageView_icon);
 
             return convertView;
         }

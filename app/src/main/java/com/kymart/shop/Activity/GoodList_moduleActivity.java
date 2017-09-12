@@ -177,7 +177,7 @@ public class GoodList_moduleActivity extends BaseActivityother {
             holder.mTextview_name.setText(bean.getGoods_name());
             holder.mTextview_price.setText(bean.getShop_price()+"元");
             Glide.with(mContext).load(BaseUrl.BaseURL+BaseUrl.main_imgURL+bean.getGoods_id()).into(holder.mImageView);
-            holder.mImageView_icon.setImageResource(Utils.selectICON(bean.getKy_type()));
+            Glide.with(mContext).load(BaseUrl.TAGURL+bean.getKy_type()+".png").into(holder.mImageView_icon);
 
             return convertView;
         }

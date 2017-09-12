@@ -28,11 +28,12 @@ import cn.kymart.tptp.R;
 import static cn.kymart.tptp.R.id.textview_accountname;
 
 public class JiangZYActivity extends BaseActivityother {
-    TextView mTextview_title,mTextview_money,mTextview_name,mTextview_ID,mTextview_type;
+    TextView mTextview_title, mTextview_money, mTextview_name, mTextview_ID, mTextview_type, mtextview_duihuanMinagzi;
     Button mButton_submit;
     EditText mEdit_moneynumber;
-    int  moneyNumber=0;
-    String type="";
+    int moneyNumber = 0;
+    String type = "";
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_jiang_zy;
@@ -45,22 +46,28 @@ public class JiangZYActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        Intent intent=getIntent();
-        type=intent.getStringExtra("type");
-        if(type.equals("youhuiquan")){
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
+        if (type.equals("youhuiquan")) {
             mTextview_title.setText("优惠券转余额");
             mTextview_type.setText("优 惠 券:");
-            mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus());
+            mTextview_money.setText("￥" + Staticdata.personCenterBean.getResult().getBonus());
 
-        }else {
+        } else if (type.equals("tuiguang")) {
             mTextview_title.setText("推广费用转余额");
             mTextview_type.setText("推广费用:");
-            mTextview_money.setText("￥"+Staticdata.personCenterBean.getResult().getBonus1());
+            mTextview_money.setText("￥" + Staticdata.personCenterBean.getResult().getBonus1());
 
+        } else if (type.equals("daifafang")) {
+            mTextview_title.setText("待发放转积分");
+            mTextview_type.setText("待发放:");
+            mtextview_duihuanMinagzi.setText("兑换积分：");
+            double daiFaFang = Double.parseDouble(Staticdata.personCenterBean.getResult().getTotal_sell()) - Double.parseDouble(Staticdata.personCenterBean.getResult().getTotal_bonus1());
+            mTextview_money.setText("￥" + new java.text.DecimalFormat("0.00").format(daiFaFang));
         }
 
         mTextview_name.setText(Staticdata.personCenterBean.getResult().getNickname());
-        mTextview_ID.setText(Staticdata.personCenterBean.getResult().getOperator_status()==0? "会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id() ):"会员ID:"+(Staticdata.personCenterBean.getResult().getUser_id())+"(运营商)");
+        mTextview_ID.setText(Staticdata.personCenterBean.getResult().getOperator_status() == 0 ? "会员ID:" + (Staticdata.personCenterBean.getResult().getUser_id()) : "会员ID:" + (Staticdata.personCenterBean.getResult().getUser_id()) + "(运营商)");
 
     }
 
@@ -73,34 +80,34 @@ public class JiangZYActivity extends BaseActivityother {
     @Override
     protected void initView() {
 //        mImageview_Code= (ImageView) findViewById(R.id.image_code);
-        mTextview_type= (TextView) findViewById(R.id.textView_type);
-        mTextview_title= (TextView) findViewById(R.id.text_title);
-        mTextview_money= (TextView) findViewById(R.id.textview_money);
-        mTextview_name= (TextView) findViewById(textview_accountname);
-        mTextview_ID= (TextView) findViewById(R.id.textview_id);
-        mButton_submit= (Button) findViewById(R.id.button_submit);
-        mEdit_moneynumber= (EditText) findViewById(R.id.editText_moneynumber);
-//        mEdit_QRcode= (EditText) findViewById(R.id.edit_QRcode);
+        mTextview_type = (TextView) findViewById(R.id.textView_type);
+        mTextview_title = (TextView) findViewById(R.id.text_title);
+        mTextview_money = (TextView) findViewById(R.id.textview_money);
+        mTextview_name = (TextView) findViewById(textview_accountname);
+        mTextview_ID = (TextView) findViewById(R.id.textview_id);
+        mButton_submit = (Button) findViewById(R.id.button_submit);
+        mEdit_moneynumber = (EditText) findViewById(R.id.editText_moneynumber);
+        mtextview_duihuanMinagzi = (TextView) findViewById(R.id.textview_duihuanMingzi);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
 //            case R.id.image_code:
 ////                mImageview_Code.setImageBitmap(CodeUtils.getInstance().createBitmap());
 //                LogUtils.LOG("ceshi",CodeUtils.getInstance().getCode());
 //                break;
             case R.id.button_submit:
-                String money=mEdit_moneynumber.getText()+"";
-                if(money.equals("")){
-                    ToastUtils.showToast(this,"输入金额有误!");
+                String money = mEdit_moneynumber.getText() + "";
+                if (money.equals("")) {
+                    ToastUtils.showToast(this, "输入有误!");
                     return;
-                }else {
-                    moneyNumber=Integer.parseInt(mEdit_moneynumber.getText()+"");
+                } else {
+                    moneyNumber = Integer.parseInt(mEdit_moneynumber.getText() + "");
                 }
-                if(moneyNumber<1){
-                    ToastUtils.showToast(this,"输入金额有误!");
+                if (moneyNumber < 1) {
+                    ToastUtils.showToast(this, "输入有误!");
                     return;
                 }
 //                QRcode=mEdit_QRcode.getText()+"";
@@ -109,34 +116,38 @@ public class JiangZYActivity extends BaseActivityother {
 //                    return;
 //                }
 
-                LogUtils.LOG("ceshi","一切输入正确!");
-                jzyMap.put("money",moneyNumber+"");
+                LogUtils.LOG("ceshi", "一切输入正确!");
+                jzyMap.put("money", moneyNumber + "");
                 request(jzyMap);
                 break;
 
         }
     }
-    Map jzyMap=new HashMap();
-    void  request(Map map ){
-        String  URL="";
-        if(type.equals("youhuiquan")){
-           URL = BaseUrl.BaseURL+BaseUrl.JiangJZY+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
-        }else{
-            URL = BaseUrl.BaseURL+BaseUrl.TuiguangZY+Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken();
+
+    Map jzyMap = new HashMap();
+
+    void request(Map map) {
+        String URL = "";
+        if (type.equals("youhuiquan")) {
+            URL = BaseUrl.BaseURL + BaseUrl.JiangJZY + Staticdata.UUID_static + "&token=" + Staticdata.userBean_static.getResult().getToken();
+        } else if (type.equals("tuiguang")) {
+            URL = BaseUrl.BaseURL + BaseUrl.TuiguangZY + Staticdata.UUID_static + "&token=" + Staticdata.userBean_static.getResult().getToken();
+        } else if (type.equals("daifafang")) {
+            URL = BaseUrl.BaseURL + BaseUrl.DaifafangZJF + Staticdata.UUID_static + "&token=" + Staticdata.userBean_static.getResult().getToken();
         }
-        new  Volley_Utils(new Interface_volley_respose() {
+        new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi","一切输入正确!"+respose);
+                LogUtils.LOG("ceshi", "一切输入正确!" + respose);
                 try {
                     JSONObject jo = new JSONObject(respose);
-                    int  status = (Integer)jo.get("status");
-                    String message=(String)jo.get("msg");
-                    if(status==-1){
-                        ToastUtils.showToast(JiangZYActivity.this,message);
+                    int status = (Integer) jo.get("status");
+                    String message = (String) jo.get("msg");
+                    if (status == -1) {
+                        ToastUtils.showToast(JiangZYActivity.this, message);
                         return;
-                    }else{
-                        ToastUtils.showToast(JiangZYActivity.this,"操作成功");
+                    } else {
+                        ToastUtils.showToast(JiangZYActivity.this, "操作成功");
                         finish();
                     }
 
@@ -153,7 +164,7 @@ public class JiangZYActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).postHttp(URL,this,1,map);
+        }).postHttp(URL, this, 1, map);
 
 
     }

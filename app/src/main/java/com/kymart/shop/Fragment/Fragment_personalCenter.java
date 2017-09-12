@@ -47,22 +47,22 @@ import static com.kymart.shop.AppStaticData.Staticdata.userBean_static;
  * Created by Administrator on 2017/6/11.
  */
 
-public class Fragment_personalCenter extends Fragment implements View.OnClickListener{
+public class Fragment_personalCenter extends Fragment implements View.OnClickListener {
     View rootView;
     CircleImageView mImage_head;
-    TextView mTextview_name,mTextview_ID,mTextview_sellState,mTextview_blance,mTextview_sharePrice,mTextview_Exit,mTextview_daiFaFang,mTextview_tuiguangfeiyong;
-    RelativeLayout mRE_wodeqianbao,mRE_jiangjin,mRE_shezhi,mRE_shouhudizhi,mRE_QRcode,mRE_shenqingtixian,mRE_jiangjinzhuanyue,mRE_shareFrends,mRE_quanbudingdan,mRE_tuiguangzhuanyue,mRE_shouhoufuwu;
+    TextView mTextview_name, mTextview_ID, mTextview_sellState, mTextview_blance, mTextview_sharePrice, mTextview_integral, mTextview_Exit, mTextview_daiFaFang, mTextview_tuiguangfeiyong;
+    RelativeLayout mRE_wodeqianbao, mRE_jiangjin, mRE_shezhi, mRE_shouhudizhi, mRE_QRcode, mRE_shenqingtixian, mRE_jiangjinzhuanyue, mRE_shareFrends, mRE_quanbudingdan, mRE_tuiguangzhuanyue, mRE_shouhoufuwu,mRE_daifafangzhuanjifen;
     LinearLayout mRE_yue;
     personCenterBean person;
     private ImageView Image_message;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-        rootView=inflater.inflate(R.layout.fragment_person_center,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_person_center, container, false);
         initview();
         initListener();
         request();
-        LogUtils.LOG("ceshi","oncreat");
+        LogUtils.LOG("ceshi", "oncreat");
 
         return rootView;
     }
@@ -70,7 +70,7 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        LogUtils.LOG("ceshi","onResume");
+        LogUtils.LOG("ceshi", "onResume");
         request();
     }
 
@@ -89,164 +89,175 @@ public class Fragment_personalCenter extends Fragment implements View.OnClickLis
         mRE_tuiguangzhuanyue.setOnClickListener(this);
         mRE_shouhoufuwu.setOnClickListener(this);
         Image_message.setOnClickListener(this);
+        mRE_daifafangzhuanjifen.setOnClickListener(this);
     }
 
-    String name="";
+    String name = "";
+
     private void setdata() {
-        Glide.with(getActivity()).load(person.getResult().getHead_pic()).placeholder(R.mipmap.user68).error(R.mipmap.user68).into(mImage_head) ;
-        name=   person.getResult().getNickname();
-        if(name==null||name.equals("")){
-            name=person.getResult().getMobile();
+        Glide.with(getActivity()).load(person.getResult().getHead_pic()).placeholder(R.mipmap.user68).error(R.mipmap.user68).into(mImage_head);
+        name = person.getResult().getNickname();
+        if (name == null || name.equals("")) {
+            name = person.getResult().getMobile();
         }
         mTextview_name.setText(person.getResult().getNickname());
-        mTextview_ID.setText(person.getResult().getOperator_status()==0? "会员ID:"+(person.getResult().getUser_id() ):"会员ID:"+(person.getResult().getUser_id())+"(运营商)");
+        mTextview_ID.setText(person.getResult().getOperator_status() == 0 ? "会员ID:" + (person.getResult().getUser_id()) : "会员ID:" + (person.getResult().getUser_id()) + "(运营商)");
         mTextview_sellState.setText(person.getResult().getLevel_name());
-        mTextview_blance.setText("￥"+person.getResult().getUser_money()+"");
-        mTextview_sharePrice.setText("￥"+person.getResult().getBonus());
-        mTextview_tuiguangfeiyong.setText("￥"+person.getResult().getBonus1());
-        double daiFaFang=Double.parseDouble(person.getResult().getTotal_sell())-Double.parseDouble(person.getResult().getTotal_bonus1());
+        mTextview_blance.setText("￥" + person.getResult().getUser_money() + "");
+        mTextview_sharePrice.setText("￥" + person.getResult().getBonus());
+        mTextview_tuiguangfeiyong.setText("￥" + person.getResult().getBonus1());
+        double daiFaFang = Double.parseDouble(person.getResult().getTotal_sell()) - Double.parseDouble(person.getResult().getTotal_bonus1());
 
-        mTextview_daiFaFang.setText("￥"+new java.text.DecimalFormat("0.00").format(daiFaFang));
-
+        mTextview_daiFaFang.setText("￥" + new java.text.DecimalFormat("0.00").format(daiFaFang));
+        mTextview_integral.setText(person.getResult().getPay_points() + "");
 
     }
-   void  request(){
-       new Volley_Utils(new Interface_volley_respose() {
-           @Override
-           public void onSuccesses(String respose) {
-               LogUtils.LOG("ceshi","userInfO"+respose);
-               person=new Gson().fromJson(respose,personCenterBean.class);
-               Staticdata.personCenterBean=person;
-               setdata();
-           }
 
-           @Override
-           public void onError(int error) {
+    void request() {
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", "userInfO" + respose);
+                person = new Gson().fromJson(respose, personCenterBean.class);
+                Staticdata.personCenterBean = person;
+                setdata();
+            }
 
-           }
-       }).Http(BaseUrl.BaseURL+BaseUrl.userInfo+"&unique_id="+ Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken(),getActivity(),0);
-        LogUtils.LOG("ceshi","userInfO"+BaseUrl.BaseURL+BaseUrl.userInfo+"&unique_id="+ Staticdata.UUID_static+"&token="+Staticdata.userBean_static.getResult().getToken());
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(BaseUrl.BaseURL + BaseUrl.userInfo + "&unique_id=" + Staticdata.UUID_static + "&token=" + Staticdata.userBean_static.getResult().getToken(), getActivity(), 0);
+        LogUtils.LOG("ceshi", "userInfO" + BaseUrl.BaseURL + BaseUrl.userInfo + "&unique_id=" + Staticdata.UUID_static + "&token=" + Staticdata.userBean_static.getResult().getToken());
     }
 
     private void initview() {
-        mTextview_daiFaFang= (TextView) rootView.findViewById(R.id.text_waitsharePrice);
-        mImage_head= (CircleImageView) rootView.findViewById(R.id.image_head);
-        mTextview_name= (TextView) rootView.findViewById(R.id.textview_accountname);
-        mTextview_ID= (TextView) rootView.findViewById(R.id.textview_id);
-        mTextview_sellState= (TextView) rootView.findViewById(R.id.Textview_sell_status);
-        mTextview_blance= (TextView) rootView.findViewById(R.id.text_balance);
-        mTextview_sharePrice= (TextView) rootView.findViewById(R.id.text_sharePrice);
-        mTextview_Exit= (TextView) rootView.findViewById(R.id.text_exit);
-        mRE_yue= (LinearLayout) rootView.findViewById(R.id.re_yue);
-        mRE_shezhi= (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
-        mRE_shouhudizhi= (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
-        mRE_wodeqianbao= (RelativeLayout) rootView.findViewById(R.id.re_wodeqianbao);
-        mRE_jiangjin= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinmingxi);
-        mRE_QRcode=(RelativeLayout)rootView.findViewById(R.id.re_erweima);
-        mRE_shenqingtixian= (RelativeLayout) rootView.findViewById(R.id.re_shenqingtixian);
-        mRE_jiangjinzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_jiangjinzhuanyue);
-        mRE_shareFrends= (RelativeLayout) rootView.findViewById(R.id.re_fenxianghaoyou);
-        mRE_quanbudingdan= (RelativeLayout) rootView.findViewById(R.id.re_dingdan);
-        mTextview_tuiguangfeiyong= (TextView) rootView.findViewById(R.id.text_tuiguangfeiyong);
-        mRE_tuiguangzhuanyue= (RelativeLayout) rootView.findViewById(R.id.re_tuiguangzhuanyue);
-        mRE_shouhoufuwu= (RelativeLayout) rootView.findViewById(R.id.re_shouhoufuwu);
-        Image_message= (ImageView) rootView.findViewById(R.id.image_message);
+        mTextview_daiFaFang = (TextView) rootView.findViewById(R.id.text_waitsharePrice);
+        mImage_head = (CircleImageView) rootView.findViewById(R.id.image_head);
+        mTextview_name = (TextView) rootView.findViewById(R.id.textview_accountname);
+        mTextview_ID = (TextView) rootView.findViewById(R.id.textview_id);
+        mTextview_sellState = (TextView) rootView.findViewById(R.id.Textview_sell_status);
+        mTextview_blance = (TextView) rootView.findViewById(R.id.text_balance);
+        mTextview_sharePrice = (TextView) rootView.findViewById(R.id.text_sharePrice);
+        mTextview_Exit = (TextView) rootView.findViewById(R.id.text_exit);
+        mRE_yue = (LinearLayout) rootView.findViewById(R.id.re_yue);
+        mRE_shezhi = (RelativeLayout) rootView.findViewById(R.id.re_shezhi);
+        mRE_shouhudizhi = (RelativeLayout) rootView.findViewById(R.id.re_dizhi);
+        mRE_wodeqianbao = (RelativeLayout) rootView.findViewById(R.id.re_wodeqianbao);
+        mRE_jiangjin = (RelativeLayout) rootView.findViewById(R.id.re_jiangjinmingxi);
+        mRE_QRcode = (RelativeLayout) rootView.findViewById(R.id.re_erweima);
+        mRE_shenqingtixian = (RelativeLayout) rootView.findViewById(R.id.re_shenqingtixian);
+        mRE_jiangjinzhuanyue = (RelativeLayout) rootView.findViewById(R.id.re_jiangjinzhuanyue);
+        mRE_shareFrends = (RelativeLayout) rootView.findViewById(R.id.re_fenxianghaoyou);
+        mRE_quanbudingdan = (RelativeLayout) rootView.findViewById(R.id.re_dingdan);
+        mTextview_tuiguangfeiyong = (TextView) rootView.findViewById(R.id.text_tuiguangfeiyong);
+        mRE_tuiguangzhuanyue = (RelativeLayout) rootView.findViewById(R.id.re_tuiguangzhuanyue);
+        mRE_shouhoufuwu = (RelativeLayout) rootView.findViewById(R.id.re_shouhoufuwu);
+        Image_message = (ImageView) rootView.findViewById(R.id.image_message);
+        mTextview_integral = (TextView) rootView.findViewById(R.id.text_integral);
+        mRE_daifafangzhuanjifen= (RelativeLayout) rootView.findViewById(R.id.re_daifafangzhuanjifen);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.image_message://推送通知
-                if(Staticdata.isLogin==1){
-                    Intent intent_message=new Intent(getActivity(), MessageActivity.class);
+                if (Staticdata.isLogin == 1) {
+                    Intent intent_message = new Intent(getActivity(), MessageActivity.class);
                     startActivity(intent_message);
-                }else {
-                    Intent intent_message=new Intent(getActivity(), LoginActivity.class);
+                } else {
+                    Intent intent_message = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent_message);
                 }
 
                 break;
             case R.id.text_exit://注销登录
-                Map map=new HashMap();
-                map.put("token",Staticdata.userBean_static.getResult().getToken());
+                Map map = new HashMap();
+                map.put("token", Staticdata.userBean_static.getResult().getToken());
                 loginOut(map);
                 break;
             case R.id.re_yue:
-                Intent intent_yue=new Intent(getActivity(), RechargeActivity.class);
-                intent_yue.putExtra("yue","￥"+person.getResult().getUser_money()+"");
+                Intent intent_yue = new Intent(getActivity(), RechargeActivity.class);
+                intent_yue.putExtra("yue", "￥" + person.getResult().getUser_money() + "");
                 getActivity().startActivity(intent_yue);
                 break;
             case R.id.re_shezhi:
-                Intent intent=new Intent(getActivity(), SettingActivity.class);
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
                 getActivity().startActivity(intent);
                 break;
             case R.id.re_dizhi:
-                Intent intent_addAddress=new Intent(getActivity(), AddressActivity.class);
+                Intent intent_addAddress = new Intent(getActivity(), AddressActivity.class);
                 getActivity().startActivity(intent_addAddress);
                 break;
             case R.id.re_wodeqianbao:
-                Intent intent_money= new Intent(getActivity(), MoneyActivity.class);
-                intent_money.putExtra("yue","￥"+person.getResult().getUser_money());
-                intent_money.putExtra("id",1);
+                Intent intent_money = new Intent(getActivity(), MoneyActivity.class);
+                intent_money.putExtra("yue", "￥" + person.getResult().getUser_money());
+                intent_money.putExtra("id", 1);
                 getActivity().startActivity(intent_money);
                 break;
             case R.id.re_jiangjinmingxi:
-                Intent intent_bonus= new Intent(getActivity(), MoneyActivity.class);
-                intent_bonus.putExtra("yue","￥"+person.getResult().getBonus());
-                intent_bonus.putExtra("id",2);
+                Intent intent_bonus = new Intent(getActivity(), MoneyActivity.class);
+                intent_bonus.putExtra("yue", "￥" + person.getResult().getBonus());
+                intent_bonus.putExtra("id", 2);
                 getActivity().startActivity(intent_bonus);
                 break;
             case R.id.re_erweima:
-                Intent intent_QRcode=new Intent(getActivity(), QRcodeActivity.class);
+                Intent intent_QRcode = new Intent(getActivity(), QRcodeActivity.class);
                 getActivity().startActivity(intent_QRcode);
                 break;
             case R.id.re_shenqingtixian:
-                Intent intent_Cashout=new Intent(getActivity(), CashoutActivity.class);
+                Intent intent_Cashout = new Intent(getActivity(), CashoutActivity.class);
                 getActivity().startActivity(intent_Cashout);
                 break;
             case R.id.re_jiangjinzhuanyue:
-                Intent intent_JiangJZyue=new Intent(getActivity(), JiangZYActivity.class);
-                intent_JiangJZyue.putExtra("type","youhuiquan");
+                Intent intent_JiangJZyue = new Intent(getActivity(), JiangZYActivity.class);
+                intent_JiangJZyue.putExtra("type", "youhuiquan");
                 getActivity().startActivity(intent_JiangJZyue);
                 break;
             case R.id.re_tuiguangzhuanyue:
-                Intent intent_tuiguangzyue=new Intent(getActivity(), JiangZYActivity.class);
-                intent_tuiguangzyue.putExtra("type","tuiguang");
+                Intent intent_tuiguangzyue = new Intent(getActivity(), JiangZYActivity.class);
+                intent_tuiguangzyue.putExtra("type", "tuiguang");
                 getActivity().startActivity(intent_tuiguangzyue);
                 break;
+            case R.id.re_daifafangzhuanjifen:
+                Intent intent_daifafangzjifen = new Intent(getActivity(), JiangZYActivity.class);
+                intent_daifafangzjifen.putExtra("type", "daifafang");
+                getActivity().startActivity(intent_daifafangzjifen);
+                break;
             case R.id.re_fenxianghaoyou:
-                Intent intent_sahreFrends=new Intent(getActivity(), ShareFriendsActivity.class);
+                Intent intent_sahreFrends = new Intent(getActivity(), ShareFriendsActivity.class);
                 getActivity().startActivity(intent_sahreFrends);
                 break;
             case R.id.re_dingdan:
-                Intent intent_dingdan=new Intent(getActivity(), AllOrderActivity.class);
+                Intent intent_dingdan = new Intent(getActivity(), AllOrderActivity.class);
                 getActivity().startActivity(intent_dingdan);
                 break;
             case R.id.re_shouhoufuwu:
-                Intent intent_shouhou=new Intent(getActivity(), ShouhouActivity.class);
+                Intent intent_shouhou = new Intent(getActivity(), ShouhouActivity.class);
                 getActivity().startActivity(intent_shouhou);
                 break;
+
         }
     }
 
     private void loginOut(Map map) {
-        new  Volley_Utils(new Interface_volley_respose() {
+        new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
 
-                LogUtils.LOG("ceshi","注销登录成功");
-                Staticdata.isLogin=0;
-                SharedPreferencesUtils.putString(getActivity(),"kymt","password", "");
-                userBean_static=null;
-                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                LogUtils.LOG("ceshi", "注销登录成功");
+                Staticdata.isLogin = 0;
+                SharedPreferencesUtils.putString(getActivity(), "kymt", "password", "");
+                userBean_static = null;
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivity(intent);
             }
 
             @Override
             public void onError(int error) {
-                ToastUtils.showToast(getActivity(),"网络连接失败");
+                ToastUtils.showToast(getActivity(), "网络连接失败");
 
             }
-        }).postHttp(BaseUrl.BaseURL+BaseUrl.loginout,getActivity(),1,map);
+        }).postHttp(BaseUrl.BaseURL + BaseUrl.loginout, getActivity(), 1, map);
     }
 }
